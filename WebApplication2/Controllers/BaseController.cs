@@ -9,7 +9,7 @@ namespace WebApplication2.Controllers
     public class BaseController : Controller
     {
         // GET: Base
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View();
         }

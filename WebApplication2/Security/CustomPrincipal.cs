@@ -21,6 +21,10 @@ namespace WebApplication2.Security
 
         public bool IsInRole(string role)
         {
+            if (role == null || role.Trim() == "")
+            {
+                return true;
+            }
             var roles = role.Split(new char[] { ',' });
             return roles.Any(r => this.Account.Role == r);
         }

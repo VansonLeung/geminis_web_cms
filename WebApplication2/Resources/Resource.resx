@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="confirmnewpassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
   <data name="confirmpassword" xml:space="preserve">
     <value>Confirm Password</value>
+  </data>
+  <data name="created_at" xml:space="preserve">
+    <value>Created At</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
@@ -129,17 +135,38 @@
   <data name="forgotpassword" xml:space="preserve">
     <value>Forgot Password</value>
   </data>
+  <data name="historyPasswords" xml:space="preserve">
+    <value>Password History</value>
+  </data>
+  <data name="lastlogin" xml:space="preserve">
+    <value>Last Login At</value>
+  </data>
   <data name="lastname" xml:space="preserve">
     <value>Last Name</value>
   </data>
+  <data name="lastPasswordModifiedAt" xml:space="preserve">
+    <value>Last Password Modified At</value>
+  </data>
   <data name="login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="modified_at" xml:space="preserve">
+    <value>Modified At</value>
+  </data>
+  <data name="newpassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="oldpassword" xml:space="preserve">
+    <value>Old Password</value>
   </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>
   </data>
   <data name="register" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="role" xml:space="preserve">
+    <value>Role</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Username</value>

@@ -22,10 +22,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@SessionPersister.Username <a href="@Url.Action("Logout", "Account")">Logout</a></li>
+                    <li>@Html.ActionLink("Home", "Index", "Account")</li>
+                    <li>@Html.ActionLink("Accounts", "List", "Account")</li>
+                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
+                    <li>@Html.ActionLink("Demo Index", "Index", "Demo")</li>
+                    <li>@Html.ActionLink("Work1", "Work1", "Demo")</li>
+                    <li>@Html.ActionLink("Work2", "Work2", "Demo")</li>
+                    <li>@Html.ActionLink("Work3", "Work3", "Demo")</li>
+                    @if (SessionPersister.account != null)
+                    {
+                        <li>@SessionPersister.account.Firstname @SessionPersister.account.Lastname <a href="@Url.Action("Logout", "Account")">Logout</a></li>
+                    }
               </ul>
             </div>
         </div>

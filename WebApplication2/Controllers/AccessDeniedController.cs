@@ -9,7 +9,7 @@ namespace WebApplication2.Controllers
     public class AccessDeniedController : BaseController
     {
         // GET: AccessDenied
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             return View();
         }

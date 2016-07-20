@@ -12,9 +12,19 @@ namespace WebApplication2.Controllers
     public class AccountController : BaseController
     {
         // GET: Account
-        public new ActionResult Index()
+        public override ActionResult Index()
         {
             return View();
+        }
+
+        [CustomAuthorize(Roles = "superadmin")]
+        public ActionResult List()
+        {
+            using (AccountDbContext db = new AccountDbContext())
+            {
+                var items = db.findAccounts();
+                return View(items);
+            }
         }
 
         public ActionResult Register()
@@ -27,10 +37,9 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (AppDbContext db = new AppDbContext())
+                using (AccountDbContext db = new AccountDbContext())
                 {
-                    db.accountDb.Add(account);
-                    db.SaveChanges();
+                    db.tryRegisterAccount(account);
                 }
                 ModelState.Clear();
                 ViewBag.Message = account.Firstname + " " + account.Lastname + " successfully registered.";
@@ -48,7 +57,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Login(Account account)
         {
-            using (AppDbContext db = new AppDbContext())
+            using (AccountDbContext db = new AccountDbContext())
             {
                 var username = account.Username;
                 var password = account.Password;
@@ -70,11 +79,58 @@ namespace WebApplication2.Controllers
 
         public ActionResult Logout()
         {
-            using (AppDbContext db = new AppDbContext())
+            using (AccountDbContext db = new AccountDbContext())
             {
                 db.tryLogout();
             }
             return RedirectToAction("Index");
+        }
+
+
+        [CustomAuthorize()]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [CustomAuthorize()]
+        public ActionResult ChangePassword(AccountChangePasswordForm form)
+        {
+            var account = new Account();
+            account.Username = SessionPersister.account.Username;
+            account.Password = form.OldPassword;
+
+            using (AccountDbContext db = new AccountDbContext())
+            {
+                var error = db.tryChangePassword(account, form.Password);
+                if (error == null)
+                {
+                    return RedirectToAction("ChangePasswordSuccess");
+                } 
+                else
+                {
+                    ModelState.AddModelError("", error);
+                }
+            }
+            return View();
+        }
+
+        [CustomAuthorize()]
+        public ActionResult ChangePasswordSuccess()
+        {
+            return View();
+        }
+
+
+        public ActionResult Expired()
+        {
+            return View();
+        }
+
+        public ActionResult ChangePasswordRequest()
+        {
+            return View();
         }
     }
 }

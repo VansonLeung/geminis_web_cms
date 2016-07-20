@@ -10,7 +10,7 @@ namespace WebApplication2.Controllers
     public class DemoController : BaseController
     {
         [AllowAnonymous]
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             return View();
         }

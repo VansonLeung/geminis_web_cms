@@ -22,7 +22,7 @@ namespace WebApplication2.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource {
+    public class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace WebApplication2.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WebApplication2.Resources.Resource", typeof(Resource).Assembly);
@@ -51,7 +51,7 @@ namespace WebApplication2.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,18 +61,36 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm New Password.
+        /// </summary>
+        public static string confirmnewpassword {
+            get {
+                return ResourceManager.GetString("confirmnewpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
-        internal static string confirmpassword {
+        public static string confirmpassword {
             get {
                 return ResourceManager.GetString("confirmpassword", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created At.
+        /// </summary>
+        public static string created_at {
+            get {
+                return ResourceManager.GetString("created_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
-        internal static string email {
+        public static string email {
             get {
                 return ResourceManager.GetString("email", resourceCulture);
             }
@@ -81,7 +99,7 @@ namespace WebApplication2.Resources {
         /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
-        internal static string firstname {
+        public static string firstname {
             get {
                 return ResourceManager.GetString("firstname", resourceCulture);
             }
@@ -90,34 +108,79 @@ namespace WebApplication2.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Forgot Password.
         /// </summary>
-        internal static string forgotpassword {
+        public static string forgotpassword {
             get {
                 return ResourceManager.GetString("forgotpassword", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Login At.
+        /// </summary>
+        public static string lastlogin {
+            get {
+                return ResourceManager.GetString("lastlogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
-        internal static string lastname {
+        public static string lastname {
             get {
                 return ResourceManager.GetString("lastname", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Password Modified At.
+        /// </summary>
+        public static string lastPasswordModifiedAt {
+            get {
+                return ResourceManager.GetString("lastPasswordModifiedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        internal static string login {
+        public static string login {
             get {
                 return ResourceManager.GetString("login", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modified At.
+        /// </summary>
+        public static string modified_at {
+            get {
+                return ResourceManager.GetString("modified_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        public static string newpassword {
+            get {
+                return ResourceManager.GetString("newpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old Password.
+        /// </summary>
+        public static string oldpassword {
+            get {
+                return ResourceManager.GetString("oldpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        internal static string password {
+        public static string password {
             get {
                 return ResourceManager.GetString("password", resourceCulture);
             }
@@ -126,16 +189,25 @@ namespace WebApplication2.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
-        internal static string register {
+        public static string register {
             get {
                 return ResourceManager.GetString("register", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Role.
+        /// </summary>
+        public static string role {
+            get {
+                return ResourceManager.GetString("role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
-        internal static string username {
+        public static string username {
             get {
                 return ResourceManager.GetString("username", resourceCulture);
             }
