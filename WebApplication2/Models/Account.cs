@@ -55,7 +55,6 @@ namespace WebApplication2.Models
         [DataType(DataType.DateTime)]
         public DateTime? LastPasswordModifiedAt { get; set; }
 
-        [Display(Name = "historyPasswords", ResourceType = typeof(Resource))]
         public string historyPasswords { get; set; }
 
         public List<string> historyPasswordList()
@@ -73,31 +72,5 @@ namespace WebApplication2.Models
             return passwordString;
         }
     }
-
-    public class AccountChangePasswordForm
-    {
-        [Key]
-        public int ID { get; set; }
-
-        [Display(Name = "oldpassword", ResourceType = typeof(Resource))]
-        [Required]
-        [AccountPasswordLengthValidation]
-        [AccountPasswordLetterValidation]
-        [DataType(DataType.Password)]
-        public string OldPassword { get; set; }
-        
-        [Display(Name = "newpassword", ResourceType = typeof(Resource))]
-        [Required]
-        [AccountPasswordLengthValidation]
-        [AccountPasswordLetterValidation]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
-        [Display(Name = "confirmnewpassword", ResourceType = typeof(Resource))]
-        [Compare("Password")]
-        [AccountPasswordLengthValidation]
-        [AccountPasswordLetterValidation]
-        [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
-    }
+    
 }

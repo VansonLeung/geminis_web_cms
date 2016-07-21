@@ -182,6 +182,7 @@
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
     <Compile Include="Security\SessionPersister.cs" />
+    <Compile Include="ViewModels\AccountChangePasswordForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -233,6 +234,10 @@
     <Content Include="Views\Account\List.cshtml" />
     <Content Include="Views\Account\Expired.cshtml" />
     <Content Include="Views\Account\ChangePasswordRequest.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Me.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

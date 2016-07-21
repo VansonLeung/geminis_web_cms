@@ -135,9 +135,6 @@
   <data name="forgotpassword" xml:space="preserve">
     <value>Forgot Password</value>
   </data>
-  <data name="historyPasswords" xml:space="preserve">
-    <value>Password History</value>
-  </data>
   <data name="lastlogin" xml:space="preserve">
     <value>Last Login At</value>
   </data>

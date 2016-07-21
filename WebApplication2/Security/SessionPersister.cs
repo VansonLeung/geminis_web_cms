@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication2.Context;
 using WebApplication2.Models;
 
 namespace WebApplication2.Security
@@ -38,6 +39,18 @@ namespace WebApplication2.Security
         {
             account = _account;
             refresh_account_last_activity();
+        }
+
+        public static void updateSessionForAccount()
+        {
+            using (AccountDbContext db = new AccountDbContext())
+            {
+                if (account != null)
+                {
+                    account = db.accountDb.Find(account.AccountID);
+                }
+                refresh_account_last_activity();
+            }
         }
 
         public static void removeSession()

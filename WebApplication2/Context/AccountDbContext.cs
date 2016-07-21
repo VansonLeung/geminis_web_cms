@@ -54,9 +54,32 @@ namespace WebApplication2.Context
             SaveChanges();
         }
 
+        public string tryEdit(Account account)
+        {
+            string error = null;
+            Account _account = findAccountByID(account.AccountID);
+            if (_account.Password != account.Password)
+            {
+                error = tryChangePassword(account, account.Password);
+                if (error != null)
+                {
+                    return error;
+                }
+            }
+
+            error = tryChangeRole(account, account.Role);
+            if (error != null)
+            {
+                return error;
+            }
+
+
+            return null;
+        }
+
         public string tryChangePassword(Account account, String newPassword)
         {
-            Account _account = findAccountByAccount(account);
+            Account _account = findAccountByID(account.AccountID);
             if (_account != null)
             {
                 var passwords = _account.historyPasswordList();
@@ -88,7 +111,7 @@ namespace WebApplication2.Context
                 }
 
                 _account.historyPasswords = _account.historyPasswordsFromList(passwords);
-                SessionPersister.createSessionForAccount(_account);
+                SessionPersister.updateSessionForAccount();
                 SaveChanges();
                 return null;
             }
@@ -98,6 +121,22 @@ namespace WebApplication2.Context
             }
         }
 
-        public System.Data.Entity.DbSet<WebApplication2.Models.AccountChangePasswordForm> AccountChangePasswordForms { get; set; }
+        public string tryChangeRole(Account account, String role)
+        {
+            Account _account = findAccountByID(account.AccountID);
+            if (_account != null)
+            {
+                Entry(_account).State = EntityState.Modified;
+                _account.Role = role;
+
+                SessionPersister.updateSessionForAccount();
+                SaveChanges();
+                return null;
+            }
+            else
+            {
+                return "Change password failed: Account not found";
+            }
+        }
     }
 }
