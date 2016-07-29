@@ -10,6 +10,11 @@ namespace WebApplication2.Models
 {
     public class Account : BaseModel
     {
+        public Account()
+        {
+            LoginFails = 0;
+        }
+
         [Key]
         public int AccountID { get; set; }
 
@@ -54,6 +59,12 @@ namespace WebApplication2.Models
         [Display(Name = "lastPasswordModifiedAt", ResourceType = typeof(Resource))]
         [DataType(DataType.DateTime)]
         public DateTime? LastPasswordModifiedAt { get; set; }
+
+        [Display(Name = "needschangepassword", ResourceType = typeof(Resource))]
+        public bool NeedChangePassword { get; set; }
+
+        [Display(Name = "loginfails", ResourceType = typeof(Resource))]
+        public int LoginFails { get; set; }
 
         public string historyPasswords { get; set; }
 

@@ -168,4 +168,10 @@
   <data name="username" xml:space="preserve">
     <value>Username</value>
   </data>
+  <data name="loginfails" xml:space="preserve">
+    <value>Login Fails</value>
+  </data>
+  <data name="needschangepassword" xml:space="preserve">
+    <value>Needs to change password</value>
+  </data>
 </root>

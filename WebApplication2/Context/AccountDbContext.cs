@@ -28,15 +28,33 @@ namespace WebApplication2.Context
             return accountDb.Where(acc => acc.Username == account.Username && acc.Password == account.Password).FirstOrDefault();
         }
 
+        public Account findAccountByAccountUsername(Account account)
+        {
+            return accountDb.Where(acc => acc.Username == account.Username).FirstOrDefault();
+        }
+
         public Account tryLoginAccountByAccount(Account account)
         {
-            Account _account = findAccountByAccount(account);
+            Account _account = findAccountByAccountUsername(account);
             if (_account != null)
             {
-                Entry(_account).State = EntityState.Modified;
-                _account.LastLogin = DateTime.UtcNow;
-                SaveChanges();
-                SessionPersister.createSessionForAccount(_account);
+                if (_account.Password == account.Password)
+                {
+                    if (_account.LoginFails < 3)
+                    {
+                        Entry(_account).State = EntityState.Modified;
+                        _account.LastLogin = DateTime.UtcNow;
+                        _account.LoginFails = 0;
+                        SaveChanges();
+                        SessionPersister.createSessionForAccount(_account);
+                    }
+                }
+                else
+                {
+                    Entry(_account).State = EntityState.Modified;
+                    _account.LoginFails = _account.LoginFails + 1;
+                    SaveChanges();
+                }
             }
             return _account;
         }
@@ -64,6 +82,13 @@ namespace WebApplication2.Context
                 if (error != null)
                 {
                     return error;
+                }
+                else
+                {
+                    Entry(_account).State = EntityState.Modified;
+                    _account.LoginFails = 0;
+                    _account.NeedChangePassword = true;
+                    SaveChanges();
                 }
             }
 
@@ -138,5 +163,7 @@ namespace WebApplication2.Context
                 return "Change password failed: Account not found";
             }
         }
+
+        public System.Data.Entity.DbSet<WebApplication2.Models.Article> Articles { get; set; }
     }
 }

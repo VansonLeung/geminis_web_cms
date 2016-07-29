@@ -5,3 +5,17 @@
 }
 
 <h2>Index</h2>
+<div>
+    <textarea id="editor1" name="editor1">asdfsadf</textarea>
+    <script type="text/javascript">
+    CKEDITOR.replace('editor1', {
+        filebrowserImageBrowseUrl: '/image/UploadPartial',
+        filebrowserImageUploadUrl: '/image/UploadNow'
+    });
+
+    function updateValue(id, value) {
+        var dialog = CKEDITOR.dialog.getCurrent();
+        dialog.setValueOf('info', 'txtUrl', value);
+    }
+    </script>
+</div>

@@ -58,20 +58,31 @@ namespace WebApplication2.Security
 
 
             // Password Change Request after 90 day' Last Password Modified At
+            // or Needchangepassword == true
+            var needchangepassword = false;
             if (account.LastPasswordModifiedAt.GetValueOrDefault() != null)
             {
                 if ((DateTime.UtcNow - account.LastPasswordModifiedAt.GetValueOrDefault()).TotalDays > 90)
                 {
-                    if (!(filterContext.Controller is AccountController)
-                        || (
-                        filterContext.ActionDescriptor.ActionName != "ChangePassword" &&
-                        filterContext.ActionDescriptor.ActionName != "ChangePasswordRequest" &&
-                        filterContext.ActionDescriptor.ActionName != "ChangePasswordSuccess"
-                        ))
-                    {
-                        filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "ChangePasswordRequest" }));
-                        return;
-                    }
+                    needchangepassword = true;
+                }
+            }
+            if (account.NeedChangePassword)
+            {
+                needchangepassword = true;
+            }
+
+            if (needchangepassword)
+            {
+                if (!(filterContext.Controller is AccountController)
+                    || (
+                    filterContext.ActionDescriptor.ActionName != "ChangePassword" &&
+                    filterContext.ActionDescriptor.ActionName != "ChangePasswordRequest" &&
+                    filterContext.ActionDescriptor.ActionName != "ChangePasswordSuccess"
+                    ))
+                {
+                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "ChangePasswordRequest" }));
+                    return;
                 }
             }
         }

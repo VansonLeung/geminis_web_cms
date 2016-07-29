@@ -62,12 +62,30 @@ namespace WebApplication2.Controllers
             var result = db.tryLoginAccountByAccount(account);
             if (result != null)
             {
+                if (result.LoginFails >= 3)
+                {
+                    return RedirectToAction("LoginLocked");
+                }
                 return RedirectToAction("Index");
             }
             else
             {
                 ModelState.AddModelError("", "Wrong username / password combination");
             }
+            return View();
+        }
+
+
+
+        public ActionResult LoginLocked()
+        {
+            return View();
+        }
+
+
+
+        public ActionResult ForgotPassword()
+        {
             return View();
         }
 
@@ -97,6 +115,9 @@ namespace WebApplication2.Controllers
             var error = db.tryChangePassword(account, form.Password);
             if (error == null)
             {
+                db.Entry(account).State = EntityState.Modified;
+                account.NeedChangePassword = false;
+                db.SaveChanges();
                 return RedirectToAction("ChangePasswordSuccess");
             }
             else

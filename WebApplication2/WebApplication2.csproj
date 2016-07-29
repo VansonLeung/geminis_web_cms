@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CKEditor.NET">
+      <HintPath>ckeditor\CKEditor.NET.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -163,16 +166,23 @@
     <Compile Include="Attributes\AccountPasswordLengthValidationAttribute - Copy.cs" />
     <Compile Include="Attributes\AccountPasswordLetterValidationAttribute - Copy.cs" />
     <Compile Include="Context\AccountDbContext.cs" />
+    <Compile Include="Context\ArticleDbContext.cs" />
     <Compile Include="Context\BaseDbContext.cs" />
     <Compile Include="Controllers\AccessDeniedController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleApproverController.cs" />
+    <Compile Include="Controllers\ArticleEditorController.cs" />
+    <Compile Include="Controllers\ArticlePublisherController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Article.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ImageView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -238,9 +248,25 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Me.cshtml" />
+    <Content Include="Views\Account\LoginLocked.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Image\UploadPartial.cshtml" />
+    <Content Include="Views\ArticleEditor\Create.cshtml" />
+    <Content Include="Views\ArticleEditor\Edit.cshtml" />
+    <Content Include="Views\ArticleEditor\List.cshtml" />
+    <Content Include="Views\ArticleEditor\Details.cshtml" />
+    <Content Include="Views\ArticleEditor\Index.cshtml" />
+    <Content Include="Views\ArticleEditor\UpsertLocale.cshtml" />
+    <Content Include="Views\ArticleEditor\CreateNewVersion.cshtml" />
+    <Content Include="Views\ArticleEditor\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ckeditor\" />
+    <Folder Include="Images\uploads\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Views\ArticleApprover\" />
+    <Folder Include="Views\ArticlePublisher\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
@@ -254,7 +280,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

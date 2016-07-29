@@ -8,6 +8,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Content/ckeditor/ckeditor.js" type="text/javascript"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -19,6 +20,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (SessionPersister.account != null)
+                {
+                    @SessionPersister.account.Firstname @SessionPersister.account.Lastname <a href="@Url.Action("Logout", "Account")">Logout</a>
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -32,10 +37,7 @@
                     <li>@Html.ActionLink("Work1", "Work1", "Demo")</li>
                     <li>@Html.ActionLink("Work2", "Work2", "Demo")</li>
                     <li>@Html.ActionLink("Work3", "Work3", "Demo")</li>
-                    @if (SessionPersister.account != null)
-                    {
-                        <li>@SessionPersister.account.Firstname @SessionPersister.account.Lastname <a href="@Url.Action("Logout", "Account")">Logout</a></li>
-                    }
+                    <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
               </ul>
             </div>
         </div>
