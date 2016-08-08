@@ -32,6 +32,18 @@ namespace WebApplication2.Context
             return articleDb.Where(acc => acc.ArticleID == articleID).FirstOrDefault();
         }
 
+
+        public List<Article> findArticlesRequestingApproval()
+        {
+            return articleDb.Where(acc => 
+            acc.isRequestingApproval == true)
+            .OrderByDescending(acc => acc.modified_at)
+            .ToList();
+        }
+
+
+
+        
         public Article findArticleByVersionAndLang(int baseArticleID, int version = 0, String lang = null)
         {
             if (lang == null)
@@ -316,11 +328,41 @@ namespace WebApplication2.Context
 
         public String tryRequestApproval(Article article)
         {
+            var _article = findArticleByID(article.ArticleID);
+            if (_article == null)
+            {
+                return "Item not found";
+            }
+            if (_article.isFrozen)
+            {
+                return "Item is frozen";
+            }
+
+            Entry(_article).State = EntityState.Modified;
+            _article.isApproved = true;
+            _article.dateApproved = DateTime.UtcNow;
+            SaveChanges();
+
             return null;
         }
 
         public String tryRequestUnapproval(Article article)
         {
+            var _article = findArticleByID(article.ArticleID);
+            if (_article == null)
+            {
+                return "Item not found";
+            }
+            if (_article.isFrozen)
+            {
+                return "Item is frozen";
+            }
+
+            Entry(_article).State = EntityState.Modified;
+            _article.isApproved = false;
+            _article.dateApproved = null;
+            SaveChanges();
+
             return null;
         }
 
@@ -344,20 +386,5 @@ namespace WebApplication2.Context
 
 
 
-
-
-
-
-        // ARTICLE PUBLISHER ONLY
-
-        public String tryPublishArticle(Article article)
-        {
-            return null;
-        }
-
-        public String tryUnpublishArticle(Article article)
-        {
-            return null;
-        }
     }
 }

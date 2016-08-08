@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 using WebApplication2.Resources;
 using WebApplication2.Attributes;
+using System.Security.Cryptography;
 
 namespace WebApplication2.Models
 {
@@ -81,6 +83,23 @@ namespace WebApplication2.Models
             var passwords = passwordList.ToArray();
             var passwordString = String.Join(",", passwords);
             return passwordString;
+        }
+
+
+        public string MakeEncryptedPassword(string password)
+        {
+            var salted = password + "GCP_V1";
+            MD5 md5 = new MD5CryptoServiceProvider();
+            Byte[] originalBytes = ASCIIEncoding.Default.GetBytes(salted);
+            Byte[] encodedBytes = md5.ComputeHash(originalBytes);
+
+            StringBuilder hex = new StringBuilder(encodedBytes.Length * 2);
+            foreach (byte b in encodedBytes)
+                hex.AppendFormat("{0:x2}", b);
+
+            var str = hex.ToString();
+            str = str.Substring(0, 20);
+            return str;
         }
     }
     

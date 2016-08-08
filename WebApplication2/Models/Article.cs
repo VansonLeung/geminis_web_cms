@@ -38,6 +38,14 @@ namespace WebApplication2.Models
 
         public bool isFrozen { get; set; }
 
+        public DateTime? dateApproved { get; set; }
+
+        public DateTime? datePublished { get; set; }
+
+
+
+
+
 
         public Article makeNewArticleByCloningContent()
         {

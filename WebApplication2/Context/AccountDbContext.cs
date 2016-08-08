@@ -23,11 +23,6 @@ namespace WebApplication2.Context
             return accountDb.Where(acc => acc.AccountID == accountID).FirstOrDefault();
         }
 
-        public Account findAccountByAccount(Account account)
-        {
-            return accountDb.Where(acc => acc.Username == account.Username && acc.Password == account.Password).FirstOrDefault();
-        }
-
         public Account findAccountByAccountUsername(Account account)
         {
             return accountDb.Where(acc => acc.Username == account.Username).FirstOrDefault();
@@ -35,10 +30,11 @@ namespace WebApplication2.Context
 
         public Account tryLoginAccountByAccount(Account account)
         {
+            var encPassword = account.MakeEncryptedPassword(account.Password);
             Account _account = findAccountByAccountUsername(account);
             if (_account != null)
             {
-                if (_account.Password == account.Password)
+                if (_account.Password == encPassword)
                 {
                     if (_account.LoginFails < 3)
                     {
@@ -66,19 +62,26 @@ namespace WebApplication2.Context
 
         public void tryRegisterAccount(Account account)
         {
+            var encPassword = account.MakeEncryptedPassword(account.Password);
+            account.Password = encPassword;
+            account.ConfirmPassword = encPassword;
             account.LastPasswordModifiedAt = DateTime.UtcNow;
             account.historyPasswords = account.Password;
             accountDb.Add(account);
             SaveChanges();
+
+            account.Password = "";
+            account.ConfirmPassword = "";
         }
 
         public string tryEdit(Account account)
         {
+            var encPassword = account.MakeEncryptedPassword(account.Password);
             string error = null;
             Account _account = findAccountByID(account.AccountID);
-            if (_account.Password != account.Password)
+            if (_account.Password != encPassword)
             {
-                error = tryChangePassword(account, account.Password);
+                error = tryChangePassword(account, encPassword);
                 if (error != null)
                 {
                     return error;
@@ -163,7 +166,5 @@ namespace WebApplication2.Context
                 return "Change password failed: Account not found";
             }
         }
-
-        public System.Data.Entity.DbSet<WebApplication2.Models.Article> Articles { get; set; }
     }
 }

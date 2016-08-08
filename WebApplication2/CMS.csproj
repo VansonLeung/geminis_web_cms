@@ -163,10 +163,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Attributes\AccountPasswordLengthValidationAttribute - Copy.cs" />
-    <Compile Include="Attributes\AccountPasswordLetterValidationAttribute - Copy.cs" />
+    <Compile Include="Attributes\AccountPasswordLengthValidationAttribute.cs" />
+    <Compile Include="Attributes\AccountPasswordLetterValidationAttribute.cs" />
     <Compile Include="Context\AccountDbContext.cs" />
     <Compile Include="Context\ArticleDbContext.cs" />
+    <Compile Include="Context\ArticlePublishedDbContext.cs" />
     <Compile Include="Context\BaseDbContext.cs" />
     <Compile Include="Controllers\AccessDeniedController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
