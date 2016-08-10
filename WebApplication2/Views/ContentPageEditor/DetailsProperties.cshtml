@@ -1,0 +1,63 @@
+﻿@model WebApplication2.Models.ContentPage
+
+@{
+    ViewBag.Title = "DetailsProperties";
+    Layout = "~/Views/ContentPageEditor/ContentPageDetailsChrome.cshtml";
+}
+
+<h2>Properties</h2>
+
+<div>
+    <h4>ContentPage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Keywords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Keywords)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isFrozen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isFrozen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modified_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modified_at)
+        </dd>
+
+    </dl>
+</div>

@@ -14,8 +14,6 @@ namespace WebApplication2.Controllers
 {
     public class AccountController : BaseController
     {
-        AccountDbContext db = new AccountDbContext();
-
         // GET: Account
         public override ActionResult Index()
         {
@@ -25,23 +23,26 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult List()
         {
-            var items = db.findAccounts();
+            var items = AccountDbContext.getInstance().findAccounts();
             return View(items);
         }
 
+        [CustomSuperadminOrEmpty()]
         public ActionResult Register()
         {
             return View();
         }
 
+        [CustomSuperadminOrEmpty()]
         [HttpPost]
         public ActionResult Register(Account account)
         {
             if (ModelState.IsValid)
             {
-                db.tryRegisterAccount(account);
+                AccountDbContext.getInstance().tryRegisterAccount(account);
                 ModelState.Clear();
                 ViewBag.Message = account.Firstname + " " + account.Lastname + " successfully registered.";
+                return RedirectToAction("List");
             }
             return View();
         }
@@ -59,7 +60,7 @@ namespace WebApplication2.Controllers
             var username = account.Username;
             var password = account.Password;
 
-            var result = db.tryLoginAccountByAccount(account);
+            var result = AccountDbContext.getInstance().tryLoginAccountByAccount(account);
             if (result != null)
             {
                 if (result.LoginFails >= 3)
@@ -93,7 +94,7 @@ namespace WebApplication2.Controllers
 
         public ActionResult Logout()
         {
-            db.tryLogout();
+            AccountDbContext.getInstance().tryLogout();
             return RedirectToAction("Index");
         }
 
@@ -112,12 +113,9 @@ namespace WebApplication2.Controllers
             account.Username = SessionPersister.account.Username;
             account.Password = form.OldPassword;
 
-            var error = db.tryChangePassword(account, form.Password);
+            var error = AccountDbContext.getInstance().tryChangePassword(account, form.Password, true);
             if (error == null)
             {
-                db.Entry(account).State = EntityState.Modified;
-                account.NeedChangePassword = false;
-                db.SaveChanges();
                 return RedirectToAction("ChangePasswordSuccess");
             }
             else
@@ -152,7 +150,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize()]
         public ActionResult Details(int id = 0)
         {
-            var item = db.accountDb.Find(id);
+            var item = AccountDbContext.getInstance().findAccountByID(id);
             if (item == null)
             {
                 return HttpNotFound();
@@ -177,7 +175,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult Edit(int id = 0)
         {
-            var item = db.accountDb.Find(id);
+            var item = AccountDbContext.getInstance().findAccountByID(id);
             if (item == null)
             {
                 return HttpNotFound();
@@ -193,7 +191,7 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var error = db.tryEdit(item);
+                var error = AccountDbContext.getInstance().tryEdit(item);
                 if (error != null)
                 {
                     ModelState.AddModelError("", error);
@@ -214,7 +212,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult Delete(int id = 0)
         {
-            var item = db.accountDb.Find(id);
+            var item = AccountDbContext.getInstance().findAccountByID(id);
             if (item == null)
             {
                 return HttpNotFound();
@@ -228,13 +226,12 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult DeleteConfirmed(int id = 0)
         {
-            var item = db.accountDb.Find(id);
+            var item = AccountDbContext.getInstance().findAccountByID(id);
             if (item == null)
             {
                 return HttpNotFound();
             }
-            db.accountDb.Remove(item);
-            db.SaveChanges();
+            AccountDbContext.getInstance().tryDeleteAccount(item);
             return RedirectToAction("List");
         }
     }

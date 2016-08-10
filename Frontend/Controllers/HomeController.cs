@@ -32,11 +32,8 @@ namespace Frontend.Controllers
 
         public ActionResult ArticleList()
         {
-            using (ArticleDbContext db = new ArticleDbContext())
-            {
-                var list = db.findArticlesGroupByBaseVersion();
-                return PartialView(list);
-            }
+            var list = ArticleDbContext.getInstance().findArticlesGroupByBaseVersion();
+            return PartialView(list);
         }
     }
 }

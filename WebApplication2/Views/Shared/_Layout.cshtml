@@ -11,7 +11,7 @@
     <script src="~/Content/ckeditor/ckeditor.js" type="text/javascript"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,25 +19,57 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @if (SessionPersister.account != null)
-                {
-                    @SessionPersister.account.Firstname @SessionPersister.account.Lastname <a href="@Url.Action("Logout", "Account")">Logout</a>
-                }
+                @Html.ActionLink("GSL CMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Account")</li>
-                    <li>@Html.ActionLink("My Account", "Me", "Account")</li>
-                    <li>@Html.ActionLink("Accounts", "List", "Account")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
-                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
-                    <li>@Html.ActionLink("Demo Index", "Index", "Demo")</li>
-                    <li>@Html.ActionLink("Work1", "Work1", "Demo")</li>
-                    <li>@Html.ActionLink("Work2", "Work2", "Demo")</li>
-                    <li>@Html.ActionLink("Work3", "Work3", "Demo")</li>
-                    <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
+
+                    @if (SessionPersister.account != null)
+                    {
+                        <li>
+                            <a>@SessionPersister.account.Firstname @SessionPersister.account.Lastname (@SessionPersister.account.Role)</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Logout", "Account")">Logout</a>
+                        </li>
+
+                        if (SessionPersister.account.Role.Equals("editor"))
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Account")</li>
+                            <li>@Html.ActionLink("My Account", "Me", "Account")</li>
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
+                            <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
+                            <li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>
+                        }
+                        else if (SessionPersister.account.Role.Equals("approver"))
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Account")</li>
+                            <li>@Html.ActionLink("My Account", "Me", "Account")</li>
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
+                            <li>@Html.ActionLink("Articles", "List", "ArticleApprover")</li>
+                        }
+                        else if (SessionPersister.account.Role.Equals("publisher"))
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Account")</li>
+                            <li>@Html.ActionLink("My Account", "Me", "Account")</li>
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
+                            <li>@Html.ActionLink("Available Articles", "ListArticlesApproved", "ArticlePublisher")</li>
+                            <li>@Html.ActionLink("Published Articles", "ListArticlesPublished", "ArticlePublisher")</li>
+                        }
+                        else if (SessionPersister.account.Role.Equals("superadmin"))
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Account")</li>
+                            <li>@Html.ActionLink("Account List", "List", "Account")</li>
+                            <li>@Html.ActionLink("Register New CMS Account", "Register", "Account")</li>
+                        }
+
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    }
+
               </ul>
             </div>
         </div>

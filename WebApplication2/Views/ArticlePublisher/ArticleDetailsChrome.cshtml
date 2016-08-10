@@ -1,0 +1,66 @@
+﻿@model WebApplication2.Models.Article
+
+@{
+    ViewBag.Title = "ArticleChrome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Article</h2>
+
+@functions
+{
+    public string CurrentTab(string tab, string lang = "")
+    {
+        var url = Request.Url.GetLeftPart(UriPartial.Path);
+        var parts = url.Split('/');
+        var urlPart = parts.ElementAt(parts.Count() - 1);
+
+        if (urlPart.Equals(tab))
+        {
+            if (urlPart.Equals("DetailsLocale"))
+            {
+                if (Model.Lang.Equals(lang))
+                {
+                    return "current";
+                }
+                if (Model.Lang.Equals(lang))
+                {
+                    return "current";
+                }
+                if (Model.Lang.Equals(lang))
+                {
+                    return "current";
+                }
+            }
+            else if (urlPart.Equals("DetatilsProperties"))
+            {
+                return "current";
+            }
+            else if (urlPart.Equals("ListArticleVersions"))
+            {
+                return "current";
+            }
+        }
+        return "";
+    }
+}
+
+<div class="tabs-menu">
+    <ul>
+        <li class=@CurrentTab("DetailsLocale", "en")>@Html.ActionLink("en", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("DetailsLocale", "zh")>@Html.ActionLink("zh", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
+        <li class=@CurrentTab("DetailsLocale", "cn")>@Html.ActionLink("cn", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
+        <li class=@CurrentTab("DetailsProperties")>@Html.ActionLink("Page Properties", "DetailsProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+    </ul>
+</div>
+
+@if (Model.isPublished)
+{
+    <div>Published</div>
+}
+
+@Html.ActionLink("Publish", "PublishArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version }) |
+@Html.ActionLink("Unpublish", "UnpublishArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version }) | 
+@Html.ActionLink("Back", "List")
+
+@RenderBody()

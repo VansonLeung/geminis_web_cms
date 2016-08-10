@@ -8,19 +8,19 @@ using WebApplication2.Security;
 
 namespace WebApplication2.Context
 {
-    public class ArticleDbContext
+    public class ContentPageDbContext
     {
         // singleton
 
-        private static ArticleDbContext articleDbContext;
+        private static ContentPageDbContext contentPageDbContext;
 
-        public static ArticleDbContext getInstance()
+        public static ContentPageDbContext getInstance()
         {
-            if (articleDbContext == null)
+            if (contentPageDbContext == null)
             {
-                articleDbContext = new ArticleDbContext();
+                contentPageDbContext = new ContentPageDbContext();
             }
-            return articleDbContext;
+            return contentPageDbContext;
         }
 
 
@@ -28,9 +28,9 @@ namespace WebApplication2.Context
 
         private BaseDbContext db = new BaseDbContext();
 
-        protected DbSet<Article> getArticleDb()
+        protected DbSet<ContentPage> getArticleDb()
         {
-            return db.articleDb;
+            return db.contentPageDb;
         }
 
 
@@ -40,12 +40,12 @@ namespace WebApplication2.Context
 
         // methods
 
-        public List<Article> findArticles()
+        public List<ContentPage> findArticles()
         {
             return (getArticleDb()).Include(acc => acc.createdByAccount).ToList();
         }
 
-        public List<Article> findArticlesGroupByBaseVersion(string lang = "en")
+        public List<ContentPage> findArticlesGroupByBaseVersion(string lang = "en")
         {
             return getArticleDb()
                 .GroupBy(acc => acc.BaseArticleID)
@@ -57,13 +57,13 @@ namespace WebApplication2.Context
         }
 
 
-        public Article findArticleByID(int articleID)
+        public ContentPage findArticleByID(int articleID)
         {
             return getArticleDb().Where(acc => acc.ArticleID == articleID).FirstOrDefault();
         }
 
 
-        public List<Article> findArticlesRequestingApproval()
+        public List<ContentPage> findArticlesRequestingApproval()
         {
             return getArticleDb().Where(acc =>
             acc.isRequestingApproval == true)
@@ -72,7 +72,7 @@ namespace WebApplication2.Context
             .ToList();
         }
 
-        public List<Article> findArticlesGroupByBaseVersionRequestingApproval(string lang = "en")
+        public List<ContentPage> findArticlesGroupByBaseVersionRequestingApproval(string lang = "en")
         {
             return getArticleDb()
                 .GroupBy(acc => acc.BaseArticleID)
@@ -84,7 +84,7 @@ namespace WebApplication2.Context
                 .ToList();
         }
 
-        public List<Article> findArticlesGroupByBaseVersionApproved(string lang = "en")
+        public List<ContentPage> findArticlesGroupByBaseVersionApproved(string lang = "en")
         {
             return getArticleDb()
                 .GroupBy(acc => acc.BaseArticleID)
@@ -97,7 +97,7 @@ namespace WebApplication2.Context
         }
 
 
-        public Article findArticleByVersionAndLang(int baseArticleID, int version = 0, String lang = null)
+        public ContentPage findArticleByVersionAndLang(int baseArticleID, int version = 0, String lang = null)
         {
             if (lang == null)
             {
@@ -122,14 +122,14 @@ namespace WebApplication2.Context
             }
         }
 
-        public Article findArticleByArticle(Article article)
+        public ContentPage findArticleByArticle(ContentPage article)
         {
             return null;
             //   return articleDb.Where(acc => acc.Username == account.Username && acc.Password == account.Password).FirstOrDefault();
         }
 
 
-        public Article findLatestArticleByBaseArticle(Article article, String lang = null)
+        public ContentPage findLatestArticleByBaseArticle(ContentPage article, String lang = null)
         {
             var targetBaseArticleID = article.BaseArticleID;
             var targetLang = article.Lang;
@@ -152,7 +152,7 @@ namespace WebApplication2.Context
         }
 
 
-        public Article findLatestArticleByBaseArticleID(int baseArticleID, String lang = null)
+        public ContentPage findLatestArticleByBaseArticleID(int baseArticleID, String lang = null)
         {
             var targetBaseArticleID = baseArticleID;
             var targetLang = lang;
@@ -176,7 +176,7 @@ namespace WebApplication2.Context
 
 
 
-        public List<Article> findAllArticlesByBaseArticle(Article article, String lang = null)
+        public List<ContentPage> findAllArticlesByBaseArticle(ContentPage article, String lang = null)
         {
             var articles = getArticleDb().Where(acc =>
             acc.BaseArticleID == article.BaseArticleID &&
@@ -193,7 +193,7 @@ namespace WebApplication2.Context
 
 
 
-        public List<Article> findAllLocaleArticlesByBaseArticleAndVersion(Article article, String Lang = "en")
+        public List<ContentPage> findAllLocaleArticlesByBaseArticleAndVersion(ContentPage article, String Lang = "en")
         {
             var articles = getArticleDb().Where(acc =>
             acc.BaseArticleID == article.BaseArticleID &&
@@ -209,7 +209,7 @@ namespace WebApplication2.Context
 
 
 
-        public bool articleWithSameVersionAndLangAlreadyPresents(Article article)
+        public bool articleWithSameVersionAndLangAlreadyPresents(ContentPage article)
         {
             return findArticleByVersionAndLang(article.BaseArticleID, article.Version, article.Lang) != null;
         }
@@ -217,13 +217,19 @@ namespace WebApplication2.Context
 
 
 
+
+
+
+
+        
+
         // ARTICLE EDITOR ONLY
 
 
 
-        public String tryCreateNewArticle(Article article)
+        public String tryCreateNewArticle(ContentPage article)
         {
-            Article latestArticle = null;
+            ContentPage latestArticle = null;
 
             if (article.BaseArticleID != 0)
             {
@@ -252,7 +258,7 @@ namespace WebApplication2.Context
 
             if (articleWithSameVersionAndLangAlreadyPresents(article))
             {
-                return "Article already presents";
+                return "ContentPage already presents";
             }
 
             article.createdBy = SessionPersister.account.AccountID;
@@ -278,13 +284,13 @@ namespace WebApplication2.Context
         }
 
 
-        void tryCloningNewLocaleArticleForNewArticleVersion(Article latestArticle, Article newArticle)
+        void tryCloningNewLocaleArticleForNewArticleVersion(ContentPage latestArticle, ContentPage newArticle)
         {
             // try clone new locale for this new article
             var articles = findAllLocaleArticlesByBaseArticleAndVersion(latestArticle, latestArticle.Lang);
             foreach (var _a in articles)
             {
-                Article _new = _a.makeNewArticleByCloningContent();
+                ContentPage _new = _a.makeNewContentPageByCloningContent();
                 _new.Version = newArticle.Version;
                 _new.createdBy = SessionPersister.account.AccountID;
                 getArticleDb().Add(_new);
@@ -293,7 +299,7 @@ namespace WebApplication2.Context
         }
 
 
-        public String tryCreateNewLocaleArticle(Article article)
+        public String tryCreateNewLocaleArticle(ContentPage article)
         {
             if (article.BaseArticleID != 0)
             {
@@ -306,7 +312,7 @@ namespace WebApplication2.Context
 
             if (articleWithSameVersionAndLangAlreadyPresents(article))
             {
-                return "Article with the same version and language already presents";
+                return "ContentPage with the same version and language already presents";
             }
 
             article.createdBy = SessionPersister.account.AccountID;
@@ -324,7 +330,7 @@ namespace WebApplication2.Context
             return null;
         }
 
-        public String tryEditArticle(Article article)
+        public String tryEditArticle(ContentPage article)
         {
             var _article = findArticleByID(article.ArticleID);
             if (_article == null)
@@ -339,7 +345,7 @@ namespace WebApplication2.Context
             db.Entry(_article).State = EntityState.Modified;
             _article.Name = article.Name;
             _article.Desc = article.Desc;
-            _article.Slug = article.Slug;
+            _article.Url = article.Url;
             _article.Keywords = article.Keywords;
             _article.Excerpt = article.Excerpt;
             db.SaveChanges();
@@ -349,7 +355,7 @@ namespace WebApplication2.Context
 
 
 
-        public String tryEditArticleProperties(Article article, bool allLocales)
+        public String tryEditArticleProperties(ContentPage article, bool allLocales)
         {
             var _article = findArticleByID(article.ArticleID);
             if (_article == null)
@@ -362,7 +368,7 @@ namespace WebApplication2.Context
             }
 
             db.Entry(_article).State = EntityState.Modified;
-            _article.Slug = article.Slug;
+            _article.Url = article.Url;
             _article.Keywords = article.Keywords;
 
             if (allLocales)
@@ -371,7 +377,7 @@ namespace WebApplication2.Context
                 foreach (var _a in _localeArticles)
                 {
                     db.Entry(_a).State = EntityState.Modified;
-                    _a.Slug = article.Slug;
+                    _a.Url = article.Url;
                     _a.Keywords = article.Keywords;
                 }
             }
@@ -382,7 +388,7 @@ namespace WebApplication2.Context
         }
 
 
-        public String tryDeleteArticle(Article article)
+        public String tryDeleteArticle(ContentPage article)
         {
             var _article = findArticleByID(article.ArticleID);
             if (_article == null)
@@ -404,116 +410,6 @@ namespace WebApplication2.Context
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        // ARTICLE EDITOR REQUEST FOR APPROVAL
-
-        public String trySubmitRequestForApproval(Article article, bool allLocales)
-        {
-            var _article = findArticleByID(article.ArticleID);
-            if (_article == null)
-            {
-                return "Item not found";
-            }
-
-            db.Entry(_article).State = EntityState.Modified;
-            _article.isRequestingApproval = true;
-            _article.isFrozen = true;
-
-            if (allLocales)
-            {
-                var _localeArticles = findAllLocaleArticlesByBaseArticleAndVersion(article, article.Lang);
-                foreach (var _a in _localeArticles)
-                {
-                    db.Entry(_a).State = EntityState.Modified;
-                    _article.isRequestingApproval = true;
-                    _article.isFrozen = true;
-                }
-            }
-
-            db.SaveChanges();
-
-            return null;
-        }
-
-
-
-
-        // ARTICLE APPROVER ONLY
-
-        public String tryRequestApproval(Article article, bool allLocales)
-        {
-            var _article = findArticleByID(article.ArticleID);
-            if (_article == null)
-            {
-                return "Item not found";
-            }
-
-            db.Entry(_article).State = EntityState.Modified;
-            _article.isApproved = true;
-            _article.isFrozen = true;
-            _article.dateApproved = DateTime.UtcNow;
-            _article.approvedBy = SessionPersister.account.AccountID;
-
-            if (allLocales)
-            {
-                var _localeArticles = findAllLocaleArticlesByBaseArticleAndVersion(article, article.Lang);
-                foreach (var _a in _localeArticles)
-                {
-                    db.Entry(_a).State = EntityState.Modified;
-                    _a.isApproved = true;
-                    _a.isFrozen = true;
-                    _a.dateApproved = DateTime.UtcNow;
-                    _a.approvedBy = SessionPersister.account.AccountID;
-                }
-            }
-
-            db.SaveChanges();
-
-            return null;
-        }
-
-        public String tryRequestUnapproval(Article article, bool allLocales)
-        {
-            var _article = findArticleByID(article.ArticleID);
-            if (_article == null)
-            {
-                return "Item not found";
-            }
-
-            db.Entry(_article).State = EntityState.Modified;
-            _article.isApproved = false;
-            _article.isFrozen = true;
-            _article.dateApproved = null;
-            _article.approvedBy = SessionPersister.account.AccountID;
-
-            if (allLocales)
-            {
-                var _localeArticles = findAllLocaleArticlesByBaseArticleAndVersion(article, article.Lang);
-                foreach (var _a in _localeArticles)
-                {
-                    db.Entry(_a).State = EntityState.Modified;
-                    _a.isApproved = false;
-                    _a.isFrozen = true;
-                    _a.dateApproved = null;
-                    _a.approvedBy = SessionPersister.account.AccountID;
-                }
-            }
-
-            db.SaveChanges();
-
-            return null;
-        }
 
 
     }

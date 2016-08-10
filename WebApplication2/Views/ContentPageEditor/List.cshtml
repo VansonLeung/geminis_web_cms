@@ -1,14 +1,14 @@
-﻿@model IEnumerable<WebApplication2.Models.Article>
+﻿@model IEnumerable<WebApplication2.Models.ContentPage>
 
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Articles</h2>
+<h2>ContentPages</h2>
 
 <p>
-    @Html.ActionLink("Create New Article", "Create")
+    @Html.ActionLink("Create New ContentPage", "Create")
 </p>
 <table class="table">
     <tr>
@@ -16,16 +16,7 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Version)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BaseArticleID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isApproved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isPublished)
+            @Html.DisplayNameFor(model => model.Url)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.created_at)
@@ -48,16 +39,7 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Version)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BaseArticleID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isApproved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isPublished)
+            @Html.DisplayFor(modelItem => item.Url)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.created_at)
@@ -75,8 +57,6 @@
             @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
             @Html.ActionLink("View", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })<br />
-            @Html.ActionLink("Version History", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })<br />
-            @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = item.BaseArticleID })
         </td>
     </tr>
 }

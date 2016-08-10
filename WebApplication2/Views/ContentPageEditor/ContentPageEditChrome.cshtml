@@ -1,0 +1,55 @@
+﻿@model WebApplication2.Models.ContentPage
+
+@{
+    ViewBag.Title = "ContentPageChrome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>ContentPage</h4>
+
+@functions
+{
+    public string CurrentTab(string tab, string lang = "")
+    {
+        var url = Request.Url.GetLeftPart(UriPartial.Path);
+        var parts = url.Split('/');
+        var urlPart = parts.ElementAt(parts.Count() - 1);
+
+        if (urlPart.Equals(tab))
+        {
+            if (urlPart.Equals("UpsertLocale"))
+            {
+                if (Model.Lang.Equals(lang))
+                {
+                    return "current";
+                }
+                if (Model.Lang.Equals(lang))
+                {
+                    return "current";
+                }
+                if (Model.Lang.Equals(lang))
+                {
+                    return "current";
+                }
+            }
+            else if (urlPart.Equals("EditProperties"))
+            {
+                return "current";
+            }
+        }
+        return "";
+    }
+}
+
+<div class="tabs-menu">
+    <ul>
+        <li class=@CurrentTab("UpsertLocale", "en")>@Html.ActionLink("Edit en", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("UpsertLocale", "zh")>@Html.ActionLink("Edit zh", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
+        <li class=@CurrentTab("UpsertLocale", "cn")>@Html.ActionLink("Edit cn", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
+        <li class=@CurrentTab("EditProperties")>@Html.ActionLink("Edit Page Properties", "EditProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+    </ul>
+</div>
+
+@Html.ActionLink("Back", "List")
+
+@RenderBody()

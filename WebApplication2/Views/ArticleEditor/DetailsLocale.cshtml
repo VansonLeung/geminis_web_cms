@@ -1,0 +1,94 @@
+﻿@model WebApplication2.Models.Article
+
+@{
+    ViewBag.Title = "DetailsLocale";
+    Layout = "~/Views/ArticleEditor/ArticleDetailsChrome.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Desc)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Desc));
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Excerpt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Excerpt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseArticleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseArticleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isPublished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isPublished)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modified_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modified_at)
+        </dd>
+
+    </dl>
+</div>

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
@@ -10,6 +13,19 @@ namespace WebApplication2.Context
 {
     public class BaseDbContext : DbContext
     {
+        // CMS Admin Accounts Table
+        public DbSet<Account> accountDb { get; set; }
+
+        // Articles Table + Published Articles Table
+        public DbSet<Article> articleDb { get; set; }
+        public DbSet<ArticlePublished> articlePublishedDb { get; set; }
+
+        // Content Pages Table
+        public DbSet<ContentPage> contentPageDb { get; set; }
+
+        
+
+
         public override int SaveChanges()
         {
             AddTimeStamps();

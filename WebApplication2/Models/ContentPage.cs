@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 
 namespace WebApplication2.Models
 {
-    public class Article : BaseArticle
+    public class ContentPage : BaseArticle
     {
-        public new Article makeNewArticleByCloningContent()
+        public ContentPage makeNewContentPageByCloningContent()
         {
-            Article a = new Article();
+            ContentPage a = new ContentPage();
             a.BaseArticleID = BaseArticleID;
+            a.Url = Url;
             a.Excerpt = Excerpt;
             a.Desc = Desc;
             a.Name = Name;

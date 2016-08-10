@@ -166,12 +166,14 @@
     <Compile Include="Attributes\AccountPasswordLengthValidationAttribute.cs" />
     <Compile Include="Attributes\AccountPasswordLetterValidationAttribute.cs" />
     <Compile Include="Context\AccountDbContext.cs" />
+    <Compile Include="Context\ContentPageDbContext.cs" />
     <Compile Include="Context\ArticleDbContext.cs" />
     <Compile Include="Context\ArticlePublishedDbContext.cs" />
     <Compile Include="Context\BaseDbContext.cs" />
     <Compile Include="Controllers\AccessDeniedController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleApproverController.cs" />
+    <Compile Include="Controllers\ContentPageEditorController.cs" />
     <Compile Include="Controllers\ArticleEditorController.cs" />
     <Compile Include="Controllers\ArticlePublisherController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -181,8 +183,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\BaseArticle.cs" />
     <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticlePublished.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ContentPage.cs" />
     <Compile Include="Models\ImageView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
@@ -190,6 +195,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Security\CustomSuperadminOrEmptyAttribute.cs" />
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
     <Compile Include="Security\SessionPersister.cs" />
@@ -253,21 +259,43 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Image\UploadPartial.cshtml" />
     <Content Include="Views\ArticleEditor\Create.cshtml" />
-    <Content Include="Views\ArticleEditor\Edit.cshtml" />
     <Content Include="Views\ArticleEditor\List.cshtml" />
-    <Content Include="Views\ArticleEditor\Details.cshtml" />
     <Content Include="Views\ArticleEditor\Index.cshtml" />
     <Content Include="Views\ArticleEditor\UpsertLocale.cshtml" />
     <Content Include="Views\ArticleEditor\CreateNewVersion.cshtml" />
     <Content Include="Views\ArticleEditor\Delete.cshtml" />
+    <Content Include="Views\ArticleEditor\ArticleDetailsChrome.cshtml" />
+    <Content Include="Views\ArticleEditor\DetailsLocale.cshtml" />
+    <Content Include="Views\ArticleEditor\ArticleEditChrome.cshtml" />
+    <Content Include="Views\ArticleEditor\EditProperties.cshtml" />
+    <Content Include="Views\ArticleEditor\DetailsProperties.cshtml" />
+    <Content Include="Views\ArticleEditor\ListArticleVersions.cshtml" />
+    <Content Include="Views\ArticleApprover\List.cshtml" />
+    <Content Include="Views\ArticleApprover\DetailsLocale.cshtml" />
+    <Content Include="Views\ArticleApprover\ArticleDetailsChrome.cshtml" />
+    <Content Include="Views\ArticleEditor\SubmitRequestForApproval.cshtml" />
+    <Content Include="Views\ArticleApprover\DetailsProperties.cshtml" />
+    <Content Include="Views\ArticlePublisher\ListArticlesPublished.cshtml" />
+    <Content Include="Views\ArticlePublisher\ArticleDetailsChrome.cshtml" />
+    <Content Include="Views\ArticlePublisher\ListArticlesApproved.cshtml" />
+    <Content Include="Views\ArticlePublisher\ListArticleVersions.cshtml" />
+    <Content Include="Views\ArticlePublisher\DetailsLocale.cshtml" />
+    <Content Include="Views\ArticlePublisher\DetailsProperties.cshtml" />
+    <Content Include="Views\ContentPageEditor\Create.cshtml" />
+    <Content Include="Views\ContentPageEditor\Delete.cshtml" />
+    <Content Include="Views\ContentPageEditor\DetailsLocale.cshtml" />
+    <Content Include="Views\ContentPageEditor\DetailsProperties.cshtml" />
+    <Content Include="Views\ContentPageEditor\EditProperties.cshtml" />
+    <Content Include="Views\ContentPageEditor\Index.cshtml" />
+    <Content Include="Views\ContentPageEditor\List.cshtml" />
+    <Content Include="Views\ContentPageEditor\UpsertLocale.cshtml" />
+    <Content Include="Views\ContentPageEditor\ContentPageDetailsChrome.cshtml" />
+    <Content Include="Views\ContentPageEditor\ContentPageEditChrome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ckeditor\" />
     <Folder Include="Images\uploads\" />
-    <Folder Include="Migrations\" />
-    <Folder Include="Views\ArticleApprover\" />
-    <Folder Include="Views\ArticlePublisher\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

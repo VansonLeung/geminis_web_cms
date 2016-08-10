@@ -16,9 +16,5 @@ namespace WebApplication2.Models
         [Display(Name = "modified_at", ResourceType = typeof(Resource))]
         [DataType(DataType.DateTime)]
         public DateTime? modified_at { get; set; }
-
-        //public Account created_by { get; set; }
-
-        //public Account modified_by { get; set; }
     }
 }

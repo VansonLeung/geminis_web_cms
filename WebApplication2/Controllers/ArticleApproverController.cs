@@ -4,35 +4,58 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Context;
+using WebApplication2.Models;
 using WebApplication2.Security;
 
 namespace WebApplication2.Controllers
 {
     public class ArticleApproverController : BaseController
     {
-        ArticleDbContext db = new ArticleDbContext();
-
         // GET: ArticleApprover
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             return View();
         }
 
-        [CustomAuthorize]
+        [CustomAuthorize(Roles = "superadmin,approver")]
         public ActionResult List()
         {
-            var items = db.findArticlesRequestingApproval();
+            var items = ArticleDbContext.getInstance().findArticlesGroupByBaseVersionRequestingApproval();
             return View(items);
         }
 
 
-        [CustomAuthorize()]
-        public ActionResult Details(int id = 0)
+        // DETAILS LOCALE
+        [CustomAuthorize(Roles = "superadmin,approver")]
+        public ActionResult DetailsLocale(int baseArticleID = 0, int version = 0, String lang = null)
         {
-            var item = db.articleDb.Find(id);
+            // find existing locale article for base article ID and version and lang
+            Article item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
             if (item == null)
             {
                 return HttpNotFound();
+            }
+            else
+            {
+                // if locale exists, treat as edit form
+            }
+            return View(item);
+        }
+
+
+        // DETAILS LOCALE
+        [CustomAuthorize(Roles = "superadmin,approver")]
+        public ActionResult DetailsProperties(int baseArticleID = 0, int version = 0, String lang = null)
+        {
+            // find existing locale article for base article ID and version and lang
+            Article item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                // if locale exists, treat as edit form
             }
             return View(item);
         }
@@ -41,46 +64,43 @@ namespace WebApplication2.Controllers
 
 
 
-
         [CustomAuthorize(Roles = "superadmin,approver")]
-        [HttpPost]
-        public ActionResult ApproveArticle(int id = 0)
+        public ActionResult ApproveArticle(int baseArticleID = 0, int version = 0)
         {
-            var item = db.articleDb.Find(id);
+            var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, "en");
             if (item == null)
             {
                 return HttpNotFound();
             }
-            var error = db.tryRequestApproval(item);
+            var error = ArticleDbContext.getInstance().tryRequestApproval(item, true);
             if (error != null)
             {
                 ModelState.AddModelError("", error);
-                return View(item);
+                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
             }
             else
             {
-                return RedirectToAction("Details", new { id = item.ArticleID });
+                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
             }
         }
 
         [CustomAuthorize(Roles = "superadmin,approver")]
-        [HttpPost]
-        public ActionResult UnapproveArticle(int id = 0)
+        public ActionResult UnapproveArticle(int baseArticleID = 0, int version = 0)
         {
-            var item = db.articleDb.Find(id);
+            var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, "en");
             if (item == null)
             {
                 return HttpNotFound();
             }
-            var error = db.tryRequestUnapproval(item);
+            var error = ArticleDbContext.getInstance().tryRequestUnapproval(item, true);
             if (error != null)
             {
                 ModelState.AddModelError("", error);
-                return View(item);
+                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
             }
             else
             {
-                return RedirectToAction("Details", new { id = item.ArticleID });
+                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
             }
         }
 

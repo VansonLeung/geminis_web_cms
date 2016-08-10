@@ -9,7 +9,7 @@ using WebApplication2.Security;
 
 namespace WebApplication2.Controllers
 {
-    public class ArticleEditorController : BaseController
+    public class ContentPageEditorController : BaseController
     {
         // GET: ArticleEditor
         public override ActionResult Index()
@@ -21,19 +21,11 @@ namespace WebApplication2.Controllers
         [CustomAuthorize]
         public ActionResult List()
         {
-            var items = ArticleDbContext.getInstance().findArticlesGroupByBaseVersion();
+            var items = ContentPageDbContext.getInstance().findArticlesGroupByBaseVersion();
             return View(items);
         }
+        
 
-
-        [CustomAuthorize]
-        public ActionResult ListArticleVersions(int baseArticleID = 0)
-        {
-            var article = new Article();
-            article.BaseArticleID = baseArticleID;
-            var items = ArticleDbContext.getInstance().findAllArticlesByBaseArticle(article);
-            return View(items);
-        }
 
 
 
@@ -49,17 +41,17 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin,editor")]
-        public ActionResult Create(Article article)
+        public ActionResult Create(ContentPage contentPage)
         {
             if (ModelState.IsValid)
             {
-                article.BaseArticleID = 0;
-                article.Version = 0;
-                ArticleDbContext.getInstance().tryCreateNewArticle(article);
+                contentPage.BaseArticleID = 0;
+                contentPage.Version = 0;
+                ContentPageDbContext.getInstance().tryCreateNewArticle(contentPage);
                 ModelState.Clear();
-                ViewBag.Message = article.Name + " successfully created.";
+                ViewBag.Message = contentPage.Name + " successfully created.";
             }
-            return RedirectToAction("DetailsLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
+            return RedirectToAction("DetailsLocale", new { baseArticleID = contentPage.BaseArticleID, version = contentPage.Version, lang = contentPage.Lang });
         }
 
 
@@ -67,34 +59,12 @@ namespace WebApplication2.Controllers
 
 
 
-        // CREATE NEW VERSION
-
-        [CustomAuthorize(Roles = "superadmin,editor")]
-        public ActionResult CreateNewVersion(int baseArticleID = 0)
-        {
-            var article = ArticleDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID);
-            return View(article);
-        }
-
-        [HttpPost]
-        [CustomAuthorize(Roles = "superadmin,editor")]
-        public ActionResult CreateNewVersion(Article article)
-        {
-            if (ModelState.IsValid)
-            {
-                article.Version = 0;
-                ArticleDbContext.getInstance().tryCreateNewArticle(article);
-                ModelState.Clear();
-                ViewBag.Message = "New Version of " + article.Name + " with version: " + article.Version + " successfully created.";
-            }
-            return RedirectToAction("UpsertLocale", new { baseArticleID = article.BaseArticleID, version = article.Version });
-        }
 
 
 
 
 
-        
+
 
 
         // EDIT LOCALE
@@ -102,17 +72,17 @@ namespace WebApplication2.Controllers
         public ActionResult UpsertLocale(int baseArticleID = 0, int version = 0, String lang = null)
         {
             // find existing locale article for base article ID and version and lang
-            Article item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
+            ContentPage item = ContentPageDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
             if (item == null)
             {
                 // if locale not exists, create blank form, while inheriting latest base article's version
-                var baseArticle = ArticleDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID, null);
+                var baseArticle = ContentPageDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID, null);
                 if (baseArticle == null)
                 {
                     return HttpNotFound();
                 }
 
-                var article = new Article();
+                var article = new ContentPage();
                 article.BaseArticleID = baseArticle.BaseArticleID;
                 article.Lang = lang;
                 article.Version = baseArticle.Version;
@@ -129,7 +99,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin,editor")]
-        public ActionResult UpsertLocale(Article item)
+        public ActionResult UpsertLocale(ContentPage item)
         {
             if (ModelState.IsValid)
             {
@@ -137,12 +107,12 @@ namespace WebApplication2.Controllers
                 if (item.ArticleID == 0)
                 {
                     // create
-                    error = ArticleDbContext.getInstance().tryCreateNewLocaleArticle(item);
+                    error = ContentPageDbContext.getInstance().tryCreateNewLocaleArticle(item);
                 }
                 else
                 {
                     // edit
-                    error = ArticleDbContext.getInstance().tryEditArticle(item);
+                    error = ContentPageDbContext.getInstance().tryEditArticle(item);
                 }
 
                 if (error != null)
@@ -164,17 +134,17 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin,editor")]
         public ActionResult EditProperties(int baseArticleID = 0, int version = 0, String lang = null)
         {
-            Article item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
+            ContentPage item = ContentPageDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
             if (item == null)
             {
                 // if locale not exists, create blank form, while inheriting latest base article's version
-                var baseArticle = ArticleDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID, null);
+                var baseArticle = ContentPageDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID, null);
                 if (baseArticle == null)
                 {
                     return HttpNotFound();
                 }
 
-                var article = new Article();
+                var article = new ContentPage();
                 article.BaseArticleID = baseArticle.BaseArticleID;
                 article.Lang = lang;
                 article.Version = baseArticle.Version;
@@ -191,11 +161,11 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin,editor")]
-        public ActionResult EditProperties(Article item)
+        public ActionResult EditProperties(ContentPage item)
         {
             if (ModelState.IsValid)
             {
-                var error = ArticleDbContext.getInstance().tryEditArticleProperties(item, true);
+                var error = ContentPageDbContext.getInstance().tryEditArticleProperties(item, true);
                 if (error != null)
                 {
                     ModelState.AddModelError("", error);
@@ -214,8 +184,8 @@ namespace WebApplication2.Controllers
 
 
 
-        
 
+        
 
 
         // DETAILS LOCALE
@@ -223,17 +193,17 @@ namespace WebApplication2.Controllers
         public ActionResult DetailsLocale(int baseArticleID = 0, int version = 0, String lang = null)
         {
             // find existing locale article for base article ID and version and lang
-            Article item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
+            ContentPage item = ContentPageDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
             if (item == null)
             {
                 // if locale not exists, create blank form, while inheriting latest base article's version
-                var baseArticle = ArticleDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID, null);
+                var baseArticle = ContentPageDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID, null);
                 if (baseArticle == null)
                 {
                     return HttpNotFound();
                 }
 
-                var article = new Article();
+                var article = new ContentPage();
                 article.BaseArticleID = baseArticle.BaseArticleID;
                 article.Lang = lang;
                 article.Version = baseArticle.Version;
@@ -252,17 +222,17 @@ namespace WebApplication2.Controllers
         public ActionResult DetailsProperties(int baseArticleID = 0, int version = 0, String lang = null)
         {
             // find existing locale article for base article ID and version and lang
-            Article item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
+            ContentPage item = ContentPageDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
             if (item == null)
             {
                 // if locale not exists, create blank form, while inheriting latest base article's version
-                var baseArticle = ArticleDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID, null);
+                var baseArticle = ContentPageDbContext.getInstance().findLatestArticleByBaseArticleID(baseArticleID, null);
                 if (baseArticle == null)
                 {
                     return HttpNotFound();
                 }
 
-                var article = new Article();
+                var article = new ContentPage();
                 article.BaseArticleID = baseArticle.BaseArticleID;
                 article.Lang = lang;
                 article.Version = baseArticle.Version;
@@ -290,7 +260,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin,editor")]
         public ActionResult Delete(int id = 0)
         {
-            var item = ArticleDbContext.getInstance().findArticleByID(id);
+            var item = ContentPageDbContext.getInstance().findArticleByID(id);
             if (item == null)
             {
                 return HttpNotFound();
@@ -304,56 +274,17 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin,editor")]
         public ActionResult DeleteConfirmed(int id = 0)
         {
-            var item = ArticleDbContext.getInstance().findArticleByID(id);
+            var item = ContentPageDbContext.getInstance().findArticleByID(id);
             if (item == null)
             {
                 return HttpNotFound();
             }
-            ArticleDbContext.getInstance().tryDeleteArticle(item);
+            ContentPageDbContext.getInstance().tryDeleteArticle(item);
             return RedirectToAction("List");
         }
 
 
 
-
-
-
-
-        // SUBMIT REQUEST FOR APPROVAL
-        [CustomAuthorize(Roles = "superadmin,editor")]
-        public ActionResult SubmitRequestForApproval(int baseArticleID = 0, int version = 0, String lang = null)
-        {
-            // find existing locale article for base article ID and version and lang
-            Article item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, lang);
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                // if locale exists, treat as edit form
-            }
-            return View(item);
-        }
-
-
-        [CustomAuthorize(Roles = "superadmin,editor")]
-        [HttpPost]
-        public ActionResult SubmitRequestForApproval(Article item)
-        {
-            if (ModelState.IsValid)
-            {
-                var error = ArticleDbContext.getInstance().trySubmitRequestForApproval(item, true);
-                if (error != null)
-                {
-                    ModelState.AddModelError("", error);
-                }
-                else
-                {
-                    return RedirectToAction("UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version });
-                }
-            }
-            return View(item);
-        }
+        
     }
 }

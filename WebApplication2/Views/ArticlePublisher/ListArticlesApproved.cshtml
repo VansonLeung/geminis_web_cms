@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication2.Models.Article>
+
+@{
+    ViewBag.Title = "ListArticlesApproved";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Available Articles</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Version)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BaseArticleID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isPublished)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.datePublished)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modified_at)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BaseArticleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isPublished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datePublished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.created_at)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.modified_at)
+            </td>
+            <td>
+                @Html.ActionLink("View", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })
+            </td>
+        </tr>
+    }
+
+</table>
