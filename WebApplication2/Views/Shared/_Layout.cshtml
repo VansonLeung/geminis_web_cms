@@ -8,7 +8,10 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Content/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    CKEDITOR_BASEPATH = "@Url.Content("~/Content/ckeditor/")";
+    </script>
+    @Scripts.Render("~/bundles/ckeditor")
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">

@@ -23,6 +23,12 @@ namespace WebApplication2
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new Bundle("~/bundles/ckeditor").Include(
+                        "~/Content/ckeditor/ckeditor.js",
+                        "~/Content/ckeditor/config.js",
+                        "~/Content/ckeditor/styles.js",
+                        "~/Content/ckeditor/adapters/jquery.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
