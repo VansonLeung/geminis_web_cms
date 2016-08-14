@@ -309,7 +309,12 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
-            ArticleDbContext.getInstance().tryDeleteArticle(item);
+            var error = ArticleDbContext.getInstance().tryDeleteArticle(item);
+            if (error != null)
+            {
+                ModelState.AddModelError("", error);
+                return View(id);
+            }
             return RedirectToAction("List");
         }
 

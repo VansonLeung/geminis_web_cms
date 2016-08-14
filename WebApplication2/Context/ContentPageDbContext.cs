@@ -412,5 +412,120 @@ namespace WebApplication2.Context
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // ARTICLE EDITOR REQUEST FOR APPROVAL
+
+        public String trySubmitRequestForApproval(ContentPage article, bool allLocales)
+        {
+            var _article = findArticleByID(article.ArticleID);
+            if (_article == null)
+            {
+                return "Item not found";
+            }
+
+            db.Entry(_article).State = EntityState.Modified;
+            _article.isRequestingApproval = true;
+            _article.isFrozen = true;
+
+            if (allLocales)
+            {
+                var _localeArticles = findAllLocaleArticlesByBaseArticleAndVersion(article, article.Lang);
+                foreach (var _a in _localeArticles)
+                {
+                    db.Entry(_a).State = EntityState.Modified;
+                    _article.isRequestingApproval = true;
+                    _article.isFrozen = true;
+                }
+            }
+
+            db.SaveChanges();
+
+            return null;
+        }
+
+
+
+
+        // ARTICLE APPROVER ONLY
+
+        public String tryRequestApproval(ContentPage article, bool allLocales)
+        {
+            var _article = findArticleByID(article.ArticleID);
+            if (_article == null)
+            {
+                return "Item not found";
+            }
+
+            db.Entry(_article).State = EntityState.Modified;
+            _article.isApproved = true;
+            _article.isFrozen = true;
+            _article.dateApproved = DateTime.UtcNow;
+            _article.approvedBy = SessionPersister.account.AccountID;
+
+            if (allLocales)
+            {
+                var _localeArticles = findAllLocaleArticlesByBaseArticleAndVersion(article, article.Lang);
+                foreach (var _a in _localeArticles)
+                {
+                    db.Entry(_a).State = EntityState.Modified;
+                    _a.isApproved = true;
+                    _a.isFrozen = true;
+                    _a.dateApproved = DateTime.UtcNow;
+                    _a.approvedBy = SessionPersister.account.AccountID;
+                }
+            }
+
+            db.SaveChanges();
+
+            return null;
+        }
+
+        public String tryRequestUnapproval(ContentPage article, bool allLocales)
+        {
+            var _article = findArticleByID(article.ArticleID);
+            if (_article == null)
+            {
+                return "Item not found";
+            }
+
+            db.Entry(_article).State = EntityState.Modified;
+            _article.isApproved = false;
+            _article.isFrozen = true;
+            _article.dateApproved = null;
+            _article.approvedBy = SessionPersister.account.AccountID;
+
+            if (allLocales)
+            {
+                var _localeArticles = findAllLocaleArticlesByBaseArticleAndVersion(article, article.Lang);
+                foreach (var _a in _localeArticles)
+                {
+                    db.Entry(_a).State = EntityState.Modified;
+                    _a.isApproved = false;
+                    _a.isFrozen = true;
+                    _a.dateApproved = null;
+                    _a.approvedBy = SessionPersister.account.AccountID;
+                }
+            }
+
+            db.SaveChanges();
+
+            return null;
+        }
+
+
     }
 }

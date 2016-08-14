@@ -65,12 +65,15 @@
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
                             <li>@Html.ActionLink("Account List", "List", "Account")</li>
                             <li>@Html.ActionLink("Register New CMS Account", "Register", "Account")</li>
+                            <li>@Html.ActionLink("Categories", "List", "InfrastructureCategory")</li>
+                            <li>@Html.ActionLink("Menu Items", "List", "InfrastructureMenuitem")</li>
                         }
 
                     }
                     else
                     {
                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Register New CMS Account", "Register", "Account")</li>
                     }
 
               </ul>

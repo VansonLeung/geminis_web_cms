@@ -166,6 +166,9 @@
     <Compile Include="Attributes\AccountPasswordLengthValidationAttribute.cs" />
     <Compile Include="Attributes\AccountPasswordLetterValidationAttribute.cs" />
     <Compile Include="Context\AccountDbContext.cs" />
+    <Compile Include="Context\InfrastructureCategoryDbContext.cs" />
+    <Compile Include="Context\InfrastructureMenuitemDbContext.cs" />
+    <Compile Include="Context\ContentPagePublishedDbContext.cs" />
     <Compile Include="Context\ContentPageDbContext.cs" />
     <Compile Include="Context\ArticleDbContext.cs" />
     <Compile Include="Context\ArticlePublishedDbContext.cs" />
@@ -179,6 +182,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\InfrastructureCategoryController.cs" />
+    <Compile Include="Controllers\InfrastructureMenuitemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,9 +191,13 @@
     <Compile Include="Models\BaseArticle.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlePublished.cs" />
+    <Compile Include="Models\Infrastructure\BaseItem.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Infrastructure\Category.cs" />
+    <Compile Include="Models\ContentPagePublished.cs" />
     <Compile Include="Models\ContentPage.cs" />
     <Compile Include="Models\ImageView.cs" />
+    <Compile Include="Models\Infrastructure\Menuitem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -605,6 +614,14 @@
     <Content Include="Views\ContentPageEditor\UpsertLocale.cshtml" />
     <Content Include="Views\ContentPageEditor\ContentPageDetailsChrome.cshtml" />
     <Content Include="Views\ContentPageEditor\ContentPageEditChrome.cshtml" />
+    <Content Include="Views\InfrastructureCategory\List.cshtml" />
+    <Content Include="Views\InfrastructureCategory\Create.cshtml" />
+    <Content Include="Views\InfrastructureCategory\Edit.cshtml" />
+    <Content Include="Views\InfrastructureCategory\Delete.cshtml" />
+    <Content Include="Views\InfrastructureMenuitem\Create.cshtml" />
+    <Content Include="Views\InfrastructureMenuitem\Delete.cshtml" />
+    <Content Include="Views\InfrastructureMenuitem\Edit.cshtml" />
+    <Content Include="Views\InfrastructureMenuitem\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

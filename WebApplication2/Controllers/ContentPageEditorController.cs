@@ -279,7 +279,14 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
-            ContentPageDbContext.getInstance().tryDeleteArticle(item);
+
+            var error = ContentPageDbContext.getInstance().tryDeleteArticle(item);
+            if (error != null)
+            {
+                ModelState.AddModelError("", error);
+                return View(id);
+            }
+
             return RedirectToAction("List");
         }
 

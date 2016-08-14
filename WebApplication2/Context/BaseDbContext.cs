@@ -8,6 +8,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using WebApplication2.Models;
+using WebApplication2.Models.Infrastructure;
 
 namespace WebApplication2.Context
 {
@@ -22,8 +23,13 @@ namespace WebApplication2.Context
 
         // Content Pages Table
         public DbSet<ContentPage> contentPageDb { get; set; }
+        public DbSet<ContentPagePublished> contentPagePublishedDb { get; set; }
 
-        
+        // Infrastructures Tables
+        public DbSet<Menuitem> infrastructureMenuitemDb { get; set; }
+        public DbSet<Category> infrastructureCategoryDb { get; set; }
+
+
 
 
         public override int SaveChanges()
