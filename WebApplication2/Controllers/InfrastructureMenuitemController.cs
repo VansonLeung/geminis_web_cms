@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,8 +12,15 @@ namespace WebApplication2.Controllers
 {
     public class InfrastructureMenuitemController : Controller
     {
-        // GET: InfrastructureMenuitem
-        public ActionResult Index()
+        SelectList getParentItemsForSelect(int? selectedID = null)
+        {
+            var parentItemsForSelect = InfrastructureMenuitemDbContext.getInstance().findMenuItemsByParentIDAsNoTracking();
+            parentItemsForSelect.Insert(0, new Menuitem { ItemID = -1, name_en = "" });
+            return new SelectList(parentItemsForSelect, "ItemID", "name_en", selectedID);
+        }
+
+    // GET: InfrastructureMenuitem
+    public ActionResult Index()
         {
             return View();
         }
@@ -32,18 +40,24 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult Create()
         {
-            var parentItemsForSelect = InfrastructureMenuitemDbContext.getInstance().findMenuItemsByParentID();
-            parentItemsForSelect.Insert(0, new Menuitem { ItemID = -1, name_en = "" });
-            ViewBag.parentItemID = new SelectList(parentItemsForSelect, "ItemID", "name_en");
+            ViewBag.parentItemID = getParentItemsForSelect();
             return View();
         }
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin")]
-        public ActionResult Create(Menuitem item)
+        public ActionResult Create(Menuitem item, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    string ImageName = Path.GetFileName(image.FileName);
+                    string physicalPath = Server.MapPath("~/images/uploads/" + ImageName);
+                    image.SaveAs(physicalPath);
+                    item.imagePath = physicalPath;
+                }
+
                 InfrastructureMenuitemDbContext.getInstance().create(item);
                 ModelState.Clear();
                 ViewBag.Message = item.GetName() + " successfully created.";
@@ -68,35 +82,41 @@ namespace WebApplication2.Controllers
         public ActionResult Edit(int id = 0)
         {
             var item = InfrastructureMenuitemDbContext.getInstance().findMenuItemByID(id);
-            
-            var parentItemsForSelect = InfrastructureMenuitemDbContext.getInstance().findMenuItemsByParentIDAsNoTracking();
-            parentItemsForSelect.Insert(0, new Menuitem { ItemID = -1, name_en = "" });
-            ViewBag.parentItemID = new SelectList(parentItemsForSelect, "ItemID", "name_en", item.parentItemID);
-
+            ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
             return View(item);
         }
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin")]
-        public ActionResult Edit(Menuitem item)
+        public ActionResult Edit(Menuitem item, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
-                InfrastructureMenuitemDbContext.getInstance().edit(item);
-                ModelState.Clear();
+                if (image != null)
+                {
+                    string ImageName = Path.GetFileName(image.FileName);
+                    string physicalPath = Server.MapPath("~/images/uploads/" + ImageName);
+                    image.SaveAs(physicalPath);
+                    item.imagePath = "/images/uploads/" + ImageName;
+                }
 
-                var parentItemsForSelect = InfrastructureMenuitemDbContext.getInstance().findMenuItemsByParentIDAsNoTracking();
-                parentItemsForSelect.Insert(0, new Menuitem { ItemID = -1, name_en = "" });
-                ViewBag.parentItemID = new SelectList(parentItemsForSelect, "ItemID", "name_en", item.parentItemID);
-
-                return View(item);
+                var error = InfrastructureMenuitemDbContext.getInstance().edit(item);
+                if (error != null)
+                {
+                    ModelState.AddModelError("", error);
+                    ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
+                    return View(item);
+                }
+                else
+                {
+                    ModelState.Clear();
+                    ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
+                    return View(item);
+                }
             }
             else
             {
-                var parentItemsForSelect = InfrastructureMenuitemDbContext.getInstance().findMenuItemsByParentIDAsNoTracking();
-                parentItemsForSelect.Insert(0, new Menuitem { ItemID = -1, name_en = "" });
-                ViewBag.parentItemID = new SelectList(parentItemsForSelect, "ItemID", "name_en", item.parentItemID);
-
+                ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
                 return View(item);
             }
         }

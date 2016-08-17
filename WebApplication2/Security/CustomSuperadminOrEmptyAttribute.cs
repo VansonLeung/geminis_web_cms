@@ -27,7 +27,7 @@ namespace WebApplication2.Security
             }
 
             // if logged in not superadmin, redirect access denied
-            if (!SessionPersister.account.Role.Equals("superadmin"))
+            if (!SessionPersister.account.Role.Contains("superadmin"))
             {
                 filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "AccessDenied", action = "Index" }));
                 return;

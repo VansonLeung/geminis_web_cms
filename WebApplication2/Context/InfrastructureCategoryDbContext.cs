@@ -72,6 +72,14 @@ namespace WebApplication2.Context
                 .ToList();
         }
 
+        public List<Category> findAllCategorysAsNoTracking()
+        {
+            return getItemDb()
+                .AsNoTracking()
+                .OrderBy(item => item.order)
+                .ToList();
+        }
+
 
         public List<Category> findEnabledCategorysByParentID(int? parentItemID = null)
         {

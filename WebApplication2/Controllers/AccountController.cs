@@ -14,6 +14,33 @@ namespace WebApplication2.Controllers
 {
     public class AccountController : BaseController
     {
+        MultiSelectList getRoleList(string selectedIDs = null)
+        {
+            List<string> ids = new List<string>();
+            if (selectedIDs != null)
+            {
+                var selIDs = selectedIDs.Split(',');
+                for (int i = 0; i < selIDs.Count(); i++)
+                {
+                    ids.Add(selIDs.ElementAt(i));
+                }
+            }
+
+            var items = new List<string>();
+            items.Add("superadmin");
+            items.Add("editor");
+            items.Add("approver");
+            items.Add("publisher");
+            return new MultiSelectList(items, ids.ToArray());
+        }
+
+        SelectList getAccountGroupsForSelect(int? selectedID = null)
+        {
+            var items = AccountGroupDbContext.getInstance().findGroups();
+            items.Insert(0, new AccountGroup { AccountGroupID = -1, Name = "" });
+            return new SelectList(items, "AccountGroupID", "Name", selectedID);
+        }
+
         // GET: Account
         public override ActionResult Index()
         {
@@ -30,6 +57,7 @@ namespace WebApplication2.Controllers
         [CustomSuperadminOrEmpty()]
         public ActionResult Register()
         {
+            ViewBag.GroupID = getAccountGroupsForSelect();
             return View();
         }
 
@@ -44,6 +72,7 @@ namespace WebApplication2.Controllers
                 ViewBag.Message = account.Firstname + " " + account.Lastname + " successfully registered.";
                 return RedirectToAction("List");
             }
+            ViewBag.RoleList = getRoleList();
             return View();
         }
 
@@ -180,6 +209,8 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.GroupID = getAccountGroupsForSelect(item.GroupID);
+            ViewBag.RoleList = getRoleList(item.Role);
             return View(item);
         }
 
@@ -201,6 +232,8 @@ namespace WebApplication2.Controllers
                     return RedirectToAction("Details", new { id = item.AccountID });
                 }
             }
+            ViewBag.GroupID = getAccountGroupsForSelect(item.GroupID);
+            ViewBag.RoleList = getRoleList(item.Role);
             return View(item);
         }
 

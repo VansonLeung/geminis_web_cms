@@ -68,6 +68,17 @@
         </dd>
 
         <dt>
+            Group
+        </dt>
+
+        <dd>
+            @if (Model.Group != null)
+            {
+                @Html.DisplayFor(model => model.Group.Name)
+            }
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.LastLogin)
         </dt>
 

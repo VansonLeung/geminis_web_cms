@@ -29,6 +29,9 @@ namespace WebApplication2.Context
         public DbSet<Menuitem> infrastructureMenuitemDb { get; set; }
         public DbSet<Category> infrastructureCategoryDb { get; set; }
 
+        // Groups and Access Rights
+        public DbSet<AccountGroup> accountGroupDb { get; set; }
+        public DbSet<AccountAccessRightsContentPage> accountAccessRightsContentPageDb { get; set; }
 
 
 

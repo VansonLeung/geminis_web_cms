@@ -7,6 +7,7 @@ using System.Text;
 using WebApplication2.Resources;
 using WebApplication2.Attributes;
 using System.Security.Cryptography;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication2.Models
 {
@@ -51,8 +52,15 @@ namespace WebApplication2.Models
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "role", ResourceType = typeof(Resource))]
-        [Required]
         public string Role { get; set; }
+        
+        [Display(Name = "role", ResourceType = typeof(Resource))]
+        public List<string> RoleList { get; set; }
+
+
+        public int? GroupID { get; set; }
+        [ForeignKey("GroupID")]
+        public virtual AccountGroup Group { get; set; }
 
         [Display(Name = "lastlogin", ResourceType = typeof(Resource))]
         [DataType(DataType.DateTime)]

@@ -26,7 +26,7 @@ namespace WebApplication2.Security
                 return true;
             }
             var roles = role.Split(new char[] { ',' });
-            return roles.Any(r => this.Account.Role == r);
+            return roles.Any(r => this.Account.Role.Contains(r));
         }
     }
 }

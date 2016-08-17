@@ -61,6 +61,33 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can Approve.
+        /// </summary>
+        public static string canApprove {
+            get {
+                return ResourceManager.GetString("canApprove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Edit.
+        /// </summary>
+        public static string canEdit {
+            get {
+                return ResourceManager.GetString("canEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can Publish.
+        /// </summary>
+        public static string canPublish {
+            get {
+                return ResourceManager.GetString("canPublish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm New Password.
         /// </summary>
         public static string confirmnewpassword {

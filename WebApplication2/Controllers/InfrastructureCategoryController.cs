@@ -11,6 +11,13 @@ namespace WebApplication2.Controllers
 {
     public class InfrastructureCategoryController : Controller
     {
+        SelectList getParentItemsForSelect(int? selectedID = null)
+        {
+            var parentItemsForSelect = InfrastructureCategoryDbContext.getInstance().findCategorysByParentID();
+            parentItemsForSelect.Insert(0, new Category { ItemID = -1, name_en = "" });
+            return new SelectList(parentItemsForSelect, "ItemID", "name_en", selectedID);
+        }
+
         // GET: InfrastructureCategory
         public ActionResult Index()
         {
@@ -31,9 +38,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult Create()
         {
-            var parentItemsForSelect = InfrastructureCategoryDbContext.getInstance().findCategorysByParentID();
-            parentItemsForSelect.Insert(0, new Category { ItemID = -1, name_en = "" });
-            ViewBag.parentItemID = new SelectList(parentItemsForSelect, "ItemID", "name_en");
+            ViewBag.parentItemID = getParentItemsForSelect();
             return View();
         }
 
@@ -67,11 +72,7 @@ namespace WebApplication2.Controllers
         public ActionResult Edit(int id = 0)
         {
             var item = InfrastructureCategoryDbContext.getInstance().findCategoryByID(id);
-
-            var parentItemsForSelect = InfrastructureCategoryDbContext.getInstance().findCategorysByParentIDAsNoTracking();
-            parentItemsForSelect.Insert(0, new Category { ItemID = -1, name_en = "" });
-            ViewBag.parentItemID = new SelectList(parentItemsForSelect, "ItemID", "name_en", item.parentItemID);
-
+            ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
             return View(item);
         }
 
@@ -83,19 +84,12 @@ namespace WebApplication2.Controllers
             {
                 InfrastructureCategoryDbContext.getInstance().edit(item);
                 ModelState.Clear();
-
-                var parentItemsForSelect = InfrastructureCategoryDbContext.getInstance().findCategorysByParentIDAsNoTracking();
-                parentItemsForSelect.Insert(0, new Category { ItemID = -1, name_en = "" });
-                ViewBag.parentItemID = new SelectList(parentItemsForSelect, "ItemID", "name_en", item.parentItemID);
-
+                ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
                 return View(item);
             }
             else
             {
-                var parentItemsForSelect = InfrastructureCategoryDbContext.getInstance().findCategorysByParentIDAsNoTracking();
-                parentItemsForSelect.Insert(0, new Category { ItemID = -1, name_en = "" });
-                ViewBag.parentItemID = new SelectList(parentItemsForSelect, "ItemID", "name_en", item.parentItemID);
-
+                ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
                 return View(item);
             }
         }

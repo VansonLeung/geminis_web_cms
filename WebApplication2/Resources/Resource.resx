@@ -174,4 +174,13 @@
   <data name="needschangepassword" xml:space="preserve">
     <value>Needs to change password</value>
   </data>
+  <data name="canApprove" xml:space="preserve">
+    <value>Can Approve</value>
+  </data>
+  <data name="canEdit" xml:space="preserve">
+    <value>Can Edit</value>
+  </data>
+  <data name="canPublish" xml:space="preserve">
+    <value>Can Publish</value>
+  </data>
 </root>

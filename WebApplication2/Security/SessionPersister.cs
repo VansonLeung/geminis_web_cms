@@ -43,14 +43,11 @@ namespace WebApplication2.Security
 
         public static void updateSessionForAccount()
         {
-            using (AccountDbContext db = new AccountDbContext())
+            if (account != null)
             {
-                if (account != null)
-                {
-                    account = db.accountDb.Find(account.AccountID);
-                }
-                refresh_account_last_activity();
+                account = AccountDbContext.getInstance().findAccountByID(account.AccountID);
             }
+            refresh_account_last_activity();
         }
 
         public static void removeSession()

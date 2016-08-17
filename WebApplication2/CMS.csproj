@@ -167,6 +167,7 @@
     <Compile Include="Attributes\AccountPasswordLetterValidationAttribute.cs" />
     <Compile Include="Context\AccountDbContext.cs" />
     <Compile Include="Context\InfrastructureCategoryDbContext.cs" />
+    <Compile Include="Context\AccountGroupDbContext.cs" />
     <Compile Include="Context\InfrastructureMenuitemDbContext.cs" />
     <Compile Include="Context\ContentPagePublishedDbContext.cs" />
     <Compile Include="Context\ContentPageDbContext.cs" />
@@ -182,12 +183,16 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\AccountGroupController.cs" />
     <Compile Include="Controllers\InfrastructureCategoryController.cs" />
     <Compile Include="Controllers\InfrastructureMenuitemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountAccessRightsContentPage.cs" />
+    <Compile Include="Models\AccountGroup.cs" />
     <Compile Include="Models\BaseArticle.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlePublished.cs" />
@@ -622,6 +627,10 @@
     <Content Include="Views\InfrastructureMenuitem\Delete.cshtml" />
     <Content Include="Views\InfrastructureMenuitem\Edit.cshtml" />
     <Content Include="Views\InfrastructureMenuitem\List.cshtml" />
+    <Content Include="Views\AccountGroup\List.cshtml" />
+    <Content Include="Views\AccountGroup\Edit.cshtml" />
+    <Content Include="Views\AccountGroup\Create.cshtml" />
+    <Content Include="Views\AccountGroup\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

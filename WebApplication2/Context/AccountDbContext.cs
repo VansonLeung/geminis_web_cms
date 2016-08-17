@@ -8,7 +8,7 @@ using WebApplication2.Security;
 
 namespace WebApplication2.Context
 {
-    public class AccountDbContext : BaseDbContext
+    public class AccountDbContext
     {
         // singleton
 
@@ -40,23 +40,44 @@ namespace WebApplication2.Context
 
         public bool isSuperadminExists()
         {
-            return getAccountDb().Where(acc => acc.Role == "superadmin").Count() > 0;
+            return getAccountDb().Where(acc => acc.Role.Contains("superadmin")).Count() > 0;
+        }
+
+        public bool isEditorExists()
+        {
+            return getAccountDb().Where(acc => acc.Role.Contains("editor")).Count() > 0;
+        }
+
+        public bool isApproverExists()
+        {
+            return getAccountDb().Where(acc => acc.Role.Contains("approver")).Count() > 0;
+        }
+
+        public bool isPublisherExists()
+        {
+            return getAccountDb().Where(acc => acc.Role.Contains("publisher")).Count() > 0;
         }
 
 
         public List<Account> findAccounts()
         {
-            return getAccountDb().ToList();
+            return getAccountDb()
+                .Include(acc => acc.Group)
+                .ToList();
         }
 
         public Account findAccountByID(int accountID)
         {
-            return getAccountDb().Where(acc => acc.AccountID == accountID).FirstOrDefault();
+            return getAccountDb().Where(acc => acc.AccountID == accountID)
+                .Include(acc => acc.Group)
+                .FirstOrDefault();
         }
 
         public Account findAccountByAccountUsername(Account account)
         {
-            return getAccountDb().Where(acc => acc.Username == account.Username).FirstOrDefault();
+            return getAccountDb().Where(acc => acc.Username == account.Username)
+                .Include(acc => acc.Group)
+                .FirstOrDefault();
         }
 
         public Account tryLoginAccountByAccount(Account account)
@@ -104,11 +125,11 @@ namespace WebApplication2.Context
 
         public string tryEdit(Account account)
         {
-            var encPassword = account.MakeEncryptedPassword(account.Password);
             string error = null;
             Account _account = findAccountByID(account.AccountID);
-            if (_account.Password != encPassword)
+            if (_account.Password != account.Password)
             {
+                var encPassword = account.MakeEncryptedPassword(account.Password);
                 error = tryChangePassword(account, encPassword);
                 if (error != null)
                 {
@@ -118,12 +139,17 @@ namespace WebApplication2.Context
                 {
                     db.Entry(_account).State = EntityState.Modified;
                     _account.LoginFails = 0;
-                    _account.NeedChangePassword = true;
+
+                    if (!_account.Role.Contains("superadmin"))
+                    {
+                        _account.NeedChangePassword = true;
+                    }
+
                     db.SaveChanges();
                 }
             }
 
-            error = tryChangeRole(account, account.Role);
+            error = tryChangeRole(account);
             if (error != null)
             {
                 return error;
@@ -181,13 +207,19 @@ namespace WebApplication2.Context
             }
         }
 
-        public string tryChangeRole(Account account, String role)
+        public string tryChangeRole(Account account)
         {
             Account _account = findAccountByID(account.AccountID);
             if (_account != null)
             {
                 db.Entry(_account).State = EntityState.Modified;
-                _account.Role = role;
+
+                if (account.RoleList != null)
+                {
+                    account.Role = String.Join(",", account.RoleList);
+                }
+
+                _account.Role = account.Role;
 
                 SessionPersister.updateSessionForAccount();
                 db.SaveChanges();

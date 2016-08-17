@@ -18,6 +18,8 @@ namespace WebApplication2.Models
 
         public string Url { get; set; }
 
+        public string BannerImageUrl { get; set; }
+
         public string Name { get; set; }
 
         public string Lang { get; set; }

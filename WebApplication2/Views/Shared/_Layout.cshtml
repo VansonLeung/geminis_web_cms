@@ -63,8 +63,9 @@
                         else if (SessionPersister.account.Role.Equals("superadmin"))
                         {
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
-                            <li>@Html.ActionLink("Account List", "List", "Account")</li>
                             <li>@Html.ActionLink("Register New CMS Account", "Register", "Account")</li>
+                            <li>@Html.ActionLink("Account Groups", "List", "AccountGroup")</li>
+                            <li>@Html.ActionLink("Account List", "List", "Account")</li>
                             <li>@Html.ActionLink("Categories", "List", "InfrastructureCategory")</li>
                             <li>@Html.ActionLink("Menu Items", "List", "InfrastructureMenuitem")</li>
                         }
