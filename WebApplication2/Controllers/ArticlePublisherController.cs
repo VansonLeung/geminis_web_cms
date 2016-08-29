@@ -85,10 +85,11 @@ namespace WebApplication2.Controllers
 
 
 
+        [HttpPost]
         [CustomAuthorize(Roles = "superadmin,publisher")]
-        public ActionResult PublishArticle(int baseArticleID = 0, int version = 0)
+        public ActionResult PublishArticle(Article article)
         {
-            var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, "en");
+            var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, "en");
             if (item == null)
             {
                 return HttpNotFound();

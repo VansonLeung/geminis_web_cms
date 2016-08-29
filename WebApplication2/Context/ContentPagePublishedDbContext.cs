@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
 using WebApplication2.Security;
 
@@ -26,7 +27,7 @@ namespace WebApplication2.Context
 
         // initializations 
 
-        private BaseDbContext db = new BaseDbContext();
+        private BaseDbContext db = BaseDbContext.getInstance();
 
         protected virtual DbSet<ContentPagePublished> getArticlePublishedDb()
         {
@@ -45,10 +46,13 @@ namespace WebApplication2.Context
                 .FirstOrDefault())
                 .OrderByDescending(acc => acc.datePublished)
                 .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
                 .ToList();
         }
 
-        public void deletePublishedArticlesByBaseArticle(ContentPage article)
+        
+
+        public string deletePublishedArticlesByBaseArticle(ContentPage article)
         {
             var targetBaseArticleID = article.BaseArticleID;
 
@@ -58,10 +62,12 @@ namespace WebApplication2.Context
                 )
             );
             db.SaveChanges();
+
+            return null;
         }
 
 
-        public void addArticleToPublished(ContentPage article)
+        public string addArticleToPublished(ContentPage article)
         {
             var _article = ContentPagePublished.makeNewContentPagePublishedByCloningContent(article);
             _article.isPublished = true;
@@ -77,13 +83,15 @@ namespace WebApplication2.Context
                 getArticlePublishedDb().Add(___article);
             }
             db.SaveChanges();
+
+            return null;
         }
 
 
 
         // ARTICLE PUBLISHER ONLY
 
-        public String tryPublishArticle(ContentPage article, bool allLocales)
+        public string tryPublishArticle(ContentPage article, bool allLocales)
         {
             var _article = ContentPageDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, "en");
             if (_article == null)
@@ -93,6 +101,12 @@ namespace WebApplication2.Context
             if (!_article.isApproved)
             {
                 return "Item not approved";
+            }
+
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
+            if (error != null)
+            {
+                return error;
             }
 
             deletePublishedArticlesByBaseArticle(article);
@@ -120,7 +134,7 @@ namespace WebApplication2.Context
             return null;
         }
 
-        public String tryUnpublishArticle(ContentPage article, bool allLocales)
+        public string tryUnpublishArticle(ContentPage article, bool allLocales)
         {
             var _article = ContentPageDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, article.Lang);
             if (_article == null)
@@ -130,6 +144,12 @@ namespace WebApplication2.Context
             if (!_article.isApproved)
             {
                 return "Item not approved";
+            }
+
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
+            if (error != null)
+            {
+                return error;
             }
 
             deletePublishedArticlesByBaseArticle(article);

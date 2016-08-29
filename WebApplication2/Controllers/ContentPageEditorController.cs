@@ -11,6 +11,13 @@ namespace WebApplication2.Controllers
 {
     public class ContentPageEditorController : BaseController
     {
+        SelectList getCategoriesForSelect(int? selectedID = null)
+        {
+            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysContentPagesAsNoTracking();
+            items.Insert(0, new Models.Infrastructure.Category { ItemID = -1, name_en = "" });
+            return new SelectList(items, "ItemID", "name_en", selectedID);
+        }
+
         // GET: ArticleEditor
         public override ActionResult Index()
         {
@@ -36,6 +43,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin,editor")]
         public ActionResult Create()
         {
+            ViewBag.categoryID = getCategoriesForSelect();
             return View();
         }
 
@@ -50,8 +58,13 @@ namespace WebApplication2.Controllers
                 ContentPageDbContext.getInstance().tryCreateNewArticle(contentPage);
                 ModelState.Clear();
                 ViewBag.Message = contentPage.Name + " successfully created.";
+                return RedirectToAction("DetailsLocale", new { baseArticleID = contentPage.BaseArticleID, version = contentPage.Version, lang = contentPage.Lang });
             }
-            return RedirectToAction("DetailsLocale", new { baseArticleID = contentPage.BaseArticleID, version = contentPage.Version, lang = contentPage.Lang });
+            else
+            {
+                ViewBag.categoryID = getCategoriesForSelect();
+                return View();
+            }
         }
 
 
@@ -154,6 +167,7 @@ namespace WebApplication2.Controllers
             {
                 // if locale exists, treat as edit form
             }
+            ViewBag.categoryID = getCategoriesForSelect(item.categoryID);
             return View(item);
         }
 
@@ -172,9 +186,11 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    ViewBag.categoryID = getCategoriesForSelect(item.categoryID);
                     return View(item);
                 }
             }
+            ViewBag.categoryID = getCategoriesForSelect(item.categoryID);
             return View(item);
         }
 

@@ -16,6 +16,8 @@ namespace WebApplication2.Models.Infrastructure
             return name_en;
         }
 
+        public string url { get; set; }
+
         public string name_en { get; set; }
         public string name_zh { get; set; }
         public string name_cn { get; set; }
@@ -23,6 +25,13 @@ namespace WebApplication2.Models.Infrastructure
 
         public bool isClickable { get; set; }
         public bool isEnabled { get; set; }
+
+        public bool isContentPage { get; set; }
+        public bool isArticleList { get; set; }
+
+        public bool isVisibleToVisitorOnly { get; set; }
+        public bool isVisibleToMembersOnly { get; set; }
+        public bool isVisibleToTradingOnly { get; set; }
 
         public int order { get; set; }
     }

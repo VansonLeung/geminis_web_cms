@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
 using WebApplication2.Security;
 
@@ -10,6 +11,8 @@ namespace WebApplication2.Context
 {
     public class ArticleDbContext
     {
+        #region "Constructor"
+
         // singleton
 
         private static ArticleDbContext articleDbContext;
@@ -26,19 +29,20 @@ namespace WebApplication2.Context
 
         // initialization
 
-        private BaseDbContext db = new BaseDbContext();
+        private BaseDbContext db = BaseDbContext.getInstance();
 
-        protected DbSet<Article> getArticleDb()
+        public DbSet<Article> getArticleDb()
         {
             return db.articleDb;
         }
 
+        #endregion
 
-
-
-
+        
 
         // methods
+
+        #region "Query"
 
         public List<Article> findArticles()
         {
@@ -47,13 +51,37 @@ namespace WebApplication2.Context
 
         public List<Article> findArticlesGroupByBaseVersion(string lang = "en")
         {
-            return getArticleDb()
+            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            {
+                return getArticleDb()
                 .GroupBy(acc => acc.BaseArticleID)
-                .Select(u => u.Where(acc => acc.Lang == lang).OrderByDescending(acc => acc.Version)
+                .Select(u => u.Where(acc => acc.Lang == lang
+                ).OrderByDescending(acc => acc.Version)
                 .FirstOrDefault())
                 .OrderByDescending(acc => acc.modified_at)
                 .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
                 .ToList();
+            }
+
+            else if (SessionPersister.account != null)
+            {
+                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+                categories.Add(0);
+
+                return getArticleDb()
+                .GroupBy(acc => acc.BaseArticleID)
+                .Select(u => u.Where(acc => acc.Lang == lang
+                ).OrderByDescending(acc => acc.Version)
+                .FirstOrDefault())
+                .Where(acc => categories.Contains(acc.categoryID ?? 0))
+                .OrderByDescending(acc => acc.modified_at)
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
+                .ToList();
+            }
+
+            return new List<Article>();
         }
 
 
@@ -65,11 +93,30 @@ namespace WebApplication2.Context
 
         public List<Article> findArticlesRequestingApproval()
         {
-            return getArticleDb().Where(acc =>
-            acc.isRequestingApproval == true)
-            .OrderByDescending(acc => acc.modified_at)
-            .Include(acc => acc.createdByAccount)
-            .ToList();
+            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            {
+                return getArticleDb().Where(acc =>
+                acc.isRequestingApproval == true && acc.Lang == "en")
+                .OrderByDescending(acc => acc.modified_at)
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
+                .ToList();
+            }
+            if (SessionPersister.account != null)
+            {
+                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+                categories.Add(0);
+
+                return getArticleDb().Where(acc =>
+                acc.isRequestingApproval == true && acc.Lang == "en"
+                && categories.Contains(acc.categoryID ?? 0))
+                .OrderByDescending(acc => acc.modified_at)
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
+                .ToList();
+            }
+
+            return new List<Article>();    
         }
 
         public List<Article> findArticlesGroupByBaseVersionRequestingApproval(string lang = "en")
@@ -81,6 +128,7 @@ namespace WebApplication2.Context
                 .Where(acc => acc.isRequestingApproval == true)
                 .OrderByDescending(acc => acc.modified_at)
                 .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
                 .ToList();
         }
 
@@ -88,11 +136,12 @@ namespace WebApplication2.Context
         {
             return getArticleDb()
                 .GroupBy(acc => acc.BaseArticleID)
-                .Select(u => u.Where(acc => acc.Lang == lang).OrderByDescending(acc => acc.Version)
+                .Select(u => u.Where(acc => acc.Lang == lang).OrderByDescending(acc => acc.isPublished)
                 .FirstOrDefault())
                 .Where(acc => acc.isApproved == true)
                 .OrderByDescending(acc => acc.dateApproved)
                 .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
                 .ToList();
         }
 
@@ -111,6 +160,7 @@ namespace WebApplication2.Context
                 acc.Lang == lang)
                 .OrderByDescending(acc => acc.Version)
                 .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
                 .FirstOrDefault();
             }
             else
@@ -140,6 +190,7 @@ namespace WebApplication2.Context
             )
             .OrderByDescending(acc => acc.Version)
             .Include(acc => acc.createdByAccount)
+            .Include(acc => acc.category)
             .FirstOrDefault();
 
 
@@ -163,6 +214,7 @@ namespace WebApplication2.Context
             )
             .OrderByDescending(acc => acc.Version)
             .Include(acc => acc.createdByAccount)
+            .Include(acc => acc.category)
             .FirstOrDefault();
 
 
@@ -184,9 +236,47 @@ namespace WebApplication2.Context
             )
             .OrderByDescending(acc => acc.Version)
             .Include(acc => acc.createdByAccount)
+            .Include(acc => acc.category)
             .ToList();
 
             return articles;
+        }
+
+
+
+        public List<Article> findAllArticlesByBaseArticleIncludingAllLocales(Article article)
+        {
+            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            {
+                var articles = getArticleDb().Where(acc =>
+                acc.BaseArticleID == article.BaseArticleID
+                )
+                .OrderByDescending(acc => acc.Version)
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
+                .ToList();
+
+                return articles;
+            }
+
+            if (SessionPersister.account != null)
+            {
+                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+                categories.Add(0);
+
+                var articles = getArticleDb().Where(acc =>
+                acc.BaseArticleID == article.BaseArticleID
+                    && categories.Contains(acc.categoryID ?? 0)
+                )
+                .OrderByDescending(acc => acc.Version)
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.category)
+                .ToList();
+
+                return articles;
+            }
+
+            return new List<Article>();
         }
 
 
@@ -201,6 +291,7 @@ namespace WebApplication2.Context
             acc.Version == article.Version
             )
             .Include(acc => acc.createdByAccount)
+            .Include(acc => acc.category)
             .ToList();
 
             return articles;
@@ -214,16 +305,28 @@ namespace WebApplication2.Context
             return findArticleByVersionAndLang(article.BaseArticleID, article.Version, article.Lang) != null;
         }
 
-
+        #endregion
+        
 
 
         // ARTICLE EDITOR ONLY
 
-
+        #region "Create"
 
         public String tryCreateNewArticle(Article article)
         {
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(article);
+            if (error != null)
+            {
+                return error;
+            }
+
             Article latestArticle = null;
+
+            if (article.categoryID == -1)
+            {
+                article.categoryID = null;
+            }
 
             if (article.BaseArticleID != 0)
             {
@@ -301,6 +404,12 @@ namespace WebApplication2.Context
                 {
                     var latestArticle = findLatestArticleByBaseArticle(article, article.Lang);
                     article.Version = latestArticle.Version;
+
+                    var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(latestArticle);
+                    if (error != null)
+                    {
+                        return error;
+                    }
                 }
             }
 
@@ -324,6 +433,10 @@ namespace WebApplication2.Context
             return null;
         }
 
+        #endregion
+
+        #region "Edit"
+
         public String tryEditArticle(Article article)
         {
             var _article = findArticleByID(article.ArticleID);
@@ -336,11 +449,19 @@ namespace WebApplication2.Context
                 return "Item is frozen";
             }
 
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
+            if (error != null)
+            {
+                return error;
+            }
+
             db.Entry(_article).State = EntityState.Modified;
             _article.Name = article.Name;
             _article.Desc = article.Desc;
             _article.Slug = article.Slug;
             _article.Keywords = article.Keywords;
+            _article.MetaData = article.MetaData;
+            _article.MetaKeywords = article.MetaKeywords;
             _article.Excerpt = article.Excerpt;
             db.SaveChanges();
 
@@ -351,6 +472,11 @@ namespace WebApplication2.Context
 
         public String tryEditArticleProperties(Article article, bool allLocales)
         {
+            if (article.categoryID == -1)
+            {
+                article.categoryID = null;
+            }
+
             var _article = findArticleByID(article.ArticleID);
             if (_article == null)
             {
@@ -361,9 +487,16 @@ namespace WebApplication2.Context
                 return "Item is frozen";
             }
 
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
+            if (error != null)
+            {
+                return error;
+            }
+
             db.Entry(_article).State = EntityState.Modified;
+            _article.Url = article.Url;
             _article.Slug = article.Slug;
-            _article.Keywords = article.Keywords;
+            _article.categoryID = article.categoryID;
 
             if (allLocales)
             {
@@ -371,15 +504,19 @@ namespace WebApplication2.Context
                 foreach (var _a in _localeArticles)
                 {
                     db.Entry(_a).State = EntityState.Modified;
+                    _a.Url = article.Url;
                     _a.Slug = article.Slug;
-                    _a.Keywords = article.Keywords;
+                    _a.categoryID = article.categoryID;
                 }
             }
 
             db.SaveChanges();
-
             return null;
         }
+
+        #endregion
+
+        #region "Delete"
 
 
         public String tryDeleteArticle(Article article)
@@ -394,27 +531,26 @@ namespace WebApplication2.Context
                 return "Item is frozen";
             }
 
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
+            if (error != null)
+            {
+                return error;
+            }
+
             getArticleDb().Remove(article);
             db.SaveChanges();
 
             return null;
         }
 
+        #endregion
 
 
 
 
+        // ARTICLE EDITOR & APPROVER ONLY
 
-
-
-
-
-
-
-
-
-
-
+        #region "Approval"
 
         // ARTICLE EDITOR REQUEST FOR APPROVAL
 
@@ -424,6 +560,16 @@ namespace WebApplication2.Context
             if (_article == null)
             {
                 return "Item not found";
+            }
+            if (_article.isFrozen)
+            {
+                return "Item is frozen";
+            }
+
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
+            if (error != null)
+            {
+                return error;
             }
 
             db.Entry(_article).State = EntityState.Modified;
@@ -458,6 +604,16 @@ namespace WebApplication2.Context
             {
                 return "Item not found";
             }
+            if (_article.isFrozen)
+            {
+                return "Item is frozen";
+            }
+
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
+            if (error != null)
+            {
+                return error;
+            }
 
             db.Entry(_article).State = EntityState.Modified;
             _article.isApproved = true;
@@ -485,6 +641,12 @@ namespace WebApplication2.Context
 
         public String tryRequestUnapproval(Article article, bool allLocales)
         {
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(article);
+            if (error != null)
+            {
+                return error;
+            }
+
             var _article = findArticleByID(article.ArticleID);
             if (_article == null)
             {
@@ -515,6 +677,6 @@ namespace WebApplication2.Context
             return null;
         }
 
-
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -44,10 +45,18 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin")]
-        public ActionResult Create(Category item)
+        public ActionResult Create(Category item, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    string ImageName = Path.GetFileName(image.FileName);
+                    string physicalPath = Server.MapPath("~/images/uploads/" + ImageName);
+                    image.SaveAs(physicalPath);
+                    item.imagePath = physicalPath;
+                }
+
                 InfrastructureCategoryDbContext.getInstance().create(item);
                 ModelState.Clear();
                 ViewBag.Message = item.GetName() + " successfully created.";
@@ -78,10 +87,18 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin")]
-        public ActionResult Edit(Category item)
+        public ActionResult Edit(Category item, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    string ImageName = Path.GetFileName(image.FileName);
+                    string physicalPath = Server.MapPath("~/images/uploads/" + ImageName);
+                    image.SaveAs(physicalPath);
+                    item.imagePath = physicalPath;
+                }
+
                 InfrastructureCategoryDbContext.getInstance().edit(item);
                 ModelState.Clear();
                 ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);

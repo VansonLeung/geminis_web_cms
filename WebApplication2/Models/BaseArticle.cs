@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication2.Helpers;
+using WebApplication2.Models.Infrastructure;
 
 namespace WebApplication2.Models
 {
@@ -18,6 +20,10 @@ namespace WebApplication2.Models
 
         public string Url { get; set; }
 
+        public int? categoryID { get; set; }
+        [ForeignKey("categoryID")]
+        public virtual Category category { get; set; }
+
         public string BannerImageUrl { get; set; }
 
         public string Name { get; set; }
@@ -28,9 +34,14 @@ namespace WebApplication2.Models
         [DataType(DataType.MultilineText)]
         public string Desc { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Excerpt { get; set; }
 
         public string Keywords { get; set; }
+
+        public string MetaData { get; set; }
+
+        public string MetaKeywords { get; set; }
 
         public int Version { get; set; }
 
@@ -49,8 +60,16 @@ namespace WebApplication2.Models
         public DateTime? datePublished { get; set; }
 
         public DateTime? datePublishStart { get; set; }
+        public string getDatePublishStartRepresentation()
+        {
+            return DateTimeExtensions.DateTimeToString(datePublishStart);
+        }
 
         public DateTime? datePublishEnd { get; set; }
+        public string getDatePublishEndRepresentation()
+        {
+            return DateTimeExtensions.DateTimeToString(datePublishEnd);
+        }
 
         public int? createdBy { get; set; }
         public int? approvedBy { get; set; }
@@ -72,6 +91,7 @@ namespace WebApplication2.Models
         {
             BaseArticle a = new BaseArticle();
             a.BaseArticleID = BaseArticleID;
+            a.categoryID = categoryID;
             a.Excerpt = Excerpt;
             a.Desc = Desc;
             a.Name = Name;

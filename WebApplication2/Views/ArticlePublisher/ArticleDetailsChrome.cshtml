@@ -23,14 +23,6 @@
                 {
                     return "current";
                 }
-                if (Model.Lang.Equals(lang))
-                {
-                    return "current";
-                }
-                if (Model.Lang.Equals(lang))
-                {
-                    return "current";
-                }
             }
             else if (urlPart.Equals("DetatilsProperties"))
             {
@@ -59,8 +51,39 @@
     <div>Published</div>
 }
 
-@Html.ActionLink("Publish", "PublishArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version }) |
-@Html.ActionLink("Unpublish", "UnpublishArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version }) | 
-@Html.ActionLink("Back", "List")
+<div class="form-group input-group-sm">
+
+    @using (Html.BeginForm("PublishArticle", "ArticlePublisher", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="position: relative;">
+            <input type="submit" value="Publish" class="btn btn-default" />
+            @Html.HiddenFor(model => model.ArticleID)
+            @Html.HiddenFor(model => model.Version)
+            @Html.HiddenFor(model => model.Lang)
+            @Html.HiddenFor(model => model.BaseArticleID)
+
+            @Html.LabelFor(model => model.datePublishStart)
+            @Html.TextBox("datePublishStart", Model.getDatePublishStartRepresentation(), new { @class = "form-control datepicker", placeholder = "Enter publish start date here..." })
+            @Html.ValidationMessageFor(model => model.datePublishStart)
+
+            @Html.LabelFor(model => model.datePublishEnd)
+            @Html.TextBox("datePublishEnd", Model.getDatePublishEndRepresentation(), new { @class = "form-control datepicker", placeholder = "Enter publish end date here..." })
+            @Html.ValidationMessageFor(model => model.datePublishEnd)
+        </div>
+    }
+    <script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datetimepicker(); //Initialise any date pickers
+    });
+    </script>
+</div>
+<div class="form-group input-group-sm">
+    @Html.ActionLink("Unpublish", "UnpublishArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version }) |
+</div>
+<div class="form-group input-group-sm">
+    @Html.ActionLink("Back", "List")
+</div>
 
 @RenderBody()

@@ -15,11 +15,14 @@ namespace WebApplication2.Models
         {
             Article a = new Article();
             a.BaseArticleID = BaseArticleID;
+            a.categoryID = categoryID;
             a.Excerpt = Excerpt;
             a.Desc = Desc;
             a.Name = Name;
             a.Slug = Slug;
             a.Keywords = Keywords;
+            a.MetaData = MetaData;
+            a.MetaKeywords = MetaKeywords;
             a.Lang = Lang;
             a.createdBy = createdBy;
             a.approvedBy = approvedBy;

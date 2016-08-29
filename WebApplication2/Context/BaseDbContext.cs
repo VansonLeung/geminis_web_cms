@@ -14,6 +14,16 @@ namespace WebApplication2.Context
 {
     public class BaseDbContext : DbContext
     {
+        protected static BaseDbContext instance;
+        public static BaseDbContext getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new BaseDbContext();
+            }
+            return instance;
+        }
+
         // CMS Admin Accounts Table
         public DbSet<Account> accountDb { get; set; }
 
@@ -26,13 +36,14 @@ namespace WebApplication2.Context
         public DbSet<ContentPagePublished> contentPagePublishedDb { get; set; }
 
         // Infrastructures Tables
-        public DbSet<Menuitem> infrastructureMenuitemDb { get; set; }
         public DbSet<Category> infrastructureCategoryDb { get; set; }
 
         // Groups and Access Rights
         public DbSet<AccountGroup> accountGroupDb { get; set; }
         public DbSet<AccountAccessRightsContentPage> accountAccessRightsContentPageDb { get; set; }
 
+        // System Maintenance Notifications
+        public DbSet<SystemMaintenanceNotification> systemMaintenanceNotificationDb { get; set; }
 
 
         public override int SaveChanges()

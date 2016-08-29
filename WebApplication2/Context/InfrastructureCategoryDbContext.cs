@@ -27,7 +27,7 @@ namespace WebApplication2.Context
 
         // initializations 
 
-        private BaseDbContext db = new BaseDbContext();
+        private BaseDbContext db = BaseDbContext.getInstance();
 
         protected virtual DbSet<Category> getItemDb()
         {
@@ -78,6 +78,58 @@ namespace WebApplication2.Context
                 .AsNoTracking()
                 .OrderBy(item => item.order)
                 .ToList();
+        }
+
+        public List<Category> findAllCategorysContentPagesAsNoTracking()
+        {
+            var categories = SessionPersister.account.Group.getAccessibleContentPageListInt();
+
+            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            {
+                return getItemDb()
+                    .AsNoTracking()
+                    .Where(item => item.isContentPage == true)
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+
+            if (SessionPersister.account != null)
+            {
+                return getItemDb()
+                    .AsNoTracking()
+                    .Where(item => item.isContentPage == true &&
+                    categories.Contains(item.ItemID))
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+
+            return new List<Category>();
+        }
+
+        public List<Category> findAllCategorysArticleListsAsNoTracking()
+        {
+            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            {
+                return getItemDb()
+                    .AsNoTracking()
+                    .Where(item => item.isArticleList == true)
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+
+            if (SessionPersister.account != null)
+            {
+                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+
+                return getItemDb()
+                    .AsNoTracking()
+                    .Where(item => item.isArticleList == true &&
+                    categories.Contains(item.ItemID))
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+
+            return new List<Category>();
         }
 
 

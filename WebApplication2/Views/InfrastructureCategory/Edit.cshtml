@@ -7,7 +7,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -16,15 +16,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ItemID)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.categorySlug, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.categorySlug, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.categorySlug, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.url, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -68,8 +59,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.imagePath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.imagePath, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.imagePath, "", new { @class = "text-danger" })
+
+                @if (Model.imagePath != null)
+                {
+                    <img src="@Model.imagePath" width="96" height="96" />
+                }
+                <input type="file" class="file-input" name="image" />
             </div>
         </div>
 
@@ -89,6 +84,56 @@
                 <div class="checkbox">
                     @Html.EditorFor(model => model.isEnabled)
                     @Html.ValidationMessageFor(model => model.isEnabled, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isContentPage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isContentPage)
+                    @Html.ValidationMessageFor(model => model.isContentPage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isArticleList, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isArticleList)
+                    @Html.ValidationMessageFor(model => model.isArticleList, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isVisibleToVisitorOnly, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isVisibleToVisitorOnly)
+                    @Html.ValidationMessageFor(model => model.isVisibleToVisitorOnly, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isVisibleToMembersOnly, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isVisibleToMembersOnly)
+                    @Html.ValidationMessageFor(model => model.isVisibleToMembersOnly, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isVisibleToTradingOnly, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isVisibleToTradingOnly)
+                    @Html.ValidationMessageFor(model => model.isVisibleToTradingOnly, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

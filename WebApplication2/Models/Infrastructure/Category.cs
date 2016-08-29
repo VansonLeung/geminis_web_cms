@@ -8,9 +8,6 @@ namespace WebApplication2.Models.Infrastructure
 {
     public class Category : BaseItem
     {
-        public string categorySlug { get; set; }
-        public string url { get; set; }
-
         public int? parentItemID { get; set; }
 
         [ForeignKey("parentItemID")]

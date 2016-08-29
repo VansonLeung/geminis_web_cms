@@ -74,8 +74,16 @@
         <dd>
             @if (Model.Group != null)
             {
-                @Html.DisplayFor(model => model.Group.Name)
+                @Model.Group.Name
             }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isEnabled)
         </dd>
 
         <dt>

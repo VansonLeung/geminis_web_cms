@@ -20,7 +20,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin,approver")]
         public ActionResult List()
         {
-            var items = ArticleDbContext.getInstance().findArticlesGroupByBaseVersionRequestingApproval();
+            var items = ArticleDbContext.getInstance().findArticlesRequestingApproval();
             return View(items);
         }
 

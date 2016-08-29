@@ -1,6 +1,7 @@
 namespace WebApplication2.Migrations
 {
     using Context;
+    using Security;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -43,6 +44,7 @@ namespace WebApplication2.Migrations
                         Lastname = "admin",
                         Password = "123123asd",
                         ConfirmPassword = "123123asd",
+                        isEnabled = true,
                     }
                 );
             }
@@ -59,6 +61,7 @@ namespace WebApplication2.Migrations
                         Lastname = "editor",
                         Password = "123123asd",
                         ConfirmPassword = "123123asd",
+                        isEnabled = true,
                     }
                 );
             }
@@ -75,6 +78,7 @@ namespace WebApplication2.Migrations
                         Lastname = "approver",
                         Password = "123123asd",
                         ConfirmPassword = "123123asd",
+                        isEnabled = true,
                     }
                 );
             }
@@ -91,9 +95,37 @@ namespace WebApplication2.Migrations
                         Lastname = "publisher",
                         Password = "123123asd",
                         ConfirmPassword = "123123asd",
+                        isEnabled = true,
                     }
                 );
             }
+
+            ContentPageDbContext.getInstance().tryCreateNewArticle(
+                new Models.ContentPage
+                {
+                    Name = "About Us",
+                    Url = "about_us",
+                    Slug = "about-us",
+                    Desc = "About Us Description",
+                    Excerpt = "About Us Summary",
+                    Keywords = "about,us",
+                },
+                "123123asd"
+            );
+
+            ContentPageDbContext.getInstance().tryCreateNewArticle(
+                new Models.ContentPage
+                {
+                    Name = "Contact Us",
+                    Url = "contact",
+                    Slug = "contact-us",
+                    Desc = "Contact Us Description",
+                    Excerpt = "Contact Us Summary",
+                    Keywords = "contact,us",
+                },
+                "123123asd"
+            );
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

@@ -6,11 +6,19 @@ using System.Web.Mvc;
 using WebApplication2.Context;
 using WebApplication2.Models;
 using WebApplication2.Security;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
 {
     public class ArticleEditorController : BaseController
     {
+        SelectList getCategoriesForSelect(int? selectedID = null)
+        {
+            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysArticleListsAsNoTracking();
+            items.Insert(0, new Models.Infrastructure.Category { ItemID = -1, name_en = "" });
+            return new SelectList(items, "ItemID", "name_en", selectedID);
+        }
+
         // GET: ArticleEditor
         public override ActionResult Index()
         {
@@ -18,7 +26,7 @@ namespace WebApplication2.Controllers
         }
 
 
-        [CustomAuthorize]
+        [CustomAuthorize(Roles = "superadmin,editor")]
         public ActionResult List()
         {
             var items = ArticleDbContext.getInstance().findArticlesGroupByBaseVersion();
@@ -26,7 +34,7 @@ namespace WebApplication2.Controllers
         }
 
 
-        [CustomAuthorize]
+        [CustomAuthorize(Roles = "superadmin,editor")]
         public ActionResult ListArticleVersions(int baseArticleID = 0)
         {
             var article = new Article();
@@ -44,6 +52,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin,editor")]
         public ActionResult Create()
         {
+            ViewBag.categoryID = getCategoriesForSelect();
             return View();
         }
 
@@ -58,9 +67,65 @@ namespace WebApplication2.Controllers
                 ArticleDbContext.getInstance().tryCreateNewArticle(article);
                 ModelState.Clear();
                 ViewBag.Message = article.Name + " successfully created.";
+                return RedirectToAction("DetailsLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
             }
-            return RedirectToAction("DetailsLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
+            else
+            {
+                ViewBag.categoryID = getCategoriesForSelect();
+                return View();
+            }
         }
+
+
+
+
+        // CREATE WITH CUSTOM VIEWMODEL FORM
+
+        [CustomAuthorize(Roles = "superadmin,editor")]
+        public ActionResult CreateWithViewModelForm()
+        {
+            ViewBag.categoryID = getCategoriesForSelect();
+            return View();
+        }
+
+        [HttpPost]
+        [CustomAuthorize(Roles = "superadmin,editor")]
+        public ActionResult CreateWithViewModelForm(ArticleCreateForm form)
+        {
+            if (ModelState.IsValid)
+            {
+                // create empty article with base lang
+                Article article = form.makeBaseArticle();
+                article.BaseArticleID = 0;
+                article.Version = 0;
+                ArticleDbContext.getInstance().tryCreateNewArticle(article);
+
+                var baseArticleID = article.BaseArticleID;
+                var version = article.Version;
+
+                // create locale articles
+
+                var article_zh = form.makeLocaleArticle("zh");
+                article_zh.BaseArticleID = baseArticleID;
+                article_zh.Version = version;
+                ArticleDbContext.getInstance().tryCreateNewLocaleArticle(article_zh);
+
+                var article_cn = form.makeLocaleArticle("cn");
+                article_cn.BaseArticleID = baseArticleID;
+                article_cn.Version = version;
+                ArticleDbContext.getInstance().tryCreateNewLocaleArticle(article_cn);
+
+                ModelState.Clear();
+                ViewBag.Message = article.Name + " successfully created.";
+                return RedirectToAction("DetailsLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
+            }
+            else
+            {
+                ViewBag.categoryID = getCategoriesForSelect();
+                return View();
+            }
+        }
+
 
 
 
@@ -184,6 +249,7 @@ namespace WebApplication2.Controllers
             {
                 // if locale exists, treat as edit form
             }
+            ViewBag.categoryID = getCategoriesForSelect(item.categoryID);
             return View(item);
         }
 
@@ -202,9 +268,11 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    ViewBag.categoryID = getCategoriesForSelect(item.categoryID);
                     return View(item);
                 }
             }
+            ViewBag.categoryID = getCategoriesForSelect(item.categoryID);
             return View(item);
         }
 
@@ -355,7 +423,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version });
+                    return RedirectToAction("UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = item.Lang });
                 }
             }
             return View(item);

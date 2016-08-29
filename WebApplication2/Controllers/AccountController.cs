@@ -42,6 +42,7 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Account
+        [CustomAuthorize()]
         public override ActionResult Index()
         {
             return View();
@@ -58,6 +59,7 @@ namespace WebApplication2.Controllers
         public ActionResult Register()
         {
             ViewBag.GroupID = getAccountGroupsForSelect();
+            ViewBag.RoleList = getRoleList();
             return View();
         }
 
@@ -96,6 +98,10 @@ namespace WebApplication2.Controllers
                 {
                     return RedirectToAction("LoginLocked");
                 }
+                if (!result.isEnabled)
+                {
+                    return RedirectToAction("LoginDisabled");
+                }
                 return RedirectToAction("Index");
             }
             else
@@ -108,6 +114,12 @@ namespace WebApplication2.Controllers
 
 
         public ActionResult LoginLocked()
+        {
+            return View();
+        }
+
+
+        public ActionResult LoginDisabled()
         {
             return View();
         }
@@ -139,6 +151,7 @@ namespace WebApplication2.Controllers
         public ActionResult ChangePassword(AccountChangePasswordForm form)
         {
             var account = new Account();
+            account.AccountID = SessionPersister.account.AccountID;
             account.Username = SessionPersister.account.Username;
             account.Password = form.OldPassword;
 

@@ -37,6 +37,9 @@
             Group
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.isEnabled)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.LastLogin)
         </th>
         <th>
@@ -75,7 +78,13 @@
             @Html.DisplayFor(modelItem => item.Role)
         </td>
         <td>
-
+            @if (item.Group != null)
+            {
+                @item.Group.Name
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isEnabled)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastLogin)

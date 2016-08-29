@@ -20,11 +20,15 @@ namespace WebApplication2.Controllers
                 var selIDs = selectedIDs.Split(',');
                 for (int i = 0; i < selIDs.Count(); i++)
                 {
-                    ids.Add(Convert.ToInt32(selIDs.ElementAt(i)));
+                    var id = selIDs.ElementAt(i);
+                    if (!id.Equals(""))
+                    {
+                        ids.Add(Convert.ToInt32(selIDs.ElementAt(i)));
+                    }
                 }
             }
 
-            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysAsNoTracking();
+            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysArticleListsAsNoTracking();
             return new MultiSelectList(items, "ItemID", "name_en", ids.ToArray());
         }
 
@@ -37,12 +41,16 @@ namespace WebApplication2.Controllers
                 var selIDs = selectedIDs.Split(',');
                 for (int i = 0; i < selIDs.Count(); i++)
                 {
-                    ids.Add(Convert.ToInt32(selIDs.ElementAt(i)));
+                    var id = selIDs.ElementAt(i);
+                    if (!id.Equals(""))
+                    {
+                        ids.Add(Convert.ToInt32(selIDs.ElementAt(i)));
+                    }
                 }
             }
 
-            var items = ContentPageDbContext.getInstance().findArticlesGroupByBaseVersion();
-            return new MultiSelectList(items, "ArticleID", "Name", ids.ToArray());
+            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysContentPagesAsNoTracking();
+            return new MultiSelectList(items, "ItemID", "name_en", ids.ToArray());
         }
 
 

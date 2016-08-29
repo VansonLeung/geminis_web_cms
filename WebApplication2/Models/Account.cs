@@ -57,6 +57,25 @@ namespace WebApplication2.Models
         [Display(Name = "role", ResourceType = typeof(Resource))]
         public List<string> RoleList { get; set; }
 
+        public bool isRoleSuperadmin()
+        {
+            return Role != null && Role.Contains("superadmin");
+        }
+
+        public bool isRoleEditor()
+        {
+            return Role != null && Role.Contains("editor");
+        }
+
+        public bool isRoleApprover()
+        {
+            return Role != null && Role.Contains("approver");
+        }
+
+        public bool isRolePublisher()
+        {
+            return Role != null && Role.Contains("publisher");
+        }
 
         public int? GroupID { get; set; }
         [ForeignKey("GroupID")]
@@ -75,6 +94,8 @@ namespace WebApplication2.Models
 
         [Display(Name = "loginfails", ResourceType = typeof(Resource))]
         public int LoginFails { get; set; }
+
+        public bool isEnabled { get; set; }
 
         public string historyPasswords { get; set; }
 

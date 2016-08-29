@@ -27,7 +27,7 @@ namespace WebApplication2.Context
 
         // initializations 
 
-        private BaseDbContext db = new BaseDbContext();
+        private BaseDbContext db = BaseDbContext.getInstance();
 
         protected virtual DbSet<AccountGroup> getItemDb()
         {
@@ -80,7 +80,8 @@ namespace WebApplication2.Context
 
             db.Entry(item).State = EntityState.Modified;
 
-            item.AccessibleArticleGroups = String.Join(",", item.AccessibleArticleGroupList.ToArray());
+            item.AccessibleArticleGroups = String.Join(",", item.getAccessibleArticleGroupList().ToArray());
+            item.AccessibleContentPages = String.Join(",", item.getAccessibleContentPageList().ToArray());
 
             db.SaveChanges();
             return null;

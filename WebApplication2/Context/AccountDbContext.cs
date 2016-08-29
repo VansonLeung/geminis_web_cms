@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
 using WebApplication2.Security;
 
@@ -27,7 +28,7 @@ namespace WebApplication2.Context
 
         // initializations
 
-        private BaseDbContext db = new BaseDbContext();
+        private BaseDbContext db = BaseDbContext.getInstance();
 
         protected DbSet<Account> getAccountDb()
         {
@@ -59,6 +60,11 @@ namespace WebApplication2.Context
         }
 
 
+
+
+
+
+
         public List<Account> findAccounts()
         {
             return getAccountDb()
@@ -88,7 +94,11 @@ namespace WebApplication2.Context
             {
                 if (_account.Password == encPassword)
                 {
-                    if (_account.LoginFails < 3)
+                    if (!_account.isEnabled)
+                    {
+                        return _account;
+                    }
+                    else if (_account.LoginFails < 3)
                     {
                         db.Entry(_account).State = EntityState.Modified;
                         _account.LastLogin = DateTime.UtcNow;
@@ -102,6 +112,7 @@ namespace WebApplication2.Context
                     db.Entry(_account).State = EntityState.Modified;
                     _account.LoginFails = _account.LoginFails + 1;
                     db.SaveChanges();
+                    return null;
                 }
             }
             return _account;
@@ -129,8 +140,8 @@ namespace WebApplication2.Context
             Account _account = findAccountByID(account.AccountID);
             if (_account.Password != account.Password)
             {
-                var encPassword = account.MakeEncryptedPassword(account.Password);
-                error = tryChangePassword(account, encPassword);
+                var rawPassword = account.Password;
+                error = tryChangePassword(account, rawPassword);
                 if (error != null)
                 {
                     return error;
@@ -143,13 +154,15 @@ namespace WebApplication2.Context
                     if (!_account.Role.Contains("superadmin"))
                     {
                         _account.NeedChangePassword = true;
+
+                        EmailHelper.SendEmailToAccountOnPasswordReset(_account, rawPassword);
                     }
 
                     db.SaveChanges();
                 }
             }
 
-            error = tryChangeRole(account);
+            error = tryChangeProfile(account);
             if (error != null)
             {
                 return error;
@@ -161,6 +174,7 @@ namespace WebApplication2.Context
 
         public string tryChangePassword(Account account, String newPassword, bool shouldInvalidateResetPasswordNeeds = false)
         {
+            var encPassword = account.MakeEncryptedPassword(newPassword);
             Account _account = findAccountByID(account.AccountID);
             if (_account != null)
             {
@@ -171,7 +185,7 @@ namespace WebApplication2.Context
                 for (var i = 0; i < passwords.Count; i++)
                 {
                     var pass = passwords[i];
-                    if (pass == newPassword)
+                    if (pass == encPassword)
                     {
                         return "New password must be different from your 9 previously used passwords";
                     }
@@ -181,8 +195,8 @@ namespace WebApplication2.Context
 
 
                 db.Entry(_account).State = EntityState.Modified;
-                _account.Password = newPassword;
-                _account.ConfirmPassword = newPassword;
+                _account.Password = encPassword;
+                _account.ConfirmPassword = encPassword;
                 _account.LastPasswordModifiedAt = DateTime.UtcNow;
 
                 if (shouldInvalidateResetPasswordNeeds)
@@ -190,7 +204,7 @@ namespace WebApplication2.Context
                     _account.NeedChangePassword = false;
                 }
 
-                passwords.Add(newPassword);
+                passwords.Add(encPassword);
                 while (passwords.Count > 9)
                 {
                     passwords.RemoveAt(0);
@@ -207,7 +221,7 @@ namespace WebApplication2.Context
             }
         }
 
-        public string tryChangeRole(Account account)
+        public string tryChangeProfile(Account account)
         {
             Account _account = findAccountByID(account.AccountID);
             if (_account != null)
@@ -220,6 +234,12 @@ namespace WebApplication2.Context
                 }
 
                 _account.Role = account.Role;
+                _account.Username = account.Username;
+                _account.Email = account.Email;
+                _account.Firstname = account.Firstname;
+                _account.Lastname = account.Lastname;
+                _account.GroupID = account.GroupID;
+                _account.isEnabled = account.isEnabled;
 
                 SessionPersister.updateSessionForAccount();
                 db.SaveChanges();

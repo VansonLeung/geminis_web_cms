@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
-    public class ArticlePublished : Article
+    public class ArticlePublished : BaseArticle
     {
         public static ArticlePublished makeNewArticleByCloningContentAndVersion(BaseArticle article)
         {
@@ -17,10 +17,13 @@ namespace WebApplication2.Models
             a.Version = article.Version;
             a.Excerpt = article.Excerpt;
             a.BaseArticleID = article.BaseArticleID;
+            a.categoryID = article.categoryID;
             a.Desc = article.Desc;
             a.Name = article.Name;
             a.Slug = article.Slug;
             a.Keywords = article.Keywords;
+            a.MetaData = article.MetaData;
+            a.MetaKeywords = article.MetaKeywords;
             a.Lang = article.Lang;
             a.datePublishStart = article.datePublishStart;
             a.datePublishEnd = article.datePublishEnd;
