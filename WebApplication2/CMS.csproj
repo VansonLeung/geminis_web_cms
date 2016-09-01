@@ -716,6 +716,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ckeditor\plugins\video\" />
+    <Folder Include="Content\ckeditor\plugins\widgetbootstrap\" />
     <Folder Include="Content\ckfinder\" />
     <Folder Include="Images\uploads\" />
     <Folder Include="Views\BaseArticle\" />

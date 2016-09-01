@@ -7,6 +7,11 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
     // config.uiColor = '#AADC6E';
-    config.extraPlugins = 'video';
+    config.extraPlugins = 'video,widgetbootstrap';
     config.extraAllowedContent = 'video [*]{*}(*);source [*]{*}(*);';
+    config.filebrowserBrowseUrl = '/Content/ckfinder/ckfinder.html';
+    config.filebrowserImageBrowseUrl = '/Content/ckfinder/ckfinder.html?type=Images';
+    config.filebrowserUploadUrl = '/fileupload/UploadNow';
+    config.filebrowserImageUploadUrl = '/image/UploadNow';
+    config.filebrowserVideoUploadUrl = '/VideoUpload/UploadPage';
 };
