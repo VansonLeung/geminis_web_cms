@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
+using WebApplication2.Properties;
 
 namespace WebApplication2.Controllers
 {
@@ -17,20 +18,21 @@ namespace WebApplication2.Controllers
                 string ImageName = upload.FileName;
                 string[] FileNames = ImageName.Split('\\');
                 string FileName = FileNames[FileNames.Length - 1];
-                string path = System.IO.Path.Combine(Server.MapPath("~/Images/uploads"), FileName);
+                string path = System.IO.Path.Combine(Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC), FileName);
                 upload.SaveAs(path);
             }
         }
 
 
-        public ActionResult UploadPartial()
+        public ActionResult UploadForm()
         {
-            var appData = Server.MapPath("~/Images/uploads");
-            var images = Directory.GetFiles(appData).Select(x => new ImageView
-            {
-                Url = Url.Content("/images/uploads/" + Path.GetFileName(x))
-            });
-            return View(images);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UploadForm(HttpPostedFileWrapper upload)
+        {
+            return View();
         }
     }
 

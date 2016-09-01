@@ -245,3 +245,4 @@ ModelManifest.xml
 .fake/
 /WebApplication2/Images/uploads
 WebApplication2/logs/
+WebApplication2/ckfinder/userfiles/

@@ -1,0 +1,86 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UploadPage</title>
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div> 
+        <div>
+            <label for="fileUpload">
+                Select File to Upload: <input id="fileUpload" type="file" />
+                <div id="fileUploadProgress"></div>
+                <input id="btnUploadFile" type="button" value="Upload File" />
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+   $('#btnUploadFile').on('click', function () {
+
+      var data = new FormData();
+
+      var files = $("#fileUpload").get(0).files;
+
+      // Add the uploaded image content to the form data collection
+      if (files.length > 0) {
+           data.append("UploadedFiles", files[0]);
+      }
+
+      // Make Ajax request with the contentType = false, and procesDate = false
+      $.ajax({
+           type: "POST",
+           url: "/VideoUpload/UploadAPI",
+           contentType: false,
+           processData: false,
+           data: data,
+           xhr: function () {
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) {
+                    myXhr.upload.addEventListener('progress', progress, false);
+                }
+                return myXhr;
+           },
+           success: function (data) {
+               console.log(data);
+
+               alert('data returned successfully');
+
+           },
+
+           error: function (data) {
+               console.log(data);
+           }
+      });
+   });
+});
+
+
+function progress(e) {
+
+    if (e.lengthComputable) {
+        var max = e.total;
+        var current = e.loaded;
+
+        var Percentage = (current * 100) / max;
+        console.log(Percentage);
+
+        $('#fileUploadProgress').text(Percentage + "%");
+
+        if (Percentage >= 100) {
+            $('#fileUploadProgress').text("Complete!");
+        }
+    }
+}
+</script>
+
+</html>

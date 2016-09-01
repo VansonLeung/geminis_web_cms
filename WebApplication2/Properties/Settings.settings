@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WebApplication2.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MS_IMAGE_UPLOAD_SRC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/ckfinder/userfiles/images/</Value>
+    </Setting>
+    <Setting Name="MS_VIDEO_UPLOAD_SRC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/ckfinder/userfiles/videos/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

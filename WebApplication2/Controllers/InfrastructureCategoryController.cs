@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Context;
 using WebApplication2.Models.Infrastructure;
+using WebApplication2.Properties;
 using WebApplication2.Security;
 
 namespace WebApplication2.Controllers
@@ -52,7 +53,7 @@ namespace WebApplication2.Controllers
                 if (image != null)
                 {
                     string ImageName = Path.GetFileName(image.FileName);
-                    string physicalPath = Server.MapPath("~/images/uploads/" + ImageName);
+                    string physicalPath = Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC + ImageName);
                     image.SaveAs(physicalPath);
                     item.imagePath = physicalPath;
                 }
@@ -94,7 +95,7 @@ namespace WebApplication2.Controllers
                 if (image != null)
                 {
                     string ImageName = Path.GetFileName(image.FileName);
-                    string physicalPath = Server.MapPath("~/images/uploads/" + ImageName);
+                    string physicalPath = Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC + ImageName);
                     image.SaveAs(physicalPath);
                     item.imagePath = physicalPath;
                 }

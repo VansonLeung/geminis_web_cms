@@ -31,6 +31,10 @@ namespace WebApplication2
                         "~/Content/ckeditor/styles.js",
                         "~/Content/ckeditor/adapters/jquery.js"));
 
+            bundles.Add(new Bundle("~/bundles/ckfinder").Include(
+                        "~/Content/ckfinder/ckfinder.js",
+                        "~/Content/ckfinder/config.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-datetimepicker.css",
