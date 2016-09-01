@@ -244,3 +244,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /WebApplication2/Images/uploads
+WebApplication2/logs/

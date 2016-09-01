@@ -61,7 +61,7 @@ namespace WebApplication2.Context
 
             if (SessionPersister.account != null)
             {
-                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
                 categories.Add(0);
 
                 return getArticlePublishedDb()

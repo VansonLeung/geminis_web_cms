@@ -72,17 +72,9 @@ namespace WebApplication2.Context
                 .ToList();
         }
 
-        public List<Category> findAllCategorysAsNoTracking()
-        {
-            return getItemDb()
-                .AsNoTracking()
-                .OrderBy(item => item.order)
-                .ToList();
-        }
-
         public List<Category> findAllCategorysContentPagesAsNoTracking()
         {
-            var categories = SessionPersister.account.Group.getAccessibleContentPageListInt();
+            var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
 
             if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
             {
@@ -119,11 +111,38 @@ namespace WebApplication2.Context
 
             if (SessionPersister.account != null)
             {
-                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
 
                 return getItemDb()
                     .AsNoTracking()
                     .Where(item => item.isArticleList == true &&
+                    categories.Contains(item.ItemID))
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+
+            return new List<Category>();
+        }
+
+
+
+        public List<Category> findAllCategorysAsNoTracking()
+        {
+            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            {
+                return getItemDb()
+                    .AsNoTracking()
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+
+            if (SessionPersister.account != null)
+            {
+                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
+
+                return getItemDb()
+                    .AsNoTracking()
+                    .Where(item => 
                     categories.Contains(item.ItemID))
                     .OrderBy(item => item.order)
                     .ToList();

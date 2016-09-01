@@ -21,19 +21,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AccessibleArticleGroups)
+            @Html.DisplayNameFor(model => model.AccessibleCategories)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AccessibleArticleGroups)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AccessibleContentPages)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccessibleContentPages)
+            @Model.getAccessibleCategoryListRepresentation()
         </dd>
 
     </dl>

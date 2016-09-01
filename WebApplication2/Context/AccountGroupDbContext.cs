@@ -80,8 +80,7 @@ namespace WebApplication2.Context
 
             db.Entry(item).State = EntityState.Modified;
 
-            item.AccessibleArticleGroups = String.Join(",", item.getAccessibleArticleGroupList().ToArray());
-            item.AccessibleContentPages = String.Join(",", item.getAccessibleContentPageList().ToArray());
+            item.AccessibleCategories = String.Join(",", item.getAccessibleCategoryList().ToArray());
 
             db.SaveChanges();
             return null;

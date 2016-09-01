@@ -16,10 +16,7 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccessibleArticleGroups)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccessibleContentPages)
+            @Html.DisplayNameFor(model => model.AccessibleCategories)
         </th>
         <th></th>
     </tr>
@@ -30,10 +27,7 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AccessibleArticleGroups)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessibleContentPages)
+            @item.getAccessibleCategoryListRepresentation()
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AccountGroupID }) |

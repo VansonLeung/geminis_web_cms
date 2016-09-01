@@ -21,12 +21,7 @@ namespace WebApplication2.Helpers
 
                 if (account.Group != null)
                 {
-                    if (account.Group.getAccessibleArticleGroupList().Contains(string.Format("{0}", article.categoryID)))
-                    {
-                        return true;
-                    }
-
-                    if (account.Group.getAccessibleContentPageList().Contains(string.Format("{0}", article.categoryID)))
+                    if (account.Group.getAccessibleCategoryList().Contains(string.Format("{0}", article.categoryID)))
                     {
                         return true;
                     }

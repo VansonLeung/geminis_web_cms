@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebApplication2.Context;
+using WebApplication2.Helpers;
+using WebApplication2.Models.Infrastructure;
 
 namespace WebApplication2.Models
 {
@@ -12,23 +15,23 @@ namespace WebApplication2.Models
         public int AccountGroupID { get; set; }
         public string Name { get; set; }
 
-        public string AccessibleArticleGroups { get; set; }
-        public List<string> AccessibleArticleGroupList { get; set; }
-        public List<string> getAccessibleArticleGroupList()
+        public string AccessibleCategories { get; set; }
+        public List<string> AccessibleCategoryList { get; set; }
+        public List<string> getAccessibleCategoryList()
         {
-            if (AccessibleArticleGroups != null)
+            if (AccessibleCategories != null)
             {
-                return AccessibleArticleGroups.Split(',').ToList();
+                return AccessibleCategories.Split(',').ToList();
             }
-            else if (AccessibleArticleGroupList != null)
+            else if (AccessibleCategoryList != null)
             {
-                return AccessibleArticleGroupList;
+                return AccessibleCategoryList;
             }
             return new List<string>();
         }
-        public List<int> getAccessibleArticleGroupListInt()
+        public List<int> getAccessibleCategoryListInt()
         {
-            List<string> list = getAccessibleArticleGroupList();
+            List<string> list = getAccessibleCategoryList();
             List<int> listInt = new List<int>();
             foreach (string str in list)
             {
@@ -40,34 +43,34 @@ namespace WebApplication2.Models
             }
             return listInt;
         }
-
-        public string AccessibleContentPages { get; set; }
-        public List<string> AccessibleContentPageList { get; set; }
-        public List<string> getAccessibleContentPageList()
+        public List<Category> getAccessibleCategoryListObject()
         {
-            if (AccessibleContentPages != null)
+            List<Category> items = new List<Category>();
+            var categoryList = getAccessibleCategoryList();
+            foreach (var id in categoryList)
             {
-                return AccessibleContentPages.Split(',').ToList();
-            }
-            else if (AccessibleContentPageList != null)
-            {
-                return AccessibleContentPageList;
-            }
-            return new List<string>();
-        }
-        public List<int> getAccessibleContentPageListInt()
-        {
-            List<string> list = getAccessibleContentPageList();
-            List<int> listInt = new List<int>();
-            foreach (string str in list)
-            {
-                if (!str.Equals(""))
+                try
                 {
-                    int id = Convert.ToInt32(str);
-                    listInt.Add(id);
+                    int _id = Convert.ToInt32(id);
+                    var item = InfrastructureCategoryDbContext.getInstance().findCategoryByID(_id);
+                    items.Add(item);
+                }
+                catch (Exception e)
+                {
+                    LogHelper.Error(null, e);
                 }
             }
-            return listInt;
+            return items;
+        }
+        public string getAccessibleCategoryListRepresentation()
+        {
+            List<string> names = new List<string>();
+            var categoryList = getAccessibleCategoryListObject();
+            foreach (var item in categoryList)
+            {
+                names.Add(item.name_en);
+            }
+            return String.Join(",", names.ToArray());
         }
     }
 }

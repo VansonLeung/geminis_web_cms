@@ -66,7 +66,7 @@ namespace WebApplication2.Context
 
             else if (SessionPersister.account != null)
             {
-                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
                 categories.Add(0);
 
                 return getArticleDb()
@@ -104,7 +104,7 @@ namespace WebApplication2.Context
             }
             if (SessionPersister.account != null)
             {
-                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
                 categories.Add(0);
 
                 return getArticleDb().Where(acc =>
@@ -261,7 +261,7 @@ namespace WebApplication2.Context
 
             if (SessionPersister.account != null)
             {
-                var categories = SessionPersister.account.Group.getAccessibleArticleGroupListInt();
+                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
                 categories.Add(0);
 
                 var articles = getArticleDb().Where(acc =>

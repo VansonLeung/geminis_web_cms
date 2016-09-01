@@ -16,6 +16,8 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        <h3>EN</h3>
+
         <div class="form-group">
             @Html.LabelFor(model => model.categoryID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -71,6 +73,9 @@
             </div>
         </div>
 
+        <hr />
+        <h3>ZH</h3>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Name_zh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -118,6 +123,9 @@
                 @Html.ValidationMessageFor(model => model.MetaKeywords_zh, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <hr />
+        <h3>CN</h3>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name_cn, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -12,7 +12,7 @@ namespace WebApplication2.Controllers
 {
     public class AccountGroupController : Controller
     {
-        MultiSelectList getAccessibleArticleGroups(string selectedIDs = null)
+        MultiSelectList getAccessibleCategories(string selectedIDs = null)
         {
             List<int> ids = new List<int>();
             if (selectedIDs != null)
@@ -28,30 +28,11 @@ namespace WebApplication2.Controllers
                 }
             }
 
-            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysArticleListsAsNoTracking();
+            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysAsNoTracking();
             return new MultiSelectList(items, "ItemID", "name_en", ids.ToArray());
         }
 
-
-        MultiSelectList getAccessibleContentPages(string selectedIDs = null)
-        {
-            List<int> ids = new List<int>();
-            if (selectedIDs != null)
-            {
-                var selIDs = selectedIDs.Split(',');
-                for (int i = 0; i < selIDs.Count(); i++)
-                {
-                    var id = selIDs.ElementAt(i);
-                    if (!id.Equals(""))
-                    {
-                        ids.Add(Convert.ToInt32(selIDs.ElementAt(i)));
-                    }
-                }
-            }
-
-            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysContentPagesAsNoTracking();
-            return new MultiSelectList(items, "ItemID", "name_en", ids.ToArray());
-        }
+        
 
 
         // GET: InfrastructureCategory
@@ -74,8 +55,7 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult Create()
         {
-            ViewBag.AccessibleArticleGroupList = getAccessibleArticleGroups();
-            ViewBag.AccessibleContentPageList = getAccessibleContentPages();
+            ViewBag.AccessibleCategoryList = getAccessibleCategories();
             return View();
         }
 
@@ -102,8 +82,7 @@ namespace WebApplication2.Controllers
         public ActionResult Edit(int id = 0)
         {
             var item = AccountGroupDbContext.getInstance().findGroupByID(id);
-            ViewBag.AccessibleArticleGroupList = getAccessibleArticleGroups(item.AccessibleArticleGroups);
-            ViewBag.AccessibleContentPageList = getAccessibleContentPages(item.AccessibleContentPages);
+            ViewBag.AccessibleCategoryList = getAccessibleCategories(item.AccessibleCategories);
             return View(item);
         }
 
@@ -117,22 +96,19 @@ namespace WebApplication2.Controllers
                 if (error != null)
                 {
                     ModelState.AddModelError("", error);
-                    ViewBag.AccessibleArticleGroupList = getAccessibleArticleGroups(item.AccessibleArticleGroups);
-                    ViewBag.AccessibleContentPageList = getAccessibleContentPages(item.AccessibleContentPages);
+                    ViewBag.AccessibleCategoryList = getAccessibleCategories(item.AccessibleCategories);
                     return View(item);
                 }
                 else
                 {
                     ModelState.Clear();
-                    ViewBag.AccessibleArticleGroupList = getAccessibleArticleGroups(item.AccessibleArticleGroups);
-                    ViewBag.AccessibleContentPageList = getAccessibleContentPages(item.AccessibleContentPages);
+                    ViewBag.AccessibleCategoryList = getAccessibleCategories(item.AccessibleCategories);
                     return View(item);
                 }
             }
             else
             {
-                ViewBag.AccessibleArticleGroupList = getAccessibleArticleGroups(item.AccessibleArticleGroups);
-                ViewBag.AccessibleContentPageList = getAccessibleContentPages(item.AccessibleContentPages);
+                ViewBag.AccessibleCategoryList = getAccessibleCategories(item.AccessibleCategories);
                 return View(item);
             }
         }
