@@ -21,40 +21,7 @@ namespace WebApplication2.Controllers
             return View(items);
         }
 
-
-
-        [CustomAuthorize(Roles = "superadmin")]
-        public ActionResult CreateImmediate()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [CustomAuthorize(Roles = "superadmin")]
-        public ActionResult CreateImmediate(SystemMaintenanceNotification item)
-        {
-            if (ModelState.IsValid)
-            {
-                var error = SystemMaintenanceNotificationDbContext.getInstance().createImmediateNotification(item);
-                if (error != null)
-                {
-                    ModelState.AddModelError("", error);
-                    return View();
-                }
-                else
-                {
-                    ModelState.Clear();
-                    ViewBag.Message = "New immediate notification successfully created.";
-                    return RedirectToAction("Index");
-                }
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-
+        
 
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult CreateScheduled()

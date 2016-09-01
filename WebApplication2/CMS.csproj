@@ -71,6 +71,10 @@
       <HintPath>..\packages\LinqKit.EntityFramework.1.0.4.0\lib\net452\LinqKit.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -104,6 +108,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -210,6 +218,8 @@
     </Compile>
     <Compile Include="Helpers\AccountGroupBaseArticlePermissionHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Helpers\PredicateBuilder.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -669,7 +679,6 @@
     <Content Include="Views\AccountGroup\Delete.cshtml" />
     <Content Include="Views\Account\LoginDisabled.cshtml" />
     <Content Include="Views\SystemMaintenanceNotification\Index.cshtml" />
-    <Content Include="Views\SystemMaintenanceNotification\CreateImmediate.cshtml" />
     <Content Include="Views\SystemMaintenanceNotification\CreateScheduled.cshtml" />
     <Content Include="Views\SystemMaintenanceNotification\Edit.cshtml" />
     <Content Include="Views\ArticleEditor\CreateWithViewModelForm.cshtml" />

@@ -25,10 +25,6 @@ namespace WebApplication2.Models
 
         public string desc_cn { get; set; }
 
-        public bool isImmediate { get; set; }
-
-        public bool isScheduled { get; set; }
-
         public bool isActive { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -40,8 +36,9 @@ namespace WebApplication2.Models
 
         [DataType(DataType.DateTime)]
         public DateTime? endDate { get; set; }
-
-        public int timePeriodMin { get; set; }
-
+        public string getEndDateRepresentation()
+        {
+            return DateTimeExtensions.DateTimeToString(endDate);
+        }
     }
 }
