@@ -8,6 +8,10 @@ namespace WebApplication2.Helpers
 {
     public static class DateTimeExtensions
     {
+        public static DateTime StringToDateTime(string str)
+        {
+            return DateTime.ParseExact(str, "MM/dd/yyyy h:mm tt", new CultureInfo("en-US"));
+        }
         public static String DateTimeToString(DateTime? dt)
         {
             var datetime = dt.GetValueOrDefault();

@@ -76,7 +76,7 @@
         <div class="form-group" style="position: relative;">
             @Html.LabelFor(model => model.startDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("startDate", Model.getStartDateRepresentation(), new { @class = "form-control datepicker" })
+                @Html.TextBox("startDate", "", new { @class = "form-control datepicker" })
                 @Html.ValidationMessageFor(model => model.startDate, "", new { @class = "text-danger" })
             </div>
         </div>

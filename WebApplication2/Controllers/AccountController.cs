@@ -74,6 +74,7 @@ namespace WebApplication2.Controllers
                 ViewBag.Message = account.Firstname + " " + account.Lastname + " successfully registered.";
                 return RedirectToAction("List");
             }
+            ViewBag.GroupID = getAccountGroupsForSelect();
             ViewBag.RoleList = getRoleList();
             return View();
         }
@@ -169,11 +170,6 @@ namespace WebApplication2.Controllers
 
         [CustomAuthorize()]
         public ActionResult ChangePasswordSuccess()
-        {
-            return View();
-        }
-
-        public ActionResult ChangePasswordRequest()
         {
             return View();
         }

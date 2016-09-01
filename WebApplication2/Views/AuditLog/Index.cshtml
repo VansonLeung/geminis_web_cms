@@ -1,0 +1,89 @@
+﻿@model IEnumerable<WebApplication2.Models.AuditLog>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Audit Logs</h2>
+
+<div style="position:relative;">
+    <form>
+        @Html.DropDownList("accountID", null, htmlAttributes: new { @placeholder = "Account" })
+        @Html.DropDownList("logAction", null, htmlAttributes: new { @placeholder = "Action" })
+        @Html.Editor("startDate", null, new { htmlAttributes = new { @class = "datepicker", placeholder = "Start Date" } })
+        @Html.Editor("endDate", null, new { htmlAttributes = new { @class = "datepicker", placeholder = "End Date" } })
+        <input type="submit" value="Search" />
+    </form>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.account.Username)
+        </th>
+        <th>
+            Article
+        </th>
+        <th>
+            Article Cat.
+        </th>
+        <th>
+            Content Page
+        </th>
+        <th>
+            Content Page Cat.
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.action)
+        </th>
+        <th>
+            Remarks
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modified_at)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.account.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.article.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.article.category.name_en)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contentPage.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contentPage.category.name_en)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.action)
+        </td>
+        <td>
+            Remarks
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_at)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modified_at)
+        </td>
+    </tr>
+}
+
+</table>
+
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datetimepicker(); //Initialise any date pickers
+    });
+</script>

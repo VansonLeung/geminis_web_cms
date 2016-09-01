@@ -45,6 +45,9 @@ namespace WebApplication2.Context
         // System Maintenance Notifications
         public DbSet<SystemMaintenanceNotification> systemMaintenanceNotificationDb { get; set; }
 
+        // Audit Logs
+        public DbSet<AuditLog> auditLogDb { get; set; }
+
 
         public override int SaveChanges()
         {

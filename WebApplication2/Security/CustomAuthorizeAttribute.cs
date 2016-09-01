@@ -77,11 +77,10 @@ namespace WebApplication2.Security
                 if (!(filterContext.Controller is AccountController)
                     || (
                     filterContext.ActionDescriptor.ActionName != "ChangePassword" &&
-                    filterContext.ActionDescriptor.ActionName != "ChangePasswordRequest" &&
                     filterContext.ActionDescriptor.ActionName != "ChangePasswordSuccess"
                     ))
                 {
-                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "ChangePasswordRequest" }));
+                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "ChangePassword" }));
                     return;
                 }
             }

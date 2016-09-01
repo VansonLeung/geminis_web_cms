@@ -61,6 +61,10 @@ namespace WebApplication2.ViewModels
             article.MetaData = MetaData_en;
             article.MetaKeywords = MetaKeywords_en;
             article.categoryID = categoryID;
+            if (article.categoryID == -1)
+            {
+                article.categoryID = null;
+            }
             return article;
         }
 
@@ -76,6 +80,10 @@ namespace WebApplication2.ViewModels
                 article.MetaData = MetaData_zh;
                 article.MetaKeywords = MetaKeywords_zh;
                 article.categoryID = categoryID;
+                if (article.categoryID == -1)
+                {
+                    article.categoryID = null;
+                }
                 article.Lang = "zh";
                 return article;
             }
@@ -89,6 +97,10 @@ namespace WebApplication2.ViewModels
                 article.MetaData = MetaData_cn;
                 article.MetaKeywords = MetaKeywords_cn;
                 article.categoryID = categoryID;
+                if (article.categoryID == -1)
+                {
+                    article.categoryID = null;
+                }
                 article.Lang = "cn";
                 return article;
             }

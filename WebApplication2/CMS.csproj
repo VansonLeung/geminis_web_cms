@@ -59,6 +59,18 @@
       <HintPath>..\packages\Localization.1.0.8\lib\net40\Insya.Localization.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LinqKit, Version=1.1.7.2, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.7.2\lib\net452\LinqKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqKit.Core, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.Core.1.0.2\lib\net451\LinqKit.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqKit.EntityFramework, Version=1.0.4.0, Culture=neutral, PublicKeyToken=b6c8cfc71f7a6a80, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.EntityFramework.1.0.4.0\lib\net452\LinqKit.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -166,6 +178,7 @@
     <Compile Include="Attributes\AccountPasswordLengthValidationAttribute.cs" />
     <Compile Include="Attributes\AccountPasswordLetterValidationAttribute.cs" />
     <Compile Include="Context\AccountDbContext.cs" />
+    <Compile Include="Context\AuditLogDbContext.cs" />
     <Compile Include="Context\InfrastructureCategoryDbContext.cs" />
     <Compile Include="Context\AccountGroupDbContext.cs" />
     <Compile Include="Context\ContentPagePublishedDbContext.cs" />
@@ -177,6 +190,7 @@
     <Compile Include="Controllers\AccessDeniedController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleApproverController.cs" />
+    <Compile Include="Controllers\AuditLogController.cs" />
     <Compile Include="Controllers\BaseArticleController.cs" />
     <Compile Include="Controllers\ContentPageEditorController.cs" />
     <Compile Include="Controllers\ArticleEditorController.cs" />
@@ -188,7 +202,6 @@
     <Compile Include="Controllers\AccountGroupController.cs" />
     <Compile Include="Controllers\InfrastructureCategoryController.cs" />
     <Compile Include="Controllers\SiteMapController.cs" />
-    <Compile Include="Controllers\SystemAuditController.cs" />
     <Compile Include="Controllers\SystemLogController.cs" />
     <Compile Include="Controllers\SystemMaintenanceNotificationController.cs" />
     <Compile Include="Controllers\VideoUploadController.cs" />
@@ -197,10 +210,12 @@
     </Compile>
     <Compile Include="Helpers\AccountGroupBaseArticlePermissionHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\PredicateBuilder.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountAccessRightsContentPage.cs" />
     <Compile Include="Models\AccountGroup.cs" />
+    <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BaseArticle.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlePublished.cs" />
@@ -604,7 +619,6 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\List.cshtml" />
     <Content Include="Views\Account\Expired.cshtml" />
-    <Content Include="Views\Account\ChangePasswordRequest.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
@@ -659,6 +673,7 @@
     <Content Include="Views\SystemMaintenanceNotification\CreateScheduled.cshtml" />
     <Content Include="Views\SystemMaintenanceNotification\Edit.cshtml" />
     <Content Include="Views\ArticleEditor\CreateWithViewModelForm.cshtml" />
+    <Content Include="Views\AuditLog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -667,7 +682,6 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Footer\" />
     <Folder Include="Views\SiteMap\" />
-    <Folder Include="Views\SystemAudit\" />
     <Folder Include="Views\SystemLog\" />
     <Folder Include="Views\VideoUpload\" />
   </ItemGroup>

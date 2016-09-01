@@ -130,6 +130,12 @@ namespace WebApplication2.Context
             account.ConfirmPassword = encPassword;
             account.LastPasswordModifiedAt = DateTime.UtcNow;
             account.historyPasswords = account.Password;
+
+            if (account.RoleList != null)
+            {
+                account.Role = String.Join(",", account.RoleList);
+            }
+
             getAccountDb().Add(account);
             db.SaveChanges();
         }

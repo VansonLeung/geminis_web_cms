@@ -17,6 +17,8 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Version)
         @Html.HiddenFor(model => model.BaseArticleID)
+        @Html.HiddenFor(model => model.Lang)
+
 
         @Html.DisplayFor(model => model.Name)
 

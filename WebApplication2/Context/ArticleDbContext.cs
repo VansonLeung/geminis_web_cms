@@ -377,6 +377,15 @@ namespace WebApplication2.Context
                 tryCloningNewLocaleArticleForNewArticleVersion(latestArticle, article);
             }
 
+            if (article.Version == 1)
+            {
+                AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_CREATE);
+            }
+            else
+            {
+                AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_CREATE_NEW_VERSION);
+            }
+
             return null;
         }
 
@@ -465,6 +474,8 @@ namespace WebApplication2.Context
             _article.Excerpt = article.Excerpt;
             db.SaveChanges();
 
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_EDIT);
+
             return null;
         }
 
@@ -511,6 +522,9 @@ namespace WebApplication2.Context
             }
 
             db.SaveChanges();
+
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_EDIT_PROPERTIES);
+
             return null;
         }
 
@@ -539,6 +553,8 @@ namespace WebApplication2.Context
 
             getArticleDb().Remove(article);
             db.SaveChanges();
+
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_DELETE);
 
             return null;
         }
@@ -589,6 +605,8 @@ namespace WebApplication2.Context
 
             db.SaveChanges();
 
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_SUBMIT_FOR_APPROVAL);
+
             return null;
         }
 
@@ -603,16 +621,6 @@ namespace WebApplication2.Context
             if (_article == null)
             {
                 return "Item not found";
-            }
-            if (_article.isFrozen)
-            {
-                return "Item is frozen";
-            }
-
-            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
-            if (error != null)
-            {
-                return error;
             }
 
             db.Entry(_article).State = EntityState.Modified;
@@ -636,17 +644,13 @@ namespace WebApplication2.Context
 
             db.SaveChanges();
 
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_APPROVE);
+
             return null;
         }
 
         public String tryRequestUnapproval(Article article, bool allLocales)
         {
-            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(article);
-            if (error != null)
-            {
-                return error;
-            }
-
             var _article = findArticleByID(article.ArticleID);
             if (_article == null)
             {
@@ -673,6 +677,8 @@ namespace WebApplication2.Context
             }
 
             db.SaveChanges();
+
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_UNAPPROVE);
 
             return null;
         }
