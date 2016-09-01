@@ -12,20 +12,6 @@ namespace WebApplication2.Controllers
 {
     public class VideoUploadController : Controller
     {
-        // GET: FileUpload
-        public void UploadNow(HttpPostedFileWrapper upload)
-        {
-            if (upload != null)
-            {
-                string Filename = upload.FileName;
-                string[] FileNames = Filename.Split('\\');
-                string FileName = FileNames[FileNames.Length - 1];
-                string path = System.IO.Path.Combine(Server.MapPath("~" + Settings.Default.MS_VIDEO_UPLOAD_SRC), FileName);
-                upload.SaveAs(path);
-            }
-        }
-
-
         public ActionResult UploadPage()
         {
             return View();
@@ -43,10 +29,32 @@ namespace WebApplication2.Controllers
                 int fileSize = file.ContentLength;
                 string filePath = file.FileName;
                 string fileName = filePath.Split('\\').LastOrDefault();
+                string fileExtension = fileName.Split('.').LastOrDefault();
                 string mimeType = file.ContentType;
                 System.IO.Stream fileContent = file.InputStream;
                 //To save file, use SaveAs method
-                file.SaveAs(Server.MapPath("~" + Settings.Default.MS_VIDEO_UPLOAD_SRC) + fileName); //File will be saved in application root
+
+                if (!mimeType.Equals("video/mp4")
+                    || !fileExtension.Equals("mp4"))
+                {
+                    var ffmpeg = new NReco.VideoConverter.FFMpegConverter();
+
+                    var original_video_src = Server.MapPath("~" + Settings.Default.MS_VIDEO_UPLOAD_SRC) + "Orig_" + fileName;
+                    var converted_video_src = Server.MapPath("~" + Settings.Default.MS_VIDEO_UPLOAD_SRC) + fileName;
+
+                    file.SaveAs(original_video_src);
+                    ffmpeg.ConvertMedia(original_video_src, converted_video_src, "mp4");
+
+                    if (System.IO.File.Exists(original_video_src))
+                    {
+                        System.IO.File.Delete(original_video_src);
+                    }
+                }
+                else
+                {
+                    var converted_video_src = Server.MapPath("~" + Settings.Default.MS_VIDEO_UPLOAD_SRC) + fileName;
+                    file.SaveAs(converted_video_src);
+                }
             }
             return Json("Uploaded " + Request.Files.Count + " files");
         }
