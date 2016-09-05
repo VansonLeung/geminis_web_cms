@@ -24,13 +24,7 @@ namespace WebApplication2
                       "~/Scripts/moment.js",
                       "~/Scripts/bootstrap-datetimepicker.js",
                       "~/Scripts/respond.js"));
-
-            bundles.Add(new Bundle("~/bundles/ckeditor").Include(
-                        "~/Content/ckeditor/ckeditor.js",
-                        "~/Content/ckeditor/config.js",
-                        "~/Content/ckeditor/styles.js",
-                        "~/Content/ckeditor/adapters/jquery.js"));
-
+            
             bundles.Add(new Bundle("~/bundles/ckfinder").Include(
                         "~/Content/ckfinder/ckfinder.js",
                         "~/Content/ckfinder/config.js"));

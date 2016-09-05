@@ -14,7 +14,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    @Scripts.Render("~/bundles/ckeditor")
+    <script type="text/javascript" src="@Url.Content("~/Content/ckeditor/ckeditor.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/ckeditor/config.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/ckeditor/styles.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/ckeditor/adapters/jquery.js")"></script>
     @Scripts.Render("~/bundles/ckfinder")
 </head>
 <body style="padding-top:0px;">
