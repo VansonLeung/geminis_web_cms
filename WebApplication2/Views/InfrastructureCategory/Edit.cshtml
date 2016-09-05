@@ -69,16 +69,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.isClickable, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.isClickable)
-                    @Html.ValidationMessageFor(model => model.isClickable, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.isEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">

@@ -46,6 +46,8 @@ namespace WebApplication2.Context
                 .FirstOrDefault())
                 .OrderByDescending(acc => acc.datePublished)
                 .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
         }

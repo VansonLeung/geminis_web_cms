@@ -55,6 +55,8 @@ namespace WebApplication2.Context
                 .FirstOrDefault())
                 .OrderByDescending(acc => acc.datePublished)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
             }
@@ -72,6 +74,8 @@ namespace WebApplication2.Context
                 .Where(acc => categories.Contains(acc.categoryID ?? 0))
                 .OrderByDescending(acc => acc.datePublished)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
             }
@@ -185,6 +189,13 @@ namespace WebApplication2.Context
 
             db.SaveChanges();
 
+            local = ArticleDbContext.getInstance().getArticleDb()
+                            .Local
+                            .FirstOrDefault(f => f.BaseArticleID == _article.BaseArticleID);
+            if (local != null)
+            {
+                db.Entry(local).State = EntityState.Detached;
+            }
 
             db.Entry(_article).State = EntityState.Modified;
             _article.isPublished = true;
@@ -231,7 +242,15 @@ namespace WebApplication2.Context
             }
 
             deletePublishedArticlesByBaseArticle(article);
-            
+
+            var local = ArticleDbContext.getInstance().getArticleDb()
+                            .Local
+                            .FirstOrDefault(f => f.BaseArticleID == _article.BaseArticleID);
+            if (local != null)
+            {
+                db.Entry(local).State = EntityState.Detached;
+            }
+
             db.Entry(_article).State = EntityState.Modified;
             _article.isPublished = false;
             _article.datePublished = null;

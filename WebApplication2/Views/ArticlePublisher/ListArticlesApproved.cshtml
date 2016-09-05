@@ -19,6 +19,15 @@
             @Html.DisplayNameFor(model => model.BaseArticleID)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.dateApproved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.approvalRemarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.approvedBy)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.isPublished)
         </th>
         <th>
@@ -44,6 +53,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BaseArticleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.approvalRemarks)
+            </td>
+            <td>
+                @if (item.approvedByAccount != null)
+                {
+                    @item.approvedByAccount.Username
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.isPublished)

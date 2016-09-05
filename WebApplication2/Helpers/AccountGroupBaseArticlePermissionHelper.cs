@@ -21,7 +21,12 @@ namespace WebApplication2.Helpers
 
                 if (account.Group != null)
                 {
-                    if (account.Group.getAccessibleCategoryList().Contains(string.Format("{0}", article.categoryID)))
+                    if (article.categoryID == null)
+                    {
+                        return true;
+                    }
+                    var categoryID = string.Format("{0}", article.categoryID);
+                    if (account.Group.getAccessibleCategoryList().Contains(categoryID))
                     {
                         return true;
                     }

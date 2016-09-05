@@ -11,7 +11,11 @@ namespace WebApplication2.Models
         {
             ArticlePublished a = new ArticlePublished();
             a.isApproved = article.isApproved;
+            a.isUnapproved = article.isUnapproved;
+            a.approvalRemarks = article.approvalRemarks;
+            a.approvedBy = article.approvedBy;
             a.dateApproved = article.dateApproved;
+            a.dateUnapproved = article.dateUnapproved;
             a.isPublished = article.isPublished;
             a.datePublished = article.datePublished;
             a.Version = article.Version;

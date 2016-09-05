@@ -9,6 +9,7 @@ using WebApplication2.Context;
 using WebApplication2.ViewModels;
 using System.Data.Entity;
 using System.Net;
+using WebApplication2.Helpers;
 
 namespace WebApplication2.Controllers
 {
@@ -126,13 +127,7 @@ namespace WebApplication2.Controllers
         }
 
 
-
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-
+        
 
         public ActionResult Logout()
         {
@@ -276,5 +271,37 @@ namespace WebApplication2.Controllers
             AccountDbContext.getInstance().tryDeleteAccount(item);
             return RedirectToAction("List");
         }
+
+
+
+
+
+
+
+        // FORGOT PASSWORD
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult ForgotPassword(string email)
+        {
+            var accounts = AccountDbContext.getInstance().findAccountsByEmail(email);
+            foreach (Account acc in accounts)
+            {
+                EmailHelper.SendEmailToSuperadminAccountsOnPasswordForget(acc);
+            }
+            return RedirectToAction("ForgotPasswordConfirm");
+        }
+
+
+        public ActionResult ForgotPasswordConfirm()
+        {
+            return View();
+        }
+
     }
 }

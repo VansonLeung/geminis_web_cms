@@ -23,7 +23,6 @@ namespace WebApplication2.Models.Infrastructure
         public string name_cn { get; set; }
         public string imagePath { get; set; }
 
-        public bool isClickable { get; set; }
         public bool isEnabled { get; set; }
 
         public bool isContentPage { get; set; }

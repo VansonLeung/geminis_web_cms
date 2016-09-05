@@ -86,6 +86,18 @@ namespace WebApplication2.Context
                 .FirstOrDefault();
         }
 
+        public List<Account> findAccountsByEmail(string email)
+        {
+            return getAccountDb().Where(acc => acc.Email == email)
+                .ToList();
+        }
+
+        public List<Account> findAccountsByRole(string role)
+        {
+            return getAccountDb().Where(acc => acc.Role.Contains(role))
+                .ToList();
+        }
+
         public Account tryLoginAccountByAccount(Account account)
         {
             var encPassword = account.MakeEncryptedPassword(account.Password);

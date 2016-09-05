@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Web;
@@ -83,6 +84,6 @@ public sealed class ExceptionUtility
         sw.Close();
         string str = sb.ToString();
 
-        EmailHelper.SendEmail("geministest1@gmail.com", str, "Geminis CMS Exception");
+        EmailHelper.SendEmail(new List<string> { "geministest1@gmail.com" }, str, "Geminis CMS Exception");
     }
 }

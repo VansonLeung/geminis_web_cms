@@ -89,20 +89,31 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin,publisher")]
         public ActionResult PublishArticle(Article article)
         {
-            var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, "en");
-            if (item == null)
+            if (ModelState.IsValid)
             {
-                return HttpNotFound();
-            }
-            var error = ArticlePublishedDbContext.getInstance().tryPublishArticle(item, true);
-            if (error != null)
-            {
-                ModelState.AddModelError("", error);
-                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
+                var datePublishStart = article.datePublishStart;
+                var datePublishEnd = article.datePublishEnd;
+                var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, "en");
+                if (item == null)
+                {
+                    return HttpNotFound();
+                }
+                item.datePublishStart = datePublishStart;
+                item.datePublishEnd = datePublishEnd;
+                var error = ArticlePublishedDbContext.getInstance().tryPublishArticle(item, true);
+                if (error != null)
+                {
+                    ModelState.AddModelError("", error);
+                    return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
+                }
+                else
+                {
+                    return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
+                }
             }
             else
             {
-                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
+                return View();
             }
         }
 

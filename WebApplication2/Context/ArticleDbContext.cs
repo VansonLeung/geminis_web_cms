@@ -46,7 +46,9 @@ namespace WebApplication2.Context
 
         public List<Article> findArticles()
         {
-            return (getArticleDb()).Include(acc => acc.createdByAccount).ToList();
+            return (getArticleDb()).Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount).ToList();
         }
 
         public List<Article> findArticlesGroupByBaseVersion(string lang = "en")
@@ -60,6 +62,8 @@ namespace WebApplication2.Context
                 .FirstOrDefault())
                 .OrderByDescending(acc => acc.modified_at)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
             }
@@ -77,6 +81,8 @@ namespace WebApplication2.Context
                 .Where(acc => categories.Contains(acc.categoryID ?? 0))
                 .OrderByDescending(acc => acc.modified_at)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
             }
@@ -99,6 +105,8 @@ namespace WebApplication2.Context
                 acc.isRequestingApproval == true && acc.Lang == "en")
                 .OrderByDescending(acc => acc.modified_at)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
             }
@@ -112,6 +120,8 @@ namespace WebApplication2.Context
                 && categories.Contains(acc.categoryID ?? 0))
                 .OrderByDescending(acc => acc.modified_at)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
             }
@@ -128,6 +138,8 @@ namespace WebApplication2.Context
                 .Where(acc => acc.isRequestingApproval == true)
                 .OrderByDescending(acc => acc.modified_at)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
         }
@@ -136,11 +148,13 @@ namespace WebApplication2.Context
         {
             return getArticleDb()
                 .GroupBy(acc => acc.BaseArticleID)
-                .Select(u => u.Where(acc => acc.Lang == lang).OrderByDescending(acc => acc.isPublished)
+                .Select(u => u.Where(acc => acc.Lang == lang && acc.isApproved == true).OrderByDescending(acc => acc.isPublished)
                 .FirstOrDefault())
                 .Where(acc => acc.isApproved == true)
                 .OrderByDescending(acc => acc.dateApproved)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
         }
@@ -160,6 +174,8 @@ namespace WebApplication2.Context
                 acc.Lang == lang)
                 .OrderByDescending(acc => acc.Version)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .FirstOrDefault();
             }
@@ -190,6 +206,8 @@ namespace WebApplication2.Context
             )
             .OrderByDescending(acc => acc.Version)
             .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
             .Include(acc => acc.category)
             .FirstOrDefault();
 
@@ -214,6 +232,8 @@ namespace WebApplication2.Context
             )
             .OrderByDescending(acc => acc.Version)
             .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
             .Include(acc => acc.category)
             .FirstOrDefault();
 
@@ -236,6 +256,8 @@ namespace WebApplication2.Context
             )
             .OrderByDescending(acc => acc.Version)
             .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
             .Include(acc => acc.category)
             .ToList();
 
@@ -253,6 +275,8 @@ namespace WebApplication2.Context
                 )
                 .OrderByDescending(acc => acc.Version)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
 
@@ -270,6 +294,8 @@ namespace WebApplication2.Context
                 )
                 .OrderByDescending(acc => acc.Version)
                 .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
                 .Include(acc => acc.category)
                 .ToList();
 
@@ -291,6 +317,8 @@ namespace WebApplication2.Context
             acc.Version == article.Version
             )
             .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
             .Include(acc => acc.category)
             .ToList();
 
@@ -341,7 +369,8 @@ namespace WebApplication2.Context
                 }
 
                 latestArticle = findLatestArticleByBaseArticle(article, null);
-                article.Version = latestArticle.Version + 1;
+                article = latestArticle.makeNewArticleByCloningContent();
+                article.Version = article.Version + 1;
             }
             else
             {
@@ -407,6 +436,12 @@ namespace WebApplication2.Context
 
         public String tryCreateNewLocaleArticle(Article article)
         {
+            var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(article);
+            if (error != null)
+            {
+                return error;
+            }
+
             if (article.BaseArticleID != 0)
             {
                 if (article.Version == 0)
@@ -414,7 +449,7 @@ namespace WebApplication2.Context
                     var latestArticle = findLatestArticleByBaseArticle(article, article.Lang);
                     article.Version = latestArticle.Version;
 
-                    var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(latestArticle);
+                    error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(latestArticle);
                     if (error != null)
                     {
                         return error;
@@ -623,10 +658,22 @@ namespace WebApplication2.Context
                 return "Item not found";
             }
 
+            if (_article.isApproved)
+            {
+                return "Item is already approved";
+            }
+
+            if (_article.isUnapproved)
+            {
+                return "item is already unapproved";
+            }
+
             db.Entry(_article).State = EntityState.Modified;
             _article.isApproved = true;
+            _article.isUnapproved = false;
             _article.isFrozen = true;
             _article.dateApproved = DateTime.UtcNow;
+            _article.approvalRemarks = article.approvalRemarks;
             _article.approvedBy = SessionPersister.account.AccountID;
 
             if (allLocales)
@@ -636,8 +683,10 @@ namespace WebApplication2.Context
                 {
                     db.Entry(_a).State = EntityState.Modified;
                     _a.isApproved = true;
+                    _a.isUnapproved = false;
                     _a.isFrozen = true;
                     _a.dateApproved = DateTime.UtcNow;
+                    _a.approvalRemarks = article.approvalRemarks;
                     _a.approvedBy = SessionPersister.account.AccountID;
                 }
             }
@@ -657,10 +706,23 @@ namespace WebApplication2.Context
                 return "Item not found";
             }
 
+            if (_article.isApproved)
+            {
+                return "Item is already approved";
+            }
+
+            if (_article.isUnapproved)
+            {
+                return "item is already unapproved";
+            }
+
             db.Entry(_article).State = EntityState.Modified;
             _article.isApproved = false;
+            _article.isUnapproved = true;
             _article.isFrozen = true;
             _article.dateApproved = null;
+            _article.dateUnapproved = DateTime.UtcNow;
+            _article.approvalRemarks = article.approvalRemarks;
             _article.approvedBy = SessionPersister.account.AccountID;
 
             if (allLocales)
@@ -670,8 +732,11 @@ namespace WebApplication2.Context
                 {
                     db.Entry(_a).State = EntityState.Modified;
                     _a.isApproved = false;
+                    _a.isUnapproved = true;
                     _a.isFrozen = true;
                     _a.dateApproved = null;
+                    _a.dateUnapproved = DateTime.UtcNow;
+                    _a.approvalRemarks = article.approvalRemarks;
                     _a.approvedBy = SessionPersister.account.AccountID;
                 }
             }

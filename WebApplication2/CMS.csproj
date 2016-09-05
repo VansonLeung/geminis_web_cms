@@ -712,6 +712,9 @@
     <Content Include="Views\ArticleEditor\CreateWithViewModelForm.cshtml" />
     <Content Include="Views\AuditLog\Index.cshtml" />
     <Content Include="Views\VideoUpload\UploadPage.cshtml" />
+    <Content Include="Views\ArticleApprover\ApproveArticle.cshtml" />
+    <Content Include="Views\ArticleApprover\UnapproveArticle.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

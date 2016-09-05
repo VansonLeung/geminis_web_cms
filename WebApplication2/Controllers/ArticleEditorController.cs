@@ -147,12 +147,13 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
+                article.Lang = null;
                 article.Version = 0;
                 ArticleDbContext.getInstance().tryCreateNewArticle(article);
                 ModelState.Clear();
                 ViewBag.Message = "New Version of " + article.Name + " with version: " + article.Version + " successfully created.";
             }
-            return RedirectToAction("UpsertLocale", new { baseArticleID = article.BaseArticleID, version = article.Version });
+            return RedirectToAction("UpsertLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
         }
 
 

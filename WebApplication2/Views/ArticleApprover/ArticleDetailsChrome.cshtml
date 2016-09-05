@@ -28,7 +28,11 @@
             {
                 return "current";
             }
-            else if (urlPart.Equals("ListArticleVersions"))
+            else if (urlPart.Equals("ApproveArticle"))
+            {
+                return "current";
+            }
+            else if (urlPart.Equals("UnapproveArticle"))
             {
                 return "current";
             }
@@ -43,16 +47,26 @@
         <li class=@CurrentTab("DetailsLocale", "zh")>@Html.ActionLink("zh", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
         <li class=@CurrentTab("DetailsLocale", "cn")>@Html.ActionLink("cn", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
         <li class=@CurrentTab("DetailsProperties")>@Html.ActionLink("Page Properties", "DetailsProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("ApproveArticle")>@Html.ActionLink("Approve", "ApproveArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("UnapproveArticle")>@Html.ActionLink("Unapprove", "UnapproveArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
     </ul>
 </div>
 
 @if (Model.isApproved)
 {
-    <div>Approved</div>
+    <h3>Approved</h3>
+    <p>
+        Remarks: @Model.approvalRemarks
+    </p>
 }
-
-@Html.ActionLink("Approve", "ApproveArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version }) |
-@Html.ActionLink("Unapprove", "UnapproveArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version }) | 
+else if (Model.isUnapproved)
+{
+    <h3>Unapproved</h3>
+    <p>
+        Remarks: @Model.approvalRemarks
+    </p>
+}
+<br />
 @Html.ActionLink("Back", "List")
 
 @RenderBody()

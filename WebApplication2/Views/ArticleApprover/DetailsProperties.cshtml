@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "DetailsProperties";
-    Layout = "~/Views/ArticleEditor/ArticleDetailsChrome.cshtml";
+    Layout = "~/Views/ArticleApprover/ArticleDetailsChrome.cshtml";
 }
 
 <h2>Properties</h2>
@@ -49,14 +49,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.isPublished)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isFrozen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isFrozen)
         </dd>
 
         <dt>

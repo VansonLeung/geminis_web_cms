@@ -11,7 +11,9 @@ namespace WebApplication2.Models
         {
             ContentPagePublished a = new ContentPagePublished();
             a.isApproved = article.isApproved;
+            a.isUnapproved = article.isUnapproved;
             a.dateApproved = article.dateApproved;
+            a.dateUnapproved = article.dateUnapproved;
             a.isPublished = article.isPublished;
             a.datePublished = article.datePublished;
             a.Version = article.Version;

@@ -5,16 +5,16 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
+using WebApplication2.Context;
 using WebApplication2.Models;
 
 namespace WebApplication2.Helpers
 {
     public class EmailHelper
     {
-        public static bool SendEmail(string emailTo, string mailbody, string subject)
+        public static bool SendEmail(List<string> emailTo, string mailbody, string subject)
         {
             var from = new MailAddress("geministest1@gmail.com");
-            var to = new MailAddress(emailTo);
 
             var useDefaultCredentials = false;
             var enableSsl = true;
@@ -31,8 +31,15 @@ namespace WebApplication2.Helpers
             int.TryParse("587", out port); //setup here the port 
             host = "smtp.gmail.com"; //setup here the host 
 
-            using (var mail = new MailMessage(from, to))
+            using (var mail = new MailMessage())
             {
+                mail.From = from;
+
+                foreach (string to in emailTo)
+                {
+                    mail.To.Add(to);
+                }
+
                 mail.Subject = subject;
                 mail.Body = mailbody;
                 mail.IsBodyHtml = true;
@@ -58,7 +65,18 @@ namespace WebApplication2.Helpers
 
         public static bool SendEmailToAccount(Account account, string mailbody, string subject)
         {
-            return SendEmail(account.Email, mailbody, subject);
+            return SendEmail(new List<string> { account.Email }, mailbody, subject);
+        }
+
+
+        public static bool SendEmailToAccounts(List<Account> accounts, string mailbody, string subject)
+        {
+            List<string> emails = new List<string>();
+            foreach (Account account in accounts)
+            {
+                emails.Add(account.Email);
+            }
+            return SendEmail(emails, mailbody, subject);
         }
 
 
@@ -79,11 +97,30 @@ namespace WebApplication2.Helpers
                 "[Geminis] Superadmin has reset your Geminis CMS login password"
             );
 
-            return SendEmail(account.Email, mailbody, subject);
+            return SendEmail(new List<string> { account.Email }, mailbody, subject);
         }
 
 
 
+
+        public static bool SendEmailToSuperadminAccountsOnPasswordForget(Account account)
+        {
+            var mailbody = string.Format(
+                "Dear Superadmins, <br/><br/>" +
+                "<p>Account: "+account.Username+" has requested a password reset.</p>" +
+                "<p>Login your superadmin account by clicking <a href='http://localhost:51042/Account/Login'>HERE</a></p>" +
+                "<p>Upon logging in, you can change "+account.Username+"'s password.</p>" +
+                "<p>Geminis CMS Team</p>"
+            );
+
+            var subject = string.Format(
+                "[Geminis] Account: " + account.Username + " has requested a password reset."
+            );
+
+            var superadmins = AccountDbContext.getInstance().findAccountsByRole("superadmin");
+
+            return SendEmailToAccounts(superadmins, mailbody, subject);
+        }
 
 
         public static bool SendEmailToAccountOnNewActivity(Account account, BaseArticle article, String action)

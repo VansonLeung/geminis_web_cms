@@ -51,11 +51,17 @@ namespace WebApplication2.Models
 
         public bool isApproved { get; set; }
 
+        public bool isUnapproved { get; set; }
+
+        public string approvalRemarks { get; set; }
+
         public bool isPublished { get; set; }
 
         public bool isFrozen { get; set; }
 
         public DateTime? dateApproved { get; set; }
+
+        public DateTime? dateUnapproved { get; set; }
 
         public DateTime? datePublished { get; set; }
 
