@@ -99,32 +99,7 @@ namespace WebApplication2.Migrations
                     }
                 );
             }
-
-            ContentPageDbContext.getInstance().tryCreateNewArticle(
-                new Models.ContentPage
-                {
-                    Name = "About Us",
-                    Url = "about_us",
-                    Slug = "about-us",
-                    Desc = "About Us Description",
-                    Excerpt = "About Us Summary",
-                    Keywords = "about,us",
-                },
-                "123123asd"
-            );
-
-            ContentPageDbContext.getInstance().tryCreateNewArticle(
-                new Models.ContentPage
-                {
-                    Name = "Contact Us",
-                    Url = "contact",
-                    Slug = "contact-us",
-                    Desc = "Contact Us Description",
-                    Excerpt = "Contact Us Summary",
-                    Keywords = "contact,us",
-                },
-                "123123asd"
-            );
+            
 
             //  This method will be called after migrating to the latest version.
 
