@@ -11,14 +11,14 @@ namespace WebApplication2.ViewModels
     public class AccountChangePasswordForm
     {
         [Display(Name = "oldpassword", ResourceType = typeof(Resource))]
-        [Required]
+        [Required( ErrorMessage = "Please enter old password") ]
         [AccountPasswordLengthValidation]
         [AccountPasswordLetterValidation]
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }
 
         [Display(Name = "newpassword", ResourceType = typeof(Resource))]
-        [Required]
+        [Required(ErrorMessage = "Please enter new password")]
         [AccountPasswordLengthValidation]
         [AccountPasswordLetterValidation]
         [DataType(DataType.Password)]
@@ -26,6 +26,7 @@ namespace WebApplication2.ViewModels
 
         [Display(Name = "confirmnewpassword", ResourceType = typeof(Resource))]
         [Compare("Password")]
+        [Required(ErrorMessage = "Please enter confirm new password")]
         [AccountPasswordLengthValidation]
         [AccountPasswordLetterValidation]
         [DataType(DataType.Password)]

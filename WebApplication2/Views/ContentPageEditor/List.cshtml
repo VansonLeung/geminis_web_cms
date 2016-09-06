@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ContentPages</h2>
+<h2>Content Pages</h2>
 
 <p>
-    @Html.ActionLink("Create New ContentPage", "Create")
+    @Html.ActionLink("Create New Content Page", "Create")
 </p>
 <table class="table">
     <tr>
@@ -55,7 +55,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-            @Html.ActionLink("View", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
+            @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })<br />
         </td>
     </tr>

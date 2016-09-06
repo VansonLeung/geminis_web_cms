@@ -23,6 +23,10 @@ namespace WebApplication2.Context
             }
             return instance;
         }
+        public static BaseDbContext newInstance()
+        {
+            return new BaseDbContext();
+        }
 
         // CMS Admin Accounts Table
         public DbSet<Account> accountDb { get; set; }

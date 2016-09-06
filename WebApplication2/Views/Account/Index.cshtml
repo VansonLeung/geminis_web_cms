@@ -1,7 +1,13 @@
-﻿
+﻿@using WebApplication2.Security
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Welcome to GSL CMS!</h2>
+
+@if (SessionPersister.account != null)
+{
+    <p>Last Login: @SessionPersister.account.LastLogin</p>
+}

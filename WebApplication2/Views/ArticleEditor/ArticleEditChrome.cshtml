@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Article</h4>
+<h4>Edit Article</h4>
 
 @functions
 {
@@ -39,16 +39,17 @@
 
 <div class="tabs-menu">
     <ul>
-        <li class=@CurrentTab("UpsertLocale", "en")>@Html.ActionLink("Edit en", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
-        <li class=@CurrentTab("UpsertLocale", "zh")>@Html.ActionLink("Edit zh", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
-        <li class=@CurrentTab("UpsertLocale", "cn")>@Html.ActionLink("Edit cn", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
-        <li class=@CurrentTab("EditProperties")>@Html.ActionLink("Edit Page Properties", "EditProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("UpsertLocale", "en")>@Html.ActionLink("EN", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("UpsertLocale", "zh")>@Html.ActionLink("ZH", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
+        <li class=@CurrentTab("UpsertLocale", "cn")>@Html.ActionLink("CN", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
+        <li class=@CurrentTab("EditProperties")>@Html.ActionLink("Page Properties", "EditProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
         <li class=@CurrentTab("SubmitForApproval")>@Html.ActionLink("Submit for Approval", "SubmitRequestForApproval", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
         <li class=@CurrentTab("ListArticleVersions")>@Html.ActionLink("List Versions", "ListArticleVersions", new { baseArticleID = Model.BaseArticleID })</li>
     </ul>
 </div>
 
-@Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = Model.BaseArticleID }) | 
-@Html.ActionLink("Back", "List")
-
 @RenderBody()
+
+@Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" }) |
+@Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = Model.BaseArticleID }) |
+@Html.ActionLink("Back", "List")

@@ -65,11 +65,15 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
+                item.isDefaultGroup = false;
                 AccountGroupDbContext.getInstance().create(item);
                 ModelState.Clear();
                 ViewBag.Message = item.Name + " successfully created.";
+                return RedirectToAction("List");
             }
-            return RedirectToAction("List");
+
+            ViewBag.AccessibleCategoryList = getAccessibleCategories();
+            return View();
         }
 
 

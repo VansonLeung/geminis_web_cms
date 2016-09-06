@@ -84,7 +84,7 @@
             @Html.DisplayFor(modelItem => item.modified_at)
         </td>
         <td>
-            @Html.ActionLink("View", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })
+            @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })
         </td>
     </tr>
 }

@@ -38,7 +38,6 @@ namespace WebApplication2.Controllers
         SelectList getAccountGroupsForSelect(int? selectedID = null)
         {
             var items = AccountGroupDbContext.getInstance().findGroups();
-            items.Insert(0, new AccountGroup { AccountGroupID = -1, Name = "" });
             return new SelectList(items, "AccountGroupID", "Name", selectedID);
         }
 
@@ -108,7 +107,7 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Wrong username / password combination");
+                ModelState.AddModelError("", "Login failed");
             }
             return View();
         }
@@ -289,6 +288,18 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(string email)
         {
+            if (email.Equals(""))
+            {
+                ModelState.AddModelError("", "Email field is required");
+                return View();
+            }
+
+            if (!new RegexUtilities().IsValidEmail(email))
+            {
+                ModelState.AddModelError("", "Please enter valid email");
+                return View();
+            }
+
             var accounts = AccountDbContext.getInstance().findAccountsByEmail(email);
             foreach (Account acc in accounts)
             {

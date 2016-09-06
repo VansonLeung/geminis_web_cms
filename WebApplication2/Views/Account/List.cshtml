@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>List</h2>
+<h2>Account List</h2>
+
+<li>@Html.ActionLink("Register New CMS Account", "Register", "Account")</li>
 
 <table class="table">
     <tr>
@@ -38,6 +40,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastLogin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginFails)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastPasswordModifiedAt)
@@ -85,6 +90,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastLogin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginFails)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastPasswordModifiedAt)

@@ -5,8 +5,6 @@
     Layout = "~/Views/ContentPageEditor/ContentPageDetailsChrome.cshtml";
 }
 
-<h2>Details</h2>
-
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -31,7 +29,7 @@
         </dt>
 
         <dd>
-            @Html.Raw(HttpUtility.HtmlDecode(Model.Desc));
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Desc))
         </dd>
 
         <dt>

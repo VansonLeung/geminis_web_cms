@@ -16,11 +16,19 @@ namespace WebApplication2.Models.Infrastructure
             return name_en;
         }
 
+        [Required]
         public string url { get; set; }
 
+
+        [Required]
         public string name_en { get; set; }
+
+        [Required]
         public string name_zh { get; set; }
+
+        [Required]
         public string name_cn { get; set; }
+
         public string imagePath { get; set; }
 
         public bool isEnabled { get; set; }
@@ -32,6 +40,7 @@ namespace WebApplication2.Models.Infrastructure
         public bool isVisibleToMembersOnly { get; set; }
         public bool isVisibleToTradingOnly { get; set; }
 
+        [Range(0, Int32.MaxValue, ErrorMessage = "Minimum value of order should be \"0\"")]
         public int order { get; set; }
     }
 }

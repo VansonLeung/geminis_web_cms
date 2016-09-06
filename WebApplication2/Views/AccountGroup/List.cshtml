@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>List</h2>
+<h2>Account Groups</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Group", "Create")
 </p>
 <table class="table">
     <tr>
@@ -30,9 +30,16 @@
             @item.getAccessibleCategoryListRepresentation()
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AccountGroupID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AccountGroupID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AccountGroupID })
+            @if (@item.isDefaultGroup)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.AccountGroupID })
+            }
+            else
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.AccountGroupID }) 
+                <br />
+                @Html.ActionLink("Delete", "Delete", new { id = item.AccountGroupID })
+            }
         </td>
     </tr>
 }

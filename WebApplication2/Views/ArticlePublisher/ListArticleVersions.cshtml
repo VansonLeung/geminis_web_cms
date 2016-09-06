@@ -99,7 +99,7 @@
             <td>
                 @if (item.isApproved)
                 {
-                    @Html.ActionLink("View", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })
+                    @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })
                 }
                 else
                 {

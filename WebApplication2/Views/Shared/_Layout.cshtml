@@ -1,11 +1,12 @@
 ﻿@using WebApplication2.Security
+@using WebApplication2.Context
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - GSL CMS</title>
+    <title>GSL CMS</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript">
@@ -36,13 +37,6 @@
 
                     @if (SessionPersister.account != null)
                     {
-                        <li>
-                            <a>@SessionPersister.account.Firstname @SessionPersister.account.Lastname (@SessionPersister.account.Role)</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Logout", "Account")">Logout</a>
-                        </li>
-
                         if (SessionPersister.account.Role.Contains("editor"))
                         {
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
@@ -50,6 +44,7 @@
                             <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
                             <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
                             <li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>
+                            <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
                         }
                         else if (SessionPersister.account.Role.Contains("approver"))
                         {
@@ -57,6 +52,7 @@
                             <li>@Html.ActionLink("My Account", "Me", "Account")</li>
                             <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
                             <li>@Html.ActionLink("Articles to Approve", "List", "ArticleApprover")</li>
+                            <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
                         }
                         else if (SessionPersister.account.Role.Contains("publisher"))
                         {
@@ -65,50 +61,64 @@
                             <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
                             <li>@Html.ActionLink("Available Articles", "ListArticlesApproved", "ArticlePublisher")</li>
                             <li>@Html.ActionLink("Published Articles", "ListArticlesPublished", "ArticlePublisher")</li>
+                            <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
                         }
                         else if (SessionPersister.account.Role.Contains("superadmin"))
                         {
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
-                            <li>@Html.ActionLink("Register New CMS Account", "Register", "Account")</li>
+                            <li>@Html.ActionLink("Register Account", "Register", "Account")</li>
                             <li>@Html.ActionLink("Account Groups", "List", "AccountGroup")</li>
                             <li>@Html.ActionLink("Account List", "List", "Account")</li>
                             <li>@Html.ActionLink("Categories", "List", "InfrastructureCategory")</li>
-                            <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Articles
+                                    <b class="caret"></b>
+
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
+                                        <li>@Html.ActionLink("Articles Pending for Approval", "List", "ArticleApprover")</li>
+                                        <li>@Html.ActionLink("Approved Articles", "ListArticlesApproved", "ArticlePublisher")</li>
+                                        <li>@Html.ActionLink("Published Articles", "ListArticlesPublished", "ArticlePublisher")</li>
+                                    </ul>
+                                </a>
+                            </li>
+                            <li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>
                             <li>@Html.ActionLink("Audit Log", "Index", "AuditLog")</li>
+                            <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
                         }
 
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Register New CMS Account", "Register", "Account")</li>
+                        if (!AccountDbContext.getInstance().isSuperadminExists())
+                        {
+                            <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                            <li>@Html.ActionLink("Register New CMS Account", "Register", "Account")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        }
                     }
+               </ul>
 
-              </ul>
+                <ul class="nav navbar-nav" style="float:right;">
+
+                    @if (SessionPersister.account != null)
+                    {
+                        <li>
+                            <a>@SessionPersister.account.Firstname @SessionPersister.account.Lastname (@SessionPersister.account.Role)</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Logout", "Account")">Logout</a>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
     <div class="body-content">
-            @if (SessionPersister.account != null)
-            {
-                <div>
-                    @if (SessionPersister.account.Role.Contains("superadmin"))
-                {
-                        <span>Articles - </span>
-                        <span>@Html.ActionLink("Articles", "List", "ArticleEditor")</span>
-                        <span>@Html.ActionLink("Articles Pending for Approval", "List", "ArticleApprover")</span>
-                        <span>@Html.ActionLink("Approved Articles", "ListArticlesApproved", "ArticlePublisher")</span>
-                        <span>@Html.ActionLink("Published Articles", "ListArticlesPublished", "ArticlePublisher")</span>
-                    }
-                </div>
-                <div>
-                    @if (SessionPersister.account.Role.Contains("superadmin"))
-                {
-                        <span>Content Pages - </span>
-                        <span>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</span>
-                    }
-                </div>
-            }
         @RenderBody()
         <hr />
         <footer>

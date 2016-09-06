@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>ContentPage</h4>
+<h4>Edit Content Page</h4>
 
 @functions
 {
@@ -35,13 +35,14 @@
 
 <div class="tabs-menu">
     <ul>
-        <li class=@CurrentTab("UpsertLocale", "en")>@Html.ActionLink("Edit en", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
-        <li class=@CurrentTab("UpsertLocale", "zh")>@Html.ActionLink("Edit zh", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
-        <li class=@CurrentTab("UpsertLocale", "cn")>@Html.ActionLink("Edit cn", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
-        <li class=@CurrentTab("EditProperties")>@Html.ActionLink("Edit Page Properties", "EditProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("UpsertLocale", "en")>@Html.ActionLink("EN", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("UpsertLocale", "zh")>@Html.ActionLink("ZH", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
+        <li class=@CurrentTab("UpsertLocale", "cn")>@Html.ActionLink("CN", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
+        <li class=@CurrentTab("EditProperties")>@Html.ActionLink("Page Properties", "EditProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
     </ul>
 </div>
 
-@Html.ActionLink("Back", "List")
-
 @RenderBody()
+
+@Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" }) |
+@Html.ActionLink("Back", "List")

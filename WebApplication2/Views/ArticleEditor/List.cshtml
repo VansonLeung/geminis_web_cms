@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Articles</h2>
+<h2>Article List</h2>
 
 <p>
     @Html.ActionLink("Create New Article", "CreateWithViewModelForm")
@@ -94,7 +94,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-            @Html.ActionLink("View", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
+            @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })<br />
             @Html.ActionLink("Version History", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })<br />
             @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = item.BaseArticleID })

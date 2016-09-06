@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Article</h2>
+<h2>Article Details</h2>
 
 @functions
 {
@@ -39,9 +39,9 @@
 
 <div class="tabs-menu">
     <ul>
-        <li class=@CurrentTab("DetailsLocale", "en")>@Html.ActionLink("en", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
-        <li class=@CurrentTab("DetailsLocale", "zh")>@Html.ActionLink("zh", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
-        <li class=@CurrentTab("DetailsLocale", "cn")>@Html.ActionLink("cn", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
+        <li class=@CurrentTab("DetailsLocale", "en")>@Html.ActionLink("EN", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("DetailsLocale", "zh")>@Html.ActionLink("ZH", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
+        <li class=@CurrentTab("DetailsLocale", "cn")>@Html.ActionLink("CN", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
         <li class=@CurrentTab("DetailsProperties")>@Html.ActionLink("Page Properties", "DetailsProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
     </ul>
 </div>

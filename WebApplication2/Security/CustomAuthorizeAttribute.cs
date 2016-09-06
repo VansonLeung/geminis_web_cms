@@ -84,6 +84,23 @@ namespace WebApplication2.Security
                     return;
                 }
             }
+
+
+
+            // If loggedin , stop going to log in page
+
+            if (account != null)
+            {
+                if ((filterContext.Controller is AccountController)
+                    && (
+                    filterContext.ActionDescriptor.ActionName == "Login"
+                    ))
+                {
+                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "Index" }));
+                    return;
+                }
+            }
+
         }
     }
 }

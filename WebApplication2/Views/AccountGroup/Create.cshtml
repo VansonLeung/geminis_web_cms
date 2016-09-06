@@ -5,14 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Create Account Group</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>AccountGroup</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -39,5 +38,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "List")
+    @Html.ActionLink("Back to Account Group", "List")
 </div>

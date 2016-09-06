@@ -13,7 +13,11 @@ namespace WebApplication2.Models
     {
         [Key]
         public int AccountGroupID { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        public bool isDefaultGroup { get; set; }
 
         public string AccessibleCategories { get; set; }
         public List<string> AccessibleCategoryList { get; set; }

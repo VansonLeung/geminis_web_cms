@@ -62,6 +62,11 @@ namespace WebApplication2.Controllers
                 ModelState.Clear();
                 ViewBag.Message = item.GetName() + " successfully created.";
             }
+            else
+            {
+                ViewBag.parentItemID = getParentItemsForSelect();
+                return View();
+            }
             if (item.parentItemID == null)
             {
                 return RedirectToAction("List");

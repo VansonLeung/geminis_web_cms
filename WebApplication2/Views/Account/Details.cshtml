@@ -1,14 +1,14 @@
-﻿@model WebApplication2.Models.Account
+﻿@using WebApplication2.Security
+@model WebApplication2.Models.Account
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Account Details</h2>
 
 <div>
-    <h4>Account</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -95,6 +95,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.LoginFails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginFails)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.LastPasswordModifiedAt)
         </dt>
 
@@ -129,6 +137,11 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AccountID }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+    {
+        @Html.ActionLink("Edit Account", "Edit", new { id = Model.AccountID })
+    }
+    &nbsp;    &nbsp; 
+    @Html.ActionLink("Back to Account List", "List")
 </p>

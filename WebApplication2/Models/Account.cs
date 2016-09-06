@@ -27,6 +27,7 @@ namespace WebApplication2.Models
 
         [Display(Name = "email", ResourceType = typeof(Resource))]
         [Required]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
 
         [Display(Name = "firstname", ResourceType = typeof(Resource))]
@@ -46,6 +47,7 @@ namespace WebApplication2.Models
 
         [Display(Name = "confirmpassword", ResourceType = typeof(Resource))]
         [Compare("Password")]
+        [Required]
         [AccountPasswordLengthValidation]
         [AccountPasswordLetterValidation]
         [DataType(DataType.Password)]

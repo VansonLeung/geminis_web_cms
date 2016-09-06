@@ -240,6 +240,7 @@
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Helpers\PredicateBuilder.cs" />
+    <Compile Include="Helpers\RegexUtilities.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountAccessRightsContentPage.cs" />

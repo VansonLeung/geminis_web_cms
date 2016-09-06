@@ -23,6 +23,7 @@ namespace WebApplication2.Migrations
                     new Models.AccountGroup
                     {
                         Name = "Default Group",
+                        isDefaultGroup = true,
                     }
                 );
             }

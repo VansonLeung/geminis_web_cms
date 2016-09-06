@@ -79,7 +79,7 @@
                 @Html.DisplayFor(modelItem => item.modified_at)
             </td>
             <td>
-                @Html.ActionLink("View", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })
+                @Html.ActionLink("Details", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })
             </td>
         </tr>
     }
