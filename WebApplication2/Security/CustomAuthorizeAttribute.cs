@@ -12,11 +12,35 @@ namespace WebApplication2.Security
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
+            // If loggedin , stop going to log in page
+            if (SessionPersister.account != null)
+            {
+                if ((filterContext.Controller is AccountController)
+                    && (
+                    filterContext.ActionDescriptor.ActionName == "Login"
+                    ))
+                {
+                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "Index" }));
+                    return;
+                }
+            }
+
             // Not logged in check
             if (SessionPersister.account == null)
             {
-                filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "Login" }));
-                return;
+                if (!(filterContext.Controller is AccountController)
+                    || (
+                    filterContext.ActionDescriptor.ActionName != "Login"
+                    ))
+                {
+                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "Login" }));
+                    return;
+                }
+                else
+                {
+                    SessionPersister.removeSession();
+                    return;
+                }
             }
 
 
@@ -34,7 +58,9 @@ namespace WebApplication2.Security
                 }
             }
 
-            if (isLastActivityExpired)
+            if (SessionPersister.account == null)
+            {
+                if (isLastActivityExpired)
             {
                 SessionPersister.removeSession();
                 filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "Expired" }));
@@ -43,6 +69,7 @@ namespace WebApplication2.Security
             else
             {
                 SessionPersister.refresh_account_last_activity();
+            }
             }
 
 
@@ -81,22 +108,6 @@ namespace WebApplication2.Security
                     ))
                 {
                     filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "ChangePassword" }));
-                    return;
-                }
-            }
-
-
-
-            // If loggedin , stop going to log in page
-
-            if (account != null)
-            {
-                if ((filterContext.Controller is AccountController)
-                    && (
-                    filterContext.ActionDescriptor.ActionName == "Login"
-                    ))
-                {
-                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { controller = "Account", action = "Index" }));
                     return;
                 }
             }

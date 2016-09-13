@@ -12,11 +12,11 @@
     <div class="form-horizontal">
         @if (Model.isRequestingApproval)
         {
-            <h4>Already Submitted for Approval</h4>
+            <h2>Already Submitted for Approval</h2>
         }
         else
         {
-            <h4>Submit Request for Approval?</h4>
+            <h2>Submit Request for Approval?</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.ArticleID)
@@ -31,8 +31,7 @@
             </div>
         }
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a href='javascript:history.go(-1)'>Back</a>
+            <a href='javascript:history.go(-1)'>Back to Article Details</a>
         </div>
     </div>
 }

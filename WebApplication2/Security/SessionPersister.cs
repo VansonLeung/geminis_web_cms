@@ -53,7 +53,7 @@ namespace WebApplication2.Security
         public static void removeSession()
         {
             account = null;
-
+            account_last_activity = null;
         }
 
         public static Account account

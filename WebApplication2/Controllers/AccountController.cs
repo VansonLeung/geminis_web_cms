@@ -109,8 +109,13 @@ namespace WebApplication2.Controllers
         }
 
 
+        [CustomAuthorize()]
         public ActionResult Login()
         {
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View();
         }
 
@@ -267,7 +272,7 @@ namespace WebApplication2.Controllers
                 else
                 {
                     ViewBag.Message = "Edit '" + item.Username + "' successfully";
-                    return RedirectToAction("Details", new { id = item.AccountID });
+                    return View(item);
                 }
             }
             ViewBag.GroupID = getAccountGroupsForSelect(item.GroupID);

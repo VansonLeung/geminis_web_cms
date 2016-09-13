@@ -8,6 +8,9 @@
 @if (ViewBag.subcategory != null)
 {
     <h2>@ViewBag.subcategory.name_en - Sub-Categories</h2>
+    <p>
+        @Html.ActionLink("Create New Category", "Create")
+    </p>
 }
 else
 {
@@ -129,3 +132,10 @@ else
 }
 
 </table>
+
+@if (ViewBag.subcategory != null)
+{
+    <p>
+        @Html.ActionLink("Back to Categories", "List")
+    </p>
+}

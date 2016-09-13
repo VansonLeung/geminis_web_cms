@@ -28,9 +28,6 @@
             @Html.DisplayNameFor(model => model.approvalRemarks)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.approvedBy)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.dateApproved)
         </th>
         <th>
@@ -80,12 +77,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.approvalRemarks)
-            </td>
-            <td>
-                @if (item.approvedByAccount != null)
-                {
-                    @item.approvedByAccount.Username
-                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dateApproved)

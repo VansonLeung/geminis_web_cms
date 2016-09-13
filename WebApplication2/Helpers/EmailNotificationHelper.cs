@@ -234,7 +234,7 @@ namespace WebApplication2.Helpers
                 item_url = "/ContentPageEditor/DetailsLocale?baseArticleID=" + baseArticle.BaseArticleID + "&version=" + baseArticle.Version + "&lang=" + baseArticle.Lang;
             }
 
-            item_url = HttpContext.Current.Request.Url.Host + item_url;
+            item_url = ServerHelper.GetSiteRoot() + item_url;
 
             var item_action_tag = "";
             var item_action_decription = "";

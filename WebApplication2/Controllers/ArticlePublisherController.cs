@@ -118,7 +118,8 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                return View();
+                var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, "en");
+                return View("DetailsProperties", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
             }
         }
 
