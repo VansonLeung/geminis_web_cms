@@ -272,6 +272,9 @@ namespace WebApplication2.Controllers
                 else
                 {
                     ViewBag.Message = "Edit '" + item.Username + "' successfully";
+                    ViewBag.GroupID = getAccountGroupsForSelect(item.GroupID);
+                    ViewBag.RoleList = getRoleList(item.Role);
+                    ViewBag.EmailNotifications = getEmailNotificationsForSelect(item.EmailNotifications);
                     return View(item);
                 }
             }

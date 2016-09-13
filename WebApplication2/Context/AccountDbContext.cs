@@ -260,7 +260,7 @@ namespace WebApplication2.Context
             {
                 account.Role = String.Join(",", account.RoleList);
             }
-            else
+            else if (account.Role == null)
             {
                 account.Role = "";
             }
