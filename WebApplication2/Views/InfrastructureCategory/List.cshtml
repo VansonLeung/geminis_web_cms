@@ -5,11 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Categories</h2>
+@if (ViewBag.subcategory != null)
+{
+    <h2>@ViewBag.subcategory.name_en - Sub-Categories</h2>
+}
+else
+{
+    <h2>Categories</h2>
+    <p>
+        @Html.ActionLink("Create New Category", "Create")
+    </p>
+}
 
-<p>
-    @Html.ActionLink("Create New Category", "Create")
-</p>
 <table class="table">
     <tr>
         <th>

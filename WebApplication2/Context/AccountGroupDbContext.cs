@@ -50,6 +50,13 @@ namespace WebApplication2.Context
                 .FirstOrDefault();
         }
 
+        public List<AccountGroup> findGroupsByNameNoTracking(string name)
+        {
+            return getItemDb().AsNoTracking()
+                .Where(acc => acc.Name == name)
+                .ToList();
+        }
+
         public bool isDefaultGroupExists()
         {
             return getItemDb().Where(acc => acc.Name == "Default Group").Count() > 0;
@@ -61,15 +68,25 @@ namespace WebApplication2.Context
         }
 
 
-        public AccountGroup create(AccountGroup item)
+        public string create(AccountGroup item)
         {
+            var result = AccountGroupDbContext.getInstance().findGroupsByNameNoTracking(item.Name);
+            if (result != null && result.Count > 0)
+            {
+                return "This category name is already used by other account. Please enter another category name.";
+            }
+
             getItemDb().Add(item);
             db.SaveChanges();
-            return item;
+            return null;
         }
 
         public string edit(AccountGroup item)
         {
+            var accountGroup = findGroupByID(item.AccountGroupID);
+            item.AccessibleCategories = String.Join(",", item.getAccessibleCategoryList().ToArray());
+            accountGroup.AccessibleCategories = item.AccessibleCategories;
+
             var local = getItemDb()
                             .Local
                             .FirstOrDefault(f => f.AccountGroupID == item.AccountGroupID);
@@ -78,9 +95,7 @@ namespace WebApplication2.Context
                 db.Entry(local).State = EntityState.Detached;
             }
 
-            db.Entry(item).State = EntityState.Modified;
-
-            item.AccessibleCategories = String.Join(",", item.getAccessibleCategoryList().ToArray());
+            db.Entry(accountGroup).State = EntityState.Modified;
 
             db.SaveChanges();
             return null;

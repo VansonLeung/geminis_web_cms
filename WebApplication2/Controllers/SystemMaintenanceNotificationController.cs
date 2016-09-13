@@ -18,6 +18,12 @@ namespace WebApplication2.Controllers
         public ActionResult Index()
         {
             var items = SystemMaintenanceNotificationDbContext.getInstance().findAllNotifications();
+
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+
             return View(items);
         }
 
@@ -44,7 +50,7 @@ namespace WebApplication2.Controllers
                 else
                 {
                     ModelState.Clear();
-                    ViewBag.Message = "New notification successfully scheduled.";
+                    TempData["Message"] = "New notification successfully scheduled.";
                     return RedirectToAction("Index");
                 }
             }

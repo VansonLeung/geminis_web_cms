@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Edit Article</h4>
+<h2>Edit Article</h2>
 
 @functions
 {
@@ -43,8 +43,6 @@
         <li class=@CurrentTab("UpsertLocale", "zh")>@Html.ActionLink("ZH", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
         <li class=@CurrentTab("UpsertLocale", "cn")>@Html.ActionLink("CN", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
         <li class=@CurrentTab("EditProperties")>@Html.ActionLink("Page Properties", "EditProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
-        <li class=@CurrentTab("SubmitForApproval")>@Html.ActionLink("Submit for Approval", "SubmitRequestForApproval", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
-        <li class=@CurrentTab("ListArticleVersions")>@Html.ActionLink("List Versions", "ListArticleVersions", new { baseArticleID = Model.BaseArticleID })</li>
     </ul>
 </div>
 
@@ -52,4 +50,4 @@
 
 @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" }) |
 @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = Model.BaseArticleID }) |
-@Html.ActionLink("Back", "List")
+@Html.ActionLink("Back to Articles", "List")

@@ -42,6 +42,15 @@
         <th>
             @Html.DisplayNameFor(model => model.modified_at)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createdBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.approvedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.publishedBy)
+        </th>
         <th></th>
     </tr>
 
@@ -85,9 +94,28 @@
                 @Html.DisplayFor(modelItem => item.modified_at)
             </td>
             <td>
-                @Html.ActionLink("Details", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })
+                @if (item.createdByAccount != null)
+                {
+                    @item.createdByAccount.Username
+                }
+            </td>
+            <td>
+                @if (item.approvedByAccount != null)
+                {
+                    @item.approvedByAccount.Username
+                }
+            </td>
+            <td>
+                @if (item.publishedByAccount != null)
+                {
+                    @item.publishedByAccount.Username
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })
             </td>
         </tr>
     }
+
 
 </table>

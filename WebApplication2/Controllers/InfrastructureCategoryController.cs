@@ -30,6 +30,25 @@ namespace WebApplication2.Controllers
         [CustomAuthorize]
         public ActionResult List(int? parentItemID = null)
         {
+            if (parentItemID != null)
+            {
+                var rootItem = InfrastructureCategoryDbContext.getInstance().findCategoryByID(parentItemID);
+                if (rootItem != null)
+                {
+                    ViewBag.subcategory = rootItem;
+                }
+            }
+
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+            
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            }
+
             var items = InfrastructureCategoryDbContext.getInstance().findCategorysByParentID(parentItemID);
             return View(items);
         }
@@ -67,6 +86,7 @@ namespace WebApplication2.Controllers
                 ViewBag.parentItemID = getParentItemsForSelect();
                 return View();
             }
+            TempData["Message"] = "'" + item.GetName() + "' successfully created.";
             if (item.parentItemID == null)
             {
                 return RedirectToAction("List");
@@ -112,6 +132,7 @@ namespace WebApplication2.Controllers
             }
             else
             {
+                ViewBag.Message = "Edit '" + item.GetName() + "' successfully";
                 ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
                 return View(item);
             }
@@ -144,8 +165,17 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
+            var name = item.GetName();
             var parentItemID = item.parentItemID;
-            InfrastructureCategoryDbContext.getInstance().delete(item, true);
+            var error = InfrastructureCategoryDbContext.getInstance().delete(item, true);
+            if (error != null)
+            {
+                TempData["ErrorMessage"] = error;
+            }
+            else
+            {
+                TempData["Message"] = "'" + name + "' Deleted";
+            }
             return RedirectToAction("List", new { parentItemID = parentItemID });
         }
 

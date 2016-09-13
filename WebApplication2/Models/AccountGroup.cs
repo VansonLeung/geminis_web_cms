@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebApplication2.Attributes;
 using WebApplication2.Context;
 using WebApplication2.Helpers;
 using WebApplication2.Models.Infrastructure;
@@ -42,7 +43,11 @@ namespace WebApplication2.Models
                 if (!str.Equals(""))
                 {
                     int id = Convert.ToInt32(str);
-                    listInt.Add(id);
+                    var item = InfrastructureCategoryDbContext.getInstance().findCategoryByID(id);
+                    if (item != null)
+                    {
+                        listInt.Add(id);
+                    }
                 }
             }
             return listInt;
@@ -57,7 +62,10 @@ namespace WebApplication2.Models
                 {
                     int _id = Convert.ToInt32(id);
                     var item = InfrastructureCategoryDbContext.getInstance().findCategoryByID(_id);
-                    items.Add(item);
+                    if (item != null)
+                    {
+                        items.Add(item);
+                    }
                 }
                 catch (Exception e)
                 {

@@ -8,7 +8,7 @@
 <h2>Content Pages</h2>
 
 <p>
-    @Html.ActionLink("Create New Content Page", "Create")
+    @Html.ActionLink("Create New Content Page", "CreateWithViewModelForm")
 </p>
 <table class="table">
     <tr>
@@ -19,16 +19,13 @@
             @Html.DisplayNameFor(model => model.Url)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.createdBy)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.created_at)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.modified_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.createdBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.createdByAccount.Username)
         </th>
         <th></th>
     </tr>
@@ -42,16 +39,16 @@
             @Html.DisplayFor(modelItem => item.Url)
         </td>
         <td>
+            @if (item.createdByAccount != null)
+            {
+                @item.createdByAccount.Username
+            }
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.created_at)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.modified_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.createdBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.createdByAccount.Username)
         </td>
         <td>
             @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |

@@ -58,6 +58,10 @@ namespace WebApplication2.Controllers
             {
                 // if locale exists, treat as edit form
             }
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(item);
         }
 
@@ -108,6 +112,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    TempData["Message"] = "'" + item.Name + "' Published";
                     return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
                 }
             }
@@ -133,6 +138,7 @@ namespace WebApplication2.Controllers
             }
             else
             {
+                TempData["Message"] = "'" + item.Name + "' Unpublished";
                 return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
             }
         }

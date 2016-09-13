@@ -19,6 +19,10 @@ namespace WebApplication2.Models.Infrastructure
         [Required]
         public string url { get; set; }
 
+        public string getUrl()
+        {
+            return "/" + url;
+        }
 
         [Required]
         public string name_en { get; set; }

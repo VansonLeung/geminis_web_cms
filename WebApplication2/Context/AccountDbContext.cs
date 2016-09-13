@@ -64,6 +64,8 @@ namespace WebApplication2.Context
 
 
 
+        #region "query"
+
 
         public List<Account> findAccounts()
         {
@@ -92,11 +94,71 @@ namespace WebApplication2.Context
                 .ToList();
         }
 
+        public Account findAccountByAccountUsernameNoTracking(Account account)
+        {
+            return getAccountDb().AsNoTracking().Where(acc => acc.Username == account.Username)
+                .Include(acc => acc.Group)
+                .FirstOrDefault();
+        }
+
+        public List<Account> findAccountsByEmailNoTracking(string email)
+        {
+            return getAccountDb().AsNoTracking().Where(acc => acc.Email == email)
+                .ToList();
+        }
+
         public List<Account> findAccountsByRole(string role)
         {
             return getAccountDb().Where(acc => acc.Role.Contains(role))
                 .ToList();
         }
+
+        public List<Account> findAccountsByAccountGroupsToEmailNotify(List<AccountGroup> accountGroups, BaseArticle baseArticle)
+        {
+            List<int> accountGroupIDs = new List<int>();
+            foreach (var group in accountGroups)
+            {
+                accountGroupIDs.Add(group.AccountGroupID);
+            }
+
+            int ownerAccountID = -1;
+
+            return getAccountDb().AsNoTracking().Where(acc => 
+            (
+                (
+                    (
+                        acc.EmailNotifications == 0 && accountGroupIDs.Contains(acc.GroupID ?? -2)
+                    ) 
+                    ||
+                    (
+                        acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.createdBy ?? -2)
+                    )
+                    ||
+                    (
+                        acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.approvedBy ?? -2)
+                    )
+                    ||
+                    (
+                        acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.publishedBy ?? -2)
+                    )
+                )
+                &&
+                (
+                    (
+                        acc.AccountID != ownerAccountID 
+                    )
+                    || 
+                    (
+                        acc.AccountID == ownerAccountID && !acc.EmailNotificationsNotNotifyOwnChangesToMySelf
+                    )
+                )
+            )).ToList();
+        }
+
+
+        #endregion "query"
+
+
 
         public Account tryLoginAccountByAccount(Account account)
         {
@@ -135,8 +197,59 @@ namespace WebApplication2.Context
             SessionPersister.removeSession();
         }
 
-        public void tryRegisterAccount(Account account)
+        public string tryCheckUsername(Account account)
         {
+            var acc = findAccountByAccountUsernameNoTracking(account);
+            if (acc != null && account.AccountID == 0)
+            {
+                return "Username is already used by other account. Please enter another username.";
+            }
+            if (account.AccountID != 0 && acc.AccountID != account.AccountID)
+            {
+                return "Username is already used by other account. Please enter another username.";
+            }
+
+            return null;
+        }
+
+        public string tryCheckEmail(Account account)
+        {
+            return null;
+
+            var acc = findAccountsByEmailNoTracking(account.Email);
+            if (acc != null && acc.Count > 0 && account.AccountID == 0)
+            {
+                return "Username is already used by other account. Please enter another username.";
+            }
+            if (account.AccountID != 0 && acc.Count > 0)
+            {
+                foreach (var a in acc)
+                {
+                    if (a.AccountID != account.AccountID)
+                    {
+                        return "Username is already used by other account. Please enter another username.";
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public string tryRegisterAccount(Account account)
+        {
+            var error = tryCheckUsername(account);
+            if (error != null)
+            {
+                return error;
+            }
+
+            error = tryCheckEmail(account);
+            if (error != null)
+            {
+                return error;
+            }
+
+            var rawPassword = account.Password;
             var encPassword = account.MakeEncryptedPassword(account.Password);
             account.Password = encPassword;
             account.ConfirmPassword = encPassword;
@@ -147,15 +260,39 @@ namespace WebApplication2.Context
             {
                 account.Role = String.Join(",", account.RoleList);
             }
+            else
+            {
+                account.Role = "";
+            }
+
+            account.NeedChangePassword = true;
+
+            EmailHelper.SendEmailToAccountOnPasswordReset(account, rawPassword);
 
             getAccountDb().Add(account);
             db.SaveChanges();
+
+            return null;
         }
 
         public string tryEdit(Account account)
         {
             string error = null;
             Account _account = findAccountByID(account.AccountID);
+
+            error = tryCheckUsername(_account);
+            if (error != null)
+            {
+                return error;
+            }
+
+            error = tryCheckEmail(_account);
+            if (error != null)
+            {
+                return error;
+            }
+
+
             if (_account.Password != account.Password)
             {
                 var rawPassword = account.Password;
@@ -169,7 +306,7 @@ namespace WebApplication2.Context
                     db.Entry(_account).State = EntityState.Modified;
                     _account.LoginFails = 0;
 
-                    if (!_account.Role.Contains("superadmin"))
+                    if (SessionPersister.account != null && _account.AccountID != SessionPersister.account.AccountID)
                     {
                         _account.NeedChangePassword = true;
 

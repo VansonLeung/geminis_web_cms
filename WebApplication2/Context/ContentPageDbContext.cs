@@ -92,6 +92,13 @@ namespace WebApplication2.Context
             return getArticleDb().Where(acc => acc.ArticleID == articleID).FirstOrDefault();
         }
 
+        public List<ContentPage> findArticlesByCategoryID(int categoryID)
+        {
+            return (getArticleDb().AsNoTracking().Where(acc => acc.categoryID == categoryID)).Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount).ToList();
+        }
+
 
         public List<ContentPage> findArticlesRequestingApproval()
         {
@@ -310,7 +317,7 @@ namespace WebApplication2.Context
         }
 
 
-        
+
 
 
 
@@ -319,7 +326,7 @@ namespace WebApplication2.Context
 
 
 
-        public String tryCreateNewArticle(ContentPage article, String supertoken = null)
+        public String tryCreateNewArticle(ContentPage article)
         {
             var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(article);
             if (error != null)
@@ -347,7 +354,9 @@ namespace WebApplication2.Context
                 }
 
                 latestArticle = findLatestArticleByBaseArticle(article, null);
-                article.Version = latestArticle.Version + 1;
+                article = latestArticle.makeNewContentPageByCloningContent();
+                article.Version = latestArticle.Version;
+                article.Version = article.Version + 1;
             }
             else
             {
@@ -361,17 +370,10 @@ namespace WebApplication2.Context
 
             if (articleWithSameVersionAndLangAlreadyPresents(article))
             {
-                return "ContentPage already presents";
+                return "Article already presents";
             }
 
-            if (supertoken != null && supertoken.Equals("123123asd"))
-            {
-                article.createdBy = 1;
-            }
-            else
-            {
-                article.createdBy = SessionPersister.account.AccountID;
-            }
+            article.createdBy = SessionPersister.account.AccountID;
             getArticleDb().Add(article);
             db.SaveChanges();
 
@@ -388,6 +390,15 @@ namespace WebApplication2.Context
             if (latestArticle != null && article != null)
             {
                 tryCloningNewLocaleArticleForNewArticleVersion(latestArticle, article);
+            }
+
+            if (article.Version == 1)
+            {
+                AuditLogDbContext.getInstance().createAuditLogContentPageAction(article, AuditLogDbContext.ACTION_CREATE);
+            }
+            else
+            {
+                AuditLogDbContext.getInstance().createAuditLogContentPageAction(article, AuditLogDbContext.ACTION_CREATE_NEW_VERSION);
             }
 
             return null;

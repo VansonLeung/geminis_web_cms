@@ -5,8 +5,6 @@
     Layout = "~/Views/ArticleApprover/ArticleDetailsChrome.cshtml";
 }
 
-<h2>Article Unapproval</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -15,11 +13,11 @@
 
         @if (Model.isApproved)
         {
-            <h4>Already Approved</h4>
+
         }
         else if (Model.isUnapproved)
         {
-            <h4>Already Unapproved</h4>
+
         }
         else
         {

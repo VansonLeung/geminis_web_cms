@@ -37,7 +37,7 @@
             else
             {
                 @Html.ActionLink("Edit", "Edit", new { id = item.AccountGroupID }) 
-                <br />
+                @(" | ")
                 @Html.ActionLink("Delete", "Delete", new { id = item.AccountGroupID })
             }
         </td>

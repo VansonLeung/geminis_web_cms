@@ -179,6 +179,16 @@ namespace WebApplication2.Context
                 .FirstOrDefault();
         }
 
+        public Category findCategoryByIDNoTracking(int? itemID)
+        {
+            if (itemID == null) return null;
+            return getItemDb()
+                .AsNoTracking()
+                .Where(item => item.ItemID == itemID)
+                .OrderBy(item => item.order)
+                .Include(item => item.parentItem)
+                .FirstOrDefault();
+        }
 
         public string create(Category category)
         {
@@ -209,6 +219,9 @@ namespace WebApplication2.Context
                 return "Parent Item ID should not be the same as its own item ID.";
             }
 
+            var _category = findCategoryByIDNoTracking(category.ItemID);
+            category.created_at = _category.created_at;
+
             var local = getItemDb()
                             .Local
                             .FirstOrDefault(f => f.ItemID == category.ItemID);
@@ -221,6 +234,7 @@ namespace WebApplication2.Context
             {
                 category.parentItemID = null;
             }
+
             db.Entry(category).State = EntityState.Modified;
             db.SaveChanges();
             return null;
@@ -228,6 +242,14 @@ namespace WebApplication2.Context
 
         public string delete(Category category, bool isRecursive)
         {
+            var articles = ArticleDbContext.getInstance().findArticlesByCategoryID(category.ItemID);
+            var contentPages = ContentPageDbContext.getInstance().findArticlesByCategoryID(category.ItemID);
+
+            if (articles.Count > 0 || contentPages.Count > 0)
+            {
+                return "Could not delete this category when it is linked with any article / content page.";
+            }
+
             if (isRecursive)
             {
                // var children = findCategorysByParentID(category.parentItemID);

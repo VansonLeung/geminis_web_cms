@@ -7,7 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
 using WebApplication2.Helpers;
+using WebApplication2.Security;
 
 namespace WebApplication2
 {
@@ -25,7 +27,11 @@ namespace WebApplication2
             configuration.AutomaticMigrationDataLossAllowed = true;
             var migrator = new DbMigrator(configuration);
             migrator.Update();
-            
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            SessionPersister.account = null;
         }
 
         void Application_Error(object sender, EventArgs e)

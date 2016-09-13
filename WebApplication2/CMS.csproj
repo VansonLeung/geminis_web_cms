@@ -237,6 +237,7 @@
     </Compile>
     <Compile Include="Helpers\AccountGroupBaseArticlePermissionHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\EmailNotificationHelper.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Helpers\PredicateBuilder.cs" />
@@ -272,7 +273,9 @@
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
     <Compile Include="Security\SessionPersister.cs" />
+    <Compile Include="ViewModels\ForgotPasswordForm.cs" />
     <Compile Include="ViewModels\AccountChangePasswordForm.cs" />
+    <Compile Include="ViewModels\ContentPageCreateForm.cs" />
     <Compile Include="ViewModels\ArticleCreateForm.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1314,6 +1317,12 @@
     <Content Include="Views\ArticleApprover\ApproveArticle.cshtml" />
     <Content Include="Views\ArticleApprover\UnapproveArticle.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirm.cshtml" />
+    <Content Include="Views\ContentPageEditor\CreateWithViewModelForm.cshtml" />
+    <Content Include="Views\Shared\_FormChangeHandler.cshtml" />
+    <Content Include="Views\ArticleEditor\_ArticleDetailsProperties.cshtml" />
+    <Content Include="Views\ArticleEditor\_ArticleDetailsLocale.cshtml" />
+    <Content Include="Views\ArticleEditor\_ArticleListForEditorListVersions.cshtml" />
+    <Content Include="Views\ArticleEditor\_ArticleListForEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -137,7 +137,7 @@ namespace WebApplication2.Context
 
         public string tryPublishArticle(Article article, bool allLocales)
         {
-            var _article = ArticleDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, "en");
+            var _article = article;
             if (_article == null)
             {
                 return "Item not found";
@@ -165,38 +165,6 @@ namespace WebApplication2.Context
             }
 
 
-
-            var allArticles = ArticleDbContext.getInstance().findArticlesGroupByBaseVersionApproved();
-            foreach (Article a in allArticles)
-            {
-                db.Entry(a).State = EntityState.Modified;
-                a.isPublished = false;
-                a.datePublished = null;
-                a.publishedBy = null;
-
-                if (allLocales)
-                {
-                    var _localeArticles = ArticleDbContext.getInstance().findAllLocaleArticlesByBaseArticleAndVersion(a, a.Lang);
-                    foreach (var _a in _localeArticles)
-                    {
-                        db.Entry(_a).State = EntityState.Modified;
-                        _a.isPublished = false;
-                        _a.datePublished = null;
-                        _a.publishedBy = null;
-                    }
-                }
-            }
-
-            db.SaveChanges();
-
-            local = ArticleDbContext.getInstance().getArticleDb()
-                            .Local
-                            .FirstOrDefault(f => f.BaseArticleID == _article.BaseArticleID);
-            if (local != null)
-            {
-                db.Entry(local).State = EntityState.Detached;
-            }
-
             db.Entry(_article).State = EntityState.Modified;
             _article.isPublished = true;
             _article.datePublished = DateTime.UtcNow;
@@ -218,14 +186,44 @@ namespace WebApplication2.Context
                 }
             }
 
+
+            var allArticles = ArticleDbContext.getInstance().findArticlesGroupByBaseVersionApproved(_article.BaseArticleID);
+            foreach (Article a in allArticles)
+            {
+                if (_article.ArticleID == a.ArticleID)
+                {
+                    continue;
+                }
+
+                db.Entry(a).State = EntityState.Modified;
+                a.isPublished = false;
+                a.datePublished = null;
+                a.publishedBy = null;
+
+                if (allLocales)
+                {
+                    var _localeArticles = ArticleDbContext.getInstance().findAllLocaleArticlesByBaseArticleAndVersion(a, a.Lang);
+                    foreach (var _a in _localeArticles)
+                    {
+                        db.Entry(_a).State = EntityState.Modified;
+                        _a.isPublished = false;
+                        _a.datePublished = null;
+                        _a.publishedBy = null;
+                    }
+                }
+            }
+
+
             db.SaveChanges();
+
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_PUBLISH);
 
             return null;
         }
 
         public string tryUnpublishArticle(Article article, bool allLocales)
         {
-            var _article = ArticleDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, article.Lang);
+            var _article = article;
             if (_article == null)
             {
                 return "Item not found";
@@ -269,6 +267,8 @@ namespace WebApplication2.Context
             }
 
             db.SaveChanges();
+
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_UNPUBLISH);
 
             return null;
         }

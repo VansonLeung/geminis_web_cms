@@ -30,6 +30,10 @@ namespace WebApplication2.Controllers
         public ActionResult List()
         {
             var items = ArticleDbContext.getInstance().findArticlesGroupByBaseVersion();
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(items);
         }
 
@@ -116,7 +120,7 @@ namespace WebApplication2.Controllers
                 ArticleDbContext.getInstance().tryCreateNewLocaleArticle(article_cn);
 
                 ModelState.Clear();
-                ViewBag.Message = article.Name + " successfully created.";
+                TempData["Message"] = "'" + article.Name + "' successfully created.";
                 return RedirectToAction("DetailsLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
             }
             else
@@ -149,11 +153,24 @@ namespace WebApplication2.Controllers
             {
                 article.Lang = null;
                 article.Version = 0;
-                ArticleDbContext.getInstance().tryCreateNewArticle(article);
-                ModelState.Clear();
-                ViewBag.Message = "New Version of " + article.Name + " with version: " + article.Version + " successfully created.";
+                var error = ArticleDbContext.getInstance().tryCreateNewArticle(article);
+                if (error == null)
+                {
+                    ModelState.Clear();
+                    var a = ArticleDbContext.getInstance().findLatestArticleByBaseArticle(article);
+                    TempData["Message"] = "New Version of '" + a.Name + "' with version: " + a.Version + " successfully created.";
+                    return RedirectToAction("DetailsLocale", new { baseArticleID = a.BaseArticleID, version = a.Version, lang = a.Lang });
+                }
+                else
+                {
+                    ModelState.AddModelError("", error);
+                    return View();
+                }
             }
-            return RedirectToAction("UpsertLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
+            else
+            {
+                return View();
+            }
         }
 
 
@@ -188,6 +205,11 @@ namespace WebApplication2.Controllers
             {
                 // if locale exists, treat as edit form
             }
+
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(item);
         }
         
@@ -217,6 +239,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    ViewBag.Message = "Edit '" + item.Name + "' successfully";
                     return View(item);
                 }
             }
@@ -270,6 +293,7 @@ namespace WebApplication2.Controllers
                 else
                 {
                     ViewBag.categoryID = getCategoriesForSelect(item.categoryID);
+                    ViewBag.Message = "Edit '" + item.Name + "' successfully";
                     return View(item);
                 }
             }
@@ -311,6 +335,11 @@ namespace WebApplication2.Controllers
             else
             {
                 // if locale exists, treat as edit form
+            }
+
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
             }
             return View(item);
         }
@@ -378,12 +407,14 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
+            var name = item.Name;
             var error = ArticleDbContext.getInstance().tryDeleteArticle(item);
             if (error != null)
             {
                 ModelState.AddModelError("", error);
                 return View(id);
             }
+            TempData["Message"] = "'" + name + "' Deleted";
             return RedirectToAction("List");
         }
 
@@ -424,6 +455,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    TempData["Message"] = "'" + item.Name + "' Submitted for Approval";
                     return RedirectToAction("UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = item.Lang });
                 }
             }

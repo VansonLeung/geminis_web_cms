@@ -53,6 +53,78 @@ namespace WebApplication2.Context
         public DbSet<AuditLog> auditLogDb { get; set; }
 
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ContentPage>()
+                .HasOptional(r => r.category)
+                .WithMany()
+                .HasForeignKey(r => r.categoryID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Article>()
+                .HasOptional(r => r.category)
+                .WithMany()
+                .HasForeignKey(r => r.categoryID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AuditLog>()
+                .HasOptional(r => r.account)
+                .WithMany()
+                .HasForeignKey(r => r.accountID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AuditLog>()
+                .HasOptional(r => r.article)
+                .WithMany()
+                .HasForeignKey(r => r.articleID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AuditLog>()
+                .HasOptional(r => r.contentPage)
+                .WithMany()
+                .HasForeignKey(r => r.contentPageID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AuditLog>()
+                .HasOptional(r => r.category)
+                .WithMany()
+                .HasForeignKey(r => r.categoryID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AccountAccessRightsContentPage>()
+                .HasOptional(r => r.Account)
+                .WithMany()
+                .HasForeignKey(r => r.AccountID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BaseArticle>()
+                .HasOptional(r => r.createdByAccount)
+                .WithMany()
+                .HasForeignKey(r => r.createdBy)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BaseArticle>()
+                .HasOptional(r => r.approvedByAccount)
+                .WithMany()
+                .HasForeignKey(r => r.approvedBy)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BaseArticle>()
+                .HasOptional(r => r.publishedByAccount)
+                .WithMany()
+                .HasForeignKey(r => r.publishedBy)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Category>()
+                .HasOptional(r => r.parentItem)
+                .WithMany()
+                .HasForeignKey(r => r.parentItemID)
+                .WillCascadeOnDelete(false);
+        }
+
+
         public override int SaveChanges()
         {
             AddTimeStamps();

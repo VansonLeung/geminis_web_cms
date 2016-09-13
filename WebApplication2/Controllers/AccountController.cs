@@ -41,6 +41,22 @@ namespace WebApplication2.Controllers
             return new SelectList(items, "AccountGroupID", "Name", selectedID);
         }
 
+        SelectList getEmailNotificationsForSelect(int? selectedID = null)
+        {
+            // 0 = notify all items' changes in my user group
+            // 1 = notify all items' changes created / approved / published by me
+            // 2 = don't notify
+            var items = new Dictionary<int, string>();
+            items.Add(0, Account.getEmailNotificationRepresentation(0));
+            items.Add(1, Account.getEmailNotificationRepresentation(1));
+            items.Add(2, Account.getEmailNotificationRepresentation(2));
+            return new SelectList(items.OrderBy(dict => dict.Value), "Key", "Value", selectedID);
+        }
+
+
+
+
+
         // GET: Account
         [CustomAuthorize()]
         public override ActionResult Index()
@@ -52,6 +68,10 @@ namespace WebApplication2.Controllers
         public ActionResult List()
         {
             var items = AccountDbContext.getInstance().findAccounts();
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(items);
         }
 
@@ -60,6 +80,7 @@ namespace WebApplication2.Controllers
         {
             ViewBag.GroupID = getAccountGroupsForSelect();
             ViewBag.RoleList = getRoleList();
+            ViewBag.EmailNotifications = getEmailNotificationsForSelect();
             return View();
         }
 
@@ -69,13 +90,21 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                AccountDbContext.getInstance().tryRegisterAccount(account);
-                ModelState.Clear();
-                ViewBag.Message = account.Firstname + " " + account.Lastname + " successfully registered.";
-                return RedirectToAction("List");
+                var error = AccountDbContext.getInstance().tryRegisterAccount(account);
+                if (error != null)
+                {
+                    ModelState.AddModelError("", error);
+                }
+                else
+                {
+                    ModelState.Clear();
+                    TempData["Message"] = account.Firstname + " " + account.Lastname + " successfully registered.";
+                    return RedirectToAction("List");
+                }
             }
             ViewBag.GroupID = getAccountGroupsForSelect();
             ViewBag.RoleList = getRoleList();
+            ViewBag.EmailNotifications = getEmailNotificationsForSelect();
             return View();
         }
 
@@ -187,6 +216,10 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(item);
         }
 
@@ -214,6 +247,7 @@ namespace WebApplication2.Controllers
             }
             ViewBag.GroupID = getAccountGroupsForSelect(item.GroupID);
             ViewBag.RoleList = getRoleList(item.Role);
+            ViewBag.EmailNotifications = getEmailNotificationsForSelect(item.EmailNotifications);
             return View(item);
         }
 
@@ -232,11 +266,13 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    ViewBag.Message = "Edit '" + item.Username + "' successfully";
                     return RedirectToAction("Details", new { id = item.AccountID });
                 }
             }
             ViewBag.GroupID = getAccountGroupsForSelect(item.GroupID);
             ViewBag.RoleList = getRoleList(item.Role);
+            ViewBag.EmailNotifications = getEmailNotificationsForSelect(item.EmailNotifications);
             return View(item);
         }
 
@@ -267,7 +303,9 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
+            var name = item.Username;
             AccountDbContext.getInstance().tryDeleteAccount(item);
+            TempData["Message"] = "Delete '" + name + "' successfully";
             return RedirectToAction("List");
         }
 
@@ -286,26 +324,18 @@ namespace WebApplication2.Controllers
 
 
         [HttpPost]
-        public ActionResult ForgotPassword(string email)
+        public ActionResult ForgotPassword(ForgotPasswordForm form)
         {
-            if (email.Equals(""))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Email field is required");
-                return View();
+                var accounts = AccountDbContext.getInstance().findAccountsByEmail(form.email);
+                foreach (Account acc in accounts)
+                {
+                    EmailHelper.SendEmailToSuperadminAccountsOnPasswordForget(acc);
+                }
+                return RedirectToAction("ForgotPasswordConfirm");
             }
-
-            if (!new RegexUtilities().IsValidEmail(email))
-            {
-                ModelState.AddModelError("", "Please enter valid email");
-                return View();
-            }
-
-            var accounts = AccountDbContext.getInstance().findAccountsByEmail(email);
-            foreach (Account acc in accounts)
-            {
-                EmailHelper.SendEmailToSuperadminAccountsOnPasswordForget(acc);
-            }
-            return RedirectToAction("ForgotPasswordConfirm");
+            return View();
         }
 
 

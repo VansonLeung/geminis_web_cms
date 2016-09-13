@@ -1,0 +1,41 @@
+﻿<script>
+var inputChanged = false;
+var formSubmitted = false;
+
+$('input, select, textarea').change(function () {
+    inputChanged = true;
+});
+
+if (CKEDITOR.instances.Desc) {
+    CKEDITOR.instances.Desc.on('change', function () {
+        inputChanged = true;
+    });
+}
+if (CKEDITOR.instances.Desc_en) {
+    CKEDITOR.instances.Desc_en.on('change', function () {
+        inputChanged = true;
+    });
+}
+if (CKEDITOR.instances.Desc_zh) {
+    CKEDITOR.instances.Desc_zh.on('change', function () {
+        inputChanged = true;
+    });
+}
+if (CKEDITOR.instances.Desc_cn) {
+    CKEDITOR.instances.Desc_cn.on('change', function () {
+        inputChanged = true;
+    });
+}
+
+$(document).ready(function () {
+    window.onbeforeunload = function () {
+        if (inputChanged && !formSubmitted) {
+            return "You have unsaved changes. Discard change?";
+        }
+    }
+});
+
+$("form").submit(function () {
+    formSubmitted = true;
+});
+</script>

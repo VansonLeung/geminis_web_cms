@@ -38,7 +38,7 @@ namespace WebApplication2.Context
 
         #endregion
 
-        
+
 
         // methods
 
@@ -47,6 +47,13 @@ namespace WebApplication2.Context
         public List<Article> findArticles()
         {
             return (getArticleDb()).Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount).ToList();
+        }
+
+        public List<Article> findArticlesByCategoryID(int categoryID)
+        {
+            return (getArticleDb().AsNoTracking().Where(acc => acc.categoryID == categoryID)).Include(acc => acc.createdByAccount)
                 .Include(acc => acc.approvedByAccount)
                 .Include(acc => acc.publishedByAccount).ToList();
         }
@@ -144,11 +151,25 @@ namespace WebApplication2.Context
                 .ToList();
         }
 
-        public List<Article> findArticlesGroupByBaseVersionApproved(string lang = "en")
+        public List<Article> findArticlesGroupByBaseVersionApproved(int baseArticleID = 0, string lang = "en")
         {
+            if (baseArticleID == 0)
+            {
+                return getArticleDb()
+                    .GroupBy(acc => acc.BaseArticleID)
+                    .Select(u => u.Where(acc => acc.Lang == lang && acc.isApproved == true).OrderByDescending(acc => acc.isPublished)
+                    .FirstOrDefault())
+                    .Where(acc => acc.isApproved == true)
+                    .OrderByDescending(acc => acc.dateApproved)
+                    .Include(acc => acc.createdByAccount)
+    .Include(acc => acc.approvedByAccount)
+    .Include(acc => acc.publishedByAccount)
+                    .Include(acc => acc.category)
+                    .ToList();
+            }
             return getArticleDb()
                 .GroupBy(acc => acc.BaseArticleID)
-                .Select(u => u.Where(acc => acc.Lang == lang && acc.isApproved == true).OrderByDescending(acc => acc.isPublished)
+                .Select(u => u.Where(acc => acc.Lang == lang && acc.isApproved == true && acc.BaseArticleID == baseArticleID).OrderByDescending(acc => acc.isPublished)
                 .FirstOrDefault())
                 .Where(acc => acc.isApproved == true)
                 .OrderByDescending(acc => acc.dateApproved)
@@ -370,6 +391,7 @@ namespace WebApplication2.Context
 
                 latestArticle = findLatestArticleByBaseArticle(article, null);
                 article = latestArticle.makeNewArticleByCloningContent();
+                article.Version = latestArticle.Version;
                 article.Version = article.Version + 1;
             }
             else

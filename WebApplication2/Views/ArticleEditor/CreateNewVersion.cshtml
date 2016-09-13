@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Are you sure to create a new version of this article?</h4>
+        <h2>Are you sure you want to create a new version of this Article?</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Version)
@@ -29,5 +29,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "List")
+    @Html.ActionLink("Back to Articles", "List")
 </div>

@@ -78,6 +78,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.EmailNotifications)
+        </dt>
+
+        <dd>
+            @Model.getEmailNotificationRepresentation()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailNotificationsNotNotifyOwnChangesToMySelf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailNotificationsNotNotifyOwnChangesToMySelf)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.isEnabled)
         </dt>
 

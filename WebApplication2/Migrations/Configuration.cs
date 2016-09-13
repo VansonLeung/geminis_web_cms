@@ -19,13 +19,15 @@ namespace WebApplication2.Migrations
             Models.AccountGroup accountGroup = null;
             if (!AccountGroupDbContext.getInstance().isDefaultGroupExists())
             {
-                accountGroup = AccountGroupDbContext.getInstance().create(
+                AccountGroupDbContext.getInstance().create(
                     new Models.AccountGroup
                     {
                         Name = "Default Group",
                         isDefaultGroup = true,
                     }
                 );
+
+                accountGroup = AccountGroupDbContext.getInstance().getDefaultGroup();
             }
             else
             {

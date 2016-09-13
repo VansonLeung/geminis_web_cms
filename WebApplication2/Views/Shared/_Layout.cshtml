@@ -37,7 +37,11 @@
 
                     @if (SessionPersister.account != null)
                     {
-                        if (SessionPersister.account.Role.Contains("editor"))
+                        if (SessionPersister.account.NeedChangePassword)
+                        {
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
+                        }
+                        else if (SessionPersister.account.Role.Contains("editor"))
                         {
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
                             <li>@Html.ActionLink("My Account", "Me", "Account")</li>
@@ -45,26 +49,26 @@
                             <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
                             <li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>
                             <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
-                        }
-                        else if (SessionPersister.account.Role.Contains("approver"))
-                        {
+                                    }
+                                    else if (SessionPersister.account.Role.Contains("approver"))
+                                    {
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
                             <li>@Html.ActionLink("My Account", "Me", "Account")</li>
                             <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
                             <li>@Html.ActionLink("Articles to Approve", "List", "ArticleApprover")</li>
                             <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
-                        }
-                        else if (SessionPersister.account.Role.Contains("publisher"))
-                        {
+                                    }
+                                    else if (SessionPersister.account.Role.Contains("publisher"))
+                                    {
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
                             <li>@Html.ActionLink("My Account", "Me", "Account")</li>
                             <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
-                            <li>@Html.ActionLink("Available Articles", "ListArticlesApproved", "ArticlePublisher")</li>
+                            <li>@Html.ActionLink("Articles to Publish", "ListArticlesApproved", "ArticlePublisher")</li>
                             <li>@Html.ActionLink("Published Articles", "ListArticlesPublished", "ArticlePublisher")</li>
                             <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
-                        }
-                        else if (SessionPersister.account.Role.Contains("superadmin"))
-                        {
+                                    }
+                                    else if (SessionPersister.account.Role.Contains("superadmin"))
+                                    {
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
                             <li>@Html.ActionLink("Register Account", "Register", "Account")</li>
                             <li>@Html.ActionLink("Account Groups", "List", "AccountGroup")</li>
@@ -77,8 +81,8 @@
 
                                     <ul class="dropdown-menu">
                                         <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
-                                        <li>@Html.ActionLink("Articles Pending for Approval", "List", "ArticleApprover")</li>
-                                        <li>@Html.ActionLink("Approved Articles", "ListArticlesApproved", "ArticlePublisher")</li>
+                                        <li>@Html.ActionLink("Articles to Approve", "List", "ArticleApprover")</li>
+                                        <li>@Html.ActionLink("Articles to Publish", "ListArticlesApproved", "ArticlePublisher")</li>
                                         <li>@Html.ActionLink("Published Articles", "ListArticlesPublished", "ArticlePublisher")</li>
                                     </ul>
                                 </a>
@@ -108,7 +112,14 @@
                     @if (SessionPersister.account != null)
                     {
                         <li>
-                            <a>@SessionPersister.account.Firstname @SessionPersister.account.Lastname (@SessionPersister.account.Role)</a>
+                            <a>@SessionPersister.account.Firstname @SessionPersister.account.Lastname
+                            @if (SessionPersister.account.Role != null && !SessionPersister.account.Role.Equals(""))
+                            {
+                                @("(")
+                                @SessionPersister.account.Role
+                                @(")")
+                            }
+                            </a>
                         </li>
                         <li>
                             <a href="@Url.Action("Logout", "Account")">Logout</a>
@@ -119,6 +130,13 @@
         </div>
     </div>
     <div class="body-content">
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @ViewBag.Message
+            </div>
+        }   
         @RenderBody()
         <hr />
         <footer>
@@ -126,7 +144,7 @@
         </footer>
     </div>
     <div style="display: inline-block; position: fixed; top: 0; right: 0; color: #FFFFFF;">
-        Version: 0.1.1 - Last Updated: 2016/09/05
+        Version: 0.1.4 - Last Updated: 2016/09/13
     </div>
 </body>
 </html>

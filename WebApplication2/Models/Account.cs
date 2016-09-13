@@ -55,7 +55,7 @@ namespace WebApplication2.Models
 
         [Display(Name = "role", ResourceType = typeof(Resource))]
         public string Role { get; set; }
-        
+
         [Display(Name = "role", ResourceType = typeof(Resource))]
         public List<string> RoleList { get; set; }
 
@@ -96,6 +96,45 @@ namespace WebApplication2.Models
 
         [Display(Name = "loginfails", ResourceType = typeof(Resource))]
         public int LoginFails { get; set; }
+
+
+        // 0 = notify all items' changes in my user group
+        // 1 = notify all items' changes created / approved / published by me
+        // 2 = don't notify
+        public int EmailNotifications { get; set; }
+
+        [Display(Name = "Don't notify own changes")]
+        public bool EmailNotificationsNotNotifyOwnChangesToMySelf { get; set; }
+
+        public bool ShouldEmailNotifyBaseArticleChanges()
+        {
+            return EmailNotifications != 2;
+        }
+        public bool ShouldEmailNotifyBaseArticleChangesByOwn()
+        {
+            return !EmailNotificationsNotNotifyOwnChangesToMySelf;
+        }
+        public static string getEmailNotificationRepresentation(int value)
+        {
+            if (value == 0)
+            {
+                return "Notify me all article and content page changes in my account group";
+            }
+            if (value == 1)
+            {
+                return "Notify me all article and content page changes I'm involved in";
+            }
+            if (value == 2)
+            {
+                return "Don't notify me";
+            }
+            return "";
+        }
+        public string getEmailNotificationRepresentation()
+        {
+            return Account.getEmailNotificationRepresentation(EmailNotifications);
+        }
+
 
         public bool isEnabled { get; set; }
 

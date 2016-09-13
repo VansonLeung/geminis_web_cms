@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Edit Content Page</h4>
+<h2>Edit Content Page</h2>
 
 @functions
 {
@@ -45,4 +45,4 @@
 @RenderBody()
 
 @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" }) |
-@Html.ActionLink("Back", "List")
+@Html.ActionLink("Back to Content Page", "List")

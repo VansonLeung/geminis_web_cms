@@ -5,101 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Article List</h2>
+<h2>Articles</h2>
 
 <p>
     @Html.ActionLink("Create New Article", "CreateWithViewModelForm")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Version)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BaseArticleID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isApproved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isUnapproved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.approvalRemarks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.approvedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isPublished)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modified_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.createdBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.createdByAccount.Username)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Version)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BaseArticleID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isApproved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isUnapproved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.approvalRemarks)
-        </td>
-        <td>
-            @if (item.approvedByAccount != null)
-            {
-                @item.approvedByAccount.Username
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isPublished)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.modified_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.createdBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.createdByAccount.Username)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-            @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })<br />
-            @Html.ActionLink("Version History", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })<br />
-            @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = item.BaseArticleID })
-        </td>
-    </tr>
-}
-
-</table>
+@Html.Partial("~/Views/ArticleEditor/_ArticleListForEditor.cshtml")

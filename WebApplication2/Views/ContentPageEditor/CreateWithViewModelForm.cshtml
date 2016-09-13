@@ -1,11 +1,11 @@
-﻿@model WebApplication2.ViewModels.ArticleCreateForm
+﻿@model WebApplication2.ViewModels.ContentPageCreateForm
 
 @{
     ViewBag.Title = "CreateWithViewModelForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create New Article</h2>
+<h2>Create New Content Page</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -216,7 +216,8 @@
 </script>
 
 <div>
-    @Html.ActionLink("Back to Articles", "List")
+    @Html.ActionLink("Back to Content Page", "List")
 </div>
+
 
 @Html.Partial("~/Views/Shared/_FormChangeHandler.cshtml")

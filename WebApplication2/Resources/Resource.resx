@@ -142,7 +142,7 @@
     <value>Last Name</value>
   </data>
   <data name="lastPasswordModifiedAt" xml:space="preserve">
-    <value>Last Password Modified At</value>
+    <value>Password Modified At</value>
   </data>
   <data name="login" xml:space="preserve">
     <value>Login</value>

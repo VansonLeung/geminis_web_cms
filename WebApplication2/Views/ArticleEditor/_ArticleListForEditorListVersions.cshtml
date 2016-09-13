@@ -1,12 +1,5 @@
 ﻿@model IEnumerable<WebApplication2.Models.Article>
 
-@{
-    ViewBag.Title = "ListArticlesApproved";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Articles to Publish</h2>
-
 <table class="table">
     <tr>
         <th>
@@ -19,19 +12,16 @@
             @Html.DisplayNameFor(model => model.BaseArticleID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dateApproved)
+            @Html.DisplayNameFor(model => model.isApproved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isUnapproved)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.approvalRemarks)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.approvedBy)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.isPublished)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.datePublished)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.created_at)
@@ -64,22 +54,16 @@
                 @Html.DisplayFor(modelItem => item.BaseArticleID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dateApproved)
+                @Html.DisplayFor(modelItem => item.isApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isUnapproved)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.approvalRemarks)
             </td>
             <td>
-                @if (item.approvedByAccount != null)
-                {
-                    @item.approvedByAccount.Username
-                }
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.isPublished)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.datePublished)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.created_at)
@@ -106,7 +90,10 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Version History", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })
+                @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
+                @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID }) |
+                @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = item.BaseArticleID })
             </td>
         </tr>
     }

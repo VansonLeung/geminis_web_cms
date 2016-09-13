@@ -79,6 +79,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.EmailNotifications)
+        </dt>
+
+        <dd>
+            @Model.getEmailNotificationRepresentation()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailNotificationsNotNotifyOwnChangesToMySelf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailNotificationsNotNotifyOwnChangesToMySelf)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.isEnabled)
         </dt>
 
@@ -141,7 +157,7 @@
     @if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
     {
         @Html.ActionLink("Edit Account", "Edit", new { id = Model.AccountID })
+        @(" | ")  
+        @Html.ActionLink("Back to Account List", "List")
     }
-    &nbsp;    &nbsp; 
-    @Html.ActionLink("Back to Account List", "List")
 </p>

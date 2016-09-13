@@ -150,6 +150,9 @@ namespace WebApplication2.Context
                 return null;
             }
 
+            var notificationAction = EmailNotificationHelper.ParseAction(action);
+            EmailNotificationHelper.NotifyAllOnActionOfBaseArticle(article, notificationAction);
+            
             AuditLog item = new AuditLog();
             item.accountID = account.AccountID;
             item.articleID = article.ArticleID;
@@ -164,6 +167,9 @@ namespace WebApplication2.Context
             {
                 return null;
             }
+
+            var notificationAction = EmailNotificationHelper.ParseAction(action);
+            EmailNotificationHelper.NotifyAllOnActionOfBaseArticle(contentPage, notificationAction);
 
             AuditLog item = new AuditLog();
             item.accountID = account.AccountID;

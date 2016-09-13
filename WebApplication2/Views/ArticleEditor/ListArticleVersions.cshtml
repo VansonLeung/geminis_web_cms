@@ -5,67 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Article Version History List</h2>
-
-@Html.ActionLink("Back", "List")
+<h2>Article Version History</h2>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Version)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BaseArticleID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isApproved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isPublished)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modified_at)
-        </th>
-        <th></th>
-    </tr>
+@Html.Partial("~/Views/ArticleEditor/_ArticleListForEditorListVersions.cshtml")
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Version)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BaseArticleID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isApproved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isPublished)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.modified_at)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-            @Html.ActionLink("View", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })<br />
-            @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = item.BaseArticleID })
-        </td>
-    </tr>
-}
-
-</table>
+@Html.ActionLink("Back to Articles", "List")

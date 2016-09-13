@@ -46,6 +46,12 @@ namespace WebApplication2.Controllers
         public ActionResult List()
         {
             var items = AccountGroupDbContext.getInstance().findGroups();
+
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+
             return View(items);
         }
 
@@ -66,10 +72,19 @@ namespace WebApplication2.Controllers
             if (ModelState.IsValid)
             {
                 item.isDefaultGroup = false;
-                AccountGroupDbContext.getInstance().create(item);
-                ModelState.Clear();
-                ViewBag.Message = item.Name + " successfully created.";
-                return RedirectToAction("List");
+                var error = AccountGroupDbContext.getInstance().create(item);
+                if (error != null)
+                {
+                    ModelState.AddModelError("", error);
+                    ViewBag.AccessibleCategoryList = getAccessibleCategories();
+                    return View();
+                }
+                else
+                {
+                    ModelState.Clear();
+                    TempData["Message"] = item.Name + " successfully created.";
+                    return RedirectToAction("List");
+                }
             }
 
             ViewBag.AccessibleCategoryList = getAccessibleCategories();
@@ -107,6 +122,7 @@ namespace WebApplication2.Controllers
                 {
                     ModelState.Clear();
                     ViewBag.AccessibleCategoryList = getAccessibleCategories(item.AccessibleCategories);
+                    ViewBag.Message = "Edit '" + item.Name + "' successfully";
                     return View(item);
                 }
             }
@@ -144,7 +160,9 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
+            var name = item.Name;
             AccountGroupDbContext.getInstance().delete(item);
+            TempData["Message"] = "Delete '" + item.Name + "' successfully";
             return RedirectToAction("List");
         }
 

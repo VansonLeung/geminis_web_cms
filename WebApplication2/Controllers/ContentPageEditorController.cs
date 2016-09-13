@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebApplication2.Context;
 using WebApplication2.Models;
 using WebApplication2.Security;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
 {
@@ -29,6 +30,10 @@ namespace WebApplication2.Controllers
         public ActionResult List()
         {
             var items = ContentPageDbContext.getInstance().findArticlesGroupByBaseVersion();
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(items);
         }
         
@@ -57,7 +62,7 @@ namespace WebApplication2.Controllers
                 contentPage.Version = 0;
                 ContentPageDbContext.getInstance().tryCreateNewArticle(contentPage);
                 ModelState.Clear();
-                ViewBag.Message = contentPage.Name + " successfully created.";
+                TempData["Message"] = "'" + contentPage.Name + "' successfully created.";
                 return RedirectToAction("DetailsLocale", new { baseArticleID = contentPage.BaseArticleID, version = contentPage.Version, lang = contentPage.Lang });
             }
             else
@@ -70,9 +75,52 @@ namespace WebApplication2.Controllers
 
 
 
+        // CREATE WITH CUSTOM VIEWMODEL FORM
 
+        [CustomAuthorize(Roles = "superadmin,editor")]
+        public ActionResult CreateWithViewModelForm()
+        {
+            ViewBag.categoryID = getCategoriesForSelect();
+            return View();
+        }
 
+        [HttpPost]
+        [CustomAuthorize(Roles = "superadmin,editor")]
+        public ActionResult CreateWithViewModelForm(ContentPageCreateForm form)
+        {
+            if (ModelState.IsValid)
+            {
+                // create empty article with base lang
+                ContentPage article = form.makeBaseArticle();
+                article.BaseArticleID = 0;
+                article.Version = 0;
+                ContentPageDbContext.getInstance().tryCreateNewArticle(article);
 
+                var baseArticleID = article.BaseArticleID;
+                var version = article.Version;
+
+                // create locale articles
+
+                var article_zh = form.makeLocaleArticle("zh");
+                article_zh.BaseArticleID = baseArticleID;
+                article_zh.Version = version;
+                ContentPageDbContext.getInstance().tryCreateNewLocaleArticle(article_zh);
+
+                var article_cn = form.makeLocaleArticle("cn");
+                article_cn.BaseArticleID = baseArticleID;
+                article_cn.Version = version;
+                ContentPageDbContext.getInstance().tryCreateNewLocaleArticle(article_cn);
+
+                ModelState.Clear();
+                ViewBag.Message = article.Name + " successfully created.";
+                return RedirectToAction("DetailsLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
+            }
+            else
+            {
+                ViewBag.categoryID = getCategoriesForSelect();
+                return View();
+            }
+        }
 
 
 
@@ -105,6 +153,11 @@ namespace WebApplication2.Controllers
             {
                 // if locale exists, treat as edit form
             }
+
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(item);
         }
         
@@ -134,6 +187,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    ViewBag.Message = "Edit '" + item.Name + "' successfully";
                     return View(item);
                 }
             }
@@ -187,6 +241,7 @@ namespace WebApplication2.Controllers
                 else
                 {
                     ViewBag.categoryID = getCategoriesForSelect(item.categoryID);
+                    ViewBag.Message = "Edit '" + item.Name + "' successfully";
                     return View(item);
                 }
             }
@@ -228,6 +283,10 @@ namespace WebApplication2.Controllers
             else
             {
                 // if locale exists, treat as edit form
+            }
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
             }
             return View(item);
         }

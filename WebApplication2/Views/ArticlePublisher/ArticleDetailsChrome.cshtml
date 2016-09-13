@@ -37,15 +37,6 @@
     }
 }
 
-<div class="tabs-menu">
-    <ul>
-        <li class=@CurrentTab("DetailsLocale", "en")>@Html.ActionLink("EN", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
-        <li class=@CurrentTab("DetailsLocale", "zh")>@Html.ActionLink("ZH", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
-        <li class=@CurrentTab("DetailsLocale", "cn")>@Html.ActionLink("CN", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
-        <li class=@CurrentTab("DetailsProperties")>@Html.ActionLink("Page Properties", "DetailsProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
-    </ul>
-</div>
-
 @if (Model.isPublished)
 {
     <div>Published</div>
@@ -63,7 +54,6 @@ else
             @Html.AntiForgeryToken()
 
             <p>
-                Publish
                 <hr />
 
                 <div class="form-actions no-color" style="position: relative;">
@@ -93,8 +83,17 @@ else
     </div>
 }
 
-<div class="form-group input-group-sm">
-    @Html.ActionLink("Back", "List")
+<div class="tabs-menu">
+    <ul>
+        <li class=@CurrentTab("DetailsLocale", "en")>@Html.ActionLink("EN", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+        <li class=@CurrentTab("DetailsLocale", "zh")>@Html.ActionLink("ZH", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "zh" })</li>
+        <li class=@CurrentTab("DetailsLocale", "cn")>@Html.ActionLink("CN", "DetailsLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "cn" })</li>
+        <li class=@CurrentTab("DetailsProperties")>@Html.ActionLink("Page Properties", "DetailsProperties", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" })</li>
+    </ul>
 </div>
 
 @RenderBody()
+
+<div class="form-group input-group-sm">
+    @Html.ActionLink("List this article's versions", "ListArticleVersions", new { baseArticleID = Model.BaseArticleID })
+</div>

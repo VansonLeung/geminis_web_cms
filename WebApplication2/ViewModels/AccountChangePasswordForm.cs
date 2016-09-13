@@ -11,7 +11,7 @@ namespace WebApplication2.ViewModels
     public class AccountChangePasswordForm
     {
         [Display(Name = "oldpassword", ResourceType = typeof(Resource))]
-        [Required( ErrorMessage = "Please enter old password") ]
+        [Required(ErrorMessage = "Please enter old password") ]
         [AccountPasswordLengthValidation]
         [AccountPasswordLetterValidation]
         [DataType(DataType.Password)]

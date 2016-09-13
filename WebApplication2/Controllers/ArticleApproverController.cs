@@ -39,6 +39,10 @@ namespace WebApplication2.Controllers
             {
                 // if locale exists, treat as edit form
             }
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(item);
         }
 
@@ -61,51 +65,7 @@ namespace WebApplication2.Controllers
         }
 
 
-
-        /*
-
-        [CustomAuthorize(Roles = "superadmin,approver")]
-        public ActionResult ApproveArticle(int baseArticleID = 0, int version = 0)
-        {
-            var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, "en");
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-            var error = ArticleDbContext.getInstance().tryRequestApproval(item, true);
-            if (error != null)
-            {
-                ModelState.AddModelError("", error);
-                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
-            }
-            else
-            {
-                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
-            }
-        }
-
-        [CustomAuthorize(Roles = "superadmin,approver")]
-        public ActionResult UnapproveArticle(int baseArticleID = 0, int version = 0)
-        {
-            var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(baseArticleID, version, "en");
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-            var error = ArticleDbContext.getInstance().tryRequestUnapproval(item, true);
-            if (error != null)
-            {
-                ModelState.AddModelError("", error);
-                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
-            }
-            else
-            {
-                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
-            }
-        }
-
-    */
-
+        
 
         // SUBMIT REQUEST FOR APPROVAL
         [CustomAuthorize(Roles = "superadmin,approver")]
@@ -138,6 +98,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    TempData["Message"] = "'" + item.Name + "' Approved";
                     return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = item.Lang });
                 }
             }
@@ -177,6 +138,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
+                    TempData["Message"] = "'" + item.Name + "' Unapproved";
                     return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = item.Lang });
                 }
             }

@@ -160,7 +160,7 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last Password Modified At.
+        ///   Looks up a localized string similar to Password Modified At.
         /// </summary>
         public static string lastPasswordModifiedAt {
             get {
