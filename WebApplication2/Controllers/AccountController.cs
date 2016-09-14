@@ -179,19 +179,22 @@ namespace WebApplication2.Controllers
         [CustomAuthorize()]
         public ActionResult ChangePassword(AccountChangePasswordForm form)
         {
-            var account = new Account();
-            account.AccountID = SessionPersister.account.AccountID;
-            account.Username = SessionPersister.account.Username;
-            account.Password = form.OldPassword;
+            if (ModelState.IsValid)
+            {
+                var account = new Account();
+                account.AccountID = SessionPersister.account.AccountID;
+                account.Username = SessionPersister.account.Username;
+                account.Password = form.OldPassword;
 
-            var error = AccountDbContext.getInstance().tryChangePassword(account, form.Password, true);
-            if (error == null)
-            {
-                return RedirectToAction("ChangePasswordSuccess");
-            }
-            else
-            {
-                ModelState.AddModelError("", error);
+                var error = AccountDbContext.getInstance().tryChangePassword(account, form.Password, true);
+                if (error == null)
+                {
+                    return RedirectToAction("ChangePasswordSuccess");
+                }
+                else
+                {
+                    ModelState.AddModelError("", error);
+                }
             }
             return View();
         }

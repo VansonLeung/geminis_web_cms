@@ -408,7 +408,7 @@ namespace WebApplication2.Controllers
                 return HttpNotFound();
             }
             var name = item.Name;
-            var error = ArticleDbContext.getInstance().tryDeleteArticle(item);
+            var error = ArticleDbContext.getInstance().tryDeleteArticle(item, true);
             if (error != null)
             {
                 ModelState.AddModelError("", error);

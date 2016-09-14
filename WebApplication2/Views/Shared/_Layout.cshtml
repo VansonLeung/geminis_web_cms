@@ -41,7 +41,7 @@
                         {
                             <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
                         }
-                        else if (SessionPersister.account.Role.Contains("superadmin"))
+                        else if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("superadmin"))
                         {
                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
                             <li>@Html.ActionLink("Register Account", "Register", "Account")</li>
@@ -72,29 +72,29 @@
                             <li>@Html.ActionLink("My Account", "Me", "Account")</li>
                             <li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
 
-                            if (SessionPersister.account.Role.Contains("editor"))
+                            if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("editor"))
                             {
 
                                 <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
                                 <li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>
                             }
 
-                            if (SessionPersister.account.Role.Contains("approver"))
+                            if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("approver"))
                             {
 
                                 <li>@Html.ActionLink("Articles to Approve", "List", "ArticleApprover")</li>
                             }
 
-                            if (SessionPersister.account.Role.Contains("publisher"))
+                            if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("publisher"))
                             {
 
                                 <li>@Html.ActionLink("Articles to Publish", "ListArticlesApproved", "ArticlePublisher")</li>
                                 <li>@Html.ActionLink("Published Articles", "ListArticlesPublished", "ArticlePublisher")</li>
                             }
 
-                            if (SessionPersister.account.Role.Contains("editor")
-                            || SessionPersister.account.Role.Contains("approver")
-                            || SessionPersister.account.Role.Contains("publisher"))
+                            if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("editor")
+                            || SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("approver")
+                            || SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("publisher"))
                             {
                                 <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
                             }

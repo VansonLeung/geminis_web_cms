@@ -387,6 +387,10 @@ namespace WebApplication2.Context
                 {
                     account.Role = String.Join(",", account.RoleList);
                 }
+                else if (account.Role == null)
+                {
+                    account.Role = "";
+                }
 
                 _account.Role = account.Role;
                 _account.Username = account.Username;

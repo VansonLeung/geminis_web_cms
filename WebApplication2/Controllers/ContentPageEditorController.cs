@@ -112,7 +112,7 @@ namespace WebApplication2.Controllers
                 ContentPageDbContext.getInstance().tryCreateNewLocaleArticle(article_cn);
 
                 ModelState.Clear();
-                ViewBag.Message = article.Name + " successfully created.";
+                TempData["Message"] = article.Name + " successfully created.";
                 return RedirectToAction("DetailsLocale", new { baseArticleID = article.BaseArticleID, version = article.Version, lang = article.Lang });
             }
             else
@@ -355,7 +355,7 @@ namespace WebApplication2.Controllers
                 return HttpNotFound();
             }
 
-            var error = ContentPageDbContext.getInstance().tryDeleteArticle(item);
+            var error = ContentPageDbContext.getInstance().tryDeleteArticle(item, true);
             if (error != null)
             {
                 ModelState.AddModelError("", error);
