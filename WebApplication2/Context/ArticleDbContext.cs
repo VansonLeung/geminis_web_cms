@@ -608,10 +608,17 @@ namespace WebApplication2.Context
                 return error;
             }
 
-            getArticleDb().Remove(article);
-            db.SaveChanges();
+            AuditLogDbContext.getInstance().createAuditLogArticleAction(_article, AuditLogDbContext.ACTION_DELETE);
 
-            AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_DELETE);
+            if (isRecursive)
+            {
+                getArticleDb().RemoveRange(getArticleDb().Table.Where((acc) => acc.BaseArticleID == _article.BaseArticleID));
+            }
+            else
+            {
+                getArticleDb().Remove(article);
+            }
+            db.SaveChanges();
 
             return null;
         }
