@@ -207,6 +207,12 @@ namespace WebApplication2.Context
             {
                 category.parentItemID = null;
             }
+
+            if (category.imagePath.Equals("____EMPTY"))
+            {
+                category.imagePath = null;
+            }
+
             getItemDb().Add(category);
             db.SaveChanges();
             return null;
@@ -233,6 +239,15 @@ namespace WebApplication2.Context
             if (category.parentItemID < 0)
             {
                 category.parentItemID = null;
+            }
+
+            if (category.imagePath.Equals("____EMPTY"))
+            {
+                category.imagePath = null;
+            }
+            else if (category.imagePath == null)
+            {
+                category.imagePath = _category.imagePath;
             }
 
             db.Entry(category).State = EntityState.Modified;

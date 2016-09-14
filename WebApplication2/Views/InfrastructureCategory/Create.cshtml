@@ -58,6 +58,7 @@
             @Html.LabelFor(model => model.imagePath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" class="file-input" name="image" />
+                <input type="checkbox" name="imagePath" value="____EMPTY" class = "" />&nbsp;<label for="imagePath" class = "control-label">Remove image upon submit</label>
             </div>
         </div>
 

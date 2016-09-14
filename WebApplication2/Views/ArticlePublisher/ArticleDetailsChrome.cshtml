@@ -64,11 +64,11 @@ else
                     @Html.HiddenFor(model => model.BaseArticleID)
 
                     @Html.LabelFor(model => model.datePublishStart)
-                    @Html.TextBox("Publish Start Date", "", new { @class = "form-control datepicker", placeholder = "Enter publish start date here..." })
+                    @Html.TextBox("datePublishStart", "", new { @class = "form-control datepicker", placeholder = "Enter publish start date here..." })
                     @Html.ValidationMessageFor(model => model.datePublishStart)
 
                     @Html.LabelFor(model => model.datePublishEnd)
-                    @Html.TextBox("Publish End Date", "", new { @class = "form-control datepicker", placeholder = "Enter publish end date here..." })
+                    @Html.TextBox("datePublishEnd", "", new { @class = "form-control datepicker", placeholder = "Enter publish end date here..." })
                     @Html.ValidationMessageFor(model => model.datePublishEnd)
 
                     <br />

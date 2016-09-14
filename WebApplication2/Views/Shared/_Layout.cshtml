@@ -137,13 +137,20 @@
         </div>
     </div>
     <div class="body-content">
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @ViewBag.ErrorMessage
+            </div>
+        }
         @if (ViewBag.Message != null)
         {
             <div class="alert alert-success">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 @ViewBag.Message
             </div>
-        }   
+        }
         @RenderBody()
         <hr />
         <footer>

@@ -58,6 +58,10 @@ namespace WebApplication2.Controllers
             {
                 // if locale exists, treat as edit form
             }
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"];
+            }
             if (TempData["Message"] != null)
             {
                 ViewBag.Message = TempData["Message"];
@@ -97,17 +101,32 @@ namespace WebApplication2.Controllers
             {
                 var datePublishStart = article.datePublishStart;
                 var datePublishEnd = article.datePublishEnd;
+
                 var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, "en");
                 if (item == null)
                 {
                     return HttpNotFound();
                 }
+
+                if (datePublishStart != null
+                    && datePublishEnd != null)
+                {
+                    var start = datePublishStart.GetValueOrDefault();
+                    var end = datePublishEnd.GetValueOrDefault();
+
+                    if (start.CompareTo(end) > 0)
+                    {
+                        TempData["ErrorMessage"] = "Publish end date must be greater than publish start date";
+                        return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
+                    }
+                }
+
                 item.datePublishStart = datePublishStart;
                 item.datePublishEnd = datePublishEnd;
                 var error = ArticlePublishedDbContext.getInstance().tryPublishArticle(item, true);
                 if (error != null)
                 {
-                    ModelState.AddModelError("", error);
+                    TempData["ErrorMessage"] = error;
                     return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
                 }
                 else
@@ -118,8 +137,15 @@ namespace WebApplication2.Controllers
             }
             else
             {
+                foreach (ModelState modelState in ViewData.ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        TempData["ErrorMessage"] = error.ErrorMessage;
+                    }
+                }
                 var item = ArticleDbContext.getInstance().findArticleByVersionAndLang(article.BaseArticleID, article.Version, "en");
-                return View("DetailsProperties", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
+                return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" });
             }
         }
 

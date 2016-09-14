@@ -99,7 +99,6 @@ namespace WebApplication2.Models
         }
 
         [Display(Name = "datePublishEnd", ResourceType = typeof(Resource))]
-        [GreaterThan("datePublishStart")]
         public DateTime? datePublishEnd { get; set; }
         public string getDatePublishEndRepresentation()
         {
