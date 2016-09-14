@@ -40,10 +40,11 @@
 @if (Model.isPublished)
 {
     <div>Published</div>
-
+    <br/>
     <div class="form-group input-group-sm">
-        @Html.ActionLink("Unpublish", "UnpublishArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version }) |
+        @Html.ActionLink("Unpublish this article", "UnpublishArticle", new { baseArticleID = Model.BaseArticleID, version = Model.Version })
     </div>
+    <br />
 }
 else
 {
@@ -63,11 +64,11 @@ else
                     @Html.HiddenFor(model => model.BaseArticleID)
 
                     @Html.LabelFor(model => model.datePublishStart)
-                    @Html.TextBox("datePublishStart", "", new { @class = "form-control datepicker", placeholder = "Enter publish start date here..." })
+                    @Html.TextBox("Publish Start Date", "", new { @class = "form-control datepicker", placeholder = "Enter publish start date here..." })
                     @Html.ValidationMessageFor(model => model.datePublishStart)
 
                     @Html.LabelFor(model => model.datePublishEnd)
-                    @Html.TextBox("datePublishEnd", "", new { @class = "form-control datepicker", placeholder = "Enter publish end date here..." })
+                    @Html.TextBox("Publish End Date", "", new { @class = "form-control datepicker", placeholder = "Enter publish end date here..." })
                     @Html.ValidationMessageFor(model => model.datePublishEnd)
 
                     <br />
@@ -95,5 +96,6 @@ else
 @RenderBody()
 
 <div class="form-group input-group-sm">
-    @Html.ActionLink("List this article's versions", "ListArticleVersions", new { baseArticleID = Model.BaseArticleID })
+    @Html.ActionLink("Back to this Article's Version History", "ListArticleVersions", new { baseArticleID = Model.BaseArticleID }) | 
+    @Html.ActionLink("Back to Published Articles", "ListArticlesPublished")
 </div>

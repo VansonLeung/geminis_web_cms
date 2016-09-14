@@ -48,7 +48,7 @@
 
 @RenderBody()
 
-@Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" }) |
+@Html.ActionLink("Edit Article", "UpsertLocale", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" }) |
 @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = Model.BaseArticleID }) |
 @Html.ActionLink("Submit for Approval", "SubmitRequestForApproval", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" }) |
 @Html.ActionLink("List Versions", "ListArticleVersions", new { baseArticleID = Model.BaseArticleID }) |

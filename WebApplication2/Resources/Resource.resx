@@ -183,4 +183,103 @@
   <data name="canPublish" xml:space="preserve">
     <value>Can Publish</value>
   </data>
+  <data name="itemisfrozen" xml:space="preserve">
+    <value>Cannot edit this article as it is already submitted before.</value>
+  </data>
+  <data name="itemnotfound" xml:space="preserve">
+    <value>Item not found.</value>
+  </data>
+  <data name="approvalRemarks" xml:space="preserve">
+    <value>Approval Remarks</value>
+  </data>
+  <data name="approvedBy" xml:space="preserve">
+    <value>Approved By</value>
+  </data>
+  <data name="approvedByAccount" xml:space="preserve">
+    <value>Approved By</value>
+  </data>
+  <data name="BannerImageUrl" xml:space="preserve">
+    <value>Banner Image Url</value>
+  </data>
+  <data name="BaseArticleID" xml:space="preserve">
+    <value>Base Article ID</value>
+  </data>
+  <data name="category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="categoryID" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="createdBy" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="createdByAccount" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="dateApproved" xml:space="preserve">
+    <value>Approval Date</value>
+  </data>
+  <data name="datePublished" xml:space="preserve">
+    <value>Published Date</value>
+  </data>
+  <data name="datePublishEnd" xml:space="preserve">
+    <value>Publish End Date</value>
+  </data>
+  <data name="datePublishStart" xml:space="preserve">
+    <value>Publish Start Date</value>
+  </data>
+  <data name="dateUnapproved" xml:space="preserve">
+    <value>Unapproval Date</value>
+  </data>
+  <data name="Desc" xml:space="preserve">
+    <value>Descripton</value>
+  </data>
+  <data name="Excerpt" xml:space="preserve">
+    <value>Excerpt</value>
+  </data>
+  <data name="isApproved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="isFrozen" xml:space="preserve">
+    <value>Frozen</value>
+  </data>
+  <data name="isPublished" xml:space="preserve">
+    <value>Published</value>
+  </data>
+  <data name="isRequestingApproval" xml:space="preserve">
+    <value>Requesting Approval</value>
+  </data>
+  <data name="isUnapproved" xml:space="preserve">
+    <value>Unapproved</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="Lang" xml:space="preserve">
+    <value>Lang</value>
+  </data>
+  <data name="MetaData" xml:space="preserve">
+    <value>Meta Data</value>
+  </data>
+  <data name="MetaKeywords" xml:space="preserve">
+    <value>Meta Keywords</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="publishedBy" xml:space="preserve">
+    <value>Published By</value>
+  </data>
+  <data name="publishedByAccount" xml:space="preserve">
+    <value>Published By</value>
+  </data>
+  <data name="Slug" xml:space="preserve">
+    <value>Slug</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
 </root>

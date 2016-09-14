@@ -512,7 +512,7 @@ namespace WebApplication2.Context
             }
             if (_article.isFrozen)
             {
-                return "Item is frozen";
+                return ResHelper.S("itemisfrozen");
             }
 
             var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
@@ -552,7 +552,7 @@ namespace WebApplication2.Context
             }
             if (_article.isFrozen)
             {
-                return "Item is frozen";
+                return ResHelper.S("itemisfrozen");
             }
 
             var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
@@ -599,7 +599,7 @@ namespace WebApplication2.Context
             }
             if (_article.isFrozen)
             {
-                return "Item is frozen";
+                return ResHelper.S("itemisfrozen");
             }
 
             var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
@@ -636,7 +636,7 @@ namespace WebApplication2.Context
             }
             if (_article.isFrozen)
             {
-                return "Item is frozen";
+                return ResHelper.S("itemisfrozen");
             }
 
             var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);

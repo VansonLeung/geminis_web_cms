@@ -242,6 +242,7 @@
     <Compile Include="Helpers\LogHelper.cs" />
     <Compile Include="Helpers\PredicateBuilder.cs" />
     <Compile Include="Helpers\RegexUtilities.cs" />
+    <Compile Include="Helpers\ResHelper.cs" />
     <Compile Include="Helpers\ServerHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />

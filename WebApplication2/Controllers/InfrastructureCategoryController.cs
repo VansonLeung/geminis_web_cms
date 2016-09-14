@@ -125,6 +125,7 @@ namespace WebApplication2.Controllers
                     item.imagePath = physicalPath;
                 }
 
+                ViewBag.Message = "Edit '" + item.GetName() + "' successfully";
                 InfrastructureCategoryDbContext.getInstance().edit(item);
                 ModelState.Clear();
                 ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
@@ -132,7 +133,6 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                ViewBag.Message = "Edit '" + item.GetName() + "' successfully";
                 ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
                 return View(item);
             }

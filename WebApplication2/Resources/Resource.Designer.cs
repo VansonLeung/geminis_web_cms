@@ -61,6 +61,51 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approval Remarks.
+        /// </summary>
+        public static string approvalRemarks {
+            get {
+                return ResourceManager.GetString("approvalRemarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approved By.
+        /// </summary>
+        public static string approvedBy {
+            get {
+                return ResourceManager.GetString("approvedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approved By.
+        /// </summary>
+        public static string approvedByAccount {
+            get {
+                return ResourceManager.GetString("approvedByAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Banner Image Url.
+        /// </summary>
+        public static string BannerImageUrl {
+            get {
+                return ResourceManager.GetString("BannerImageUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Base Article ID.
+        /// </summary>
+        public static string BaseArticleID {
+            get {
+                return ResourceManager.GetString("BaseArticleID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can Approve.
         /// </summary>
         public static string canApprove {
@@ -84,6 +129,24 @@ namespace WebApplication2.Resources {
         public static string canPublish {
             get {
                 return ResourceManager.GetString("canPublish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string category {
+            get {
+                return ResourceManager.GetString("category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string categoryID {
+            get {
+                return ResourceManager.GetString("categoryID", resourceCulture);
             }
         }
         
@@ -115,11 +178,92 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created By.
+        /// </summary>
+        public static string createdBy {
+            get {
+                return ResourceManager.GetString("createdBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created By.
+        /// </summary>
+        public static string createdByAccount {
+            get {
+                return ResourceManager.GetString("createdByAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approval Date.
+        /// </summary>
+        public static string dateApproved {
+            get {
+                return ResourceManager.GetString("dateApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published Date.
+        /// </summary>
+        public static string datePublished {
+            get {
+                return ResourceManager.GetString("datePublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publish End Date.
+        /// </summary>
+        public static string datePublishEnd {
+            get {
+                return ResourceManager.GetString("datePublishEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publish Start Date.
+        /// </summary>
+        public static string datePublishStart {
+            get {
+                return ResourceManager.GetString("datePublishStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unapproval Date.
+        /// </summary>
+        public static string dateUnapproved {
+            get {
+                return ResourceManager.GetString("dateUnapproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Descripton.
+        /// </summary>
+        public static string Desc {
+            get {
+                return ResourceManager.GetString("Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string email {
             get {
                 return ResourceManager.GetString("email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excerpt.
+        /// </summary>
+        public static string Excerpt {
+            get {
+                return ResourceManager.GetString("Excerpt", resourceCulture);
             }
         }
         
@@ -138,6 +282,87 @@ namespace WebApplication2.Resources {
         public static string forgotpassword {
             get {
                 return ResourceManager.GetString("forgotpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approved.
+        /// </summary>
+        public static string isApproved {
+            get {
+                return ResourceManager.GetString("isApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frozen.
+        /// </summary>
+        public static string isFrozen {
+            get {
+                return ResourceManager.GetString("isFrozen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published.
+        /// </summary>
+        public static string isPublished {
+            get {
+                return ResourceManager.GetString("isPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requesting Approval.
+        /// </summary>
+        public static string isRequestingApproval {
+            get {
+                return ResourceManager.GetString("isRequestingApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unapproved.
+        /// </summary>
+        public static string isUnapproved {
+            get {
+                return ResourceManager.GetString("isUnapproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot edit this article as it is already submitted before..
+        /// </summary>
+        public static string itemisfrozen {
+            get {
+                return ResourceManager.GetString("itemisfrozen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item not found..
+        /// </summary>
+        public static string itemnotfound {
+            get {
+                return ResourceManager.GetString("itemnotfound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keywords.
+        /// </summary>
+        public static string Keywords {
+            get {
+                return ResourceManager.GetString("Keywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lang.
+        /// </summary>
+        public static string Lang {
+            get {
+                return ResourceManager.GetString("Lang", resourceCulture);
             }
         }
         
@@ -187,11 +412,38 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meta Data.
+        /// </summary>
+        public static string MetaData {
+            get {
+                return ResourceManager.GetString("MetaData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meta Keywords.
+        /// </summary>
+        public static string MetaKeywords {
+            get {
+                return ResourceManager.GetString("MetaKeywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modified At.
         /// </summary>
         public static string modified_at {
             get {
                 return ResourceManager.GetString("modified_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -232,6 +484,24 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Published By.
+        /// </summary>
+        public static string publishedBy {
+            get {
+                return ResourceManager.GetString("publishedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published By.
+        /// </summary>
+        public static string publishedByAccount {
+            get {
+                return ResourceManager.GetString("publishedByAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string register {
@@ -250,11 +520,38 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slug.
+        /// </summary>
+        public static string Slug {
+            get {
+                return ResourceManager.GetString("Slug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Url.
+        /// </summary>
+        public static string Url {
+            get {
+                return ResourceManager.GetString("Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string username {
             get {
                 return ResourceManager.GetString("username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
     }
