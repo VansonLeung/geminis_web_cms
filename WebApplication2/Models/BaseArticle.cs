@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foolproof;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -98,6 +99,7 @@ namespace WebApplication2.Models
         }
 
         [Display(Name = "datePublishEnd", ResourceType = typeof(Resource))]
+        [GreaterThan("datePublishStart")]
         public DateTime? datePublishEnd { get; set; }
         public string getDatePublishEndRepresentation()
         {

@@ -72,9 +72,11 @@ namespace WebApplication2.Controllers
                 if (image != null)
                 {
                     string ImageName = Path.GetFileName(image.FileName);
-                    string physicalPath = Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC + ImageName);
-                    image.SaveAs(physicalPath);
-                    item.imagePath = physicalPath;
+                    string[] FileNames = ImageName.Split('\\');
+                    string FileName = FileNames[FileNames.Length - 1];
+                    string path = System.IO.Path.Combine(Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC), FileName);
+                    image.SaveAs(path);
+                    item.imagePath = FileName;
                 }
 
                 InfrastructureCategoryDbContext.getInstance().create(item);
@@ -120,9 +122,11 @@ namespace WebApplication2.Controllers
                 if (image != null)
                 {
                     string ImageName = Path.GetFileName(image.FileName);
-                    string physicalPath = Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC + ImageName);
-                    image.SaveAs(physicalPath);
-                    item.imagePath = physicalPath;
+                    string[] FileNames = ImageName.Split('\\');
+                    string FileName = FileNames[FileNames.Length - 1];
+                    string path = System.IO.Path.Combine(Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC), FileName);
+                    image.SaveAs(path);
+                    item.imagePath = FileName;
                 }
 
                 ViewBag.Message = "Edit '" + item.GetName() + "' successfully";

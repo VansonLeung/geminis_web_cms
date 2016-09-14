@@ -30,5 +30,10 @@ namespace WebApplication2.Helpers
 
             return sOut;
         }
+
+        public static string GetImage(string filename)
+        {
+            return GetSiteRoot() + "/ckfinder/userfiles/images/" + filename;
+        }
     }
 }
