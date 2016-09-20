@@ -208,7 +208,7 @@ namespace WebApplication2.Context
                 category.parentItemID = null;
             }
 
-            if (category.imagePath.Equals("____EMPTY"))
+            if (category.imagePath != null && category.imagePath.Equals("____EMPTY"))
             {
                 category.imagePath = null;
             }
@@ -241,7 +241,7 @@ namespace WebApplication2.Context
                 category.parentItemID = null;
             }
 
-            if (category.imagePath.Equals("____EMPTY"))
+            if (category.imagePath != null && category.imagePath.Equals("____EMPTY"))
             {
                 category.imagePath = null;
             }

@@ -14,20 +14,16 @@ namespace WebApplication2.Models
         public int logID { get; set; }
 
         public int? accountID { get; set; }
-        [ForeignKey("accountID")]
-        public virtual Account account { get; set; }
+        public string account { get; set; }
 
         public int? articleID { get; set; }
-        [ForeignKey("articleID")]
-        public virtual Article article { get; set; }
+        public string article { get; set; }
 
         public int? contentPageID { get; set; }
-        [ForeignKey("contentPageID")]
-        public virtual ContentPage contentPage { get; set; }
+        public string contentPage { get; set; }
 
         public int? categoryID { get; set; }
-        [ForeignKey("categoryID")]
-        public virtual Category category { get; set; }
+        public string category { get; set; }
 
         public string action { get; set; }
     }

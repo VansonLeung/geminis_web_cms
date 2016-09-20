@@ -123,6 +123,11 @@ namespace WebApplication2.Context
 
             int ownerAccountID = -1;
 
+            if (SessionPersister.account != null)
+            {
+                ownerAccountID = SessionPersister.account.AccountID;
+            }
+
             return getAccountDb().AsNoTracking().Where(acc => 
             (
                 (
@@ -202,11 +207,15 @@ namespace WebApplication2.Context
             var acc = findAccountByAccountUsernameNoTracking(account);
             if (acc != null && account.AccountID == 0)
             {
-                return "Username is already used by other account. Please enter another username.";
+                return "This Username already exists. Please enter another Username.";
+            }
+            if (acc == null)
+            {
+                return null;
             }
             if (account.AccountID != 0 && acc.AccountID != account.AccountID)
             {
-                return "Username is already used by other account. Please enter another username.";
+                return "This Username already exists. Please enter another Username.";
             }
 
             return null;
@@ -219,7 +228,7 @@ namespace WebApplication2.Context
             var acc = findAccountsByEmailNoTracking(account.Email);
             if (acc != null && acc.Count > 0 && account.AccountID == 0)
             {
-                return "Username is already used by other account. Please enter another username.";
+                return "This Username already exists. Please enter another Username.";
             }
             if (account.AccountID != 0 && acc.Count > 0)
             {
@@ -227,7 +236,7 @@ namespace WebApplication2.Context
                 {
                     if (a.AccountID != account.AccountID)
                     {
-                        return "Username is already used by other account. Please enter another username.";
+                        return "This Username already exists. Please enter another Username.";
                     }
                 }
             }
@@ -235,7 +244,7 @@ namespace WebApplication2.Context
             return null;
         }
 
-        public string tryRegisterAccount(Account account)
+        public string tryRegisterAccount(Account account, bool isSeeding = false)
         {
             var error = tryCheckUsername(account);
             if (error != null)
@@ -267,7 +276,10 @@ namespace WebApplication2.Context
 
             account.NeedChangePassword = true;
 
-            EmailHelper.SendEmailToAccountOnPasswordReset(account, rawPassword);
+            if (!isSeeding)
+            {
+                EmailHelper.SendEmailToAccountOnPasswordReset(account, rawPassword);
+            }
 
             getAccountDb().Add(account);
             db.SaveChanges();
@@ -279,6 +291,9 @@ namespace WebApplication2.Context
         {
             string error = null;
             Account _account = findAccountByID(account.AccountID);
+
+            _account.Username = account.Username;
+            _account.Email = account.Email;
 
             error = tryCheckUsername(_account);
             if (error != null)

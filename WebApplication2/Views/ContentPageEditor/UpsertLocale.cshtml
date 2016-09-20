@@ -67,6 +67,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Preview" class="btn btn-default" onclick="showFormPreview();" />
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
@@ -76,7 +77,16 @@
 
 <script type="text/javascript">
     CKEDITOR.replace('Desc');
+
+    var showFormPreview = function () {
+        showPreview({
+            lang: $("#Lang").val(),
+            name: $("#Name").val(),
+            desc: CKEDITOR.instances['Desc'].getData()
+        });
+    }
 </script>
 
 
 @Html.Partial("~/Views/Shared/_FormChangeHandler.cshtml")
+@Html.Partial("~/Views/Shared/_PreviewScript.cshtml")

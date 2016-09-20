@@ -48,7 +48,8 @@ namespace WebApplication2.Migrations
                         Password = "123123asd",
                         ConfirmPassword = "123123asd",
                         isEnabled = true,
-                    }
+                    },
+                    true
                 );
             }
             if (!AccountDbContext.getInstance().isEditorExists())
@@ -65,7 +66,8 @@ namespace WebApplication2.Migrations
                         Password = "123123asd",
                         ConfirmPassword = "123123asd",
                         isEnabled = true,
-                    }
+                    },
+                    true
                 );
             }
             if (!AccountDbContext.getInstance().isApproverExists())
@@ -82,7 +84,8 @@ namespace WebApplication2.Migrations
                         Password = "123123asd",
                         ConfirmPassword = "123123asd",
                         isEnabled = true,
-                    }
+                    },
+                    true
                 );
             }
             if (!AccountDbContext.getInstance().isPublisherExists())
@@ -99,7 +102,8 @@ namespace WebApplication2.Migrations
                         Password = "123123asd",
                         ConfirmPassword = "123123asd",
                         isEnabled = true,
-                    }
+                    },
+                    true
                 );
             }
             

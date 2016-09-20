@@ -184,13 +184,13 @@
     <value>Can Publish</value>
   </data>
   <data name="itemisfrozen" xml:space="preserve">
-    <value>Cannot edit this article as it is already submitted before.</value>
+    <value>Cannot edit or delete this article as it is already submitted before.</value>
   </data>
   <data name="itemnotfound" xml:space="preserve">
     <value>Item not found.</value>
   </data>
   <data name="approvalRemarks" xml:space="preserve">
-    <value>Approval Remarks</value>
+    <value>Remarks</value>
   </data>
   <data name="approvedBy" xml:space="preserve">
     <value>Approved By</value>
@@ -247,7 +247,7 @@
     <value>Published</value>
   </data>
   <data name="isRequestingApproval" xml:space="preserve">
-    <value>Requesting Approval</value>
+    <value>Submitted</value>
   </data>
   <data name="isUnapproved" xml:space="preserve">
     <value>Unapproved</value>

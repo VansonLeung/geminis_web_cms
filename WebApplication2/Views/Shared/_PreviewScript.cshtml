@@ -1,0 +1,20 @@
+﻿<script type="text/javascript">
+
+    var showPreview = function (params) {
+        var site = "<html><head></head><body></body></html>";
+        var popupWindow = window.open("", "", "menubar=0,scrollbars=0");
+        popupWindow.document.write(site);
+        popupWindow.document.close();
+
+        var body = $(popupWindow.document.body);
+        var html = "";
+
+        html += ("<div>" + (params['name'] || "") + "</div>");
+        html += ("<hr/>");
+        html += ("<div>" + (params['desc'] || "") + "</div>");
+        html += ("<hr/>");
+
+        body.html(html);
+    }
+
+</script>

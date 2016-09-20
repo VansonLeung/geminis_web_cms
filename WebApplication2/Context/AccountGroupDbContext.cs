@@ -73,7 +73,7 @@ namespace WebApplication2.Context
             var result = AccountGroupDbContext.getInstance().findGroupsByNameNoTracking(item.Name);
             if (result != null && result.Count > 0)
             {
-                return "This category name is already used by other account. Please enter another category name.";
+                return "This Account Group Name already exists. Please enter another Account Group Name.";
             }
 
             getItemDb().Add(item);
@@ -84,6 +84,19 @@ namespace WebApplication2.Context
         public string edit(AccountGroup item)
         {
             var accountGroup = findGroupByID(item.AccountGroupID);
+
+            var result = AccountGroupDbContext.getInstance().findGroupsByNameNoTracking(item.Name);
+            if (result != null && result.Count > 0)
+            {
+                foreach (var res in result)
+                {
+                    if (item.AccountGroupID != res.AccountGroupID)
+                    {
+                        return "This Account Group Name already exists. Please enter another Account Group Name.";
+                    }
+                }
+            }
+
             item.AccessibleCategories = String.Join(",", item.getAccessibleCategoryList().ToArray());
             accountGroup.AccessibleCategories = item.AccessibleCategories;
 

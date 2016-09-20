@@ -92,6 +92,12 @@ namespace WebApplication2.Context
             return getArticleDb().Where(acc => acc.ArticleID == articleID).FirstOrDefault();
         }
 
+        public ContentPage findArticleByIDNoTracking(int articleID)
+        {
+            return getArticleDb().AsNoTracking().Where(acc => acc.ArticleID == articleID).FirstOrDefault();
+        }
+
+
         public List<ContentPage> findArticlesByCategoryID(int categoryID)
         {
             return (getArticleDb().AsNoTracking().Where(acc => acc.categoryID == categoryID)).Include(acc => acc.createdByAccount)
@@ -540,7 +546,7 @@ namespace WebApplication2.Context
         }
 
 
-        public String tryDeleteArticle(ContentPage article, boolean isRecursive)
+        public String tryDeleteArticle(ContentPage article, bool isRecursive)
         {
             var _article = findArticleByID(article.ArticleID);
 
@@ -563,7 +569,7 @@ namespace WebApplication2.Context
 
             if (isRecursive)
             {
-                getArticleDb().RemoveRange(getArticleDb().Table.Where((acc) => acc.BaseArticleID == _article.BaseArticleID));
+                getArticleDb().RemoveRange(getArticleDb().Where((acc) => acc.BaseArticleID == _article.BaseArticleID));
             }
             else
             {

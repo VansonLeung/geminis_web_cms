@@ -144,6 +144,12 @@ namespace WebApplication2.Context
 
         public string createAuditLogArticleAction(Article article, string action)
         {
+            var _article = ArticleDbContext.getInstance().findArticleByIDNoTracking(article.ArticleID);
+            if (_article == null)
+            {
+                return null;
+            }
+
             var account = SessionPersister.account;
             if (account == null)
             {
@@ -151,17 +157,27 @@ namespace WebApplication2.Context
             }
 
             var notificationAction = EmailNotificationHelper.ParseAction(action);
-            EmailNotificationHelper.NotifyAllOnActionOfBaseArticle(article, notificationAction);
+            EmailNotificationHelper.NotifyAllOnActionOfBaseArticle(_article, notificationAction);
             
             AuditLog item = new AuditLog();
             item.accountID = account.AccountID;
-            item.articleID = article.ArticleID;
+            item.account = account.Username;
+            item.articleID = _article.ArticleID;
+            item.article = _article.Name;
+            item.categoryID = _article.categoryID;
+            item.category = _article.category != null ? _article.category.GetName() : null;
             item.action = action;
 
             return createAuditLog(item);
         }
         public string createAuditLogContentPageAction(ContentPage contentPage, string action)
         {
+            var _contentPage = ContentPageDbContext.getInstance().findArticleByIDNoTracking(contentPage.ArticleID);
+            if (_contentPage == null)
+            {
+                return null;
+            }
+
             var account = SessionPersister.account;
             if (account == null)
             {
@@ -173,7 +189,11 @@ namespace WebApplication2.Context
 
             AuditLog item = new AuditLog();
             item.accountID = account.AccountID;
-            item.contentPageID = contentPage.ArticleID;
+            item.account = account.Username;
+            item.contentPageID = _contentPage.ArticleID;
+            item.contentPage = _contentPage.Name;
+            item.categoryID = _contentPage.categoryID;
+            item.category = _contentPage.category != null ? _contentPage.category.GetName() : null;
             item.action = action;
 
             return createAuditLog(item);
@@ -188,7 +208,9 @@ namespace WebApplication2.Context
 
             AuditLog item = new AuditLog();
             item.accountID = account.AccountID;
+            item.account = account.Username;
             item.categoryID = category.ItemID;
+            item.category = category.GetName();
             item.action = action;
 
             return createAuditLog(item);

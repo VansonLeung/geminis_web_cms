@@ -68,7 +68,7 @@ namespace WebApplication2.Context
                 .WithMany()
                 .HasForeignKey(r => r.categoryID)
                 .WillCascadeOnDelete(false);
-
+            /*
             modelBuilder.Entity<AuditLog>()
                 .HasOptional(r => r.account)
                 .WithMany()
@@ -92,26 +92,44 @@ namespace WebApplication2.Context
                 .WithMany()
                 .HasForeignKey(r => r.categoryID)
                 .WillCascadeOnDelete(false);
-
+*/
             modelBuilder.Entity<AccountAccessRightsContentPage>()
                 .HasOptional(r => r.Account)
                 .WithMany()
                 .HasForeignKey(r => r.AccountID)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<BaseArticle>()
+            modelBuilder.Entity<Article>()
                 .HasOptional(r => r.createdByAccount)
                 .WithMany()
                 .HasForeignKey(r => r.createdBy)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<BaseArticle>()
+            modelBuilder.Entity<Article>()
                 .HasOptional(r => r.approvedByAccount)
                 .WithMany()
                 .HasForeignKey(r => r.approvedBy)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<BaseArticle>()
+            modelBuilder.Entity<Article>()
+                .HasOptional(r => r.publishedByAccount)
+                .WithMany()
+                .HasForeignKey(r => r.publishedBy)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ContentPage>()
+                .HasOptional(r => r.createdByAccount)
+                .WithMany()
+                .HasForeignKey(r => r.createdBy)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ContentPage>()
+                .HasOptional(r => r.approvedByAccount)
+                .WithMany()
+                .HasForeignKey(r => r.approvedBy)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ContentPage>()
                 .HasOptional(r => r.publishedByAccount)
                 .WithMany()
                 .HasForeignKey(r => r.publishedBy)

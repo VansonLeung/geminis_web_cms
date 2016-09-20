@@ -103,6 +103,11 @@ namespace WebApplication2.Context
             return getArticleDb().Where(acc => acc.ArticleID == articleID).FirstOrDefault();
         }
 
+        public Article findArticleByIDNoTracking(int articleID)
+        {
+            return getArticleDb().AsNoTracking().Where(acc => acc.ArticleID == articleID).FirstOrDefault();
+        }
+
 
         public List<Article> findArticlesRequestingApproval()
         {
@@ -348,6 +353,18 @@ namespace WebApplication2.Context
 
 
 
+        public bool frozenArticleAlreadyPresents(Article article)
+        {
+            var count = getArticleDb().AsNoTracking().Where(acc =>
+            acc.BaseArticleID == article.BaseArticleID &&
+            acc.isFrozen == true
+            )
+            .Count();
+
+            return count > 0;
+        }
+
+
 
         public bool articleWithSameVersionAndLangAlreadyPresents(Article article)
         {
@@ -590,7 +607,7 @@ namespace WebApplication2.Context
         #region "Delete"
 
 
-        public String tryDeleteArticle(Article article)
+        public String tryDeleteArticle(Article article, bool isRecursive)
         {
             var _article = findArticleByID(article.ArticleID);
             if (_article == null)
@@ -612,7 +629,12 @@ namespace WebApplication2.Context
 
             if (isRecursive)
             {
-                getArticleDb().RemoveRange(getArticleDb().Table.Where((acc) => acc.BaseArticleID == _article.BaseArticleID));
+                if (frozenArticleAlreadyPresents(_article))
+                {
+                    error = ResHelper.S("itemisfrozen");
+                    return error;
+                }
+                getArticleDb().RemoveRange(getArticleDb().Where((acc) => acc.BaseArticleID == _article.BaseArticleID));
             }
             else
             {

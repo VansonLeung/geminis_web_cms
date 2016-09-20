@@ -92,7 +92,7 @@
             <td>
                 @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
                 @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID }) |
+                @Html.ActionLink("Delete", "DeleteSingle", new { id = item.ArticleID }) |
                 @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = item.BaseArticleID })
             </td>
         </tr>

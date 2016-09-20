@@ -85,7 +85,7 @@ namespace WebApplication2.Helpers
             var mailbody = string.Format(
                 "Dear {0} {1}, <br/><br/>" +
                 "<p>Superadmin has reset your Geminis CMS login password. Here is your temporary password: {2}</p>" +
-                "<p>Login by clicking <a href='"+ ServerHelper.GetSiteRoot() + "/Account/Login'>HERE</a></p>" +
+                "<p>Login by clicking <a href='" + ServerHelper.GetSiteRoot() + "/Account/Login'>HERE</a></p>" +
                 "<p>Upon logging in, you will be prompted to assign your account a new password.</p>" +
                 "<p>Geminis CMS Team</p>",
                 account.Firstname,
@@ -95,6 +95,28 @@ namespace WebApplication2.Helpers
 
             var subject = string.Format(
                 "[Geminis] Superadmin has reset your Geminis CMS login password"
+            );
+
+            return SendEmail(new List<string> { account.Email }, mailbody, subject);
+        }
+
+
+
+        public static bool SendEmailToAccountOnPasswordCreate(Account account, String newPassword)
+        {
+            var mailbody = string.Format(
+                "Dear {0} {1}, <br/><br/>" +
+                "<p>Superadmin has created your Geminis CMS login account. Here is your temporary password: {2}</p>" +
+                "<p>Login by clicking <a href='" + ServerHelper.GetSiteRoot() + "/Account/Login'>HERE</a></p>" +
+                "<p>Upon logging in, you will be prompted to assign your account a new password.</p>" +
+                "<p>Geminis CMS Team</p>",
+                account.Firstname,
+                account.Lastname,
+                newPassword
+            );
+
+            var subject = string.Format(
+                "[Geminis] Superadmin has created your Geminis CMS login account"
             );
 
             return SendEmail(new List<string> { account.Email }, mailbody, subject);

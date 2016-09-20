@@ -354,14 +354,14 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
-
+            var name = item.Name;
             var error = ContentPageDbContext.getInstance().tryDeleteArticle(item, true);
             if (error != null)
             {
                 ModelState.AddModelError("", error);
-                return View(id);
+                return View(item);
             }
-
+            TempData["Message"] = "'" + name + "' Deleted";
             return RedirectToAction("List");
         }
 

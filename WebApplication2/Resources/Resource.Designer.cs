@@ -61,7 +61,7 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Approval Remarks.
+        ///   Looks up a localized string similar to Remarks.
         /// </summary>
         public static string approvalRemarks {
             get {
@@ -313,7 +313,7 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requesting Approval.
+        ///   Looks up a localized string similar to Submitted.
         /// </summary>
         public static string isRequestingApproval {
             get {
@@ -331,7 +331,7 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot edit this article as it is already submitted before..
+        ///   Looks up a localized string similar to Cannot edit or delete this article as it is already submitted before..
         /// </summary>
         public static string itemisfrozen {
             get {

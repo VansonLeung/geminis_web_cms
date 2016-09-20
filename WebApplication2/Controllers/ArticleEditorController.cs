@@ -44,6 +44,10 @@ namespace WebApplication2.Controllers
             var article = new Article();
             article.BaseArticleID = baseArticleID;
             var items = ArticleDbContext.getInstance().findAllArticlesByBaseArticle(article);
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
             return View(items);
         }
 
@@ -412,10 +416,49 @@ namespace WebApplication2.Controllers
             if (error != null)
             {
                 ModelState.AddModelError("", error);
-                return View(id);
+                return View(item);
             }
             TempData["Message"] = "'" + name + "' Deleted";
             return RedirectToAction("List");
+        }
+
+
+
+
+
+        // DELETE
+        [CustomAuthorize(Roles = "superadmin,editor")]
+        public ActionResult DeleteSingle(int id = 0)
+        {
+            var item = ArticleDbContext.getInstance().findArticleByID(id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            return View(item);
+        }
+
+
+        [HttpPost, ActionName("DeleteSingle")]
+        [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = "superadmin,editor")]
+        public ActionResult DeleteSingleConfirmed(int id = 0)
+        {
+            var item = ArticleDbContext.getInstance().findArticleByID(id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            var name = item.Name;
+            var baseArticleID = item.BaseArticleID;
+            var error = ArticleDbContext.getInstance().tryDeleteArticle(item, false);
+            if (error != null)
+            {
+                ModelState.AddModelError("", error);
+                return View(item);
+            }
+            TempData["Message"] = "'" + name + "' Deleted";
+            return RedirectToAction("ListArticleVersions", new { baseArticleID = baseArticleID });
         }
 
 
@@ -456,7 +499,7 @@ namespace WebApplication2.Controllers
                 else
                 {
                     TempData["Message"] = "'" + item.Name + "' Submitted for Approval";
-                    return RedirectToAction("UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = item.Lang });
+                    return RedirectToAction("DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = item.Lang });
                 }
             }
             return View(item);

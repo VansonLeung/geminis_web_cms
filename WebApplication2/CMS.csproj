@@ -1343,6 +1343,8 @@
     <Content Include="Views\ArticleEditor\_ArticleDetailsLocale.cshtml" />
     <Content Include="Views\ArticleEditor\_ArticleListForEditorListVersions.cshtml" />
     <Content Include="Views\ArticleEditor\_ArticleListForEditor.cshtml" />
+    <Content Include="Views\Shared\_PreviewScript.cshtml" />
+    <Content Include="Views\ArticleEditor\DeleteSingle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

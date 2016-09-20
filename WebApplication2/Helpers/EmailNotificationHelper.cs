@@ -188,12 +188,14 @@ namespace WebApplication2.Helpers
                     && owner.ShouldEmailNotifyBaseArticleChangesByOwn())
                 {
                     SendEmail(owner, acc, baseArticle, category, action);
+                    continue;
                 }
 
                 // send to all?
                 if (acc.ShouldEmailNotifyBaseArticleChanges())
                 {
                     SendEmail(owner, acc, baseArticle, category, action);
+                    continue;
                 }
             }
 
@@ -237,48 +239,48 @@ namespace WebApplication2.Helpers
             item_url = ServerHelper.GetSiteRoot() + item_url;
 
             var item_action_tag = "";
-            var item_action_decription = "";
+            var item_action_description = "";
             switch (action)
             {
                 case EmailNotificationAction.CREATE:
                     item_action_tag = "Created";
-                    item_action_decription = "{0} {1} has been created by {2}.";
+                    item_action_description = "{0} {1} has been created by {2}.";
                     break;
                 case EmailNotificationAction.EDIT:
                     item_action_tag = "Edited";
-                    item_action_decription = "{0} {1}'s contents has been edited by {2}.";
+                    item_action_description = "{0} {1}'s contents has been edited by {2}.";
                     break;
                 case EmailNotificationAction.EDITPROPERTIES:
                     item_action_tag = "Properties Edited";
-                    item_action_decription = "{0} {1}'s properties has been edited by {2}.";
+                    item_action_description = "{0} {1}'s properties has been edited by {2}.";
                     break;
                 case EmailNotificationAction.DELETE:
                     item_action_tag = "Deleted";
-                    item_action_decription = "{0} {1} has been deleted by {2}.";
+                    item_action_description = "{0} {1} has been deleted by {2}.";
                     break;
                 case EmailNotificationAction.CREATENEWVERSION:
                     item_action_tag = "Created New Version";
-                    item_action_decription = "A new version of {0} {1} has been created by {2}.";
+                    item_action_description = "A new version of {0} {1} has been created by {2}.";
                     break;
                 case EmailNotificationAction.SUBMITFORAPPROVAL:
                     item_action_tag = "Submitted for Approval";
-                    item_action_decription = "{0} {1} has been submitted for approval by {2}.";
+                    item_action_description = "{0} {1} has been submitted for approval by {2}.";
                     break;
                 case EmailNotificationAction.APPROVE:
                     item_action_tag = "Approved";
-                    item_action_decription = "{0} {1} has been approved by {2}.";
+                    item_action_description = "{0} {1} has been approved by {2}.";
                     break;
                 case EmailNotificationAction.UNAPPROVE:
                     item_action_tag = "Unapproved";
-                    item_action_decription = "{0} {1} has been unapproved by {2}.";
+                    item_action_description = "{0} {1} has been unapproved by {2}.";
                     break;
                 case EmailNotificationAction.PUBLISH:
                     item_action_tag = "Published";
-                    item_action_decription = "{0} {1} has been published by {2}.";
+                    item_action_description = "{0} {1} has been published by {2}.";
                     break;
                 case EmailNotificationAction.UNPUBLISH:
                     item_action_tag = "Unpublished";
-                    item_action_decription = "{0} {1} has been unpublished by {2}.";
+                    item_action_description = "{0} {1} has been unpublished by {2}.";
                     break;
                 default:
                     break;
@@ -290,8 +292,15 @@ namespace WebApplication2.Helpers
                 item_action_tag,
                 name
             );
-            
-            
+
+
+            var item_action_description_impl = string.Format(
+                item_action_description,
+                item_cat,
+                baseArticleID,
+                account.Username
+            );
+
 
             var item_body = string.Format(
                 "Dear {0} {1}, <br/><br/>" +
@@ -301,7 +310,7 @@ namespace WebApplication2.Helpers
                 "<p>Geminis CMS Team</p>",
                 account.Firstname,
                 account.Lastname,
-                item_action_decription,
+                item_action_description_impl,
                 item_url,
                 item_subject
             );

@@ -203,6 +203,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Preview EN" class="btn btn-default" onclick="showFormPreviewEN();" />
+                <input type="button" value="Preview ZH" class="btn btn-default" onclick="showFormPreviewZH();" />
+                <input type="button" value="Preview CN" class="btn btn-default" onclick="showFormPreviewCN();" />
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
@@ -213,6 +216,30 @@
     CKEDITOR.replace('Desc_en');
     CKEDITOR.replace('Desc_zh');
     CKEDITOR.replace('Desc_cn');
+
+    var showFormPreviewEN = function () {
+        showPreview({
+            lang: 'en',
+            name: $("#Name_en").val(),
+            desc: CKEDITOR.instances['Desc_en'].getData(),
+        });
+    }
+
+    var showFormPreviewZH = function () {
+        showPreview({
+            lang: 'zh',
+            name: $("#Name_zh").val(),
+            desc: CKEDITOR.instances['Desc_zh'].getData(),
+        });
+    }
+
+    var showFormPreviewCN = function () {
+        showPreview({
+            lang: 'cn',
+            name: $("#Name_cn").val(),
+            desc: CKEDITOR.instances['Desc_cn'].getData(),
+        });
+    }
 </script>
 
 <div>
@@ -220,3 +247,4 @@
 </div>
 
 @Html.Partial("~/Views/Shared/_FormChangeHandler.cshtml")
+@Html.Partial("~/Views/Shared/_PreviewScript.cshtml")

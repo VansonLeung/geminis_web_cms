@@ -20,19 +20,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.account.Username)
+            Account
+        </th>
+        <th>
+            Category
         </th>
         <th>
             Article
         </th>
         <th>
-            Article Cat.
-        </th>
-        <th>
             Content Page
-        </th>
-        <th>
-            Content Page Cat.
         </th>
         <th>
             @Html.DisplayNameFor(model => model.action)
@@ -51,25 +48,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.account.Username)
+            @Html.DisplayFor(modelItem => item.account)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.article.Name)
+            @Html.DisplayFor(modelItem => item.category)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.article.category.name_en)
+            @Html.DisplayFor(modelItem => item.article)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.contentPage.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.contentPage.category.name_en)
+            @Html.DisplayFor(modelItem => item.contentPage)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.action)
         </td>
         <td>
-            Remarks
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.created_at)
