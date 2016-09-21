@@ -278,7 +278,7 @@ namespace WebApplication2.Context
 
             if (!isSeeding)
             {
-                EmailHelper.SendEmailToAccountOnPasswordReset(account, rawPassword);
+                EmailHelper.SendEmailToAccountOnPasswordCreate(account, rawPassword);
             }
 
             getAccountDb().Add(account);

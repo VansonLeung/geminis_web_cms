@@ -41,6 +41,10 @@ textarea {
 .navbar-default .navbar-text {
   color: #ffffff;
 }
+.navbar-default .navbar-nav > li {
+  float: none;
+  display: inline-block;
+}
 .navbar-default .navbar-nav > li > a {
   color: #ffffff;
 }

@@ -7,46 +7,83 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
 using WebApplication2.Models.Infrastructure;
+using WebApplication2.Resources;
 
 namespace WebApplication2.ViewModels
 {
     public class ArticleCreateForm
     {
+        [Display(Name = "categoryID", ResourceType = typeof(Resource))]
         public int? categoryID { get; set; }
+
         [ForeignKey("categoryID")]
         public virtual Category category { get; set; }
 
-
+        [Display(Name = "name_en", ResourceType = typeof(Resource))]
         public string Name_en { get; set; }
+
         [AllowHtml]
         [DataType(DataType.MultilineText)]
+        [Display(Name = "desc_en", ResourceType = typeof(Resource))]
         public string Desc_en { get; set; }
+
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Excerpt_en", ResourceType = typeof(Resource))]
         public string Excerpt_en { get; set; }
+
+        [Display(Name = "Keywords_en", ResourceType = typeof(Resource))]
         public string Keywords_en { get; set; }
+
+        [Display(Name = "MetaData_en", ResourceType = typeof(Resource))]
         public string MetaData_en { get; set; }
+
+        [Display(Name = "MetaKeywords_en", ResourceType = typeof(Resource))]
         public string MetaKeywords_en { get; set; }
 
 
+
+        [Display(Name = "name_zh", ResourceType = typeof(Resource))]
         public string Name_zh { get; set; }
+
         [AllowHtml]
         [DataType(DataType.MultilineText)]
+        [Display(Name = "desc_zh", ResourceType = typeof(Resource))]
         public string Desc_zh { get; set; }
+
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Excerpt_zh", ResourceType = typeof(Resource))]
         public string Excerpt_zh { get; set; }
+
+        [Display(Name = "Keywords_zh", ResourceType = typeof(Resource))]
         public string Keywords_zh { get; set; }
+
+        [Display(Name = "MetaData_zh", ResourceType = typeof(Resource))]
         public string MetaData_zh { get; set; }
+
+        [Display(Name = "MetaKeywords_zh", ResourceType = typeof(Resource))]
         public string MetaKeywords_zh { get; set; }
 
 
+
+        [Display(Name = "name_cn", ResourceType = typeof(Resource))]
         public string Name_cn { get; set; }
+
         [AllowHtml]
         [DataType(DataType.MultilineText)]
+        [Display(Name = "desc_cn", ResourceType = typeof(Resource))]
         public string Desc_cn { get; set; }
+
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Excerpt_cn", ResourceType = typeof(Resource))]
         public string Excerpt_cn { get; set; }
+
+        [Display(Name = "Keywords_cn", ResourceType = typeof(Resource))]
         public string Keywords_cn { get; set; }
+
+        [Display(Name = "MetaData_cn", ResourceType = typeof(Resource))]
         public string MetaData_cn { get; set; }
+
+        [Display(Name = "MetaKeywords_cn", ResourceType = typeof(Resource))]
         public string MetaKeywords_cn { get; set; }
 
 

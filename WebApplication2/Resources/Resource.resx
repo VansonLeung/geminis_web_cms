@@ -232,7 +232,7 @@
     <value>Unapproval Date</value>
   </data>
   <data name="Desc" xml:space="preserve">
-    <value>Descripton</value>
+    <value>Description</value>
   </data>
   <data name="Excerpt" xml:space="preserve">
     <value>Excerpt</value>
@@ -256,7 +256,7 @@
     <value>Keywords</value>
   </data>
   <data name="Lang" xml:space="preserve">
-    <value>Lang</value>
+    <value>Language</value>
   </data>
   <data name="MetaData" xml:space="preserve">
     <value>Meta Data</value>
@@ -281,5 +281,107 @@
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="EmailNotifications" xml:space="preserve">
+    <value>Email Notifications</value>
+  </data>
+  <data name="historyPasswords" xml:space="preserve">
+    <value>Password History</value>
+  </data>
+  <data name="imagePath" xml:space="preserve">
+    <value>Image Path</value>
+  </data>
+  <data name="isArticleList" xml:space="preserve">
+    <value>Article List</value>
+  </data>
+  <data name="isContentPage" xml:space="preserve">
+    <value>Content Page</value>
+  </data>
+  <data name="isEnabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="isVisibleToMembersOnly" xml:space="preserve">
+    <value>Visible to Members</value>
+  </data>
+  <data name="isVisibleToTradingOnly" xml:space="preserve">
+    <value>Visible to Traders</value>
+  </data>
+  <data name="isVisibleToVisitorOnly" xml:space="preserve">
+    <value>Visible to Visitors</value>
+  </data>
+  <data name="name_cn" xml:space="preserve">
+    <value>Name (CN)</value>
+  </data>
+  <data name="name_en" xml:space="preserve">
+    <value>Name (EN)</value>
+  </data>
+  <data name="name_zh" xml:space="preserve">
+    <value>Name (ZH)</value>
+  </data>
+  <data name="order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="parentItemID" xml:space="preserve">
+    <value>Parent ID</value>
+  </data>
+  <data name="desc_cn" xml:space="preserve">
+    <value>Description (CN)</value>
+  </data>
+  <data name="desc_en" xml:space="preserve">
+    <value>Description (EN)</value>
+  </data>
+  <data name="desc_zh" xml:space="preserve">
+    <value>Description (ZH)</value>
+  </data>
+  <data name="Excerpt_cn" xml:space="preserve">
+    <value>Excerpt (CN)</value>
+  </data>
+  <data name="Excerpt_en" xml:space="preserve">
+    <value>Excerpt (EN)</value>
+  </data>
+  <data name="Excerpt_zh" xml:space="preserve">
+    <value>Excerpt (ZH)</value>
+  </data>
+  <data name="isActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Keywords_cn" xml:space="preserve">
+    <value>Keywords (CN)</value>
+  </data>
+  <data name="Keywords_en" xml:space="preserve">
+    <value>Keywords (EN)</value>
+  </data>
+  <data name="Keywords_zh" xml:space="preserve">
+    <value>Keywords (ZH)</value>
+  </data>
+  <data name="MetaData_cn" xml:space="preserve">
+    <value>MetaData (CN)</value>
+  </data>
+  <data name="MetaData_en" xml:space="preserve">
+    <value>MetaData (EN)</value>
+  </data>
+  <data name="MetaData_zh" xml:space="preserve">
+    <value>MetaData (ZH)</value>
+  </data>
+  <data name="MetaKeywords_cn" xml:space="preserve">
+    <value>MetaKeywords (CN)</value>
+  </data>
+  <data name="MetaKeywords_en" xml:space="preserve">
+    <value>MetaKeywords (EN)</value>
+  </data>
+  <data name="MetaKeywords_zh" xml:space="preserve">
+    <value>MetaKeywords (ZH)</value>
+  </data>
+  <data name="endDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="startDate" xml:space="preserve">
+    <value>Start Date</value>
   </data>
 </root>

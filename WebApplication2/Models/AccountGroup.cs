@@ -7,6 +7,7 @@ using WebApplication2.Attributes;
 using WebApplication2.Context;
 using WebApplication2.Helpers;
 using WebApplication2.Models.Infrastructure;
+using WebApplication2.Resources;
 
 namespace WebApplication2.Models
 {
@@ -20,8 +21,12 @@ namespace WebApplication2.Models
 
         public bool isDefaultGroup { get; set; }
 
+        [Display(Name = "Categories", ResourceType = typeof(Resource))]
         public string AccessibleCategories { get; set; }
+
+        [Display(Name = "Categories", ResourceType = typeof(Resource))]
         public List<string> AccessibleCategoryList { get; set; }
+
         public List<string> getAccessibleCategoryList()
         {
             if (AccessibleCategories != null)

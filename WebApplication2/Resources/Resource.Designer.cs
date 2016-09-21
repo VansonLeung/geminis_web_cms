@@ -61,6 +61,15 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string Action {
+            get {
+                return ResourceManager.GetString("Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remarks.
         /// </summary>
         public static string approvalRemarks {
@@ -129,6 +138,15 @@ namespace WebApplication2.Resources {
         public static string canPublish {
             get {
                 return ResourceManager.GetString("canPublish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Categories.
+        /// </summary>
+        public static string Categories {
+            get {
+                return ResourceManager.GetString("Categories", resourceCulture);
             }
         }
         
@@ -241,11 +259,38 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descripton.
+        ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Desc {
             get {
                 return ResourceManager.GetString("Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description (CN).
+        /// </summary>
+        public static string desc_cn {
+            get {
+                return ResourceManager.GetString("desc_cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description (EN).
+        /// </summary>
+        public static string desc_en {
+            get {
+                return ResourceManager.GetString("desc_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description (ZH).
+        /// </summary>
+        public static string desc_zh {
+            get {
+                return ResourceManager.GetString("desc_zh", resourceCulture);
             }
         }
         
@@ -259,11 +304,56 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email Notifications.
+        /// </summary>
+        public static string EmailNotifications {
+            get {
+                return ResourceManager.GetString("EmailNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Date.
+        /// </summary>
+        public static string endDate {
+            get {
+                return ResourceManager.GetString("endDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Excerpt.
         /// </summary>
         public static string Excerpt {
             get {
                 return ResourceManager.GetString("Excerpt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excerpt (CN).
+        /// </summary>
+        public static string Excerpt_cn {
+            get {
+                return ResourceManager.GetString("Excerpt_cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excerpt (EN).
+        /// </summary>
+        public static string Excerpt_en {
+            get {
+                return ResourceManager.GetString("Excerpt_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excerpt (ZH).
+        /// </summary>
+        public static string Excerpt_zh {
+            get {
+                return ResourceManager.GetString("Excerpt_zh", resourceCulture);
             }
         }
         
@@ -286,11 +376,65 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password History.
+        /// </summary>
+        public static string historyPasswords {
+            get {
+                return ResourceManager.GetString("historyPasswords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image Path.
+        /// </summary>
+        public static string imagePath {
+            get {
+                return ResourceManager.GetString("imagePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string isActive {
+            get {
+                return ResourceManager.GetString("isActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Approved.
         /// </summary>
         public static string isApproved {
             get {
                 return ResourceManager.GetString("isApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Article List.
+        /// </summary>
+        public static string isArticleList {
+            get {
+                return ResourceManager.GetString("isArticleList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Content Page.
+        /// </summary>
+        public static string isContentPage {
+            get {
+                return ResourceManager.GetString("isContentPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string isEnabled {
+            get {
+                return ResourceManager.GetString("isEnabled", resourceCulture);
             }
         }
         
@@ -331,6 +475,33 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Visible to Members.
+        /// </summary>
+        public static string isVisibleToMembersOnly {
+            get {
+                return ResourceManager.GetString("isVisibleToMembersOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visible to Traders.
+        /// </summary>
+        public static string isVisibleToTradingOnly {
+            get {
+                return ResourceManager.GetString("isVisibleToTradingOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visible to Visitors.
+        /// </summary>
+        public static string isVisibleToVisitorOnly {
+            get {
+                return ResourceManager.GetString("isVisibleToVisitorOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot edit or delete this article as it is already submitted before..
         /// </summary>
         public static string itemisfrozen {
@@ -358,7 +529,34 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lang.
+        ///   Looks up a localized string similar to Keywords (CN).
+        /// </summary>
+        public static string Keywords_cn {
+            get {
+                return ResourceManager.GetString("Keywords_cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keywords (EN).
+        /// </summary>
+        public static string Keywords_en {
+            get {
+                return ResourceManager.GetString("Keywords_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keywords (ZH).
+        /// </summary>
+        public static string Keywords_zh {
+            get {
+                return ResourceManager.GetString("Keywords_zh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Lang {
             get {
@@ -421,11 +619,65 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MetaData (CN).
+        /// </summary>
+        public static string MetaData_cn {
+            get {
+                return ResourceManager.GetString("MetaData_cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MetaData (EN).
+        /// </summary>
+        public static string MetaData_en {
+            get {
+                return ResourceManager.GetString("MetaData_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MetaData (ZH).
+        /// </summary>
+        public static string MetaData_zh {
+            get {
+                return ResourceManager.GetString("MetaData_zh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meta Keywords.
         /// </summary>
         public static string MetaKeywords {
             get {
                 return ResourceManager.GetString("MetaKeywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MetaKeywords (CN).
+        /// </summary>
+        public static string MetaKeywords_cn {
+            get {
+                return ResourceManager.GetString("MetaKeywords_cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MetaKeywords (EN).
+        /// </summary>
+        public static string MetaKeywords_en {
+            get {
+                return ResourceManager.GetString("MetaKeywords_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MetaKeywords (ZH).
+        /// </summary>
+        public static string MetaKeywords_zh {
+            get {
+                return ResourceManager.GetString("MetaKeywords_zh", resourceCulture);
             }
         }
         
@@ -444,6 +696,33 @@ namespace WebApplication2.Resources {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name (CN).
+        /// </summary>
+        public static string name_cn {
+            get {
+                return ResourceManager.GetString("name_cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name (EN).
+        /// </summary>
+        public static string name_en {
+            get {
+                return ResourceManager.GetString("name_en", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name (ZH).
+        /// </summary>
+        public static string name_zh {
+            get {
+                return ResourceManager.GetString("name_zh", resourceCulture);
             }
         }
         
@@ -471,6 +750,24 @@ namespace WebApplication2.Resources {
         public static string oldpassword {
             get {
                 return ResourceManager.GetString("oldpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order.
+        /// </summary>
+        public static string order {
+            get {
+                return ResourceManager.GetString("order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parent ID.
+        /// </summary>
+        public static string parentItemID {
+            get {
+                return ResourceManager.GetString("parentItemID", resourceCulture);
             }
         }
         
@@ -525,6 +822,15 @@ namespace WebApplication2.Resources {
         public static string Slug {
             get {
                 return ResourceManager.GetString("Slug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date.
+        /// </summary>
+        public static string startDate {
+            get {
+                return ResourceManager.GetString("startDate", resourceCulture);
             }
         }
         

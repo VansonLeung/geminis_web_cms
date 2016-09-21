@@ -101,6 +101,7 @@ namespace WebApplication2.Models
         // 0 = notify all items' changes in my user group
         // 1 = notify all items' changes created / approved / published by me
         // 2 = don't notify
+        [Display(Name = "EmailNotifications", ResourceType = typeof(Resource))]
         public int EmailNotifications { get; set; }
 
         [Display(Name = "Don't notify own changes")]
@@ -135,9 +136,10 @@ namespace WebApplication2.Models
             return Account.getEmailNotificationRepresentation(EmailNotifications);
         }
 
-
+        [Display(Name = "isEnabled", ResourceType = typeof(Resource))]
         public bool isEnabled { get; set; }
 
+        [Display(Name = "historyPasswords", ResourceType = typeof(Resource))]
         public string historyPasswords { get; set; }
 
         public List<string> historyPasswordList()

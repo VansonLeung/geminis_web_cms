@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using WebApplication2.Models.Infrastructure;
+using WebApplication2.Resources;
 
 namespace WebApplication2.Models
 {
@@ -25,6 +26,7 @@ namespace WebApplication2.Models
         public int? categoryID { get; set; }
         public string category { get; set; }
 
+        [Display(Name = "Action", ResourceType = typeof(Resource))]
         public string action { get; set; }
     }
 }
