@@ -496,6 +496,8 @@ namespace WebApplication2.Context
             _article.Excerpt = article.Excerpt;
             db.SaveChanges();
 
+            AuditLogDbContext.getInstance().createAuditLogContentPageAction(_article, AuditLogDbContext.ACTION_EDIT);
+
             return null;
         }
 
@@ -542,6 +544,9 @@ namespace WebApplication2.Context
             }
 
             db.SaveChanges();
+
+            AuditLogDbContext.getInstance().createAuditLogContentPageAction(_article, AuditLogDbContext.ACTION_EDIT_PROPERTIES);
+
             return null;
         }
 

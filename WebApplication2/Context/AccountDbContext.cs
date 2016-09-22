@@ -121,6 +121,11 @@ namespace WebApplication2.Context
                 accountGroupIDs.Add(group.AccountGroupID);
             }
 
+            if (accountGroupIDs.Count <= 0)
+            {
+                accountGroupIDs.Add(1);
+            }
+
             int ownerAccountID = -1;
 
             if (SessionPersister.account != null)
@@ -128,12 +133,13 @@ namespace WebApplication2.Context
                 ownerAccountID = SessionPersister.account.AccountID;
             }
 
-            return getAccountDb().AsNoTracking().Where(acc => 
+
+            return getAccountDb().AsNoTracking().Where(acc =>
             (
                 (
                     (
-                        acc.EmailNotifications == 0 && accountGroupIDs.Contains(acc.GroupID ?? -2)
-                    ) 
+                        acc.EmailNotifications == 0 && accountGroupIDs.Contains(acc.GroupID ?? 1)
+                    )
                     ||
                     (
                         acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.createdBy ?? -2)
@@ -150,9 +156,9 @@ namespace WebApplication2.Context
                 &&
                 (
                     (
-                        acc.AccountID != ownerAccountID 
+                        acc.AccountID != ownerAccountID
                     )
-                    || 
+                    ||
                     (
                         acc.AccountID == ownerAccountID && !acc.EmailNotificationsNotNotifyOwnChangesToMySelf
                     )

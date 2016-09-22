@@ -75,24 +75,19 @@ namespace WebApplication2.Helpers
             return notificationAction;
         }
 
-        public static bool NotifyAllOnActionOfBaseArticle(BaseArticle baseArticle, EmailNotificationAction action, List<Object> parameters = null)
+        public static bool NotifyAllOnActionOfBaseArticle(string categoryStr, BaseArticle baseArticle, EmailNotificationAction action, List<Object> parameters = null)
         {
             if (action == EmailNotificationAction.UNKNOWN)
             {
                 return false;
             }
 
+            var categoryID = baseArticle.categoryID;
+            Category category = null;
+
             if (baseArticle.categoryID == null || baseArticle.categoryID <= 0)
             {
-                return false;
-            }
-
-            var categoryID = baseArticle.categoryID;
-            var category = InfrastructureCategoryDbContext.getInstance().findCategoryByID(categoryID);
-
-            if (category == null)
-            {
-                return false;
+                category = InfrastructureCategoryDbContext.getInstance().findCategoryByID(categoryID);
             }
 
 
@@ -110,7 +105,7 @@ namespace WebApplication2.Helpers
             foreach (var group in accountGroups)
             {
                 List<int> categoryIDs = group.getAccessibleCategoryListInt();
-                if (categoryIDs.Contains(category.ItemID))
+                if (category != null && categoryIDs.Contains(category.ItemID))
                 {
                     filteredAccountGroups.Add(group);
                 }
@@ -187,14 +182,14 @@ namespace WebApplication2.Helpers
                 if (owner != null && owner.AccountID == acc.AccountID 
                     && owner.ShouldEmailNotifyBaseArticleChangesByOwn())
                 {
-                    SendEmail(owner, acc, baseArticle, category, action);
+                    SendEmail(categoryStr, owner, acc, baseArticle, category, action);
                     continue;
                 }
 
                 // send to all?
                 if (acc.ShouldEmailNotifyBaseArticleChanges())
                 {
-                    SendEmail(owner, acc, baseArticle, category, action);
+                    SendEmail(categoryStr, owner, acc, baseArticle, category, action);
                     continue;
                 }
             }
@@ -204,7 +199,7 @@ namespace WebApplication2.Helpers
 
 
 
-        public static System.Collections.Generic.Dictionary<string, string> MakeNotificationInfo(Account owner, Account account, BaseArticle baseArticle, Category category, EmailNotificationAction action)
+        public static System.Collections.Generic.Dictionary<string, string> MakeNotificationInfo(string categoryStr, Account owner, Account account, BaseArticle baseArticle, Category category, EmailNotificationAction action)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
 
@@ -214,7 +209,7 @@ namespace WebApplication2.Helpers
             var baseArticleID = baseArticle.BaseArticleID;
             var name = baseArticle.Name;
 
-            if (category.isArticleList)
+            if (categoryStr.Equals("Article"))
             {
                 item_cat = "Article";
                 if (account.isRolePublisher())
@@ -230,7 +225,7 @@ namespace WebApplication2.Helpers
                     item_url = "/ArticleEditor/DetailsLocale?baseArticleID=" + baseArticle.BaseArticleID + "&version=" + baseArticle.Version + "&lang=" + baseArticle.Lang;
                 }
             }
-            else if (category.isContentPage)
+            else if (categoryStr.Equals("Content Page"))
             {
                 item_cat = "Content Page";
                 item_url = "/ContentPageEditor/DetailsLocale?baseArticleID=" + baseArticle.BaseArticleID + "&version=" + baseArticle.Version + "&lang=" + baseArticle.Lang;
@@ -298,7 +293,7 @@ namespace WebApplication2.Helpers
                 item_action_description,
                 item_cat,
                 baseArticleID,
-                account.Username
+                owner.Username
             );
 
 
@@ -322,9 +317,9 @@ namespace WebApplication2.Helpers
         }
         
 
-        public static void SendEmail(Account owner, Account account, BaseArticle baseArticle, Category category, EmailNotificationAction action)
+        public static void SendEmail(string categoryStr, Account owner, Account account, BaseArticle baseArticle, Category category, EmailNotificationAction action)
         {
-            var dict = MakeNotificationInfo(owner, account, baseArticle, category, action);
+            var dict = MakeNotificationInfo(categoryStr, owner, account, baseArticle, category, action);
             var body = dict["body"];
             var subject = dict["subject"];
 

@@ -36,7 +36,7 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Url)
+            @item.getUrl()
         </td>
         <td>
             @if (item.createdByAccount != null)

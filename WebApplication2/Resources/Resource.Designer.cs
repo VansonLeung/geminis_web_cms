@@ -61,6 +61,15 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accounts.
+        /// </summary>
+        public static string Accounts {
+            get {
+                return ResourceManager.GetString("Accounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action.
         /// </summary>
         public static string Action {
@@ -372,6 +381,15 @@ namespace WebApplication2.Resources {
         public static string forgotpassword {
             get {
                 return ResourceManager.GetString("forgotpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group.
+        /// </summary>
+        public static string GroupID {
+            get {
+                return ResourceManager.GetString("GroupID", resourceCulture);
             }
         }
         
@@ -763,7 +781,7 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parent ID.
+        ///   Looks up a localized string similar to Parent.
         /// </summary>
         public static string parentItemID {
             get {

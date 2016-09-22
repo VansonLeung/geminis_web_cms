@@ -328,7 +328,7 @@
     <value>Order</value>
   </data>
   <data name="parentItemID" xml:space="preserve">
-    <value>Parent ID</value>
+    <value>Parent</value>
   </data>
   <data name="desc_cn" xml:space="preserve">
     <value>Description (CN)</value>
@@ -378,8 +378,14 @@
   <data name="MetaKeywords_zh" xml:space="preserve">
     <value>MetaKeywords (ZH)</value>
   </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
   <data name="endDate" xml:space="preserve">
     <value>End Date</value>
+  </data>
+  <data name="GroupID" xml:space="preserve">
+    <value>Group</value>
   </data>
   <data name="startDate" xml:space="preserve">
     <value>Start Date</value>

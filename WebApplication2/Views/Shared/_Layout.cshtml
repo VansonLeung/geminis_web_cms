@@ -21,9 +21,9 @@
     <script type="text/javascript" src="@Url.Content("~/Content/ckeditor/adapters/jquery.js")"></script>
     @Scripts.Render("~/bundles/ckfinder")
 </head>
-<body style="padding-top:0px;">
+<body style="padding-top:64px;">
     <div style="padding-left: 0px; padding-right: 0px;" class="container-fluid">
-        <div class="navbar navbar-default" style="border: 0px solid transparent; background-color: transparent;">
+        <div class="navbar navbar-default navbar-fixed-top" style="">
             <div class="">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="navbar-collapse collapse" style="padding: 0;">
-                    <table style="border-image: none; table-layout: fixed; max-width: 100%; background-color: #E74C3C;">
+                    <table style="border-image: none; table-layout: fixed; max-width: 100%;">
                         <tr>
                             <td style="white-space: nowrap; position: relative; width: 100%;">
                                 <ul class="nav navbar-nav" style="white-space: nowrap; position: relative;">
@@ -48,9 +48,19 @@
                                         else if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("superadmin"))
                                         {
                                             <li>@Html.ActionLink("Home", "Index", "Account")</li>
-                                            <li>@Html.ActionLink("Register Account", "Register", "Account")</li>
-                                            <li>@Html.ActionLink("Account Groups", "List", "AccountGroup")</li>
-                                            <li>@Html.ActionLink("Account List", "List", "Account")</li>
+                                            <li>
+                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                    Accounts
+                                                    <b class="caret"></b>
+
+                                                    <ul class="dropdown-menu">
+                                                        <li>@Html.ActionLink("Register Account", "Register", "Account")</li>
+                                                        <li>@Html.ActionLink("Account Groups", "List", "AccountGroup")</li>
+                                                        <li>@Html.ActionLink("Account List", "List", "Account")</li>
+                                                    </ul>
+                                                </a>
+                                            </li>
+
                                             <li>@Html.ActionLink("Categories", "List", "InfrastructureCategory")</li>
                                             <li>
                                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -119,7 +129,7 @@
                                 </ul>
 
                             </td>
-                            <td style="min-width: 280px;">
+                            <td style="min-width: 280px; white-space: nowrap; overflow: auto;">
 
                                 <ul class="nav navbar-nav">
 
@@ -171,7 +181,7 @@
         </footer>
     </div>
     <div style="display: inline-block; position: fixed; top: 0; right: 0; color: #FFFFFF;">
-        Version: 0.1.10 - Last Updated: 2016/09/21
+        Version: 0.1.11 - Last Updated: 2016/09/22
     </div>
 </body>
 </html>

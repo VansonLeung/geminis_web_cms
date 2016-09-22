@@ -157,7 +157,7 @@ namespace WebApplication2.Context
             }
 
             var notificationAction = EmailNotificationHelper.ParseAction(action);
-            EmailNotificationHelper.NotifyAllOnActionOfBaseArticle(_article, notificationAction);
+            EmailNotificationHelper.NotifyAllOnActionOfBaseArticle("Article", _article, notificationAction);
             
             AuditLog item = new AuditLog();
             item.accountID = account.AccountID;
@@ -185,7 +185,7 @@ namespace WebApplication2.Context
             }
 
             var notificationAction = EmailNotificationHelper.ParseAction(action);
-            EmailNotificationHelper.NotifyAllOnActionOfBaseArticle(contentPage, notificationAction);
+            EmailNotificationHelper.NotifyAllOnActionOfBaseArticle("Content Page", contentPage, notificationAction);
 
             AuditLog item = new AuditLog();
             item.accountID = account.AccountID;

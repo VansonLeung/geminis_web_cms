@@ -81,6 +81,7 @@ namespace WebApplication2.Models
 
         public int? GroupID { get; set; }
         [ForeignKey("GroupID")]
+        [Display(Name = "GroupID", ResourceType = typeof(Resource))]
         public virtual AccountGroup Group { get; set; }
 
         [Display(Name = "lastlogin", ResourceType = typeof(Resource))]

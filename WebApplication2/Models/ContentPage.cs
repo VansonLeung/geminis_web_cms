@@ -7,6 +7,21 @@ namespace WebApplication2.Models
 {
     public class ContentPage : BaseArticle
     {
+        public string getUrl()
+        {
+            if (category != null)
+            {
+                var url = category.getUrl();
+
+                if (url != null)
+                {
+                    return String.Format("{0}", url);
+                }
+            }
+
+            return "";
+        }
+
         public ContentPage makeNewContentPageByCloningContent()
         {
             ContentPage a = new ContentPage();
