@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Calendar | by Valeriu Timbuc for DesignModo</title>
+
+	<link rel="stylesheet" href="css/calendar.css" media="screen">
+
+<meta name="robots" content="noindex,follow" />
+</head>
+
+<body>
+
+<div id="calendar"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="js/jquery-ui-datepicker.min.js"></script>
+<script>
+
+	var eventDates = {};
+
+	eventDates[ new Date( '09/04/2016' )] = 
+	{
+		date: new Date( '09/04/2016' ),
+		class: "eventDates_company eventDates_announcement",
+	};
+
+	eventDates[ new Date( '09/14/2016' )] = 
+	{
+		date: new Date( '09/14/2016' ),
+		class: "eventDates_announcement",
+	};
+
+	eventDates[ new Date( '09/24/2016' )] = 
+	{
+		date: new Date( '09/24/2016' ),
+		class: "eventDates_company",
+	};
+
+	eventDates[ new Date( '10/04/2016' )] = 
+	{
+		date: new Date( '10/04/2016' ),
+		class: "eventDates_announcement",
+	};
+
+
+
+
+	$('#calendar').datepicker({
+
+		format: 'mm-yyyy',
+	    dateFormat: "mm/yy",
+	    changeMonth: false,
+	    changeYear: false,
+	    monthNames: ["01","02","03","04","05","06","07","08","09","10","11","12"],
+	    monthNamesShort: ["01","02","03","04","05","06","07","08","09","10","11","12"],
+		inline: true,
+		firstDay: 7,
+		showOtherMonths: true,
+		dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		beforeShowDay: function(date) {
+            var eventDate = eventDates[date];
+	        if (eventDate) 
+	        {
+				return [true, eventDate.class, eventDate.date];
+	        }
+	        return [true, '', ''];
+	     }
+	});
+</script>
+
+</body>
+
+</html>

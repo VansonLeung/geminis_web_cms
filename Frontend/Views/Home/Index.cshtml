@@ -2,10 +2,44 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Geminis Unit Test Page</h1>
-</div>
+<section class='back'>
+    <div class='content_big_title'>
+        <table>
+            <tr>
+                <td>
+                    <div class='title'>
+                        股票報價- 00001 長和
+                    </div>
+                    <div class='hr'></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
 
-<div class="row">
-    @Html.Action("ArticleList", "Home")
-</div>
+
+
+<section class='front'>
+    <div class='gem_form nobg fixedformpadding'>
+        <div class='row'>
+            <div class='col s12 m12'>
+                <iframe class='if-flexible' id='i0' src='./stock_top_menu.html' frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class='gem_form nobg'>
+        <div class='row'>
+            <div class='col s12 m8'>
+                <iframe class='if-flexible' id='i1' src='./stock_dashboard.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i2' src='./stock_table.html' frameborder="0" scrolling="no"></iframe>
+            </div>
+
+            <div class='col s12 m4'>
+                <iframe class='if-flexible' id='i3' src='./stock_price_alert_form.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i4' src='./stock_price_alert_form2.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i5' src='./generic_widget_news_select.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i6' src='./generic_sidebar_banner_with_title.html' frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
+</section>

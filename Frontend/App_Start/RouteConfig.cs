@@ -14,9 +14,41 @@ namespace Frontend
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                    name: "Page",
+                    url: "Page/{category}/{id}",
+                    defaults: new
+                    {
+                        locale = "zh-HK",
+                        controller = "Page",
+                        action = "Index",
+                        category = UrlParameter.Optional,
+                        id = UrlParameter.Optional
+                    }
+                );
+
+            routes.MapRoute(
+                    name: "PageLocale",
+                    url: "{locale}/Page/{category}/{id}",
+                    defaults: new
+                    {
+                        locale = "zh-HK",
+                        controller = "Page",
+                        action = "Index",
+                        category = UrlParameter.Optional,
+                        id = UrlParameter.Optional
+                    }
+                );
+
+            routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{locale}/{controller}/{action}/{id}",
+                defaults: new
+                {
+                    locale = "zh-HK",
+                    controller = "Home",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
             );
         }
     }
