@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+textarea.cke_source {
+    max-width: none !important;
+}
+
 
 
 /* Set styles for nav bar */

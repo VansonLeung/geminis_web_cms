@@ -14,6 +14,21 @@ namespace WebApplication2.Models.Infrastructure
 
         public string GetName(string locale = null)
         {
+            if (locale != null)
+            {
+                if (locale.Equals("en"))
+                {
+                    return name_en;
+                }
+                if (locale.Equals("zh"))
+                {
+                    return name_zh;
+                }
+                if (locale.Equals("cn"))
+                {
+                    return name_cn;
+                }
+            }
             return name_en;
         }
 
@@ -23,7 +38,7 @@ namespace WebApplication2.Models.Infrastructure
 
         public string getUrl()
         {
-            return "/" + url;
+            return "Page/" + url;
         }
 
         [Required]
@@ -62,5 +77,23 @@ namespace WebApplication2.Models.Infrastructure
         [Range(0, Int32.MaxValue, ErrorMessage = "Minimum value of order should be \"0\"")]
         [Display(Name = "order", ResourceType = typeof(Resource))]
         public int order { get; set; }
+
+        [Display(Name = "isHeaderMenu", ResourceType = typeof(Resource))]
+        public bool isHeaderMenu { get; set; }
+
+        [Display(Name = "isFooterMenu", ResourceType = typeof(Resource))]
+        public bool isFooterMenu { get; set; }
+
+        [Display(Name = "isShortcut", ResourceType = typeof(Resource))]
+        public bool isShortcut { get; set; }
+
+        [Display(Name = "isJumbotron", ResourceType = typeof(Resource))]
+        public bool isJumbotron { get; set; }
+
+        [Display(Name = "isBanner", ResourceType = typeof(Resource))]
+        public bool isBanner { get; set; }
+
+        [Display(Name = "remarks", ResourceType = typeof(Resource))]
+        public string remarks { get; set; }
     }
 }

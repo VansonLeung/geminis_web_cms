@@ -1,0 +1,213 @@
+﻿@model Frontend.ViewModels.BaseViewModel
+
+<section class='top'>
+    <div class='header'>
+        <div class='top-red-bar'>
+        </div>
+        <div class='white-space'>
+            <div class='gem_form nobg zeromarginpadding'>
+                <div class="row">
+                    <div class="col m12">
+                        <table class='header-table-grid-1 font_sm'>
+                            <tr>
+                                <td>
+                                    <div class='GSL'>@Model.headerData.title</div>
+                                </td>
+                                <td>
+                                    繁中 
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    字體大小
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style='font-size: 20px'>A</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style='font-size: 30px'>A</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class='generic-button-standalone gb-hollow-white'>
+                                        <a href="/@Model.lang.locale/Page/login">登入／註冊</a>
+                                    </span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class='generic-button-standalone gb-primary'>
+                                        免費開戶
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class='nav-bar-bg'>
+                            <ul id="nav-mobile">
+                                @for (var i = 0; i < Model.headerMenu.Count; i++)
+                                {
+                                    var menuItem = Model.headerMenu[i];
+                                    <li id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
+                                }
+                            </ul>
+                            <ul id="nav-mobile" class="right">
+                                <li style="border-right: 1px solid #999999; width: 100px; text-align: center"><a href="badges.html"><i class="fa fa-search"></i></a></li>
+                                <li><a class="c_red" href="collapsible.html">Account</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="nav-overlay">
+            @for (var i = 0; i < Model.headerMenu.Count; i++)
+            {
+                var menuItem = Model.headerMenu[i];
+
+                <div class='gem_form nobg zeromarginpadding nav-overlay-li' id="headerMenu_@i">
+                    <div class="row">
+                        <div class="col s3 box">
+                            <div class="font_xxxlg" style="font-weight: bolder;">@menuItem.name</div>
+                            <p class="font_sm c_grey_2" style="line-height: 1.43;">@menuItem.name</p>
+                        </div>
+                        <div class="col s3 box">
+                            <ul class="nav-sub-menu sub">
+                                @for (var j = 0; j < menuItem.submenu.Count; j++)
+                                {
+                                    var submenuItem = menuItem.submenu[j];
+                                    if (submenuItem.category.isNoContent)
+                                    {
+                                        <li id="headerMenu_sub_li_@j">
+                                            @submenuItem.name
+                                            @if (submenuItem.submenu.Count > 0)
+                                            {
+                                                <p class="arrow"></p>
+                                            }
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li id="headerMenu_sub_li_@j">
+                                            <a href="@submenuItem.link.GetFullURL()">@submenuItem.name</a>
+                                            @if (submenuItem.submenu.Count > 0)
+                                            {
+                                                <p class="arrow"></p>
+                                            }
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <div class="col s3 box">
+                            @for (var j = 0; j < menuItem.submenu.Count; j++)
+                            {
+                                var submenuItem = menuItem.submenu[j];
+                                <ul class="nav-sub-menu subsub" id="headerMenu_sub_@j">
+                                    @for (var k = 0; k < submenuItem.submenu.Count; k++)
+                                    {
+                                        var subsubmenuItem = submenuItem.submenu[k];
+                                        <li><a href="@subsubmenuItem.link.GetFullURL()">@subsubmenuItem.name</a><p class="arrow"></p></li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                        <div class="col s3 box">
+                            <img src="/images/menu_img1.jpg" style="width: 100%" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+
+
+        <div class='breadcrumb-bar-bg'>
+            <div class='gem_form nobg zeromarginpadding'>
+                <div class="row">
+                    <div class="col m12">
+                        @for (var k = 0; k < Model.breadcrumbData.Count; k++)
+                        {
+                            var arrow = "";
+                            if (k + 1 < Model.breadcrumbData.Count)
+                            {
+                                arrow = " > ";
+                            }
+                            var data = Model.breadcrumbData[k];
+                            <a href="@data.link.GetFullURL()">@data.name</a> @arrow
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+var overlay_time = null;
+
+$('.nav-bar-bg').find('li').on('mouseover', function (e) {
+    var target = $(e.target).closest('li');
+    var siblings = target.closest('.nav-bar-bg').find('li');
+
+    if (!target.hasClass('highlighted'))
+    {
+        $('.nav-sub-menu.sub').find('li').removeClass('active');
+        $('.nav-sub-menu.subsub').hide();
+        $('.nav-sub-menu.subsub').find('li').removeClass('active');
+    }
+
+    siblings.removeClass('highlighted');
+    target.addClass('highlighted')
+
+    $('#nav-overlay').show();
+
+
+    var headerMenu_li_ = target.attr('id');
+    var headerMenu_li_id = headerMenu_li_.replace("headerMenu_li_", "headerMenu_");
+    $('#nav-overlay').find('#' + headerMenu_li_id).show();
+    $('#nav-overlay').find('#' + headerMenu_li_id).siblings('.nav-overlay-li').hide();
+
+
+    if (overlay_time) {
+        clearTimeout(overlay_time);
+        overlay_time = null;
+    }
+});
+
+$('#nav-overlay').on('mouseout', function(e)
+{
+    overlay_time = setTimeout(function() {
+        $('#nav-overlay').hide();
+        var siblings = $('.nav-bar-bg').find('li');
+        siblings.removeClass('highlighted');
+    }, 500);
+});
+$('#nav-overlay').on('mouseover', function(e)
+{
+    if (overlay_time)
+    {
+        clearTimeout(overlay_time);
+        overlay_time = null;
+    }
+});
+
+
+$('.nav-sub-menu.sub').find('li').on('mouseover', function (e) {
+    var target = $(e.target).closest('li');
+    var siblings = target.siblings('li');
+
+    siblings.removeClass('active');
+    target.addClass('active');
+
+    var headerMenu_sub_li_ = target.attr('id');
+    var headerMenu_sub_li_id = headerMenu_li_.replace("headerMenu_sub_li_", "headerMenu_sub_");
+    $('#nav-overlay').find('#' + headerMenu_sub_li_id).show();
+    $('#nav-overlay').find('#' + headerMenu_sub_li_id).siblings('.nav-sub-menu.subsub').hide();
+})
+
+$('.nav-sub-menu.subsub').find('li').on('mouseover', function (e) {
+    var target = $(e.target).closest('li');
+    var siblings = target.siblings('li');
+
+    siblings.removeClass('active');
+    target.addClass('active');
+})
+
+</script>

@@ -57,7 +57,7 @@ namespace WebApplication2.Context
 
         public List<Category> findCategorysByParentIDAsNoTracking(int? parentItemID = null)
         {
-            if (parentItemID == null)
+            if (parentItemID == null || parentItemID == 0)
             {
                 return getItemDb()
                     .AsNoTracking()
@@ -67,6 +67,25 @@ namespace WebApplication2.Context
             }
             return getItemDb()
                 .Where(item => item.parentItemID == parentItemID)
+                .OrderBy(item => item.order)
+                .Include(item => item.parentItem)
+                .ToList();
+        }
+
+        public List<Category> findActiveCategorysByParentIDAsNoTracking(int? parentItemID = null)
+        {
+            if (parentItemID == null || parentItemID == 0)
+            {
+                return getItemDb()
+                    .AsNoTracking()
+                    .Where(item => item.parentItemID == null 
+                    && item.isEnabled == true)
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+            return getItemDb()
+                .Where(item => item.parentItemID == parentItemID
+                    && item.isEnabled == true)
                 .OrderBy(item => item.order)
                 .Include(item => item.parentItem)
                 .ToList();
@@ -174,6 +193,17 @@ namespace WebApplication2.Context
             if (itemID == null) return null;
             return getItemDb()
                 .Where(item => item.ItemID == itemID)
+                .OrderBy(item => item.order)
+                .Include(item => item.parentItem)
+                .FirstOrDefault();
+        }
+
+
+        public Category findCategoryByURL(string URL)
+        {
+            if (URL == null) return null;
+            return getItemDb()
+                .Where(item => item.url == URL)
                 .OrderBy(item => item.order)
                 .Include(item => item.parentItem)
                 .FirstOrDefault();

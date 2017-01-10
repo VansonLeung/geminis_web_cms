@@ -1,20 +1,32 @@
 ﻿<script type="text/javascript">
 
     var showPreview = function (params) {
-        var site = "<html><head></head><body></body></html>";
+        var site = " \
+<!DOCTYPE html> \
+<html> \
+<head> \
+    <link rel='stylesheet' href='/fonts/font_roboto_condensed.css' type='text/css'/> \
+    <link rel='stylesheet' href='/fonts/font_material_icons.css' type='text/css'/> \
+    <link rel='stylesheet' href='/fonts/font_font_awesome.css' type='text/css'/> \
+    <link rel='stylesheet' href='/css/app.css' type='text/css'/> \
+    <meta charset='UTF-8'/> \
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' /> \
+</head> \
+ \
+<body> \
+<script type='text/javascript' src='/js/jquerymin.js'><\/script> \
+<script type='text/javascript' src='/js/materialize.min.js'><\/script> \
+<script type='text/javascript' src='/js/iframeResizer.min.js'><\/script> \
+ \
+" + params['desc'] + "  \
+ \
+<script type='text/javascript' src='/js/iframeResizer.contentWindow.min.js'><\/script> \
+<script type='text/javascript' src='/js/init_iframe.js'><\/script> \
+</body> \
+</html> ";
         var popupWindow = window.open("", "", "menubar=0,scrollbars=0");
         popupWindow.document.write(site);
         popupWindow.document.close();
-
-        var body = $(popupWindow.document.body);
-        var html = "";
-
-        html += ("<div>" + (params['name'] || "") + "</div>");
-        html += ("<hr/>");
-        html += ("<div>" + (params['desc'] || "") + "</div>");
-        html += ("<hr/>");
-
-        body.html(html);
     }
 
 </script>

@@ -14,7 +14,7 @@ namespace WebApplication2.Controllers
     {
         SelectList getCategoriesForSelect(int? selectedID = null)
         {
-            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysArticleListsAsNoTracking();
+            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysAsNoTracking();
             items.Insert(0, new Models.Infrastructure.Category { ItemID = -1, name_en = "" });
             return new SelectList(items, "ItemID", "name_en", selectedID);
         }

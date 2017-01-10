@@ -1,4 +1,5 @@
 ﻿using Frontend.Attributes;
+using Frontend.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace Frontend.Controllers
         [Internationalization]
         public override ActionResult Index()
         {
-            return View();
+            BaseViewModel vm = BaseViewModel.make(null, null, null, Request);
+            return View(vm);
         }
 
         [Internationalization]

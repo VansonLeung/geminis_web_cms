@@ -111,6 +111,15 @@
   .gb-transparent-white:active {
     opacity: 0.6; }
 
+.gb-white-red {
+  border: solid 2px #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  color: #A50841 !important; }
+  .gb-white-red:hover {
+    opacity: 0.8; }
+  .gb-white-red:active {
+    opacity: 0.6; }
+
 .oval-button-red {
   width: 72px;
   height: 72px;
@@ -469,17 +478,12 @@ section {
       margin: 0px;
       font-size: 0.8em;
       color: #666666; }
-    .header .nav-bar-bg ul:last-child li:last-child {
-      line-height: 38px;
-      margin: 6px;
-      height: 38px;
-      border-left: 1px solid #666666; }
-      .header .nav-bar-bg ul:last-child li:last-child:hover {
-        box-shadow: 0 0 0 0 #ce0f00,  0 6px 0 0 #ce0f00; }
     .header .nav-bar-bg ul li a {
       color: #666666; }
-    .header .nav-bar-bg ul li:hover {
+    .header .nav-bar-bg ul li.selected {
       box-shadow: inset 0 -6px 0 0 #ce0f00; }
+    .header .nav-bar-bg ul li.highlighted {
+      background-color: #F3F3F3; }
 
 .header .breadcrumb-bar-bg {
   width: 100%;
@@ -672,6 +676,105 @@ input[type="text"]:focus, input[type="password"]:focus {
       line-height: 45px;
       width: 22px;
       height: 22px; }
+
+.landingpage_banner {
+  height: 399px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5); }
+  .landingpage_banner ul.landingpage_banner_button li {
+    position: relative;
+    width: 200px;
+    height: 54px;
+    color: #ffffff;
+    background-color: #394f64;
+    margin-left: 36px;
+    margin-right: 36px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 14px 14px;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer; }
+    .landingpage_banner ul.landingpage_banner_button li .arrow {
+      background: url("../images/index/banner_arrow.png");
+      position: absolute;
+      top: -15px;
+      left: 10px;
+      width: 8px;
+      height: 30px;
+      display: none; }
+    .landingpage_banner ul.landingpage_banner_button li.active {
+      background-color: #1b2942; }
+      .landingpage_banner ul.landingpage_banner_button li.active .arrow {
+        display: inline-block; }
+
+.landingpage_shortcut {
+  height: 60px;
+  line-height: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5); }
+  .landingpage_shortcut a {
+    color: #ffffff; }
+  .landingpage_shortcut td {
+    margin: 0px !important;
+    padding: 0px !important;
+    text-align: center;
+    border-right: 2px solid #ffffff;
+    cursor: pointer; }
+    .landingpage_shortcut td:last-child {
+      border-right-width: 0px !important; }
+
+.nav-bar-bg {
+  position: relative; }
+
+#nav-overlay {
+  box-shadow: 0px 25px 20px rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 100000;
+  top: 130px;
+  height: 430px;
+  width: 100%;
+  position: absolute;
+  background: #F3F3F3; }
+  #nav-overlay > .gem_form {
+    position: relative;
+    height: 100%;
+    padding-top: 60px !important;
+    padding-bottom: 30px !important; }
+    #nav-overlay > .gem_form > .row {
+      height: 100%; }
+  #nav-overlay.active {
+    display: inline-block; }
+  #nav-overlay .box {
+    display: inline-block;
+    height: 100%;
+    padding-right: 27px;
+    border-right: 1px solid #979797; }
+    #nav-overlay .box:last-child {
+      border-right-width: 0px; }
+    #nav-overlay .box:nth-last-child(2) {
+      border-right-width: 0px; }
+  #nav-overlay ul.nav-sub-menu {
+    margin: 0px !important; }
+    #nav-overlay ul.nav-sub-menu li {
+      color: #333333;
+      position: relative;
+      padding: 10px 20px;
+      font-size: 0.9em; }
+      #nav-overlay ul.nav-sub-menu li .arrow {
+        position: absolute;
+        top: -5px;
+        right: 10px;
+        width: 9px;
+        height: 16px;
+        background: url("../images/menu_arrow_1.png") 0 -16px; }
+      #nav-overlay ul.nav-sub-menu li.active {
+        background-color: #ce0f00;
+        color: #fff; }
+        #nav-overlay ul.nav-sub-menu li.active .arrow {
+          background: url("../images/menu_arrow_1.png") 0 0; }
 
 .text-bottom-wrapper {
   position: relative; }

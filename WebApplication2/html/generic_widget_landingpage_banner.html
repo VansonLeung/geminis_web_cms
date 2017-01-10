@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/fonts/font_roboto_condensed.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_material_icons.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_font_awesome.css">
+    <link type="text/css" rel="stylesheet" href="/css/app.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<script type="text/javascript" src="/js/jquerymin.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<script type="text/javascript" src="/js/iframeResizer.min.js"></script>
+<section>
+
+    <div class='gem_form notopstripe shortbottom'>
+        <div class="landingpage_banner">
+            <table style="height: 100%">
+                <tr>
+                    <td>
+                        <div>
+                            <img src="/images/index/banner_txt.png" style="width: 100%; max-width: 560px" />
+                            <div style="height: 2px; width: 60%; max-width: 406px; background-color: #fff"></div>
+                            <br/>
+                            <table class='generic-table-form font_lg' style="width: auto !important;">
+                                <tr>
+                                    <td class='font_sm'><div class='generic-button-big gb-primary font_lg'>儲存</div></td>
+                                    <td class='font_sm'><div class='generic-button-big gb-white-red font_lg'>重設</div></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td style="width: 228px;">
+                        <ul class="landingpage_banner_button">
+                            <li>鉅亨證券<p class="arrow"></p></li>
+                            <li>股市新聞<p class="arrow"></p></li>
+                            <li>IPO<p class="arrow"></p></li>
+                            <li>股市新聞<p class="arrow"></p></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <div class="landingpage_shortcut">
+            <table>
+                <tr>
+                    <td>
+                        <a href="賬上餘額">賬上餘額</a>
+                    </td>
+                    <td>
+                        <a href="賬上餘額">賬上餘額</a>
+                    </td>
+                    <td>
+                        <a href="賬上餘額">賬上餘額</a>
+                    </td>
+                    <td>
+                        <a href="賬上餘額">賬上餘額</a>
+                    </td>
+                    <td>
+                        <a href="賬上餘額">賬上餘額</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+    $('.landingpage_banner_button').find('li').on('mouseover', function(e)
+    {
+        var target = $(e.target).closest('li');
+        var siblings = target.siblings('li');
+        siblings.removeClass('active');
+        target.addClass('active');
+    })
+</script><script type="text/javascript" src="/js/iframeResizer.contentWindow.min.js"></script>
+<script type="text/javascript" src="/js/init_iframe.js"></script>
+</body>
+</html>

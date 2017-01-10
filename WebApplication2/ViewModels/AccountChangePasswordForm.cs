@@ -12,8 +12,6 @@ namespace WebApplication2.ViewModels
     {
         [Display(Name = "oldpassword", ResourceType = typeof(Resource))]
         [Required]
-        [AccountPasswordLengthValidation]
-        [AccountPasswordLetterValidation]
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }
 

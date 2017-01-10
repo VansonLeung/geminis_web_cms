@@ -13,6 +13,9 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.category)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Version)
         </th>
         <th>
@@ -55,6 +58,12 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @if (item.category != null)
+                {
+                @item.category.GetName(null)
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Version)

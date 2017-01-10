@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using WebApplication2.Helpers;
 using WebApplication2.Models;
+using WebApplication2.Models.Infrastructure;
 using WebApplication2.Security;
 
 namespace WebApplication2.Context
@@ -52,7 +53,7 @@ namespace WebApplication2.Context
                 .ToList();
         }
 
-        
+
 
         public string deletePublishedArticlesByBaseArticle(ContentPage article)
         {
@@ -88,6 +89,27 @@ namespace WebApplication2.Context
 
             return null;
         }
+
+
+
+
+
+        public ContentPagePublished getArticlePublishedByCategory(Category category, string lang = "en")
+        {
+            var now = DateTime.Now;
+
+            return (getArticlePublishedDb().AsNoTracking().Where(acc =>
+            acc.categoryID == category.ItemID
+            && acc.Lang == lang
+            && acc.datePublishStart.GetValueOrDefault() <= now
+            && acc.datePublishEnd.GetValueOrDefault() >= now
+            ).OrderByDescending(acc => acc.Version))
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount).FirstOrDefault();
+        }
+
+
 
 
 

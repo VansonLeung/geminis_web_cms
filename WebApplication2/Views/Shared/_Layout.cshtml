@@ -75,7 +75,8 @@
                                                     </ul>
                                                 </a>
                                             </li>
-                                            <li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>
+                                            <!--<li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>-->
+                                            <li>@Html.ActionLink("Constants", "Index", "Constant")</li>
                                             <li>@Html.ActionLink("Audit Log", "Index", "AuditLog")</li>
                                             <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
                                         }
@@ -90,7 +91,7 @@
                                             {
 
                                                 <li>@Html.ActionLink("Articles", "List", "ArticleEditor")</li>
-                                                <li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>
+                                                <!--<li>@Html.ActionLink("Content Pages", "List", "ContentPageEditor")</li>-->
                                             }
 
                                             if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("approver"))
@@ -110,6 +111,7 @@
                                             || SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("approver")
                                             || SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("publisher"))
                                             {
+                                                <li>@Html.ActionLink("Constants", "Index", "Constant")</li>
                                                 <li>@Html.ActionLink("Maintenance", "Index", "SystemMaintenanceNotification")</li>
                                             }
                                         }

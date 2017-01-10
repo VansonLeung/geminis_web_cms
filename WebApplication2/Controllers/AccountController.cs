@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using WebApplication2.Models;
 using WebApplication2.Security;
 using WebApplication2.Context;
-using WebApplication2.ViewModels;
+using WebApplication2.Models;
 using System.Data.Entity;
 using System.Net;
 using WebApplication2.Helpers;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
 {
@@ -121,12 +122,16 @@ namespace WebApplication2.Controllers
 
 
         [HttpPost]
-        public ActionResult Login(Account account)
+        public ActionResult Login(AccountLoginForm account)
         {
-            var username = account.Username;
-            var password = account.Password;
+            var _account = new Account();
+            _account.Username = account.Username;
+            _account.Password = account.Password;
 
-            var result = AccountDbContext.getInstance().tryLoginAccountByAccount(account);
+            var username = _account.Username;
+            var password = _account.Password;
+
+            var result = AccountDbContext.getInstance().tryLoginAccountByAccount(_account);
             if (result != null)
             {
                 if (result.LoginFails >= 3)

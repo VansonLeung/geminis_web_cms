@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using WebApplication2.Helpers;
 using WebApplication2.Models;
+using WebApplication2.Models.Infrastructure;
 using WebApplication2.Security;
 
 namespace WebApplication2.Context
@@ -127,6 +128,42 @@ namespace WebApplication2.Context
 
             return null;
         }
+
+
+
+
+        public List<ArticlePublished> getArticlesPublishedByCategory(Category category, string lang = "en")
+        {
+            var now = DateTime.Now;
+
+            return (getArticlePublishedDb().AsNoTracking().Where(acc =>
+            acc.categoryID == category.ItemID
+            && acc.Lang == lang
+            && (!acc.datePublishStart.HasValue || acc.datePublishStart.Value <= now)
+            && (!acc.datePublishEnd.HasValue || acc.datePublishEnd.Value >= now)
+            ).OrderByDescending(acc => acc.datePublishStart))
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount).ToList();
+        }
+
+
+        public ArticlePublished getArticlePublishedByBaseArticleID(int baseArticleID, string lang = "en")
+        {
+            var now = DateTime.Now;
+
+            return (getArticlePublishedDb().AsNoTracking().Where(acc =>
+            acc.BaseArticleID == baseArticleID
+            && acc.Lang == lang
+            && (!acc.datePublishStart.HasValue || acc.datePublishStart.Value.Date <= now)
+            && (!acc.datePublishEnd.HasValue || acc.datePublishEnd.Value.Date >= now)
+            ).OrderByDescending(acc => acc.Version))
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount).FirstOrDefault();
+        }
+
+
 
         #endregion
 

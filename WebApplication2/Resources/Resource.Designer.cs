@@ -439,6 +439,15 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Banner.
+        /// </summary>
+        public static string isBanner {
+            get {
+                return ResourceManager.GetString("isBanner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Content Page.
         /// </summary>
         public static string isContentPage {
@@ -457,11 +466,38 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Footer Menu.
+        /// </summary>
+        public static string isFooterMenu {
+            get {
+                return ResourceManager.GetString("isFooterMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Frozen.
         /// </summary>
         public static string isFrozen {
             get {
                 return ResourceManager.GetString("isFrozen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Header Menu.
+        /// </summary>
+        public static string isHeaderMenu {
+            get {
+                return ResourceManager.GetString("isHeaderMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jumbotron.
+        /// </summary>
+        public static string isJumbotron {
+            get {
+                return ResourceManager.GetString("isJumbotron", resourceCulture);
             }
         }
         
@@ -480,6 +516,15 @@ namespace WebApplication2.Resources {
         public static string isRequestingApproval {
             get {
                 return ResourceManager.GetString("isRequestingApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shortcut.
+        /// </summary>
+        public static string isShortcut {
+            get {
+                return ResourceManager.GetString("isShortcut", resourceCulture);
             }
         }
         
@@ -822,6 +867,15 @@ namespace WebApplication2.Resources {
         public static string register {
             get {
                 return ResourceManager.GetString("register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remarks.
+        /// </summary>
+        public static string remarks {
+            get {
+                return ResourceManager.GetString("remarks", resourceCulture);
             }
         }
         

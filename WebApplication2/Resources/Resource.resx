@@ -390,4 +390,22 @@
   <data name="startDate" xml:space="preserve">
     <value>Start Date</value>
   </data>
+  <data name="isBanner" xml:space="preserve">
+    <value>Banner</value>
+  </data>
+  <data name="isFooterMenu" xml:space="preserve">
+    <value>Footer Menu</value>
+  </data>
+  <data name="isHeaderMenu" xml:space="preserve">
+    <value>Header Menu</value>
+  </data>
+  <data name="isJumbotron" xml:space="preserve">
+    <value>Jumbotron</value>
+  </data>
+  <data name="isShortcut" xml:space="preserve">
+    <value>Shortcut</value>
+  </data>
+  <data name="remarks" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
 </root>

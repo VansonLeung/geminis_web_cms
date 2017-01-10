@@ -12,5 +12,6 @@ namespace Frontend.ViewModels
         public Category category { get; set; }
         public bool is_active { get; set; }
         public bool is_highlighted { get; set; }
+        public List<Menu> submenu { get; set; }
     }
 }

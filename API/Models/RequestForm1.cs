@@ -11,5 +11,7 @@ namespace API.Models
         public string a { get; set; }
         public string b { get; set; }
         public string date { get; set; }
+
+        public Dictionary<string, string> dict { get; set; }
     }
 }

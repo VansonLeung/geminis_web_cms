@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/fonts/font_roboto_condensed.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_material_icons.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_font_awesome.css">
+    <link type="text/css" rel="stylesheet" href="/css/app.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<script type="text/javascript" src="/js/jquerymin.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<script type="text/javascript" src="/js/iframeResizer.min.js"></script>
+<section>
+
+  <div class='gem_form'>
+    <div class='gem_form_header' style='position:relative; padding-left: 0; padding-right: 0;'>
+      <p class='topbar'></p>
+
+    </div>
+    <div style='padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 10px;'>
+      <br>
+      <table class='generic-table-form'>
+        <tr>
+          <td class='font_lg'>新增提示</td>
+        </tr>
+      </table>
+      <br/>
+      <table class='generic-table-form font_smed prefix_100'>
+        <tr>
+          <td>
+            <input type='radio' checked='checked' name='code' value='stock_code' id='code01' />
+            <label for='code01'><span><span></span></span>股票代號：</label>
+          </td>
+          <td><input type='text' class='gm gm-numbers' /></td>
+        </tr>
+        <tr>
+          <td>
+            <input type='radio' name='code' value='stock_code' id='code02' />
+            <label for='code02'><span><span></span></span>指數：</label>
+          </td>
+          <td><input type='text' class='gm gm-numbers' /></td>
+        </tr>
+      </table>
+
+
+
+      <table class='generic-table-form font_smed prefix_80'>
+        <tr>
+          <td>
+            <label for='code03'><span><span></span></span>標準：</label>
+          </td>
+          <td><input name='code03' type='text' /></td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for='code03'><span><span></span></span></label>
+          </td>
+          <td>
+
+            <div style='position: relative;'>
+              <table class='generic-table-form'>
+                <tr>
+                  <td>
+                    <div class='select-style'>
+                      <select name='code04' style='width: 60px'>
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td>
+                    <input name='code03' type='text' style='width: 100%' />
+                  </td>
+                </tr>
+              </table>
+
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for='code04'><span><span></span></span>到期日：</label>
+          </td>
+          <td>
+            <div class='select-style'>
+              <select name='code04'>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for='code05'><span><span></span></span>發送模式：</label>
+          </td>
+          <td>
+            <div class='select-style'>
+              <select name='code05'>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+
+      <table class='generic-table-form font_lg'>
+        <tr>
+          <td class='font_sm'><div class='generic-button-flexible gb-primary font_lg'>儲存</div></td>
+          <td class='font_sm'><div class='generic-button-flexible gb-secondary font_lg'>重設</div></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+<script type="text/javascript" src="/js/iframeResizer.contentWindow.min.js"></script>
+<script type="text/javascript" src="/js/init_iframe.js"></script>
+</body>
+</html>

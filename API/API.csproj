@@ -80,11 +80,13 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -234,14 +236,20 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Bindings\JSONParamBindingAttribute.cs" />
     <Compile Include="Bindings\JSONParamBinding.cs" />
-    <Compile Include="Controllers\DemoController.cs" />
+    <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\TTLAPIRequest.cs" />
     <Compile Include="Models\RequestForm1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\TTLITradeWSDEV\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -275,6 +283,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\default.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -286,6 +295,441 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.accountBalanceEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.accountBalanceEnquiryResponseAccountBalanceEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.applyIPOResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.applyIPOResponseApplyIPOResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.bankBalanceEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.bankBalanceEnquiryResponseBankBalanceEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.buyingPowerEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.buyingPowerEnquiryResponseBuyingPowerResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cancelOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cancelOrderResponseCancelOrderResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.changePasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.changePasswordResponseChangePasswordResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.checkNominalClosingPriceDerivationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.checkNominalClosingPriceDerivationResponseCheckNominalClosingPriceDerivationResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.clientDeviceRegResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.clientDeviceRegResponseClientDeviceResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.clientLoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.clientLoginResponseLoginResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.clientLogoutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.clientLogoutResponseLogoutResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.createClientResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.createClientResponseCreateClientResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.depositCashResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.depositCashResponseDepositCashResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.disclaimerAgreedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.disclaimerAgreedResponseDisclaimerAgreedResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.eMessageDeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.eMessageDeleteResponseEMessageDeleteResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.eMessageEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.eMessageEnquiryResponseEMessageEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.enterOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.enterOrderResponseEnterOrderResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.foreignExchangeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.foreignExchangeResponseForeignExchangeResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.getnTradeDateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.getnTradeDateResponseGetnTradeDateResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.getSpreadTableResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.getSpreadTableResponseSpreadTableResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.IPOApplStatusEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.IPOApplStatusEnquiryResponseIpoApplStatusEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.IPODetailEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.IPODetailEnquiryResponseIpoDetailEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.IPOListEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.IPOListEnquiryResponseIpoListEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.isClientLoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.isClientLoginResponseIsLoginResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.loginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.loginResponseOperatorLoginResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.marketEventCalendarEnquriyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.marketEventCalendarEnquriyResponseMarketEventResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.mobileAccountBalanceEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.mobileAccountBalanceEnquiryResponseMoblieAccountBalanceEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.modifyAccountDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.modifyAccountDetailsResponseModifyAccountDetailsResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.modifyOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.modifyOrderResponseModifyOrderResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.orderHistoryEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.orderHistoryEnquiryResponseOrderHistoryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.orderPlacementPreviewResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.orderPlacementPreviewResponseOrderPlacementPreviewResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.portfolioEnquiryByInstrumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.portfolioEnquiryByInstrumentResponsePortfolioEnquiryByInstrumentResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.priceAlertDeleteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.priceAlertDeleteResponsePriceAlertDeleteResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.priceAlertEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.priceAlertEnquiryResponsePriceAlertEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.priceAlertSubscriptionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.priceAlertSubscriptionResponsePriceAlertSubscriptionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryAccountDetailsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryAccountDetailsResponseQueryAccountDetailsResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryAppParamInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryAppParamInfoResponseAppParamInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryChannelInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryChannelInfoResponseQueryChannelInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryChannelSpecialOrderSettingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryChannelSpecialOrderSettingResponseQueryChannelSpecialOrderSettingResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientBankAccountInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientBankAccountInfoResponseQueryClientBankAccountInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientInfoResponseQueryClientInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientIPORequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientIPORequestResponseQueryClientIPORequestResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientJointAccountInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientJointAccountInfoResponseQueryClientJointAccountInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientMSPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientMSPResponseQueryClientMSPResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientRelatedAccountInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientRelatedAccountInfoResponseQueryClientRelatedAccountInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientTradingAccBoardInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryClientTradingAccBoardInfoResponseQueryClientTradingAccBoardInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryCMSMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryCMSMessageResponseQueryCMSMessagesResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryCreateClientOptionItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryCreateClientOptionItemResponseQueryCreateClientOptionItemResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryEMessageNotificationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryEMessageNotificationResponseQueryMsgNotifyResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryInstrumentInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryInstrumentInfoResponseQueryInstrumentInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOAllotmentResultResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOAllotmentResultResponseQueryIPOAllotmentResultResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOApplyAmountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOApplyAmountResponseQueryIPOApplyAmountResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOInfoResponseQueryIPOInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOLotSpreadDetailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOLotSpreadDetailResponseQueryIPOLotSpreadDetailResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOSystemOnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryIPOSystemOnResponseQueryIPOSystemOnResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryOrderExecutionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryOrderExecutionResponseQueryOrderExecutionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryOrderInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryOrderInfoResponseQueryOrderInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryPromoMessagesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.queryPromoMessagesResponseQueryPromoMessagesResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.responseHeaderType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.searchInstrumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.searchInstrumentResponseSearchInstrumentInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.settlementInstructionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.settlementInstructionResponseSettlementInstructionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.setupClientMSPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.setupClientMSPResponseSetupClientMSPResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.shareHoldersConfirmResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.shareHoldersConfirmResponseShareHoldsEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.shareHoldersEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.shareHoldersEnquiryResponseShareHoldsEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.shareHoldersInputResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.shareHoldersInputResponseShareHoldsEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.shareHoldersListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.shareHoldersListResponseShareHoldersListResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.stockPriceInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.stockPriceInfoResponseStockPriceInfoResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.stockQuoteEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.stockQuoteEnquiryResponseStockQuoteEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.subscribeMarketDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.subscribeMarketDataResponseMarketDataSubscriptionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.tradeEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.tradeEnquiryResponseTradeEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.transactionHistoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.transactionHistoryResponseTransactionHistoryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.updatePasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.updatePasswordResponseUpdatePasswordResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.withdrawCashResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.withdrawCashResponseWithdrawCashResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\TTLITradeWSDEV\configuration91.svcinfo" />
+    <None Include="Service References\TTLITradeWSDEV\configuration.svcinfo" />
+    <None Include="Service References\TTLITradeWSDEV\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -301,6 +745,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -313,6 +758,12 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\TTLITradeWSDEV\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

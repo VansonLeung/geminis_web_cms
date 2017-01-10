@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/fonts/font_roboto_condensed.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_material_icons.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_font_awesome.css">
+    <link type="text/css" rel="stylesheet" href="/css/app.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<script type="text/javascript" src="/js/jquerymin.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<script type="text/javascript" src="/js/iframeResizer.min.js"></script>
+<section class='top'>
+  <div class='header'>
+    <div class='top-red-bar'>
+    </div>
+    <div class='white-space'>
+      <div class='gem_form nobg zeromarginpadding'>
+        <div class="row">
+          <div class="col m12">
+            <table class='header-table-grid-1 font_sm'>
+              <tr>
+                <td>
+                  <div class='GSL'>GSL</div>
+                </td>
+                <td>
+                  繁中 
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  字體大小
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <span style='font-size: 20px'>A</span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <span style='font-size: 30px'>A</span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                <span class='generic-button-standalone gb-hollow-white'>
+                  登入／註冊
+                </span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                <span class='generic-button-standalone gb-primary'>
+                  免費開戶
+                </span>
+                </td>
+              </tr>
+            </table>
+
+            <div class='nav-bar-bg'>
+              <ul id="nav-mobile">
+                <li><a href="sass.html">Home</a></li>
+                <li class="selected"><a href="badges.html">Market</a></li>
+                <li><a href="collapsible.html">News</a></li>
+                <li><a href="collapsible.html">Investments</a></li>
+                <li><a href="collapsible.html">Promotions</a></li>
+                <li><a href="collapsible.html">About Us</a></li>
+                <li><a href="collapsible.html">Services</a></li>
+              </ul>
+              <ul id="nav-mobile" class="right">
+                <li style="border-right: 1px solid #999999; width: 100px; text-align: center"><a href="badges.html"><i class="fa fa-search"></i></a></li>
+                <li><a class="c_red" href="collapsible.html">Account</a></li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="nav-overlay">
+
+      <div class='gem_form nobg zeromarginpadding'>
+        <div class="row">
+          <div class="col s3 box">
+            <div class="font_xxxlg" style="font-weight: bolder;">股市行情</div>
+            <p class="font_sm c_grey_2" style="line-height: 1.43;">致力於運用互聯網思維優化香港現有證券服務運作，透過投資服務的網絡及電子化，融入最尖端的互聯網科技與設計，讓投資者輕鬆體會最便捷的一站式投資服務。</p>
+          </div>
+          <div class="col s3 box">
+            <ul class="nav-sub-menu">
+              <li>港股 (HK)<p class="arrow"></p></li>
+              <li>A股 (CN)<p class="arrow"></p></li>
+              <li>台股 (TW)<p class="arrow"></p></li>
+              <li>美股 (US)<p class="arrow"></p></li>
+              <li>期權杠杆<p class="arrow"></p></li>
+              <li>財經新聞<p class="arrow"></p></li>
+            </ul>
+          </div>
+          <div class="col s3 box">
+            <ul class="nav-sub-menu">
+              <li>指數</li>
+              <li>最活躍股</li>
+            </ul>
+          </div>
+          <div class="col s3 box">
+            <img src="/images/menu_img1.jpg" style="width: 100%" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class='breadcrumb-bar-bg'>
+      <div class='gem_form nobg zeromarginpadding'>
+        <div class="row">
+          <div class="col m12">
+            主頁   > 市場   > 香港證券   > 股票報價
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script type="text/javascript">
+  var overlay_time = null;
+
+  $('.nav-bar-bg').find('li').on('mouseover', function(e)
+  {
+    var target = $(e.target).closest('li');
+    var siblings = target.closest('.nav-bar-bg').find('li');
+
+    siblings.removeClass('highlighted');
+    target.addClass('highlighted')
+
+    $('#nav-overlay').show();
+
+    if (overlay_time)
+    {
+      clearTimeout(overlay_time);
+      overlay_time = null;
+    }
+  });
+  $('#nav-overlay').on('mouseout', function(e)
+  {
+    overlay_time = setTimeout(function() {
+      $('#nav-overlay').hide();
+      var siblings = $('.nav-bar-bg').find('li');
+      siblings.removeClass('highlighted');
+    }, 500);
+  });
+  $('#nav-overlay').on('mouseover', function(e)
+  {
+    if (overlay_time)
+    {
+      clearTimeout(overlay_time);
+      overlay_time = null;
+    }
+  });
+
+
+  $('.nav-sub-menu').find('li').on('mouseover', function(e)
+  {
+    var target = $(e.target).closest('li');
+    var siblings = target.siblings('li');
+
+    siblings.removeClass('active');
+    target.addClass('active');
+  })
+
+</script>
+
+<section class='back'>
+  <div class='content_big_title'>
+    <table>
+      <tr>
+        <td>
+          <div class='title'>
+            股票報價- 00001 長和
+          </div>
+          <div class='hr'></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+
+
+<section class='front'>
+  <div class='gem_form nobg fixedformpadding'>
+    <div class='row'>
+      <div class='col s12 m12'>
+        <iframe class='if-flexible' id='i0' src='./stock_top_menu.html' frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </div>
+  <div class='gem_form nobg'>
+    <div class='row'>
+      <div class='col s12 m8'>
+        <iframe class='if-flexible' id='i1' src='./stock_dashboard.html' frameborder="0" scrolling="no"></iframe>
+        <iframe class='if-flexible' id='i2' src='./stock_table.html' frameborder="0" scrolling="no"></iframe>
+      </div>
+
+      <div class='col s12 m4'>
+        <iframe class='if-flexible' id='i3' src='./stock_price_alert_form.html' frameborder="0" scrolling="no"></iframe>
+        <iframe class='if-flexible' id='i4' src='./stock_price_alert_form2.html' frameborder="0" scrolling="no"></iframe>
+        <iframe class='if-flexible' id='i5' src='./generic_widget_news_select.html' frameborder="0" scrolling="no"></iframe>
+        <iframe class='if-flexible' id='i6' src='./generic_sidebar_banner_with_title.html' frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+<section class='top'>
+  <div class='footer'>
+    <div class='white-space'>
+      <div class='gem_form nobg zeromarginpadding' style='position:relative; overflow: visible;'>
+        <div class='row'>
+          <div class='col s12 m4'>
+            <a href='#'>常見問題</a>
+            <a href='#'>免責聲明</a>
+          </div>
+          <div class='col s12 m4'>
+            <a href='#'>下載</a>
+            <a href='#'>開戶申請查詢</a>
+          </div>
+          <div class='col s12 m4'>
+            <a href='#'>聯絡我們</a>
+            <a href='#'>網站地圖</a>
+          </div>
+        </div>
+        <a href='#' class='oval-button-red' style='position:fixed;bottom: 106px; right: 10px;'></a>
+        <a href='#' class='oval-button-white' style='position:fixed;bottom: 24px; right: 10px;'></a>
+      </div>
+    </div>
+    <div class='footer-bar-bg'>
+      <div class='gem_form nobg zeromarginpadding'>
+        <div class='row'>
+          <div class='col s12 m12'>
+            © 2016 Geminis Securities Limited，版權所有，不得轉載。&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>用戶協議</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>保障個人資料(隱私)政策</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>免責聲明</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript" src="/js/init.js"></script><script type="text/javascript" src="/js/iframeResizer.contentWindow.min.js"></script>
+<script type="text/javascript" src="/js/init_iframe.js"></script>
+</body>
+</html>

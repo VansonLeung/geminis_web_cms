@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/fonts/font_roboto_condensed.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_material_icons.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_font_awesome.css">
+    <link type="text/css" rel="stylesheet" href="/css/app.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<script type="text/javascript" src="/js/jquerymin.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<script type="text/javascript" src="/js/iframeResizer.min.js"></script>
+<section class="tmpbody">
+    <div class="row inst-form gem_form inst-form-settlement">
+        <form class="inst-mobile-form only-mobile">
+            <div class="mobile-part=1">
+                <div class="col s12">
+                    <h5 class="inst-form-1sttitle">資金交易提示</h5>
+                </div>
+                <div class="col s12">
+                    <div data-tradtype="depositItem-m" class="cashTradingBtn-m cashTradingActive-m">存入</div>
+                    <div data-tradtype="withdrawItem-m" class="cashTradingBtn-m">提取</div>
+                </div>   
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s4">
+                            <p class="inst-form-label label-left">支賬戶口</p>
+                        </div>
+                        <div class="col s8">
+                            <div class="form_acct_choice_1-m">
+                                <div class="inst-form-comboboxItem">
+                                    <input type='radio' class="with-gap" name='AccountType' id='choice_counterparty-m' />
+                                    <label for='choice_counterparty-m'>
+                                        <span class="inst-form-greenbox-base">
+                                                    <span class="inst-form-greenbox" ></span>
+                                        </span>
+                                        Counterparty
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_acct_choice_2-m">
+                                <div class="inst-form-comboboxItem">
+                                    <input type='radio' class="with-gap" name='AccountType' id='choice_margin-m' />
+                                    <label for='choice_margin-m'>
+                                        <span class="inst-form-greenbox-base">
+                                                    <span class="inst-form-greenbox" ></span>
+                                        </span>
+                                        Margin
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form_acct_choice_3-m">
+                                <div class="inst-form-comboboxItem">
+                                    <input type='radio' class="with-gap" name='AccountType' id='choice_custodian-m' />
+                                    <label for='choice_custodian-m'>
+                                        <span class="inst-form-greenbox-base">
+                                                    <span class="inst-form-greenbox"></span>
+                                        </span>
+                                        Custodian
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s4">
+                            <p class="inst-form-label label-left">收賬戶口</p>
+                        </div>
+                        <div class="col s8">
+                            <div class="to_acct_choice_1-m">
+                                <div class="inst-form-comboboxItem">
+                                    <input type='radio' class="with-gap" name='AccountType' id='choice_counterparty_r-m' />
+                                    <label for='choice_counterparty_r-m'>
+                                        <span class="inst-form-greenbox-base">
+                                                    <span class="inst-form-greenbox" ></span>
+                                        </span>
+                                        Counterparty
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="to_acct_choice_2-m">
+                                <div class="inst-form-comboboxItem">
+                                    <input type='radio' class="with-gap" name='transferMethod' id='choice_margin_r-m' />
+                                    <label for='choice_margin_r-m'>
+                                        <span class="inst-form-greenbox-base">
+                                                    <span class="inst-form-greenbox" ></span>
+                                        </span>
+                                        Margin
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="to_acct_choice_3-m">
+                                <div class="inst-form-comboboxItem">
+                                    <input type='radio' class="with-gap" name='transferMethod' id='choice_custodian_r-m' />
+                                    <label for='choice_custodian_r-m'>
+                                        <span class="inst-form-greenbox-base">
+                                                    <span class="inst-form-greenbox"></span>
+                                        </span>
+                                        Custodian
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s4">
+                            <p class="inst-form-label label-left">交收方法</p>
+                        </div>
+                        <div class="col s8">
+                            <div>
+                                <div class="inst-form-comboboxItem">
+                                    <input type='radio' checked class="with-gap" name='transferacctType' id='choice_nocash' />
+                                    <label for='choice_nocash'>
+                                        <span class="inst-form-greenbox-base">
+                                                    <span class="inst-form-greenbox" ></span>
+                                        </span>
+                                        無需付款交收
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="inst-form-comboboxItem">
+                                    <input type='radio' class="with-gap" name='transferacctType' id='choice_neddcash' />
+                                    <label for='choice_neddcash'>
+                                        <span class="inst-form-greenbox-base">
+                                                    <span class="inst-form-greenbox"></span>
+                                        </span>
+                                        金額對付交收
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col s12">
+                    <label for='field_currency' class="selecthits">
+                             市場
+                    </label>
+                    <select id="field_currency">
+                        <option value="" disabled selected>貨幣</option>
+                        <option value="HKD">HKD</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="AUD">AUD</option>
+                        <option value="CNY">CNY</option>
+                        <option value="JPY">JPY</option>
+                        <option value="GBP">GBP</option>
+                        <option value="SGD">SGD</option>
+                        <option value="MYR">MYR</option>
+                    </select>                
+                </div>  
+                <div class="col s12">
+                    <h5 class="inst-form-2ndtitle withdrawTitle">
+                        交收對手
+                    </h5>
+                </div>
+                <div class="col s12">
+                    <div class="gem_form materialize remove-gemform-s">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="field_name" type="text" class="validate labelfield">
+                                <label class="labelfield-text labelfield-left" for="field_name">名稱</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="gem_form materialize remove-gemform-s">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="field_accountnum" type="text" class="validate labelfield">
+                                <label class="labelfield-text labelfield-left" for="field_accountnum">戶口號碼</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="gem_form materialize remove-gemform-s">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="field_contactname" type="text" class="validate labelfield">
+                                <label class="labelfield-text labelfield-left" for="field_contactname">聯絡人名稱</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="gem_form materialize remove-gemform-s">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="field_contactnum" type="text" class="validate labelfield">
+                                <label class="labelfield-text labelfield-left" for="field_contactnum">電話</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <h5 class="inst-form-2ndtitle withdrawTitle">
+                        股票資訊
+                    </h5>
+                </div>
+
+
+                <div class="col s12">
+      <table class='generic-table-content generic-table-content-expandable font_smedmed'>
+        <tr class='smaller'>
+          <th></th>
+          <th>代號</th>
+          <th class="t_right">股票名稱</th>
+        </tr>
+        <tr class="expandable-header">
+          <td class="toggle"><div class='iconexheader'></div></td>
+          <td><input type="text" value="00001" /></td>
+          <td class="t_right">長和</td>
+        </tr>
+        <tr class="expandable-content">
+          <td colspan="3">
+          <div class="row marketnewsinfo">
+            <div class="col s12">
+              <div class="row">
+              <div class="col s6 offset-s2">
+                <p>股數：</p>
+                <p>金額：</p>
+                <p>備註：</p>
+              </div>
+              <div class="col s6">
+                <p class="right-align"><input type="text" value="500" /></p>
+                <p class="right-align">999,9999,999.99</p>
+                <p class="right-align"><textarea name="">備註備註備註備註備註備註備註備註備註備註備註備註</textarea></p>
+                <p class="right-align"><span style="display:inline-block;">刪除</span> <div class="table_button settlement-red-color c_white"><i class="fa fa-remove" aria-hidden="true"></i></div></p>
+
+              </div>
+              </div>
+            </div>
+          </div>
+
+          </td>
+        </tr>        <tr class="expandable-header">
+          <td class="toggle"><div class='iconexheader'></div></td>
+          <td><input type="text" value="00001" /></td>
+          <td class="t_right">長和</td>
+        </tr>
+        <tr class="expandable-content">
+          <td colspan="3">
+          <div class="row marketnewsinfo">
+            <div class="col s12">
+              <div class="row">
+              <div class="col s6 offset-s2">
+                <p>股數：</p>
+                <p>金額：</p>
+                <p>備註：</p>
+              </div>
+              <div class="col s6">
+                <p class="right-align"><input type="text" value="500" /></p>
+                <p class="right-align">999,9999,999.99</p>
+                <p class="right-align"><textarea name="">備註備註備註備註備註備註備註備註備註備註備註備註</textarea></p>
+                <p class="right-align"><span style="display:inline-block;">刪除</span> <div class="table_button settlement-red-color c_white"><i class="fa fa-remove" aria-hidden="true"></i></div></p>
+
+              </div>
+              </div>
+            </div>
+          </div>
+
+          </td>
+        </tr>
+        <tr class="expandable-header">
+          <td class="toggle"><div class='iconexheader'></div></td>
+          <td><input type="text" value="00001" /></td>
+          <td class="t_right">長和</td>
+        </tr>
+        <tr class="expandable-content">
+          <td colspan="3">
+          <div class="row marketnewsinfo">
+            <div class="col s12">
+              <div class="row">
+              <div class="col s6 offset-s2">
+                <p>股數：</p>
+                <p>金額：</p>
+                <p>備註：</p>
+              </div>
+              <div class="col s6">
+                <p class="right-align"><input type="text" value="500" /></p>
+                <p class="right-align">999,9999,999.99</p>
+                <p class="right-align"><textarea name="">備註備註備註備註備註備註備註備註備註備註備註備註</textarea></p>
+                <p class="right-align"><span style="display:inline-block;">刪除</span> <div class="table_button settlement-red-color c_white"><i class="fa fa-remove" aria-hidden="true"></i></div></p>
+
+              </div>
+              </div>
+            </div>
+          </div>
+
+          </td>
+        </tr>
+      </table>                    
+                </div>    
+                <div class="col s12">
+                <div class="sellement-bottom-line">
+                    <input type='checkbox' checked='checked' name='check' value='stock_check' id='check01' />
+                    <label for='check01' class="accepttnscb"><span><span></span></span>本人/吾等確認上述股票收益人身份並沒有因進行以上股票交收指示而改變。本人/吾等願為有關上述指示承擔一切後果。</label>
+                </div>  
+                </div>    
+                <div class="col s12">
+                    
+                </div>    
+                <div class="col s12">
+                    
+                </div>             
+            </div>
+            <div class="mobile-part-3">
+            </div>
+
+        </form>            
+        <form class="only-desktop">
+        <div class="area-top">
+            <div class="col s12">
+                <h5 class="inst-form-1sttitle">資金交易提示</h5>
+            </div>
+            <div class="inst-area-one row">
+                <div class="col s6 inst-grid-t inst-grid-b">
+                    <div>
+                        <div data-tradtype="depositItem" class="cashTradingBtn cashTradingActive">存入</div>
+                        <div data-tradtype="withdrawItem" class="cashTradingBtn">提取</div>
+                    </div>
+                </div>
+                <div class="col s6 inst-grid-r inst-grid-t inst-grid-b">
+                    <div class="row">
+                        <div class="col s4">
+                            <p class="inst-form-label label-left">支賬戶口</p>
+                        </div>
+                        <div class="col s4 form_acct_choice_1">
+                            <div class="inst-form-comboboxItem">
+                                <input type='radio' class="with-gap" name='AccountType' id='choice_counterparty' />
+                                <label for='choice_counterparty'>
+                                    <span class="inst-form-greenbox-base">
+                                                <span class="inst-form-greenbox" ></span>
+                                    </span>
+                                    Counterparty
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col s4 form_acct_choice_2">
+                            <div class="inst-form-comboboxItem">
+                                <input type='radio' class="with-gap" name='AccountType' id='choice_margin' />
+                                <label for='choice_margin'>
+                                    <span class="inst-form-greenbox-base">
+                                                <span class="inst-form-greenbox" ></span>
+                                    </span>
+                                    Margin
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col s4 form_acct_choice_3">
+                            <div class="inst-form-comboboxItem">
+                                <input type='radio' class="with-gap" name='AccountType' id='choice_custodian' />
+                                <label for='choice_custodian'>
+                                    <span class="inst-form-greenbox-base">
+                                                <span class="inst-form-greenbox"></span>
+                                    </span>
+                                    Custodian
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="inst-area-two row">
+                <div class="col s6 inst-grid-b">
+                    <div class="row">
+                        <div class="col s4">
+                            <p class="inst-form-label">收賬戶口</p>
+                        </div>
+                        <div class="col s4 to_acct_choice_1">
+                            <div class="inst-form-comboboxItem">
+                                <input type='radio' class="with-gap" name='AccountType' id='choice_counterparty_r' />
+                                <label for='choice_counterparty_r'>
+                                    <span class="inst-form-greenbox-base">
+                                                <span class="inst-form-greenbox" ></span>
+                                    </span>
+                                    Counterparty
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col s4 to_acct_choice_2">
+                            <div class="inst-form-comboboxItem">
+                                <input type='radio' class="with-gap" name='transferMethod' id='choice_margin_r' />
+                                <label for='choice_margin_r'>
+                                    <span class="inst-form-greenbox-base">
+                                                <span class="inst-form-greenbox" ></span>
+                                    </span>
+                                    Margin
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col s4 to_acct_choice_3">
+                            <div class="inst-form-comboboxItem">
+                                <input type='radio' class="with-gap" name='transferMethod' id='choice_custodian_r' />
+                                <label for='choice_custodian_r'>
+                                    <span class="inst-form-greenbox-base">
+                                                <span class="inst-form-greenbox"></span>
+                                    </span>
+                                    Custodian
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s6 inst-grid-r inst-grid-b">
+                    <div class="row">
+                        <div class="col s4">
+                            <p class="inst-form-label label-left">交收方法</p>
+                        </div>
+                        <div class="col s4">
+                            <div class="inst-form-comboboxItem">
+                                <input type='radio' checked class="with-gap" name='transferacctType' id='choice_nocash' />
+                                <label for='choice_nocash'>
+                                    <span class="inst-form-greenbox-base">
+                                                <span class="inst-form-greenbox" ></span>
+                                    </span>
+                                    無需付款交收
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col s4">
+                            <div class="inst-form-comboboxItem">
+                                <input type='radio' class="with-gap" name='transferacctType' id='choice_neddcash' />
+                                <label for='choice_neddcash'>
+                                    <span class="inst-form-greenbox-base">
+                                                <span class="inst-form-greenbox"></span>
+                                    </span>
+                                    金額對付交收
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="inst-area-three row">
+                <div class="col s6 inst-form-select inst-grid-b">
+                        <label for='field_currency' class="selecthits">
+                                市場
+                         </label>
+                    <select id="field_currency">
+                        <option value="" disabled selected>貨幣</option>
+                        <option value="HKD">HKD</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="AUD">AUD</option>
+                        <option value="CNY">CNY</option>
+                        <option value="JPY">JPY</option>
+                        <option value="GBP">GBP</option>
+                        <option value="SGD">SGD</option>
+                        <option value="MYR">MYR</option>
+                    </select>
+
+                </div>
+                <div class="col s6 inst-grid-r inst-grid-b">
+                    <div class="emptyItem"></div>
+                </div>
+            </div>
+            <h6 class="inst-tips"></h6>
+            <div class="col s12">
+                <h5 class="inst-form-2ndtitle withdrawTitle">交收對手</h5>
+            </div>
+            <div class="inst-area-four row">
+                <div class="col s6 inst-grid-t inst-grid-b">
+                    <div class="gem_form materialize remove-gemform-s">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="field_name" type="text" class="validate labelfield">
+                                <label class="labelfield-text labelfield-left" for="field_name">名稱</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s6 inst-grid-t inst-grid-r inst-grid-b">
+                    <div class="gem_form materialize remove-gemform-s">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="field_accountnum" type="text" class="validate labelfield">
+                                <label class="labelfield-text labelfield-left" for="field_accountnum">戶口號碼</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="inst-area-five row">
+                <div class="col s6 inst-grid-b">
+                    <div class="gem_form materialize remove-gemform-s">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="field_contactname" type="text" class="validate labelfield">
+                                <label class="labelfield-text labelfield-left" for="field_contactname">聯絡人名稱</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s6 inst-grid-r inst-grid-b">
+                    <div class="gem_form materialize remove-gemform-s">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="field_contactnum" type="text" class="validate labelfield">
+                                <label class="labelfield-text labelfield-left" for="field_contactnum">電話</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h6 class="inst-tips"></h6>
+            <div class="col s12">
+                <h5 class="inst-form-2ndtitle withdrawTitle">股票資訊</h5>
+            </div>
+        </div>
+      <table class='generic-table-content small font_smed stocklisttable'>
+        <tr class='smaller'>
+          <th class="settlement-col-1">代號</th>
+          <th class="settlement-col-2">股票名稱</th>
+          <th class="settlement-col-3">股數</th>
+          <th class="t_right settlement-col-4">金額 (如適用)</th>
+          <th class="settlement-col-5">備註</th>
+        </tr>
+        <tr class="real-grey-line">
+          <td><input type="text" value="00001" class="settlement-box-one" /></td>
+          <td>香港恆生</td>
+          <td><input type="text" value="500" class="settlement-box-two" /></td>
+          <td class="t_right">999,999,999.00</td>
+          <td><input type="text" value="備註備註備註備註備註備註備註..." class="settlement-box-three" /> <div class="table_button settlement-red-color c_white"><i class="fa fa-remove" aria-hidden="true"></i></div></td>
+        </tr>
+        <tr class="real-grey-line">
+          <td><input type="text" value="00001" class="settlement-box-one" /></td>
+          <td>香港恆生</td>
+          <td><input type="text" value="500" class="settlement-box-two" /></td>
+          <td class="t_right">999,999,999.00</td>
+          <td><input type="text" value="備註備註備註備註備註備註備註..." class="settlement-box-three" /> <div class="table_button settlement-red-color c_white"><i class="fa fa-remove" aria-hidden="true"></i></div></td>
+        </tr>
+        <tr class="real-grey-line">
+          <td><input type="text" value="00001" class="settlement-box-one" /></td>
+          <td>香港恆生</td>
+          <td><input type="text" value="500" class="settlement-box-two" /></td>
+          <td class="t_right">999,999,999.00</td>
+          <td><input type="text" value="備註備註備註備註備註備註備註..." class="settlement-box-three" /> <div class="table_button settlement-red-color c_white"><i class="fa fa-remove" aria-hidden="true"></i></div></td>
+        </tr>
+
+        
+      </table>
+      <a class="btn settlement-addstockBtn"><div class="dsa"></div>加入股票</a>
+      <div class="sellement-bottom-line">
+                <input type='checkbox' checked='checked' name='check' value='stock_check' id='check01' />
+                <label for='check01' class="accepttnscb"><span><span></span></span>本人/吾等確認上述股票收益人身份並沒有因進行以上股票交收指示而改變。本人/吾等願為有關上述指示承擔一切後果。</label>
+        </div>
+        </form>
+    </div>
+</section>
+
+
+
+<script>
+
+
+
+      $(function(e){
+
+
+
+          
+
+
+        let loadinstallFx = function(){
+
+          loadinstallFx.prototype.initBehavior = function(){
+
+            // init
+                    $(".form_acct_choice_1").show();
+                    $(".form_acct_choice_2").hide();
+                    $(".form_acct_choice_3").hide();
+
+                    $(".to_acct_choice_1").hide();
+                    $(".to_acct_choice_2").show();
+                    $(".to_acct_choice_3").show();  
+
+
+                    $(".form_acct_choice_1-m").show();
+                    $(".form_acct_choice_2-m").hide();
+                    $(".form_acct_choice_3-m").hide();
+
+                    $(".to_acct_choice_1-m").hide();
+                    $(".to_acct_choice_2-m").show();
+                    $(".to_acct_choice_3-m").show();                         
+
+            $('.cashTradingBtn').on('click',function(e){
+
+                let curSelItem = $(this).data().tradtype;
+                $('.cashTradingBtn').removeClass('cashTradingActive');
+                $(this).addClass('cashTradingActive');
+
+
+                if(curSelItem == 'depositItem'){
+                    $(".form_acct_choice_1").show();
+                    $(".form_acct_choice_2").hide();
+                    $(".form_acct_choice_3").hide();
+
+                    $(".to_acct_choice_1").hide();
+                    $(".to_acct_choice_2").show();
+                    $(".to_acct_choice_3").show(); 
+
+                }else{
+                    $(".to_acct_choice_1").show();
+                    $(".to_acct_choice_2").hide();
+                    $(".to_acct_choice_3").hide();
+
+                    $(".form_acct_choice_1").hide();
+                    $(".form_acct_choice_2").show();
+                    $(".form_acct_choice_3").show(); 
+
+
+                }
+
+
+
+            });
+ 
+
+
+
+           $('.cashTradingBtn-m').on('click',function(e){
+
+                let curSelItem = $(this).data().tradtype;
+                $('.cashTradingBtn-m').removeClass('cashTradingActive-m');
+                $(this).addClass('cashTradingActive-m');
+
+                if(curSelItem == 'depositItem-m'){
+ 
+
+                    $(".form_acct_choice_1-m").show();
+                    $(".form_acct_choice_2-m").hide();
+                    $(".form_acct_choice_3-m").hide();
+
+                    $(".to_acct_choice_1-m").hide();
+                    $(".to_acct_choice_2-m").show();
+                    $(".to_acct_choice_3-m").show();                                        
+
+                }else{
+
+
+                    $(".to_acct_choice_1-m").show();
+                    $(".to_acct_choice_2-m").hide();
+                    $(".to_acct_choice_3-m").hide();
+
+                    $(".form_acct_choice_1-m").hide();
+                    $(".form_acct_choice_2-m").show();
+                    $(".form_acct_choice_3-m").show(); 
+
+                }
+
+
+
+            });
+
+
+
+          }
+
+          $('body').on('click','.settlement-addstockBtn',function(e){
+            $('.stocklisttable').append('\
+        <tr class="real-grey-line">\
+          <td><input type="text" value="" class="settlement-box-one" /></td>\
+          <td>---</td>\
+          <td><input type="text" value="" class="settlement-box-two" /></td>\
+          <td class="t_right">---</td>\
+          <td><input type="text" value="" class="settlement-box-three" /> <div class="table_button settlement-red-color c_white removestockbtn"><i class="fa fa-remove" aria-hidden="true"></i></div></td>\
+        </tr>\
+                ');
+          });
+
+
+        $('body').on('click','.removestockbtn',function(e){
+                $(this).parent().parent().remove();
+        });          
+
+        }
+            let init = new loadinstallFx();
+            init.initBehavior();
+            $('.settlement-addstockBtn').click();
+      });
+</script>
+<script type="text/javascript">
+  $('.generic-table-content-expandable').find('.expandable-header .toggle').on('click', function(e) {
+    var toggle = $(e.target).closest('.toggle');
+    var header = $(e.target).closest('.expandable-header');
+    var content = header.next('.expandable-content');
+    if (header.hasClass('active'))
+    {
+      header.removeClass('active');
+      content.removeClass('active');
+      toggle.html("<div class='iconexheader'></div>");
+    }
+    else
+    {
+      header.addClass('active');
+      content.addClass('active');
+      toggle.html("<div class='iconexcontent'></div>");
+                      
+    }
+  });
+</script><script type="text/javascript" src="/js/iframeResizer.contentWindow.min.js"></script>
+<script type="text/javascript" src="/js/init_iframe.js"></script>
+</body>
+</html>

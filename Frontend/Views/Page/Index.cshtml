@@ -1,7 +1,47 @@
 ﻿@model Frontend.ViewModels.BaseViewModel
+@using Frontend.ViewModels
 
-<h3>content page here</h3>
-<p>@Model.lang.lang</p>
-<p>@Model.content.link.url</p>
-<p>@Model.category.name</p>
-<p>Resouce language test: @Frontend.Resources.Resource.test</p>
+@Html.Partial("_Header", Model)
+
+@if (Model.isError)
+{
+
+    @Html.RazorEncode(HttpUtility.HtmlDecode(Model.errorMessage), Model)
+
+}
+else
+{
+    <section class='back'>
+        <div class='content_big_title'>
+            <table>
+                <tr>
+                    <td>
+                        <div class='title'>
+                            @Html.RazorEncode(HttpUtility.HtmlDecode(Model.category.title), Model)
+                        </div>
+                        <div class='hr'></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class='front'>
+        @if (Model.category.submenu != null)
+        {
+            foreach (var menuItem in Model.category.submenu)
+            {
+                <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
+            }
+        }
+        @Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.desc), Model)
+        <!--
+        <h3>content page here</h3>
+        <p>@Model.lang.lang</p>
+        <p>@Model.content.link.GetFullURL()</p>
+        <p>@Model.category.name</p>
+        <p>Resouce language test: @Frontend.Resources.Resource.test</p>
+        -->
+    </section>
+    @Html.Partial("_Footer", Model)
+}

@@ -48,14 +48,16 @@ namespace WebApplication2.Context
         {
             return (getArticleDb()).Include(acc => acc.createdByAccount)
                 .Include(acc => acc.approvedByAccount)
-                .Include(acc => acc.publishedByAccount).ToList();
+                .Include(acc => acc.publishedByAccount)
+                .Include(acc => acc.category).ToList();
         }
 
         public List<Article> findArticlesByCategoryID(int categoryID)
         {
             return (getArticleDb().AsNoTracking().Where(acc => acc.categoryID == categoryID)).Include(acc => acc.createdByAccount)
                 .Include(acc => acc.approvedByAccount)
-                .Include(acc => acc.publishedByAccount).ToList();
+                .Include(acc => acc.publishedByAccount)
+                .Include(acc => acc.category).ToList();
         }
 
         public List<Article> findArticlesGroupByBaseVersion(string lang = "en")
@@ -100,12 +102,20 @@ namespace WebApplication2.Context
 
         public Article findArticleByID(int articleID)
         {
-            return getArticleDb().Where(acc => acc.ArticleID == articleID).FirstOrDefault();
+            return getArticleDb().Where(acc => acc.ArticleID == articleID)
+                .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
+                .Include(acc => acc.category).FirstOrDefault();
         }
 
         public Article findArticleByIDNoTracking(int articleID)
         {
-            return getArticleDb().AsNoTracking().Where(acc => acc.ArticleID == articleID).FirstOrDefault();
+            return getArticleDb().AsNoTracking().Where(acc => acc.ArticleID == articleID)
+                .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
+                .Include(acc => acc.category).FirstOrDefault();
         }
 
 
@@ -210,7 +220,11 @@ namespace WebApplication2.Context
                 return getArticleDb().Where(acc =>
                 acc.BaseArticleID == baseArticleID &&
                 acc.Version == version &&
-                acc.Lang == lang).FirstOrDefault();
+                acc.Lang == lang)
+                .Include(acc => acc.createdByAccount)
+.Include(acc => acc.approvedByAccount)
+.Include(acc => acc.publishedByAccount)
+                .Include(acc => acc.category).FirstOrDefault();
             }
         }
 
@@ -529,7 +543,10 @@ namespace WebApplication2.Context
             }
             if (_article.isFrozen)
             {
-                return ResHelper.S("itemisfrozen");
+                if (!ConstantDbContext.getInstance().ALLOW_EDIT_AFTER_PUBLISH())
+                {
+                    return ResHelper.S("itemisfrozen");
+                }
             }
 
             var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);
@@ -569,7 +586,10 @@ namespace WebApplication2.Context
             }
             if (_article.isFrozen)
             {
-                return ResHelper.S("itemisfrozen");
+                if (!ConstantDbContext.getInstance().ALLOW_EDIT_AFTER_PUBLISH())
+                {
+                    return ResHelper.S("itemisfrozen");
+                }
             }
 
             var error = AccountGroupBaseArticlePermissionHelper.tryCatchAccountGroupPermissionError(_article);

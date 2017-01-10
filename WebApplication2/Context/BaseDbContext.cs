@@ -52,6 +52,9 @@ namespace WebApplication2.Context
         // Audit Logs
         public DbSet<AuditLog> auditLogDb { get; set; }
 
+        // Constants
+        public DbSet<Constant> constantDb { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

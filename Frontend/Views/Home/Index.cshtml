@@ -1,6 +1,10 @@
-﻿@{
+﻿@model Frontend.ViewModels.BaseViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
+@Html.Partial("_Header", Model)
+
 
 <section class='back'>
     <div class='content_big_title'>
@@ -20,26 +24,101 @@
 
 
 <section class='front'>
+
+    <div class='gem_form shortbottom'>
+        <div class='row'>
+            <div class='col s12 m8'>
+                <div class="landingpage_banner">
+                    <table style="height: 100%">
+                        <tr>
+                            <td>
+                                <div>
+                                    <img src="/images/index/banner_txt.png" style="width: 100%; max-width: 560px" />
+                                    <div style="height: 2px; width: 60%; max-width: 406px; background-color: #fff"></div>
+                                    <br />
+                                    <table class='generic-table-form font_lg' style="width: auto !important;">
+                                        <tr>
+                                            <td class='font_sm'><div class='generic-button-big gb-primary font_lg'>儲存</div></td>
+                                            <td class='font_sm'><div class='generic-button-big gb-white-red font_lg'>重設</div></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                            <td style="width: 228px;">
+                                <ul class="landingpage_banner_button">
+                                    <li>鉅亨證券<p class="arrow"></p></li>
+                                    <li>股市新聞<p class="arrow"></p></li>
+                                    <li>IPO<p class="arrow"></p></li>
+                                    <li>股市新聞<p class="arrow"></p></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br />
+                <div class="landingpage_shortcut">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="賬上餘額">賬上餘額</a>
+                            </td>
+                            <td>
+                                <a href="賬上餘額">賬上餘額</a>
+                            </td>
+                            <td>
+                                <a href="賬上餘額">賬上餘額</a>
+                            </td>
+                            <td>
+                                <a href="賬上餘額">賬上餘額</a>
+                            </td>
+                            <td>
+                                <a href="賬上餘額">賬上餘額</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class='col s12 m4'>
+                <iframe class='if-flexible' id='i7' src='/html/stock_quoter.html' frameborder="0" scrolling="no"></iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+            $('.landingpage_banner_button').find('li').on('mouseover', function (e) {
+                var target = $(e.target).closest('li');
+                var siblings = target.siblings('li');
+                siblings.removeClass('active');
+                target.addClass('active');
+            })
+    </script>
+
     <div class='gem_form nobg fixedformpadding'>
         <div class='row'>
             <div class='col s12 m12'>
-                <iframe class='if-flexible' id='i0' src='./stock_top_menu.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i0' src='/html/stock_top_menu.html' frameborder="0" scrolling="no"></iframe>
             </div>
         </div>
     </div>
     <div class='gem_form nobg'>
         <div class='row'>
             <div class='col s12 m8'>
-                <iframe class='if-flexible' id='i1' src='./stock_dashboard.html' frameborder="0" scrolling="no"></iframe>
-                <iframe class='if-flexible' id='i2' src='./stock_table.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i1' src='/html/stock_dashboard.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i2' src='/html/stock_table.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i9' src='/html/stock_table_tabbed_with_left_tabpanel.html' frameborder="0" scrolling="no"></iframe>
             </div>
 
             <div class='col s12 m4'>
-                <iframe class='if-flexible' id='i3' src='./stock_price_alert_form.html' frameborder="0" scrolling="no"></iframe>
-                <iframe class='if-flexible' id='i4' src='./stock_price_alert_form2.html' frameborder="0" scrolling="no"></iframe>
-                <iframe class='if-flexible' id='i5' src='./generic_widget_news_select.html' frameborder="0" scrolling="no"></iframe>
-                <iframe class='if-flexible' id='i6' src='./generic_sidebar_banner_with_title.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i3' src='/html/stock_price_alert_form.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i4' src='/html/stock_price_alert_form2.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i5' src='/html/generic_widget_news_select.html' frameborder="0" scrolling="no"></iframe>
+                <iframe class='if-flexible' id='i6' src='/html/generic_sidebar_banner_with_title.html' frameborder="0" scrolling="no"></iframe>
             </div>
         </div>
     </div>
 </section>
+
+@Html.Partial("_Footer", Model)
+

@@ -50,6 +50,16 @@ namespace Frontend
                     id = UrlParameter.Optional
                 }
             );
+
+            routes.MapRoute(
+                name: "APISession",
+                url: "api/session/{action}",
+                defaults: new
+                {
+                    controller = "Session",
+                    action = "Index"
+                }
+            );
         }
     }
 }

@@ -60,6 +60,21 @@ else
             @Html.DisplayNameFor(model => model.order)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.isHeaderMenu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isFooterMenu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isShortcut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isJumbotron)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isBanner)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.created_at)
         </th>
         <th>
@@ -103,17 +118,32 @@ else
         <td>
             @Html.DisplayFor(modelItem => item.isArticleList)
         </td>
-        <th>
+        <td>
             @Html.DisplayFor(modelItem => item.isVisibleToVisitorOnly)
-        </th>
-        <th>
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.isVisibleToMembersOnly)
-        </th>
-        <th>
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.isVisibleToTradingOnly)
-        </th>
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.order)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isHeaderMenu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isFooterMenu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isShortcut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isJumbotron)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isBanner)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.created_at)

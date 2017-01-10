@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/fonts/font_roboto_condensed.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_material_icons.css">
+    <link type="text/css" rel="stylesheet" href="/fonts/font_font_awesome.css">
+    <link type="text/css" rel="stylesheet" href="/css/app.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<script type="text/javascript" src="/js/jquerymin.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script>
+<script type="text/javascript" src="/js/iframeResizer.min.js"></script>
+<section>
+
+  <div class='container gem_form materialize'>
+
+    <div class='row' style='position:relative;'>
+      <p class='topbar'></p>
+
+      <div class='col s12'>
+        <br>
+      </div>
+      <div class='col s12'>
+        <div class='title'>
+          你的基本資料
+        </div>
+      </div>
+
+      <div class='input-field col s6 grid-l grid-t'>
+        <select>
+          <option value="" disabled selected>Choose your option</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+      </div>
+
+      <div class='input-field col s6 grid-r grid-t'>
+        <div class='wrapper'>
+          <input id="eng_name" type="text" class="validate">
+          <label for="eng_name">申請人英文姓名</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-l grid-t grid-b'>
+        <div class='wrapper'>
+          <input id="chi_name" type="text" class="validate">
+          <label for="chi_name">中文姓名</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-r grid-t grid-b'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">別名 (如有)</label>
+        </div>
+      </div>
+
+      <div class='col s12'>
+        <div class='remarks'>
+          (注：若為香港永久居民，請提供香港身份證號碼)
+        </div>
+      </div>
+
+
+
+      <div class='input-field col s6 grid-l'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">出生日期</label>
+        </div>
+      </div>
+
+      <div class='input-field col s6 grid-r'>
+        <div class='wrapper'>
+          <input id="eng_name" type="text" class="validate">
+          <label for="eng_name">香港身份證或護照號碼及簽發國家</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-l grid-t grid-b'>
+        <div class='wrapper'>
+          <input id="chi_name" type="text" class="validate">
+          <label for="chi_name">國籍</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-r grid-t grid-b'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">最高學歷</label>
+        </div>
+      </div>
+
+
+
+      <div class='col s6'>
+        <div class='title'>
+          你的住宅地址
+        </div>
+      </div>
+
+      <div class='col s6'>
+        <div class='title_remarks'>
+          (注：請提供地址證明)
+        </div>
+      </div>
+
+
+
+      <div class='input-field col s6 grid-l grid-t'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">室 *</label>
+        </div>
+      </div>
+
+      <div class='input-field col s6 grid-r grid-t'>
+        <div class='wrapper'>
+          <input id="eng_name" type="text" class="validate">
+          <label for="eng_name">層 *</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-l grid-t'>
+        <div class='wrapper'>
+          <input id="chi_name" type="text" class="validate">
+          <label for="chi_name">座 *</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-r grid-t'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">大廈/屋*</label>
+        </div>
+      </div>
+
+      <div class='input-field col s6 grid-l grid-t'>
+        <div class='wrapper'>
+          <input id="chi_name" type="text" class="validate">
+          <label for="chi_name">街道號數及名稱(可選擇填寫) *</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-r grid-t'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">地區</label>
+        </div>
+      </div>
+
+      <div class='input-field col s6 grid-l grid-t'>
+        <div class='wrapper'>
+          <input id="chi_name" type="text" class="validate">
+          <label for="chi_name">國家</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-r grid-t'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">住宅電話號碼</label>
+        </div>
+      </div>
+
+
+      <div class='other-field col s3 grid-t'>
+        <div class='wrapper'>
+          <input class="with-gap" name="usage" type="radio" id="test5" checked />
+          <label for="test5">自置</label>
+        </div>
+      </div>
+
+      <div class='other-field col s9 grid-t'>
+        <div class='wrapper'>
+          <input class="with-gap" name="usage" type="radio" id="test5" />
+          <label for="test5">租用</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s9 grid-t grid-b'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">永久地址與住宅地址相同?</label>
+        </div>
+      </div>
+
+      <div class='other-field col s3 grid-t grid-b'>
+        <div class='switch'>
+          <label>
+            Off
+            <input type="checkbox">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      <div class='col s12'>
+        <div class='title'>
+          你的聯絡資料
+        </div>
+      </div>
+
+
+
+      <div class='input-field col s6 grid-l grid-t'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">手提電話號碼</label>
+        </div>
+      </div>
+
+      <div class='input-field col s6 grid-r grid-t'>
+        <div class='wrapper'>
+          <input id="eng_name" type="text" class="validate">
+          <label for="eng_name">公司電話號碼</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-l grid-t grid-b'>
+        <div class='wrapper'>
+          <input id="chi_name" type="text" class="validate">
+          <label for="chi_name">電郵地址 (必須填寫) *</label>
+        </div>
+      </div>
+
+
+      <div class='input-field col s6 grid-r grid-t grid-b'>
+        <div class='wrapper'>
+          <input id="other_name" type="text" class="validate">
+          <label for="other_name">與接收確認書和接單通知的電郵地址相同?</label>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+</section>
+<script type="text/javascript" src="/js/iframeResizer.contentWindow.min.js"></script>
+<script type="text/javascript" src="/js/init_iframe.js"></script>
+</body>
+</html>
