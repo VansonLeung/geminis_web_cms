@@ -8,8 +8,9 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor;
+using WebApplication2.ViewModels.Include;
 
-namespace Frontend.ViewModels
+namespace WebApplication2.ViewModels
 {
     public static class MyRazorExtensions
     {

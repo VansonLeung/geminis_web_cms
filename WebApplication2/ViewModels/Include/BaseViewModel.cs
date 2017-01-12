@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication2.Models;
 
-namespace Frontend.ViewModels
+namespace WebApplication2.ViewModels.Include
 {
     public class BaseViewModel
     {
@@ -44,13 +44,13 @@ namespace Frontend.ViewModels
 
         public List<Constant> constants { get; set; }
         public List<Constant> queries { get; set; }
-        public Category headerData { get; set; }
-        public List<Category> breadcrumbData { get; set; }
-        public Category footerData { get; set; }
+        public ViewCategory headerData { get; set; }
+        public List<ViewCategory> breadcrumbData { get; set; }
+        public ViewCategory footerData { get; set; }
         public List<Menu> headerMenu { get; set; }
         public List<Menu> footerMenu { get; set; }
-        public Category category { get; set; }
-        public Content content { get; set; }
+        public ViewCategory category { get; set; }
+        public ViewContent content { get; set; }
         public Current current { get; set; }
         public Lang lang { get; set; }
         public List list { get; set; }
@@ -105,7 +105,7 @@ namespace Frontend.ViewModels
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
                 item.link = new Link(lang.locale, _cat.getUrl(), null);
-                item.category = new Category(_cat, lang);
+                item.category = new ViewCategory(_cat, lang);
 
                 item.submenu = createSubmenu(item.category.categoryItemID, lang, 
                     isHeaderMenu,
@@ -136,7 +136,7 @@ namespace Frontend.ViewModels
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
                 item.link = new Link(lang.locale, _cat.getUrl(), null);
-                item.category = new Category(_cat, lang);
+                item.category = new ViewCategory(_cat, lang);
 
                 item.submenu = createSubmenu(item.category.categoryItemID, lang, 
                     true,
@@ -161,7 +161,7 @@ namespace Frontend.ViewModels
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
                 item.link = new Link(lang.locale, _cat.getUrl(), null);
-                item.category = new Category(_cat, lang);
+                item.category = new ViewCategory(_cat, lang);
 
                 item.submenu = createSubmenu(item.category.categoryItemID, lang,
                     false,
@@ -177,19 +177,19 @@ namespace Frontend.ViewModels
         }
 
 
-        public static Category getCategoryRecursively(int categoryItemID, Lang lang)
+        public static ViewCategory getCategoryRecursively(int categoryItemID, Lang lang)
         {
-            Category category = null;
+            ViewCategory category = null;
             var cat = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findCategoryByIDNoTracking(categoryItemID);
             if (cat != null)
             {
-                category = new Category(cat, lang);
+                category = new ViewCategory(cat, lang);
                 category.categoryParent = getCategoryRecursively(category.categoryParentItemID, lang);
             }
             return category;
         }
 
-        public static List<Category> convertCategoryRecursiveToList(List<Category> categories, Category category)
+        public static List<ViewCategory> convertCategoryRecursiveToList(List<ViewCategory> categories, ViewCategory category)
         {
             if (category != null)
             {
@@ -202,10 +202,10 @@ namespace Frontend.ViewModels
             return categories;
         }
 
-        public static List<Category> createBreadcrumbData(int categoryItemID, Lang lang)
+        public static List<ViewCategory> createBreadcrumbData(int categoryItemID, Lang lang)
         {
-            Category category = getCategoryRecursively(categoryItemID, lang);
-            List<Category> breadcrumbData = new List<Category>();
+            ViewCategory category = getCategoryRecursively(categoryItemID, lang);
+            List<ViewCategory> breadcrumbData = new List<ViewCategory>();
             breadcrumbData = convertCategoryRecursiveToList(breadcrumbData, category);
             return breadcrumbData;
         }
@@ -270,31 +270,40 @@ namespace Frontend.ViewModels
             // category
 
             var db = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance();
-            var cat = db.findCategoryByURL(category);
 
-            vm.category = new Category(cat, vm.lang);
+            WebApplication2.Models.Infrastructure.Category cat = null;
 
+            if (category != null && locale != null)
+            {
 
+                cat = db.findCategoryByURL(category);
 
-
-            // header data
-
-            vm.headerData = new Category(null, null);
-            vm.headerData.title = "Geminis";
+                vm.category = new ViewCategory(cat, vm.lang);
 
 
-            // header menu
 
-            vm.headerMenu = createHeaderMenu(0, vm.lang);
 
-            // footer menu
+                // header data
 
-            vm.footerMenu = createFooterMenu(0, vm.lang);
+                vm.headerData = new ViewCategory(null, null);
+                vm.headerData.title = "Geminis";
 
-            // breadcrumb data
 
-            vm.breadcrumbData = createBreadcrumbData(vm.category.categoryItemID, vm.lang);
+                // header menu
 
+                vm.headerMenu = createHeaderMenu(0, vm.lang);
+
+                // footer menu
+
+                vm.footerMenu = createFooterMenu(0, vm.lang);
+
+                // breadcrumb data
+
+                vm.breadcrumbData = createBreadcrumbData(vm.category.categoryItemID, vm.lang);
+
+
+
+            }
 
 
             // content
@@ -317,7 +326,7 @@ namespace Frontend.ViewModels
 
                     if (articlePublished != null)
                     {
-                        vm.content = new Content();
+                        vm.content = new ViewContent();
                         vm.content.name = articlePublished.Name;
                         vm.content.desc = articlePublished.Desc;
                         vm.content.slug = articlePublished.Slug;
@@ -328,7 +337,7 @@ namespace Frontend.ViewModels
                     }
                     else
                     {
-                        vm.content = new Content();
+                        vm.content = new ViewContent();
                         vm.content.articleList = new List<Listitem>();
                         var articleList = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlesPublishedByCategory(cat, vm.lang.lang);
                         foreach (var article in articleList)
@@ -357,7 +366,7 @@ namespace Frontend.ViewModels
 
                     if (contentPage != null)
                     {
-                        vm.content = new Content();
+                        vm.content = new ViewContent();
                         vm.content.name = contentPage.Name;
                         vm.content.desc = contentPage.Desc;
                         vm.content.slug = contentPage.Slug;
@@ -377,6 +386,11 @@ namespace Frontend.ViewModels
 
             if (vm.content == null)
             {
+                if (vm.category == null)
+                {
+                    vm.category = new ViewCategory();
+                }
+
                 vm.category.isNoContent = true;
                 vm.isError = true;
                 vm.errorCode = 404;
@@ -384,6 +398,11 @@ namespace Frontend.ViewModels
             }
             else
             {
+                if (vm.category == null)
+                {
+                    vm.category = new ViewCategory();
+                }
+
                 vm.category.isNoContent = false;
             }
 

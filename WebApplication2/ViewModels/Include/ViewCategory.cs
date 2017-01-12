@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Frontend.ViewModels
-{
-    public class Category
+namespace WebApplication2.ViewModels.Include
+{ 
+    public class ViewCategory
     {
-        public Category(WebApplication2.Models.Infrastructure.Category cat, Lang lang)
+        public ViewCategory()
+        {
+
+        }
+
+        public ViewCategory(WebApplication2.Models.Infrastructure.Category cat, Lang lang)
         {
             if (cat != null && lang != null)
             {
@@ -32,7 +37,7 @@ namespace Frontend.ViewModels
         public bool is_disabled { get; set; }
         public int categoryItemID { get; set; }
         public int categoryParentItemID { get; set; }
-        public Category categoryParent { get; set; }
+        public ViewCategory categoryParent { get; set; }
         public List<Menu> submenu { get; set; }
     }
 }

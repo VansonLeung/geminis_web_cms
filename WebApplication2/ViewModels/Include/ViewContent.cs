@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Frontend.ViewModels
+namespace WebApplication2.ViewModels.Include
 {
-    public class Content
+    public class ViewContent
     {
         public string name { get; set; }
         public string slug { get; set; }
         public Link link { get; set; }
-        public Category category { get; set; }
+        public ViewCategory category { get; set; }
         public Listitem listitem { get; set; }
         public List<Listitem> articleList { get; set; }
         public string desc { get; set; }

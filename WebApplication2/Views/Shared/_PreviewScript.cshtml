@@ -1,6 +1,7 @@
 ﻿<script type="text/javascript">
 
     var showPreview = function (params) {
+        /*
         var site = " \
 <!DOCTYPE html> \
 <html> \
@@ -27,6 +28,17 @@
         var popupWindow = window.open("", "", "menubar=0,scrollbars=0");
         popupWindow.document.write(site);
         popupWindow.document.close();
+    }
+
+    */
+
+
+        $('<form method="post" action=\'@Url.Action("Index", "Preview", null, Request.Url.Scheme)\' target="_blank"> \
+               <input type="hidden" name="name" value="'+params['name']+'"> \
+               <input type="hidden" name="desc" value="' + encodeURIComponent(params['desc']) + '"> \
+               <input type="hidden" name="lang" value="'+params['lang']+'"> \
+           </form>').appendTo('body').submit().remove();
+
     }
 
 </script>

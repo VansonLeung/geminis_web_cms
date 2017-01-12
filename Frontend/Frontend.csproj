@@ -234,17 +234,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Category.cs" />
-    <Compile Include="ViewModels\Content.cs" />
-    <Compile Include="ViewModels\Current.cs" />
-    <Compile Include="ViewModels\Lang.cs" />
-    <Compile Include="ViewModels\Link.cs" />
-    <Compile Include="ViewModels\List.cs" />
-    <Compile Include="ViewModels\Listitem.cs" />
-    <Compile Include="ViewModels\Menu.cs" />
-    <Compile Include="ViewModels\MyRazorExtensions.cs" />
-    <Compile Include="ViewModels\Sideitem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="calendarjquerycss3\css\calendar.css" />

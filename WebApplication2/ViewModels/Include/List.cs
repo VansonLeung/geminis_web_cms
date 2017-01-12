@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Frontend.ViewModels
+namespace WebApplication2.ViewModels.Include
 {
     public class List
     {

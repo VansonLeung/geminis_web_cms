@@ -1,10 +1,10 @@
 ﻿using Frontend.Attributes;
-using Frontend.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication2.ViewModels.Include;
 
 namespace Frontend.Controllers
 {
@@ -13,12 +13,14 @@ namespace Frontend.Controllers
         [Internationalization]
         public ActionResult Index(string locale, string category, string id)
         {
+            /*
             List<WebApplication2.Models.Article> articles = WebApplication2.Context.ArticleDbContext.getInstance().findArticles();
             if (articles.Count > 0)
             {
                 log4net.ILog logger = log4net.LogManager.GetLogger("Logger");
                 logger.Debug("Can fetch information from CMS");
             }
+            */
             BaseViewModel vm = BaseViewModel.make(locale, category, id, Request);
             return View(vm);
         }

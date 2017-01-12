@@ -242,6 +242,7 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\AccountGroupController.cs" />
     <Compile Include="Controllers\InfrastructureCategoryController.cs" />
+    <Compile Include="Controllers\PreviewController.cs" />
     <Compile Include="Controllers\SiteMapController.cs" />
     <Compile Include="Controllers\SystemLogController.cs" />
     <Compile Include="Controllers\SystemMaintenanceNotificationController.cs" />
@@ -295,6 +296,17 @@
     <Compile Include="ViewModels\AccountChangePasswordForm.cs" />
     <Compile Include="ViewModels\ContentPageCreateForm.cs" />
     <Compile Include="ViewModels\ArticleCreateForm.cs" />
+    <Compile Include="ViewModels\Include\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Include\ViewCategory.cs" />
+    <Compile Include="ViewModels\Include\ViewContent.cs" />
+    <Compile Include="ViewModels\Include\Current.cs" />
+    <Compile Include="ViewModels\Include\Lang.cs" />
+    <Compile Include="ViewModels\Include\Link.cs" />
+    <Compile Include="ViewModels\Include\List.cs" />
+    <Compile Include="ViewModels\Include\Listitem.cs" />
+    <Compile Include="ViewModels\Include\Menu.cs" />
+    <Compile Include="ViewModels\Include\Sideitem.cs" />
+    <Compile Include="ViewModels\MyRazorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />
@@ -1650,6 +1662,7 @@
     <Content Include="Views\Constant\Create.cshtml" />
     <Content Include="Views\Constant\Edit.cshtml" />
     <Content Include="Views\Constant\Delete.cshtml" />
+    <Content Include="Views\Preview\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

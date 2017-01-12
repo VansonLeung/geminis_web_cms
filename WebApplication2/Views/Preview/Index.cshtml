@@ -1,4 +1,10 @@
 ﻿@model WebApplication2.ViewModels.Include.BaseViewModel
+@using WebApplication2.ViewModels
+
+@{
+    Layout = null;
+}
+
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +14,7 @@
     @Styles.Render("~/fonts/font_font_awesome.css")
     @Styles.Render("~/css/app.css")
 
+    <title>Preview: @ViewBag.name</title>
     <!--Let browser know website is optimized for mobile-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,7 +25,12 @@
     @Scripts.Render("~/js/materialize.min.js")
     @Scripts.Render("~/js/iframeResizer.min.js")
 
-    @RenderBody()
+
+    <h4>Preview: @Model.content.name</h4>
+
+    <section class='front'>
+        @Html.RazorEncode(HttpUtility.UrlDecode(Model.content.desc), Model)
+    </section>
 
 
     @Scripts.Render("~/js/iframeResizer.contentWindow.min.js")
