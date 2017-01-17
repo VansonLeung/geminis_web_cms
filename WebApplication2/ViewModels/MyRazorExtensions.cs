@@ -77,29 +77,117 @@ namespace WebApplication2.ViewModels
 
             pattern = @"@{S:LOCALE}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
-                return model.lang.locale;
+                if (model != null
+                    && model.lang != null
+                    && model.lang.locale != null)
+                {
+                    return model.lang.locale;
+                }
+                return "";
             });
 
             pattern = @"@{S:LANG}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
-                return model.lang.lang;
+                if (model != null
+                    && model.lang != null
+                    && model.lang.lang != null)
+                {
+                    return model.lang.lang;
+                }
+                return "";
             });
 
             pattern = @"@{S:CULTURE}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
-                return model.lang.culture;
+                if (model != null
+                    && model.lang != null
+                    && model.lang.culture != null)
+                {
+                    return model.lang.culture;
+                }
+                return "";
             });
 
 
             pattern = @"@{S:CLIENTID}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
-                return model.current.clientID;
+                if (model != null
+                    && model.current != null
+                    && model.current.session != null
+                    && model.current.session.clientID != null)
+                {
+                    return model.current.session.clientID;
+                }
+                return "";
             });
-            
+
+
             pattern = @"@{S:SESSIONID}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
-                return model.current.sessionID;
+                if (model != null
+                    && model.current != null
+                    && model.current.session != null
+                    && model.current.session.sessionID != null)
+                {
+                    return model.current.session.sessionID;
+                }
+                return "";
             });
+
+
+            pattern = @"@{S:ACCOUNTSEQ}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                try
+                {
+                    return model.current.session.accountSeq + "";
+                }
+                catch (Exception e)
+                {
+                    return "";
+                }
+            });
+
+
+            pattern = @"@{S:ACCOUNTTYPE}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                try
+                {
+                    return model.current.session.accountType + "";
+                }
+                catch (Exception e)
+                {
+                    return "";
+                }
+            });
+
+
+            pattern = @"@{S:TRADINGACCSEQ}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                if (model != null
+                    && model.current != null
+                    && model.current.session != null
+                    && model.current.session.tradingAccSeq != null)
+                {
+                    return model.current.session.tradingAccSeq;
+                }
+                return "";
+            });
+
+            pattern = @"@{S:TRADINGACCSTATUS}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                if (model != null
+                    && model.current != null
+                    && model.current.session != null
+                    && model.current.session.tradingAccStatus != null)
+                {
+                    return model.current.session.tradingAccStatus;
+                }
+                return "";
+            });
+
+
+
+
 
 
 

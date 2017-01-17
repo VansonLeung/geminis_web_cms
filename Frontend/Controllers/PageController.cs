@@ -8,7 +8,7 @@ using WebApplication2.ViewModels.Include;
 
 namespace Frontend.Controllers
 {
-    public class PageController : Controller
+    public class PageController : BaseController
     {
         [Internationalization]
         public ActionResult Index(string locale, string category, string id)
@@ -21,7 +21,7 @@ namespace Frontend.Controllers
                 logger.Debug("Can fetch information from CMS");
             }
             */
-            BaseViewModel vm = BaseViewModel.make(locale, category, id, Request);
+            BaseViewModel vm = BaseViewModel.make(locale, category, id, Request, getSession());
             return View(vm);
         }
         public ActionResult _Header()

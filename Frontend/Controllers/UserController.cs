@@ -9,7 +9,7 @@ namespace Frontend.Controllers
     public class UserController : BaseController
     {
         // GET: User
-        public override ActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

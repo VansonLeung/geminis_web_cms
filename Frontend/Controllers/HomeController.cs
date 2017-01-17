@@ -12,9 +12,9 @@ namespace Frontend.Controllers
     public class HomeController : BaseController
     {
         [Internationalization]
-        public override ActionResult Index()
+        public ActionResult Index()
         {
-            BaseViewModel vm = BaseViewModel.make(null, null, null, Request);
+            BaseViewModel vm = BaseViewModel.make(null, null, null, Request, getSession());
             return View(vm);
         }
 

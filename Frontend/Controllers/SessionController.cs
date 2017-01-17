@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Frontend.Controllers
 {
-    public class SessionController : Controller
+    public class SessionController : BaseController
     {
         public string GetAPILink()
         {
@@ -42,7 +42,7 @@ namespace Frontend.Controllers
                     return this.Json(BaseResponse.MakeResponse("F001", resp.errorCode, resp, resp.errorMessage));
                 }
 
-                Session.Add("TTLClient", resp);
+                setSession(resp);
 
                 return this.Json(BaseResponse.MakeResponse(resp));
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication2.Models;
+using static WebApplication2.Controllers.BaseController;
 
 namespace WebApplication2.ViewModels.Include
 {
@@ -210,7 +211,7 @@ namespace WebApplication2.ViewModels.Include
             return breadcrumbData;
         }
 
-        public static BaseViewModel make(string locale, string category, string id, HttpRequestBase request)
+        public static BaseViewModel make(string locale, string category, string id, HttpRequestBase request, BaseControllerSession session)
         {
             // locale
 
@@ -237,6 +238,10 @@ namespace WebApplication2.ViewModels.Include
             vm.lang.locale = locale;
             vm.lang.lang = language;
             vm.lang.culture = culture;
+
+
+            // sessions
+            vm.current = new Current(session, null, null);
 
 
             // constants
@@ -273,6 +278,24 @@ namespace WebApplication2.ViewModels.Include
 
             WebApplication2.Models.Infrastructure.Category cat = null;
 
+
+            // header data
+
+            vm.headerData = new ViewCategory(null, null);
+            vm.headerData.title = "Geminis";
+
+
+            // header menu
+
+            vm.headerMenu = createHeaderMenu(0, vm.lang);
+
+            // footer menu
+
+            vm.footerMenu = createFooterMenu(0, vm.lang);
+
+
+
+
             if (category != null && locale != null)
             {
 
@@ -281,21 +304,6 @@ namespace WebApplication2.ViewModels.Include
                 vm.category = new ViewCategory(cat, vm.lang);
 
 
-
-
-                // header data
-
-                vm.headerData = new ViewCategory(null, null);
-                vm.headerData.title = "Geminis";
-
-
-                // header menu
-
-                vm.headerMenu = createHeaderMenu(0, vm.lang);
-
-                // footer menu
-
-                vm.footerMenu = createFooterMenu(0, vm.lang);
 
                 // breadcrumb data
 

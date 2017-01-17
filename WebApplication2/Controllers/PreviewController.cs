@@ -17,7 +17,7 @@ namespace WebApplication2.Controllers
             string desc
             )
         {
-            BaseViewModel vm = BaseViewModel.make(null, null, null, Request);
+            BaseViewModel vm = BaseViewModel.make(null, null, null, Request, null);
 
             vm.content = new ViewContent();
             vm.content.name = name;
