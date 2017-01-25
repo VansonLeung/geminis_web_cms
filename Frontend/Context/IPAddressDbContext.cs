@@ -1,4 +1,4 @@
-﻿using Frontend.Models;
+using Frontend.Models;
 using Frontend.Security;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,8 @@ using System.Web;
 
 namespace Frontend.Context
 {
-    public class UserDbContext : BaseDbContext
+    public class IPAddressDbContext : BaseDbContext
     {
-        public DbSet<User> accountDb { get; set; }
+        public DbSet<IPAddress> ipaddressDb { get; set; }
     }
 }
