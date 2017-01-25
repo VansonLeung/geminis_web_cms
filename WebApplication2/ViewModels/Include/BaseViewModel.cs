@@ -57,6 +57,7 @@ namespace WebApplication2.ViewModels.Include
         public List list { get; set; }
         public Menu menu { get; set; }
         public Sideitem sideitem { get; set; }
+        public List<Menu> topbarMenu { get; set; }
 
         public bool isError { get; set; } 
         public int errorCode { get; set; }
@@ -309,6 +310,18 @@ namespace WebApplication2.ViewModels.Include
 
                 vm.breadcrumbData = createBreadcrumbData(vm.category.categoryItemID, vm.lang);
 
+
+                // top bar menu
+
+                if (cat.pageShouldShowTopbarmenu)
+                {
+                    vm.topbarMenu = createSubmenu(cat.ItemID, vm.lang, false,false,false,false,false);
+                }
+
+                if (vm.topbarMenu != null && vm.topbarMenu.Count <= 0)
+                {
+                    vm.topbarMenu = null;
+                }
 
 
             }

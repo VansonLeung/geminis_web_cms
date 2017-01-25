@@ -12,22 +12,39 @@
 }
 else
 {
-    <section class='back'>
-        <div class='content_big_title'>
-            <table>
-                <tr>
-                    <td>
-                        <div class='title'>
-                            @Html.RazorEncode(HttpUtility.HtmlDecode(Model.category.title), Model)
-                        </div>
-                        <div class='hr'></div>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    <section class='back' style='background-image: url("");'>
+        @if (Model.category.hide_big_title)
+        {
+
+        }
+        else
+        {
+            <div class='content_big_title'>
+                <table>
+                    <tr>
+                        <td>
+                            <div class='title'>
+                                @Html.RazorEncode(HttpUtility.HtmlDecode(Model.category.title), Model)
+                            </div>
+                            <div class='hr'></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+
+        @if (Model.category.show_submenu_bar)
+        {
+            @Html.Partial("Topsubmenu", Model)
+        }
+        else
+        {
+
+        }
     </section>
 
     <section class='front'>
+
         @if (Model.category.submenu != null)
         {
             foreach (var menuItem in Model.category.submenu)
@@ -35,14 +52,35 @@ else
                 <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
             }
         }
-        @Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.desc), Model)
-        <!--
-        <h3>content page here</h3>
-        <p>@Model.lang.lang</p>
-        <p>@Model.content.link.GetFullURL()</p>
-        <p>@Model.category.name</p>
-        <p>Resouce language test: @Frontend.Resources.Resource.test</p>
-        -->
+
+
+        @if (Model.content != null && Model.content.type == "ArticleList")
+        {
+            <div class='row'>
+                <div class='col s12 m8'>
+                    @Html.Partial("List", Model)
+                </div>
+                <div class='col s12 m4'>
+                    @Html.Partial("Sidebar", Model)
+                </div>
+            </div>
+        }
+        else if (Model.content != null && Model.content.type == "Article")
+        {
+            <div class='row'>
+                <div class='col s12 m8'>
+                    @Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.desc), Model)
+                </div>
+                <div class='col s12 m4'>
+                    @Html.Partial("Sidebar", Model)
+                </div>
+            </div>
+        }
+        else
+        {
+            @Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.desc), Model)
+        }
+
     </section>
     @Html.Partial("_Footer", Model)
 }

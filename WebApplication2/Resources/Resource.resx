@@ -408,4 +408,8 @@
   <data name="remarks" xml:space="preserve">
     <value>Remarks</value>
   </data>
+  <data name="pageShouldShowTopbarmenu" xml:space="preserve">
+    <value>Page should show top bar menu</value>
+  </data>
+
 </root>

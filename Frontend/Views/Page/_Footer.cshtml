@@ -4,18 +4,14 @@
         <div class='white-space'>
             <div class='gem_form nobg zeromarginpadding' style='position:relative; overflow: visible;'>
                 <div class='row'>
-                    <div class='col s12 m4'>
-                        <a href='#'>常見問題</a>
-                        <a href='#'>免責聲明</a>
-                    </div>
-                    <div class='col s12 m4'>
-                        <a href='#'>下載</a>
-                        <a href='#'>開戶申請查詢</a>
-                    </div>
-                    <div class='col s12 m4'>
-                        <a href='#'>聯絡我們</a>
-                        <a href='#'>網站地圖</a>
-                    </div>
+                    @for (var i = 0; i < Model.headerMenu.Count; i++)
+                    {
+                        var menuItem = Model.headerMenu[i];
+
+                        <div class='col s12 m4'>
+                            <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
+                        </div>
+                    }                
                 </div>
                 <a href='#' class='oval-button-red' style='position:fixed;bottom: 106px; right: 10px;'></a>
                 <a href='#' class='oval-button-white' style='position:fixed;bottom: 24px; right: 10px;'></a>

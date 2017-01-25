@@ -1,1 +1,49 @@
-﻿
+﻿@model WebApplication2.ViewModels.Include.BaseViewModel
+@using WebApplication2.ViewModels.Include
+@using WebApplication2.ViewModels
+
+<div class='gem_form'>
+<div class='gem_form_header' style='position:relative; padding-left: 0; padding-right: 0;'>
+  <p class='topbar'></p>
+
+</div>
+<div>
+  <br/>
+  <table class='generic-table-content font_smedmed smallpadding'>
+	@foreach (var item in Model.items) 
+	{
+	  	<tr>
+	  		<td>
+	  			<a href='#'>
+					@if (Model.listitem.image)
+					{
+
+					}
+					else
+					{
+
+					}
+	  			</a>
+	  		</td>
+	  	</tr>
+	}
+  </table>
+  <table class='generic-table-footer font_smed thin-line nopadding'>
+    <tr>
+      <td class="t_center"></td>
+      <td class="t_center">
+        <div class="pagination">
+          <div class="pagination-control">&lt;&lt; @Resources.Resource.prev_page</div>
+          <div class="pagination-control pagination-page pagination-highlight">1</div>
+          <div class="pagination-control pagination-page">2</div>
+          <div class="pagination-control pagination-page">3</div>
+          <div class="pagination-control pagination-page">4</div>
+          <div class="pagination-control pagination-page">5</div>
+          <div class="pagination-control">@Resources.Resource.next_page &gt;&gt;</div>
+        </div>
+      </td>
+      <td class="t_center"></td>
+    </tr>
+  </table>
+</div>
+</div>
