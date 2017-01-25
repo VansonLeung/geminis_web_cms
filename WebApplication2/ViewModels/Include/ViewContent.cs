@@ -13,6 +13,7 @@ namespace WebApplication2.ViewModels.Include
         public ViewCategory category { get; set; }
         public Listitem listitem { get; set; }
         public List<Listitem> articleList { get; set; }
+        public int articleListTotal { get; set; }
         public string desc { get; set; }
         public string type { get; set; }
         public string author { get; set; }

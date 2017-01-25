@@ -148,6 +148,45 @@ namespace WebApplication2.Context
         }
 
 
+        public int getArticlesPublishedByCategoryTotalCount(Category category, string lang = "en")
+        {
+            var now = DateTime.Now;
+
+            var query = (getArticlePublishedDb().AsNoTracking().Where(acc =>
+                acc.categoryID == category.ItemID
+                && acc.Lang == lang
+                && (!acc.datePublishStart.HasValue || acc.datePublishStart.Value <= now)
+                && (!acc.datePublishEnd.HasValue || acc.datePublishEnd.Value >= now)
+            ));
+
+            int totalCount = query.Count();
+
+            return totalCount;
+        }
+        public List<ArticlePublished> getArticlesPublishedByCategoryPaginated(Category category, int size = 10, int page = 0, string lang = "en")
+        {
+            var now = DateTime.Now;
+
+            var query = (getArticlePublishedDb().AsNoTracking().Where(acc =>
+                acc.categoryID == category.ItemID
+                && acc.Lang == lang
+                && (!acc.datePublishStart.HasValue || acc.datePublishStart.Value <= now)
+                && (!acc.datePublishEnd.HasValue || acc.datePublishEnd.Value >= now)
+            ));
+
+            var items = query
+                .OrderByDescending(acc => acc.datePublishStart)
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount)
+                .Skip((int)size * (page - 1))
+                .Take((int)size)
+                .ToList();
+
+            return items;
+        }
+
+
         public ArticlePublished getArticlePublishedByBaseArticleID(int baseArticleID, string lang = "en")
         {
             var now = DateTime.Now;

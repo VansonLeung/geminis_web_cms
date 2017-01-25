@@ -272,6 +272,22 @@ namespace WebApplication2.ViewModels.Include
             }
 
 
+            int articlelist_page = 0;
+            int articlelist_size = 10;
+
+            foreach (Constant constant in vm.queries)
+            {
+                if (constant.Key == "page")
+                {
+                    articlelist_page = Int.parse(constant.Value);
+                }
+                if (constant.Key == "size")
+                {
+                    articlelist_size = Int.parse(constant.Value);
+                }
+            }
+
+
 
             // category
 
@@ -360,16 +376,19 @@ namespace WebApplication2.ViewModels.Include
                     {
                         vm.content = new ViewContent();
                         vm.content.articleList = new List<Listitem>();
-                        var articleList = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlesPublishedByCategory(cat, vm.lang.lang);
+                        var articleList = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlesPublishedByCategoryPaginated(cat, articlelist_size, articlelist_page, vm.lang.lang);
                         foreach (var article in articleList)
                         {
                             Listitem item = new Listitem();
                             item.name = article.Name;
                             item.summary = article.Excerpt;
-                            vm.content.link = new Link(vm.lang.locale, cat.getUrl(), article.BaseArticleID + "");
+                            item.link = new Link(vm.lang.locale, cat.getUrl(), article.BaseArticleID + "");
                             item.link.is_absolute = false;
                             item.link.is_external = false;
+                            item.content.type = "Article";
+                            vm.content.articleList.Add(item);
                         }
+                        vm.content.articleListTotal = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlesPublishedByCategoryTotalCount(cat, vm.lang.lang);
                         vm.content.type = "ArticleList";
                     }
                 }
