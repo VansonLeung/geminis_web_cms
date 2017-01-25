@@ -1,176 +1,184 @@
-@model WebApplication2.ViewModels.Include.BaseViewModel
+﻿@model WebApplication2.ViewModels.Include.BaseViewModel
 @using WebApplication2.ViewModels.Include
 @using WebApplication2.ViewModels
 
+
 <div class='gem_form'>
 
-  <div class='generic-table-quoter font_smedmed'>
-    <div class="row">
-      <div class="col s6 header-left">個股查詢</div>
-      <div class="col s6 header-right">(延時)</div>
+    <div class='generic-table-quoter font_smedmed'>
+        <div class="row">
+            <div class="col s6 header-left">個股查詢</div>
+            <div class="col s6 header-right">(延時)</div>
+        </div>
+        <div class='quote gm gm-numbers'>
+            <input type='text' class="stockquotersearch" name='code' value='' placeholder="請輸入" />
+        </div>
+        <div class="stockSimpleInfo">
+            <table>
+                <tr><td class="leftinfo headertitle"><h4>0005</h4></td><td class="rightinfo headertitle"><h4>匯豐控股</h4></td></tr>
+                <tr><td colspan="2" class="leftinfo">現價 $54.900</td></tr>
+                <tr><td colspan="2" class="leftinfo c_green">+0.700 / 1.29%</td></tr>
+
+                <tr><td class="leftinfo">成交量 1,010.73萬</td><td class="rightinfo"><span class="infoarrow">相關資料</span> <img class="infoarrowicon" src='/images/more_arrow_1.png' /></td></tr>
+            </table>
+        </div>
     </div>
-    <div class='quote gm gm-numbers'>
-      <input type='text' class="stockquotersearch" name='code' value='' placeholder="請輸入" />
+
+    <div>
+        <div class='generic-table-tabbar small'>
+            <div class="row">
+                <div class="col s4">
+                    <h5 class="recordTitle">瀏覽記錄</h5>
+                </div>
+                <div class="col s8">
+                    <ul>
+                        <li>
+                            <div class='background-active'>
+                                <!--  <div class='icon'>
+                                  <img src='/images/flag_hk.png'/>
+                                </div> -->
+                                <div class='text cuntryEnvItem'>
+                                    港
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class='background'>
+                                <!--    <div class='icon'>
+                                  <img src='/images/flag_cn.png'/>
+                                </div> -->
+                                <div class='text cuntryEnvItem'>
+                                    中
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class='background'>
+                                <!--  <div class='icon'>
+                                  <img src='/images/flag_tw.png'/>
+                                </div> -->
+                                <div class='text cuntryEnvItem'>
+                                    台
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class='background'>
+                                <!--   <div class='icon'>
+                                  <img src='/images/flag_us.png'/>
+                                </div> -->
+                                <div class='text cuntryEnvItem'>
+                                    美
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <table class='generic-table-content small font_smed'>
+                <tr class='smaller'>
+                    <th>代號</th>
+                    <th>名稱</th>
+                    <th class="t_right">現價</th>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_red">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_red">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_red">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_green">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_green">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_green">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_green">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_green">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_green">112.10</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>亞里巴巴</td>
+                    <td class="t_right c_green">112.10</td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div class="stockSimpleInfo">
-      <table>
-        <tr><td class="leftinfo headertitle"><h4>0005</h4></td><td class="rightinfo headertitle"><h4>匯豐控股</h4></td></tr>
-        <tr><td colspan="2" class="leftinfo">現價 $54.900</td></tr>
-        <tr><td colspan="2" class="leftinfo c_green">+0.700 / 1.29%</td></tr>
 
-        <tr><td class="leftinfo">成交量 1,010.73萬</td><td class="rightinfo"><span class="infoarrow">相關資料</span> <img class="infoarrowicon" src='/images/more_arrow_1.png'/></td></tr>
-      </table>
+    <div class='gem_form shortbottom'>
+        <div class='gem_form_header' style='position:relative; padding-left: 0; padding-right: 0;'>
+            <p class='topbar big bg_c_navy'>
+                <span class='font_smed'>熱門新聞</span>
+            </p>
+
+        </div>
+        <br />
+        <div style='padding-left: 0px; padding-right: 0px;'>
+            <br>
+            <table class='generic-table-form more-table-form gm gm-numbers'>
+                <tr class='tablerow' onclick='javascript:alert("clicked");'>
+                    <td class='font_sm'>
+                        <span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
+                    </td>
+                </tr>
+                <tr class='tablerow' onclick='javascript:alert("clicked");'>
+                    <td class='font_sm'>
+                        <span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
+                    </td>
+                </tr>
+                <tr class='tablerow' onclick='javascript:alert("clicked");'>
+                    <td class='font_sm'>
+                        <span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
+                    </td>
+                </tr>
+                <tr class='tablerow' onclick='javascript:alert("clicked");'>
+                    <td class='font_sm'>
+                        <span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
+                    </td>
+                </tr>
+                <tr class='tablerow' onclick='javascript:alert("clicked");'>
+                    <td class='font_sm'>
+                        <span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
+                    </td>
+                </tr>
+                <tr class='tablerow' onclick='javascript:alert("clicked");'>
+                    <td class='font_sm text-right'>
+                        <span class='c_navy'>更多新聞 > </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-  </div>
-
-  <div>
-    <div class='generic-table-tabbar small'>
-      <div class="row">
-        <div class="col s4">
-          <h5 class="recordTitle">瀏覽記錄</h5>
-        </div>
-        <div class="col s8">
-          <ul>
-            <li>
-              <div class='background-active'>
-       <!--  <div class='icon'>
-          <img src='/images/flag_hk.png'/>
-        </div> -->
-        <div class='text cuntryEnvItem'>
-          港
-        </div>
-      </div>
-    </li>
-    <li>
-      <div class='background'>
-     <!--    <div class='icon'>
-          <img src='/images/flag_cn.png'/>
-        </div> -->
-        <div class='text cuntryEnvItem'>
-          中
-        </div>
-      </div>
-    </li>
-    <li>
-      <div class='background'>
-       <!--  <div class='icon'>
-          <img src='/images/flag_tw.png'/>
-        </div> -->
-        <div class='text cuntryEnvItem'>
-          台
-        </div>
-      </div>
-    </li>
-    <li>
-      <div class='background'>
-      <!--   <div class='icon'>
-          <img src='/images/flag_us.png'/>
-        </div> -->
-        <div class='text cuntryEnvItem'>
-          美
-        </div>
-      </div>
-    </li>
-  </ul>        
-</div>
-
-
-</div>
-<table class='generic-table-content small font_smed'>
-  <tr class='smaller'>
-    <th>代號</th>
-    <th>名稱</th>
-    <th class="t_right">現價</th>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_red">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_red">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_red">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_green">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_green">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_green">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_green">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_green">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_green">112.10</td>
-  </tr>
-  <tr>
-    <td>00001</td>
-    <td>亞里巴巴</td>
-    <td class="t_right c_green">112.10</td>
-  </tr>
-</table>
-</div>
-</div>
-
-<div class='gem_form shortbottom'>
-  <div class='gem_form_header' style='position:relative; padding-left: 0; padding-right: 0;'>
-    <p class='topbar big bg_c_navy'>
-      <span class='font_smed'>熱門新聞</span>
-    </p>
-
-  </div>
-  <br/>
-  <div style='padding-left: 0px; padding-right: 0px;'>
-    <br>
-    <table class='generic-table-form more-table-form gm gm-numbers'>
-      <tr class='tablerow' onclick='javascript:alert("clicked");'>
-        <td class='font_sm'><span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
-        </td>
-      </tr>
-      <tr class='tablerow' onclick='javascript:alert("clicked");'>
-        <td class='font_sm'><span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
-        </td>
-      </tr>
-      <tr class='tablerow' onclick='javascript:alert("clicked");'>
-        <td class='font_sm'><span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
-        </td>
-      </tr>
-      <tr class='tablerow' onclick='javascript:alert("clicked");'>
-        <td class='font_sm'><span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
-        </td>
-      </tr>
-      <tr class='tablerow' onclick='javascript:alert("clicked");'>
-        <td class='font_sm'><span class='c_navy'>{日期}</span>&nbsp;&nbsp;<span class='c_navy'>{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}{標題}</span>
-        </td>
-      </tr>
-      <tr class='tablerow' onclick='javascript:alert("clicked");'>
-        <td class='font_sm text-right'><span class='c_navy'>更多新聞 > </span>
-        </td>
-      </tr>
-    </table>
-  </div>
 </div>

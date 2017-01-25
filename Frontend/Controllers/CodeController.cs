@@ -16,6 +16,8 @@ namespace Frontend.Controllers
             // will not register new code within 5 minute after register, but will refresh existing code's expiry time
             // will register & override with new code after 5 minute after register has passed
             // will also send email to the user
+
+            return null;
         }
 
         public bool VerifyEmailCodeCombination(string Email, string Code)
@@ -23,6 +25,8 @@ namespace Frontend.Controllers
             // find existing non-completed code with correct email + code combination
             // if exists , then complete it, and return true
             // otherwise return false
+
+            return false;
         }
     }
 }

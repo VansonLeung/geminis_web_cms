@@ -106,7 +106,7 @@ namespace WebApplication2.ViewModels.Include
 
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
-                item.link = new Link(lang.locale, _cat.getUrl(), null);
+                item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
                 item.submenu = createSubmenu(item.category.categoryItemID, lang, 
@@ -137,7 +137,7 @@ namespace WebApplication2.ViewModels.Include
 
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
-                item.link = new Link(lang.locale, _cat.getUrl(), null);
+                item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
                 item.submenu = createSubmenu(item.category.categoryItemID, lang, 
@@ -162,7 +162,7 @@ namespace WebApplication2.ViewModels.Include
             {
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
-                item.link = new Link(lang.locale, _cat.getUrl(), null);
+                item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
                 item.submenu = createSubmenu(item.category.categoryItemID, lang,
@@ -272,18 +272,18 @@ namespace WebApplication2.ViewModels.Include
             }
 
 
-            int articlelist_page = 0;
+            int articlelist_page = 1;
             int articlelist_size = 10;
 
             foreach (Constant constant in vm.queries)
             {
                 if (constant.Key == "page")
                 {
-                    articlelist_page = Int.parse(constant.Value);
+                    articlelist_page = int.Parse(constant.Value);
                 }
                 if (constant.Key == "size")
                 {
-                    articlelist_size = Int.parse(constant.Value);
+                    articlelist_size = int.Parse(constant.Value);
                 }
             }
 
@@ -357,8 +357,7 @@ namespace WebApplication2.ViewModels.Include
 
                     if (id != null)
                     {
-                        var idInt = int.Parse(id);
-                        articlePublished = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlePublishedByBaseArticleID(idInt, vm.lang.lang);
+                        articlePublished = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlePublishedBySlugAndCategoryID(cat.ItemID, id, vm.lang.lang);
                     }
 
                     if (articlePublished != null)
@@ -367,7 +366,7 @@ namespace WebApplication2.ViewModels.Include
                         vm.content.name = articlePublished.Name;
                         vm.content.desc = articlePublished.Desc;
                         vm.content.slug = articlePublished.Slug;
-                        vm.content.link = new Link(vm.lang.locale, cat.getUrl(), articlePublished.BaseArticleID + "");
+                        vm.content.link = new Link(vm.lang.locale, cat.getUrl(), null, articlePublished.Slug);
                         vm.content.link.is_absolute = false;
                         vm.content.link.is_external = false;
                         vm.content.type = "Article";
@@ -382,13 +381,17 @@ namespace WebApplication2.ViewModels.Include
                             Listitem item = new Listitem();
                             item.name = article.Name;
                             item.summary = article.Excerpt;
-                            item.link = new Link(vm.lang.locale, cat.getUrl(), article.BaseArticleID + "");
+                            item.link = new Link(vm.lang.locale, cat.getUrl(), null, article.Slug);
                             item.link.is_absolute = false;
                             item.link.is_external = false;
-                            item.content.type = "Article";
                             vm.content.articleList.Add(item);
                         }
                         vm.content.articleListTotal = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlesPublishedByCategoryTotalCount(cat, vm.lang.lang);
+                        vm.content.articleListTotalPages = vm.content.articleListTotal / articlelist_size;
+                        vm.content.articleListPageSize = articlelist_size;
+                        vm.content.articleListCurrentPage = articlelist_page;
+                        vm.content.articleListHasPrevPage = articlelist_page <= 1;
+                        vm.content.articleListHasNextPage = articlelist_page >= vm.content.articleListTotalPages;
                         vm.content.type = "ArticleList";
                     }
                 }
@@ -410,7 +413,7 @@ namespace WebApplication2.ViewModels.Include
                         vm.content.name = contentPage.Name;
                         vm.content.desc = contentPage.Desc;
                         vm.content.slug = contentPage.Slug;
-                        vm.content.link = new Link(vm.lang.locale, cat.getUrl(), contentPage.BaseArticleID + "");
+                        vm.content.link = new Link(vm.lang.locale, cat.getUrl(), contentPage.BaseArticleID + "", null);
                         vm.content.link.is_absolute = false;
                         vm.content.link.is_external = false;
                         vm.content.type = "ContentPage";

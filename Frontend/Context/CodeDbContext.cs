@@ -8,8 +8,29 @@ using System.Web;
 
 namespace Frontend.Context
 {
-    public class CodeDbContext : BaseDbContext
+    public class CodeDbContext : FrontendBaseDbContext
     {
-        public DbSet<Code> codeDb { get; set; }
+        // singleton
+
+        private static CodeDbContext context;
+
+        public static CodeDbContext getInstance()
+        {
+            if (context == null)
+            {
+                context = new CodeDbContext();
+            }
+            return context;
+        }
+
+
+        // initializations 
+
+        private FrontendBaseDbContext db = FrontendBaseDbContext.getInstance();
+
+        protected virtual DbSet<Code> getItemDb()
+        {
+            return db.codeDb;
+        }
     }
 }

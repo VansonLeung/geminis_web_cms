@@ -185,6 +185,18 @@ namespace WebApplication2.ViewModels
                 return "";
             });
 
+            pattern = @"@{S:TRADINGACCLIST}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                try
+                {
+                    return model.current.session.tradingAccList + "";
+                }
+                catch (Exception e)
+                {
+                    return "";
+                }
+            });
+
 
 
 

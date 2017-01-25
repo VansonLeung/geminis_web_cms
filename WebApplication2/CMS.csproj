@@ -259,6 +259,10 @@
     <Compile Include="Helpers\RegexUtilities.cs" />
     <Compile Include="Helpers\ResHelper.cs" />
     <Compile Include="Helpers\ServerHelper.cs" />
+    <Compile Include="Migrations\201701250751306_Constants.cs" />
+    <Compile Include="Migrations\201701250751306_Constants.Designer.cs">
+      <DependentUpon>201701250751306_Constants.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountAccessRightsContentPage.cs" />
@@ -1568,6 +1572,8 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="slick\slick.css" />
+    <Content Include="slick\slick.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1682,6 +1688,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701250751306_Constants.resx">
+      <DependentUpon>201701250751306_Constants.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>

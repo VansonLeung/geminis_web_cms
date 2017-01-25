@@ -8,8 +8,29 @@ using System.Web;
 
 namespace Frontend.Context
 {
-    public class IPAddressDbContext : BaseDbContext
+    public class IPAddressDbContext : FrontendBaseDbContext
     {
-        public DbSet<IPAddress> ipaddressDb { get; set; }
+        // singleton
+
+        private static IPAddressDbContext context;
+
+        public static IPAddressDbContext getInstance()
+        {
+            if (context == null)
+            {
+                context = new IPAddressDbContext();
+            }
+            return context;
+        }
+
+
+        // initializations 
+
+        private FrontendBaseDbContext db = FrontendBaseDbContext.getInstance();
+
+        protected virtual DbSet<IPAddress> getItemDb()
+        {
+            return db.ipaddressDb;
+        }
     }
 }

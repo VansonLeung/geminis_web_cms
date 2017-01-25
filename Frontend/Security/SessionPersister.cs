@@ -47,7 +47,7 @@ namespace Frontend.Security
             {
                 if (account != null)
                 {
-                    account = db.accountDb.Find(account.UserID);
+                    account = db.userDb.Find(account.UserID);
                 }
                 refresh_account_last_activity();
             }

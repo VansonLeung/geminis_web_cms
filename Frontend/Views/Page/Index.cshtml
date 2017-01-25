@@ -13,7 +13,7 @@
 else
 {
     <section class='back' style='background-image: url("");'>
-        @if (Model.category.hide_big_title)
+        @if (Model.category.hideTopTitle)
         {
 
         }
@@ -33,7 +33,7 @@ else
             </div>
         }
 
-        @if (Model.category.show_submenu_bar)
+        @if (Model.category.showTopsubmenuBar)
         {
             @Html.Partial("Topsubmenu", Model)
         }

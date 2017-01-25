@@ -11,12 +11,15 @@ namespace Frontend.Controllers
         // GET: User
         public ActionResult Me()
         {
-            return me
+
+            return null;
         }
 
         public ActionResult Register()
         {
             // register and call ttl
+
+            return null;
         }
 
         public ActionResult Login()
@@ -24,18 +27,24 @@ namespace Frontend.Controllers
             // login and call ttl & qpi
             // save session
             // return success 200
+
+            return null;
         }
 
         public ActionResult KeepAlive()
         {
             // call qpi keepalive api
             // return success 200
+
+            return null;
         }
 
         public ActionResult Logout()
         {
             // logout and kill session
             // return success 200
+
+            return null;
         }
 
         public ActionResult EditSettings()
@@ -44,6 +53,8 @@ namespace Frontend.Controllers
             // 1. country code
             // 2. lang code
             // 3. locale code
+
+            return null;
         }
 
         public ActionResult EditProfile()
@@ -51,6 +62,8 @@ namespace Frontend.Controllers
             // what settings:
             // 1. email
             // 2. password  (call ttl)
+
+            return null;
         }
     }
 }

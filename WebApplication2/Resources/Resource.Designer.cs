@@ -826,6 +826,15 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page should show top bar menu.
+        /// </summary>
+        public static string pageShouldShowTopbarmenu {
+            get {
+                return ResourceManager.GetString("pageShouldShowTopbarmenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parent.
         /// </summary>
         public static string parentItemID {

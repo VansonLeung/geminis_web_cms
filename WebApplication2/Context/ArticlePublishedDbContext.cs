@@ -163,7 +163,7 @@ namespace WebApplication2.Context
 
             return totalCount;
         }
-        public List<ArticlePublished> getArticlesPublishedByCategoryPaginated(Category category, int size = 10, int page = 0, string lang = "en")
+        public List<ArticlePublished> getArticlesPublishedByCategoryPaginated(Category category, int size = 10, int page = 1, string lang = "en")
         {
             var now = DateTime.Now;
 
@@ -194,14 +194,30 @@ namespace WebApplication2.Context
             return (getArticlePublishedDb().AsNoTracking().Where(acc =>
             acc.BaseArticleID == baseArticleID
             && acc.Lang == lang
-            && (!acc.datePublishStart.HasValue || acc.datePublishStart.Value.Date <= now)
-            && (!acc.datePublishEnd.HasValue || acc.datePublishEnd.Value.Date >= now)
+            && (!acc.datePublishStart.HasValue || acc.datePublishStart.Value <= now)
+            && (!acc.datePublishEnd.HasValue || acc.datePublishEnd.Value >= now)
             ).OrderByDescending(acc => acc.Version))
                 .Include(acc => acc.createdByAccount)
                 .Include(acc => acc.approvedByAccount)
                 .Include(acc => acc.publishedByAccount).FirstOrDefault();
         }
 
+
+        public ArticlePublished getArticlePublishedBySlugAndCategoryID(int categoryID, string slug, string lang = "en")
+        {
+            var now = DateTime.Now;
+
+            return (getArticlePublishedDb().AsNoTracking().Where(acc =>
+            acc.categoryID == categoryID
+            && acc.Slug == slug
+            && acc.Lang == lang
+            && (!acc.datePublishStart.HasValue || acc.datePublishStart.Value <= now)
+            && (!acc.datePublishEnd.HasValue || acc.datePublishEnd.Value >= now)
+            ).OrderByDescending(acc => acc.Version))
+                .Include(acc => acc.createdByAccount)
+                .Include(acc => acc.approvedByAccount)
+                .Include(acc => acc.publishedByAccount).FirstOrDefault();
+        }
 
 
         #endregion

@@ -200,11 +200,15 @@
     <Compile Include="Attributes\Internationalization.cs" />
     <Compile Include="Bindings\JSONParamBinding.cs" />
     <Compile Include="Bindings\JSONParamBindingAttribute.cs" />
+    <Compile Include="Context\CodeDbContext.cs" />
+    <Compile Include="Context\IPAddressDbContext.cs" />
     <Compile Include="Context\UserDbContext.cs" />
-    <Compile Include="Context\BaseDbContext.cs" />
+    <Compile Include="Context\FrontendBaseDbContext.cs" />
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IPAddressController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -213,6 +217,8 @@
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BaseResponse.cs" />
+    <Compile Include="Models\Code.cs" />
+    <Compile Include="Models\IPAddress.cs" />
     <Compile Include="Models\TTLAPIRequest.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -545,10 +551,8 @@
     <Content Include="fonts\roboto_condensed.woff" />
     <Content Include="calendarjquerycss3\img\Untitled.sketch" />
     <Content Include="images\bg_img\_DS_Store" />
-    <Content Include="images\index\index_products_icon.psd" />
     <Content Include="images\index\_DS_Store" />
     <Content Include="images\ipo\_DS_Store" />
-    <Content Include="images\menu_img1.psd" />
     <Content Include="images\page_title_icon\_DS_Store" />
     <Content Include="images\trading\_DS_Store" />
     <Content Include="js\iframeResizer.contentWindow.map" />
@@ -1002,6 +1006,8 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="slick\slick.css" />
+    <Content Include="slick\slick.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1025,6 +1031,8 @@
     <Content Include="Views\Page\_Footer.cshtml" />
     <Content Include="Views\Page\_Header.cshtml" />
     <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl" />
+    <Content Include="Views\Page\Topsubmenu.cshtml" />
+    <Content Include="Views\Page\Sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

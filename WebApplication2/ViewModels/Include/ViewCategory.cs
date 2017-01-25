@@ -23,7 +23,7 @@ namespace WebApplication2.ViewModels.Include
                 this.title = cat.GetName(lang.lang);
                 this.is_active = cat.isEnabled;
                 this.is_disabled = !cat.isEnabled;
-                this.link = new Link(lang.locale, cat.getUrl(), null);
+                this.link = new Link(lang.locale, cat.getUrl(), null, null);
             }
         }
         
@@ -39,5 +39,8 @@ namespace WebApplication2.ViewModels.Include
         public int categoryParentItemID { get; set; }
         public ViewCategory categoryParent { get; set; }
         public List<Menu> submenu { get; set; }
+
+        public bool hideTopTitle { get; set; }
+        public bool showTopsubmenuBar { get; set; }
     }
 }

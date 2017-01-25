@@ -14,6 +14,11 @@ namespace WebApplication2.ViewModels.Include
         public Listitem listitem { get; set; }
         public List<Listitem> articleList { get; set; }
         public int articleListTotal { get; set; }
+        public int articleListTotalPages { get; set; }
+        public int articleListPageSize { get; set; }
+        public int articleListCurrentPage { get; set; }
+        public bool articleListHasPrevPage { get; set; }
+        public bool articleListHasNextPage { get; set; }
         public string desc { get; set; }
         public string type { get; set; }
         public string author { get; set; }
