@@ -1158,7 +1158,8 @@ table.generic-table-form {
       list-style-type: none;
       display: inline-block;
       margin: 0px;
-      border-left: 0px solid #dadada; }
+      border-left: 0px solid #dadada;
+      vertical-align: middle; }
       .horizontal-menu ul li div.background {
         display: inline-block;
         border-radius: 10px;
@@ -1324,7 +1325,7 @@ table.generic-table-form {
 
 .gem_form {
   background-color: #FEFFFF;
-  border-radius: 0px;
+  border-radius: 10px;
   overflow: hidden;
   margin-top: 0px;
   padding-top: 10px;
@@ -1443,7 +1444,6 @@ table.generic-table-form {
         display: inline-block; }
   .gem_form > .container {
     position: relative;
-    border-radius: 10px;
     overflow: hidden;
     padding-top: 10px;
     width: 100%; }
@@ -1548,13 +1548,11 @@ table.generic-table-form {
   padding: 0px; }
 
 .tmpbody {
-  background-color: black;
-  padding: 20px; }
+  background-color: black; }
 
 .inst-form {
   padding: 36px;
   max-width: 900px;
-  width: 900px;
   border-radius: 8px;
   background-color: white; }
 
@@ -1580,7 +1578,22 @@ table.generic-table-form {
   text-align: center;
   vertical-align: middle; }
 
+.cashTradingBtn-m {
+  font-size: 16px;
+  float: left;
+  width: 50%;
+  height: 76px;
+  line-height: 76px;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: center;
+  vertical-align: middle; }
+
 .cashTradingActive {
+  background-color: #c6ed9f;
+  color: #45c45b;
+  border-radius: 4px; }
+
+.cashTradingActive-m {
   background-color: #c6ed9f;
   color: #45c45b;
   border-radius: 4px; }
@@ -1609,21 +1622,6 @@ table.generic-table-form {
 
 .inst-form input[type="radio"]:checked + label > .inst-form-greenbox-base {
   background-color: #c6ed9f !important; }
-
-.inst-form-select {
-  line-height: 72px; }
-
-.inst-grid-b {
-  border-bottom: 1px solid #BCBCBC; }
-
-.inst-grid-t {
-  border-top: 1px solid #BCBCBC; }
-
-.inst-grid-l {
-  border-right: 1px solid #BCBCBC; }
-
-.inst-grid-r {
-  border-left: 1px solid #BCBCBC; }
 
 .remove-gemform-s {
   margin: 0 !important;
@@ -1726,13 +1724,6 @@ table.generic-table-form {
   line-height: 24px;
   font-size: 16px; }
 
-.selecthits {
-  font-size: 12px;
-  color: #0076ff;
-  position: relative;
-  top: -26px;
-  left: 30px; }
-
 .t_lasttd {
   padding-right: 35px !important; }
 
@@ -1751,6 +1742,86 @@ table.generic-table-form {
   padding: 0px;
   padding-top: 20px;
   font-size: 16px; }
+
+.cbcitem {
+  min-width: 105px; }
+
+@media only screen and (max-width: 992px) {
+  .hidewhenmobile {
+    display: none; }
+  .inst-form-select {
+    line-height: 36px; }
+  .selecthits {
+    font-size: 16px;
+    color: #0076ff;
+    position: initial;
+    top: auto;
+    left: auto; }
+  .inputselect {
+    width: 100%;
+    margin-bottom: 10px; }
+  #orgForm {
+    margin-bottom: 50px; }
+  .smallform {
+    padding: 0px !important; }
+  .inst-form {
+    border-radius: 0px; }
+  .mobileitemrow {
+    border-top: 1px solid #9e9e9e;
+    border-bottom: 1px solid #9e9e9e; }
+  .area-top {
+    padding: 0px 15px; }
+  .includecurrency {
+    line-height: 70px; }
+  .mobile-label {
+    padding-left: 16px !important; }
+  /* vanson border  */
+  .inst-grid-b {
+    border-bottom: 1px solid #BCBCBC; }
+  .inst-grid-t {
+    border-top: 1px solid #BCBCBC; }
+  .inst-grid-l {
+    border-right: 0px solid #BCBCBC; }
+  .inst-grid-r {
+    border-left: 0px solid #BCBCBC; } }
+
+@media only screen and (min-width: 992px) {
+  .hidewhenmobile {
+    display: block; }
+  .inst-form-select {
+    line-height: 72px; }
+  .selecthits {
+    font-size: 12px;
+    color: #0076ff;
+    position: relative;
+    top: -26px;
+    left: 30px; }
+  .inputselect {
+    width: auto;
+    margin-bottom: auto; }
+  #orgForm {
+    margin-bottom: 100px; }
+  .smallform {
+    padding: 0px !important; }
+  .inst-form {
+    border-radius: 8px; }
+  .mobileitemrow {
+    border-bottom: 0px solid #9e9e9e; }
+  .area-top {
+    padding: 0px 36px; }
+  .includecurrency {
+    line-height: 72px; }
+  .mobile-label {
+    padding-left: auto; }
+  /* vanson border  */
+  .inst-grid-b {
+    border-bottom: 1px solid #BCBCBC; }
+  .inst-grid-t {
+    border-top: 1px solid #BCBCBC; }
+  .inst-grid-l {
+    border-right: 1px solid #BCBCBC; }
+  .inst-grid-r {
+    border-left: 1px solid #BCBCBC; } }
 
 /*!
  * Materialize v0.97.7 (http://materializecss.com)
