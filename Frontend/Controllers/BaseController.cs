@@ -11,10 +11,12 @@ namespace Frontend.Controllers
     {
         public BaseControllerSession getSession()
         {
-            if (Session["TTLClient"] != null)
+            if (Session["TTLClient"] != null
+                && Session["jsessionID"] != null)
             {
                 TTLITradeWSDEV.clientLoginResponseLoginResp resp = (TTLITradeWSDEV.clientLoginResponseLoginResp)(Session["TTLClient"]);
-                BaseControllerSession session = MakeBaseControllerSession(resp);
+                string jsessionID = (string) Session["jsessionID"];
+                BaseControllerSession session = MakeBaseControllerSession(resp, jsessionID);
                 return session;
             }
             return null;
@@ -22,7 +24,7 @@ namespace Frontend.Controllers
 
 
 
-        BaseControllerSession MakeBaseControllerSession(TTLITradeWSDEV.clientLoginResponseLoginResp resp)
+        BaseControllerSession MakeBaseControllerSession(TTLITradeWSDEV.clientLoginResponseLoginResp resp, string jsessionID)
         {
             BaseControllerSession session = new BaseControllerSession();
             session.clientID = resp.clientId;
@@ -32,13 +34,19 @@ namespace Frontend.Controllers
             session.tradingAccSeq = resp.tradingAccSeq;
             session.tradingAccStatus = resp.tradingAccStatus;
             session.tradingAccList = Newtonsoft.Json.JsonConvert.SerializeObject(resp.tradingAccList);
+            session.jsessionID = jsessionID;
             return session;
         }
 
 
-    public void setSession(TTLITradeWSDEV.clientLoginResponseLoginResp resp)
+        public void setSession(TTLITradeWSDEV.clientLoginResponseLoginResp resp)
         {
             Session["TTLClient"] = resp;
+        }
+
+        public void setJSession(string sid)
+        {
+            Session["jsessionID"] = sid;
         }
     }
 }

@@ -24,6 +24,8 @@ namespace WebApplication2.ViewModels.Include
                 this.is_active = cat.isEnabled;
                 this.is_disabled = !cat.isEnabled;
                 this.link = new Link(lang.locale, cat.getUrl(), null, null);
+                this.hideTopTitle = cat.hideTopTitle;
+                this.showTopsubmenuBar = cat.showTopsubmenuBar;
             }
         }
         

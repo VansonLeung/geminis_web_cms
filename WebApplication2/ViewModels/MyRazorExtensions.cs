@@ -35,9 +35,12 @@ namespace WebApplication2.ViewModels
             // turn @{iframe_stock_1}asdfsdf@{iframe_stock_1}asdfsdf  into  constantasdfsdfconstantasdfsdf
 
             string input = template;
+            string output = input;
+
+            bool isChanged = false;
 
             string pattern = @"@{C:(?<key>\w+)}";
-            string output = Regex.Replace(input, pattern, delegate (Match m) {
+            output = Regex.Replace(input, pattern, delegate (Match m) {
                 var str = m.Value;
                 str = str.Substring(4);
                 str = str.Substring(0, str.Length - 1);
@@ -75,6 +78,45 @@ namespace WebApplication2.ViewModels
             });
 
 
+
+            pattern = @"@{IFRAME_QPI:(?<key>\w+)}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                var str = m.Value;
+                str = str.Substring(11);
+                str = str.Substring(0, str.Length - 1);
+
+                if (model != null)
+                {
+                    //var value = "@{C:IFRAME_QPI_URL}" + str + ";jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}";
+                    var value = "http://uat.quotepower.com/web/geminis/" + str + ".jsp;jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}&UpDwnColor=@{S:UPDWNCOLOR}";
+                    return value;
+                }
+
+                return m.Value;
+            });
+
+
+
+            pattern = @"@{IFRAME_TTL:(?<key>\w+)}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                var str = m.Value;
+                str = str.Substring(11);
+                str = str.Substring(0, str.Length - 1);
+
+                if (model != null)
+                {
+                    //var value = "@{C:IFRAME_TTL_URL}" + str + ";jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}";
+                    var value = "http://223.197.108.131/hks/servlet/ITradeServlet?action=hksLoginLiteAction&SessionID=@{S:SESSIONID}&clientID=@{S:CLIENTID}&jsessionID=@{S:JSESSIONID}&lang=@{S:LOCALE_TTL}&UpDwnColor=@{S:UPDWNCOLOR}&page=" + str;
+                    return value;
+                }
+
+                return m.Value;
+            });
+
+
+
+
+
             pattern = @"@{S:LOCALE}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
                 if (model != null
@@ -85,6 +127,74 @@ namespace WebApplication2.ViewModels
                 }
                 return "";
             });
+
+            pattern = @"@{S:LOCALE_QPI}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                if (model != null
+                    && model.lang != null
+                    && model.lang.locale != null)
+                {
+                    if (model.lang.locale === "zh-HK")
+                    {
+                        return "zh_TW";
+                    }
+                    if (model.lang.locale === "zh-CN")
+                    {
+                        return "zh_CN";
+                    }
+                    if (model.lang.locale === "en-US")
+                    {
+                        return "en_US";
+                    }
+                    return model.lang.locale;
+                }
+                return "";
+            });
+
+            pattern = @"@{S:LOCALE_TTL}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                if (model != null
+                    && model.lang != null
+                    && model.lang.locale != null)
+                {
+                    if (model.lang.locale === "zh-HK")
+                    {
+                        return "zh_TW";
+                    }
+                    if (model.lang.locale === "zh-CN")
+                    {
+                        return "zh_CN";
+                    }
+                    if (model.lang.locale === "en-US")
+                    {
+                        return "en_US";
+                    }
+                    return model.lang.locale;
+                }
+                return "";
+            });
+
+            pattern = @"@{S:UPDWNCOLOR}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                if (model != null
+                    && model.lang != null
+                    && model.lang.locale != null)
+                {
+                    if (model.lang.locale === "zh-HK")
+                    {
+                        return "HK";
+                    }
+                    if (model.lang.locale === "zh-CN")
+                    {
+                        return "CN";
+                    }
+                    return "HK";
+                }
+                return "";
+            });
+
+            
+
 
             pattern = @"@{S:LANG}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
@@ -197,8 +307,28 @@ namespace WebApplication2.ViewModels
                 }
             });
 
+            pattern = @"@{S:JSESSIONID}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                if (model != null
+                    && model.current != null
+                    && model.current.session != null
+                    && model.current.session.jsessionID != null)
+                {
+                    return model.current.session.jsessionID;
+                }
+                return "";
+            });
 
 
+            if (output != input)
+            {
+                isChanged = true;
+            }
+
+            if (isChanged)
+            {
+                output = Render(helper, output, model);
+            }
 
 
 

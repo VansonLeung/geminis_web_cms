@@ -2,107 +2,26 @@
 @using WebApplication2.ViewModels.Include
 @using WebApplication2.ViewModels
 
-
-<div>
+@if (Model.topbarMenu != null)
+{
   <div>
-    <div class='horizontal-menu'>
-      <ul>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-        <li class='divider'></li>
-        <li>
-          <div class='background'>
-            <div class='text'>
-              有效的指示
-            </div>
-          </div>
-        </li>
-      </ul>
-    </table>
+    <div>
+      <div class='horizontal-menu'>
+        <ul>
+          @foreach (var menuItem in Model.topbarMenu)
+          {
+              <a href="@menuItem.link.GetFullURL()">
+                <li>
+                  <div class='background'>
+                    <div class='text'>
+                      @menuItem.name
+                    </div>
+                  </div>
+                </li>
+              </a>
+          }
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
+}
