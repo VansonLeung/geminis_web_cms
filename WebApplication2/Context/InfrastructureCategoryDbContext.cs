@@ -55,6 +55,21 @@ namespace WebApplication2.Context
         }
 
 
+        public List<Category> findCategorysExcept(int? itemID = null)
+        {
+            if (itemID == null)
+            {
+                return getItemDb()
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+            return getItemDb()
+                .Where(item => item.ItemID != itemID)
+                .OrderBy(item => item.order)
+                .ToList();
+        }
+
+
         public List<Category> findCategorysByParentIDAsNoTracking(int? parentItemID = null)
         {
             if (parentItemID == null || parentItemID == 0)

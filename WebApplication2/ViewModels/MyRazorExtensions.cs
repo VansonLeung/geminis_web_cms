@@ -82,7 +82,7 @@ namespace WebApplication2.ViewModels
             pattern = @"@{IFRAME_QPI:(?<key>\w+)}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
                 var str = m.Value;
-                str = str.Substring(11);
+                str = str.Substring(13);
                 str = str.Substring(0, str.Length - 1);
 
                 if (model != null)
@@ -100,7 +100,7 @@ namespace WebApplication2.ViewModels
             pattern = @"@{IFRAME_TTL:(?<key>\w+)}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
                 var str = m.Value;
-                str = str.Substring(11);
+                str = str.Substring(13);
                 str = str.Substring(0, str.Length - 1);
 
                 if (model != null)
@@ -134,15 +134,15 @@ namespace WebApplication2.ViewModels
                     && model.lang != null
                     && model.lang.locale != null)
                 {
-                    if (model.lang.locale === "zh-HK")
+                    if (model.lang.locale == "zh-HK")
                     {
                         return "zh_TW";
                     }
-                    if (model.lang.locale === "zh-CN")
+                    if (model.lang.locale == "zh-CN")
                     {
                         return "zh_CN";
                     }
-                    if (model.lang.locale === "en-US")
+                    if (model.lang.locale == "en-US")
                     {
                         return "en_US";
                     }
@@ -157,15 +157,15 @@ namespace WebApplication2.ViewModels
                     && model.lang != null
                     && model.lang.locale != null)
                 {
-                    if (model.lang.locale === "zh-HK")
+                    if (model.lang.locale == "zh-HK")
                     {
                         return "zh_TW";
                     }
-                    if (model.lang.locale === "zh-CN")
+                    if (model.lang.locale == "zh-CN")
                     {
                         return "zh_CN";
                     }
-                    if (model.lang.locale === "en-US")
+                    if (model.lang.locale == "en-US")
                     {
                         return "en_US";
                     }
@@ -180,11 +180,11 @@ namespace WebApplication2.ViewModels
                     && model.lang != null
                     && model.lang.locale != null)
                 {
-                    if (model.lang.locale === "zh-HK")
+                    if (model.lang.locale == "zh-HK")
                     {
                         return "HK";
                     }
-                    if (model.lang.locale === "zh-CN")
+                    if (model.lang.locale == "zh-CN")
                     {
                         return "CN";
                     }

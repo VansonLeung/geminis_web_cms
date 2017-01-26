@@ -15,7 +15,7 @@ namespace WebApplication2.Controllers
     {
         SelectList getParentItemsForSelect(int? selectedID = null)
         {
-            var parentItemsForSelect = InfrastructureCategoryDbContext.getInstance().findCategorysByParentID();
+            var parentItemsForSelect = InfrastructureCategoryDbContext.getInstance().findCategorysExcept(selectedID);
             parentItemsForSelect.Insert(0, new Category { ItemID = -1, name_en = "" });
             return new SelectList(parentItemsForSelect, "ItemID", "name_en", selectedID);
         }
@@ -109,7 +109,7 @@ namespace WebApplication2.Controllers
         public ActionResult Edit(int id = 0)
         {
             var item = InfrastructureCategoryDbContext.getInstance().findCategoryByID(id);
-            ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
+            ViewBag.parentItemID = getParentItemsForSelect(item.ItemID);
             return View(item);
         }
 
@@ -132,12 +132,12 @@ namespace WebApplication2.Controllers
                 ViewBag.Message = "Edit '" + item.GetName() + "' successfully";
                 InfrastructureCategoryDbContext.getInstance().edit(item);
                 ModelState.Clear();
-                ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
+                ViewBag.parentItemID = getParentItemsForSelect(item.ItemID);
                 return View(item);
             }
             else
             {
-                ViewBag.parentItemID = getParentItemsForSelect(item.parentItemID);
+                ViewBag.parentItemID = getParentItemsForSelect(item.ItemID);
                 return View(item);
             }
         }

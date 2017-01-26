@@ -826,6 +826,15 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page should hide top title.
+        /// </summary>
+        public static string pageShouldHideTopTitle {
+            get {
+                return ResourceManager.GetString("pageShouldHideTopTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page should show top bar menu.
         /// </summary>
         public static string pageShouldShowTopbarmenu {

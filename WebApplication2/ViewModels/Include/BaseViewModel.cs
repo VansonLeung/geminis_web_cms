@@ -329,9 +329,9 @@ namespace WebApplication2.ViewModels.Include
 
                 // top bar menu
 
-                if (cat.pageShouldShowTopbarmenu)
+                if (cat.pageShouldShowTopbarmenu && cat.parentItemID.HasValue)
                 {
-                    vm.topbarMenu = createSubmenu(cat.ItemID, vm.lang, false,false,false,false,false);
+                    vm.topbarMenu = createSubmenu(cat.parentItemID.Value, vm.lang, false,false,false,false,false);
                 }
 
                 if (vm.topbarMenu != null && vm.topbarMenu.Count <= 0)

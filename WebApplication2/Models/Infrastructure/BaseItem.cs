@@ -96,6 +96,9 @@ namespace WebApplication2.Models.Infrastructure
         [Display(Name = "pageShouldShowTopbarmenu", ResourceType = typeof(Resource))]
         public bool pageShouldShowTopbarmenu { get; set; }
 
+        [Display(Name = "pageShouldHideTopTitle", ResourceType = typeof(Resource))]
+        public bool pageShouldHideTopTitle { get; set; }
+        
         [Display(Name = "remarks", ResourceType = typeof(Resource))]
         public string remarks { get; set; }
     }

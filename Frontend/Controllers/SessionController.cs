@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -66,7 +68,6 @@ namespace Frontend.Controllers
 
             string domain = "GEMINIS";
             string uid = username;
-            string password = password;
             string ts = DateTime.Now.ToString("yyyyMMddHHmmss");
             string env_key = "UAT";
 
@@ -96,18 +97,20 @@ namespace Frontend.Controllers
             query["token"] = hashstr;
             string queryString = query.ToString();
 
-            client.BaseAddress = new Uri("http://uat.quotepower.com/web/geminis/login.jsp?" + queryString);
+            client.BaseAddress = new Uri("http://uat.quotepower.com/web/geminis/login.jsp");
 
             // List data response.
-            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call!
+            HttpResponseMessage response = client.GetAsync("?" + queryString).Result;  // Blocking call!
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body. Blocking!
+                /*
                 var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;
                 foreach (var d in dataObjects)
                 {
                     Console.WriteLine("{0}", d.Name);
                 }
+                */
             }
 
             return "ABC";
@@ -137,11 +140,12 @@ namespace Frontend.Controllers
             var query = HttpUtility.ParseQueryString(string.Empty);
             query["jsessionid"] = jsessionID;
             string queryString = query.ToString();
-
-            client.BaseAddress = new Uri("http://uat.quotepower.com/web/luso/json/heartbeat.jsp;" + queryString);
+            
+            // List data response.
+            client.BaseAddress = new Uri("http://uat.quotepower.com/web/luso/json/heartbeat.jsp");
 
             // List data response.
-            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call!
+            HttpResponseMessage response = client.GetAsync(";" + queryString).Result;  // Blocking call!
             if (response.IsSuccessStatusCode)
             {
                 return true;

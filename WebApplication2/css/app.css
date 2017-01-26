@@ -1158,8 +1158,7 @@ table.generic-table-form {
       list-style-type: none;
       display: inline-block;
       margin: 0px;
-      border-left: 0px solid #dadada;
-      vertical-align: middle; }
+      border-left: 0px solid #dadada; }
       .horizontal-menu ul li div.background {
         display: inline-block;
         border-radius: 10px;
@@ -3881,7 +3880,6 @@ ul li {
   list-style-type: none; }
 
 a {
-  color: #039be5;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent; }
 

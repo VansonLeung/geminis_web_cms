@@ -22,9 +22,11 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style='font-size: 30px'>A</span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span class='generic-button-standalone gb-hollow-white'>
-                                        <a href="/@Model.lang.locale/Page/login">登入／註冊</a>
-                                    </span>
+                                    <a href="/@Model.lang.locale/Page/login">
+                                        <span class='generic-button-standalone gb-hollow-white'>
+                                            登入／註冊
+                                        </span>
+                                    </a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <span class='generic-button-standalone gb-primary'>
                                         免費開戶
@@ -69,7 +71,7 @@
                                 @for (var j = 0; j < menuItem.submenu.Count; j++)
                                 {
                                     var submenuItem = menuItem.submenu[j];
-                                    <li id="headerMenu_sub_li_@j"><a href="@submenuItem.link.GetFullURL()">@submenuItem.name</a><p class="arrow"></p></li>
+                                    <a href="@submenuItem.link.GetFullURL()"><li id="headerMenu_sub_li_@j">@submenuItem.name<p class="arrow"></p></li></a>
                                 }
                             </ul>
                         </div>
@@ -77,17 +79,17 @@
                             @for (var j = 0; j < menuItem.submenu.Count; j++)
                             {
                                 var submenuItem = menuItem.submenu[j];
-                                <ul class="nav-sub-menu subsub" id="headerMenu_sub_@j">
+                                <ul class="nav-sub-menu subsub headerMenu_sub_@j">
                                     @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                     {
                                         var subsubmenuItem = submenuItem.submenu[k];
-                                        <li><a href="@subsubmenuItem.link.GetFullURL()">@subsubmenuItem.name</a><p class="arrow"></p></li>
+                                        <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name<p class="arrow"></p></li></a>
                                     }
                                 </ul>
                             }
                         </div>
                         <div class="col s3 box">
-                            <img src="../images/menu_img1.jpg" style="width: 100%" />
+                            <img src="/images/menu_img1.jpg" style="width: 100%" />
                         </div>
                     </div>
                 </div>
@@ -111,7 +113,7 @@
                                     arrow = " > ";
                                 }
                                 var data = Model.breadcrumbData[k];
-                                <a href="@data.link.GetFullURL()">@data.name</a> @arrow
+                                <a href="@data.link.GetFullURL()" style="color: white;">@data.title</a> @arrow
                             }
                         </div>
                     </div>
@@ -174,20 +176,20 @@ $('#nav-overlay').on('mouseover', function(e)
 
 $('.nav-sub-menu.sub').find('li').on('mouseover', function (e) {
     var target = $(e.target).closest('li');
-    var siblings = target.siblings('li');
+    var siblings = target.closest('a').siblings('a').find('li');
 
     siblings.removeClass('active');
     target.addClass('active');
 
     var headerMenu_sub_li_ = target.attr('id');
-    var headerMenu_sub_li_id = headerMenu_li_.replace("headerMenu_sub_li_", "headerMenu_sub_");
-    $('#nav-overlay').find('#' + headerMenu_sub_li_id).show();
-    $('#nav-overlay').find('#' + headerMenu_sub_li_id).siblings('.nav-sub-menu.subsub').hide();
+    var headerMenu_sub_li_id = headerMenu_sub_li_.replace("headerMenu_sub_li_", "headerMenu_sub_");
+    $('#nav-overlay').find('.' + headerMenu_sub_li_id).show();
+    $('#nav-overlay').find('.' + headerMenu_sub_li_id).siblings('.nav-sub-menu.subsub').hide();
 })
 
 $('.nav-sub-menu.subsub').find('li').on('mouseover', function (e) {
     var target = $(e.target).closest('li');
-    var siblings = target.siblings('li');
+    var siblings = target.closest('a').siblings('a').find('li');
 
     siblings.removeClass('active');
     target.addClass('active');
