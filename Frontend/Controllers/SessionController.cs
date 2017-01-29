@@ -59,7 +59,7 @@ namespace Frontend.Controllers
         }
 
 
-        public string loginQPI(string username, string password, TTLITradeWSDEV.clientLoginResponseLoginResp resp)
+        public QPIAPIResponse loginQPI(string username, string password, TTLITradeWSDEV.clientLoginResponseLoginResp resp)
         {
 
             /* QPI */
@@ -103,6 +103,11 @@ namespace Frontend.Controllers
             HttpResponseMessage response = client.GetAsync("?" + queryString).Result;  // Blocking call!
             if (response.IsSuccessStatusCode)
             {
+                string json = await response.Content.ReadAsStringAsync();
+                var qpiapiresponse = JsonConvert.DeserializeObject<QPIAPIResponse>(json);
+
+                return qpiapiresponse;
+
                 // Parse the response body. Blocking!
                 /*
                 var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;
@@ -112,8 +117,7 @@ namespace Frontend.Controllers
                 }
                 */
             }
-
-            return "ABC";
+            return null;
         }
 
 
@@ -123,7 +127,8 @@ namespace Frontend.Controllers
             if (Session["jsessionID"] != null)
             {
                 string jsessionID = (string) Session["jsessionID"];
-                keepAliveQPI(jsessionID);
+                bool success = keepAliveQPI(jsessionID);
+                Session["jsessionIDkeepAlive"] = success;
             }
             return null;
         }

@@ -44,9 +44,10 @@ namespace Frontend.Controllers
             Session["TTLClient"] = resp;
         }
 
-        public void setJSession(string sid)
+        public void setJSession(QPIAPIResponse resp)
         {
-            Session["jsessionID"] = sid;
+            Session["jsessionID"] = resp.session;
+            Session["jsessionIDdateDT"] = resp.header.dateDT;
         }
     }
 }

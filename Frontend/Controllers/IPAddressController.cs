@@ -10,35 +10,130 @@ namespace Frontend.Controllers
     {
     	int loginRetries = 5;
         // GET: User
-        public ActionResult RegisterIPAddress()
-        {
-            // register ip address
 
-            return null;
+        public IPAddress FindIPAddressRecord()
+        {
+            var db = IPAddressDbContext.getInstance().getItemDb();
+            var ipaddress = GetIPAddress();
+            IPAddress addr = null;
+            if (ipaddress != null)
+            {
+                addr = db.Find(a => a.Address == ipaddress).FirstOrDefault();
+            }
+            else
+            {
+                throw exception no ip addr
+            }
+            return addr;
         }
 
-        public ActionResult RegisterIPAddressFailLoginRetries()
+        public IPAddress CreateNewIPAddressRecord()
         {
-            // register ip address fail login retries once
+            var db = IPAddressDbContext.getInstance().getItemDb();
+            var ipaddress = GetIPAddress();
 
-            return null;
+            var newAddr = new IPAddress();
+            newAddr.Address = ipaddress;
+            newAddr.retries = 0;
+            var id = db.Insert ( newAddr )
+            return newAddr;
+        }
+
+        public IPAddress UpsertIPAddress()
+        {
+            try
+            {
+                IPAddress addr = FindIPAddressRecord();
+
+                if (addr == null)
+                {
+                    return CreateNewIPAddressRecord();
+                }
+
+                return addr;            
+            } 
+            catch (Exception e)
+            {
+                // 
+            }
+        }
+
+        public IPAddress RegisterIPAddressFailLoginRetries()
+        {
+            try
+            {
+                IPAddress addr = UpsertIPAddress();
+
+                // modify + 1 retry count
+
+                addr.retries += 1;
+
+                var db = IPAddressDbContext.getInstance().getItemDb();
+                db.save(addr);
+
+                return addr;
+            }
+            catch (Exception e)
+            {
+                //
+            }
         }
 
         public int GetIPAddressStatus()
         {
-            // get ip validity
-            // if login retries > N times
-            // return 403 (suspended)
-            // return 200 (OK)
+            try
+            {
+                IPAddress addr = FindIPAddressRecord();
 
-            return 0;
+                if (addr != null && addr.retries < loginRetries)
+                {
+                    return 200;
+                }
+
+                return 403;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
 
-        public ActionResult ClearFails()
+        public IPAddress ClearFails()
         {
-            // admin access only
+            try
+            {
+                IPAddress addr = FindIPAddressRecord();
 
-            return null;
+                if (addr != null)
+                {
+                    addr.retries = 0;
+
+                    var db = IPAddressDbContext.getInstance().getItemDb();
+                    db.save(addr);
+                }
+
+                return addr;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
+
+        public string GetIPAddress()
+        {
+            string VisitorsIPAddr = string.Empty;
+            if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+            {
+                VisitorsIPAddr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+            }
+            else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+            {
+                VisitorsIPAddr = HttpContext.Current.Request.UserHostAddress;
+            }
+            
+            return VisitorsIPAddr;
         }
     }
 }
