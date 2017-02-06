@@ -19,6 +19,19 @@ namespace Frontend.Controllers
         {
             // register and call ttl
 
+            User user = new User();
+            var email = params.email;
+            var code = params.code;
+
+            if (CodeController.verifyEmailCode(email, code))
+            {
+                
+            }
+            else
+            {
+                return ...
+            }
+
             return null;
         }
 

@@ -21,6 +21,19 @@ namespace Frontend.Controllers
                 logger.Debug("Can fetch information from CMS");
             }
             */
+
+            
+            // check session if timeout
+
+            if (SessionTimeout())
+            {
+                ClearSession();
+                return LoginView(new Param { expired: true });
+            }
+
+            KeepAlive();
+            QPIKeepAlive();
+
             BaseViewModel vm = BaseViewModel.make(locale, category, id, Request, getSession());
             return View(vm);
         }
