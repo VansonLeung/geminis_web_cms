@@ -22,7 +22,7 @@ namespace WebApplication2.Context
         {
             if (articlePublishedDbContext == null)
             {
-                return new ArticlePublishedDbContext();
+                articlePublishedDbContext = new ArticlePublishedDbContext();
             }
             return articlePublishedDbContext;
         }

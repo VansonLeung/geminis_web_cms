@@ -19,7 +19,7 @@ namespace WebApplication2.Context
         {
             if (instance == null)
             {
-                return new BaseDbContext();
+                instance = new BaseDbContext();
             }
             return instance;
         }

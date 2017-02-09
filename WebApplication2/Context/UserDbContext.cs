@@ -17,7 +17,7 @@ namespace WebApplication2.Context
         {
             if (context == null)
             {
-                return new UserDbContext();
+                context = new UserDbContext();
             }
             return context;
         }

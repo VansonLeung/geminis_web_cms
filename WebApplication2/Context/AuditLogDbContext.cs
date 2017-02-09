@@ -40,7 +40,7 @@ namespace WebApplication2.Context
         {
             if (instance == null)
             {
-                return new AuditLogDbContext();
+                instance = new AuditLogDbContext();
             }
             return instance;
         }

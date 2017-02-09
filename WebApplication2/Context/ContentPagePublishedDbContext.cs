@@ -20,7 +20,7 @@ namespace WebApplication2.Context
         {
             if (contentPagePublishedDbContext == null)
             {
-                return new ContentPagePublishedDbContext();
+                contentPagePublishedDbContext = new ContentPagePublishedDbContext();
             }
             return contentPagePublishedDbContext;
         }

@@ -21,7 +21,7 @@ namespace WebApplication2.Context
         {
             if (articleDbContext == null)
             {
-                return new ArticleDbContext();
+                articleDbContext = new ArticleDbContext();
             }
             return articleDbContext;
         }
@@ -29,7 +29,7 @@ namespace WebApplication2.Context
 
         // initialization
 
-        private BaseDbContext db = BaseDbContext.getInstance();
+        public BaseDbContext db = BaseDbContext.getInstance();
 
         public DbSet<Article> getArticleDb()
         {

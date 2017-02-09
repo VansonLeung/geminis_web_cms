@@ -19,7 +19,7 @@ namespace WebApplication2.Context
         {
             if (infrastructureCategoryDbContext == null)
             {
-                return new InfrastructureCategoryDbContext();
+                infrastructureCategoryDbContext = new InfrastructureCategoryDbContext();
             }
             return infrastructureCategoryDbContext;
         }
