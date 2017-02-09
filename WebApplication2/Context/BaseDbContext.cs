@@ -19,7 +19,7 @@ namespace WebApplication2.Context
         {
             if (instance == null)
             {
-                instance = new BaseDbContext();
+                return new BaseDbContext();
             }
             return instance;
         }
@@ -54,6 +54,14 @@ namespace WebApplication2.Context
 
         // Constants
         public DbSet<Constant> constantDb { get; set; }
+
+
+
+        public DbSet<User> userDb { get; set; }
+        public DbSet<UserCode> userCodeDb { get; set; }
+        public DbSet<IPAddress> ipaddressDb { get; set; }
+
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

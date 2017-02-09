@@ -1,4 +1,3 @@
-using Frontend.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,20 +5,18 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
-using Frontend.Attributes;
-using Frontend.Models;
 
-namespace Frontend.Models
+namespace WebApplication2.Models
 {
-    public class Code : BaseModel
+    public class UserCode : BaseModel
     {
-        public Code()
+        public UserCode()
         {
 
         }
 
         [Key]
-        public int CodeID { get; set; }
+        public int UserCodeID { get; set; }
 
         public string Email { get; set; }
         public string Key { get; set; }

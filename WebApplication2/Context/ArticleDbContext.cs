@@ -21,7 +21,7 @@ namespace WebApplication2.Context
         {
             if (articleDbContext == null)
             {
-                articleDbContext = new ArticleDbContext();
+                return new ArticleDbContext();
             }
             return articleDbContext;
         }

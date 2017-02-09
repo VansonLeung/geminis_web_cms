@@ -200,13 +200,9 @@
     <Compile Include="Attributes\Internationalization.cs" />
     <Compile Include="Bindings\JSONParamBinding.cs" />
     <Compile Include="Bindings\JSONParamBindingAttribute.cs" />
-    <Compile Include="Context\CodeDbContext.cs" />
-    <Compile Include="Context\IPAddressDbContext.cs" />
-    <Compile Include="Context\UserDbContext.cs" />
-    <Compile Include="Context\FrontendBaseDbContext.cs" />
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\CodeController.cs" />
+    <Compile Include="Controllers\UserCodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IPAddressController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -217,10 +213,7 @@
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BaseResponse.cs" />
-    <Compile Include="Models\Code.cs" />
-    <Compile Include="Models\IPAddress.cs" />
     <Compile Include="Models\TTLAPIRequest.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1036,6 +1029,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Context\" />
     <Folder Include="Migrations\" />
     <Folder Include="Views\Session\" />
     <Folder Include="Views\User\" />

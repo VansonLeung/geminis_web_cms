@@ -60,6 +60,33 @@ namespace Frontend
                     action = "Index"
                 }
             );
+            routes.MapRoute(
+                name: "APIIPAddress",
+                url: "api/ipaddress/{action}",
+                defaults: new
+                {
+                    controller = "IPAddress",
+                    action = "Index"
+                }
+            );
+            routes.MapRoute(
+                name: "APIUserCode",
+                url: "api/usercode/{action}",
+                defaults: new
+                {
+                    controller = "UserCode",
+                    action = "Index"
+                }
+            );
+            routes.MapRoute(
+                name: "APIUser",
+                url: "api/user/{action}",
+                defaults: new
+                {
+                    controller = "User",
+                    action = "Index"
+                }
+            );
         }
     }
 }

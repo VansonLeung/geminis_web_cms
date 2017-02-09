@@ -14,9 +14,16 @@ namespace WebApplication2.Controllers
     {
         SelectList getCategoriesForSelect(int? selectedID = null)
         {
-            var items = InfrastructureCategoryDbContext.getInstance().findAllCategorysAsNoTracking();
-            items.Insert(0, new Models.Infrastructure.Category { ItemID = -1, name_en = "" });
-            return new SelectList(items, "ItemID", "name_en", selectedID);
+            var items = InfrastructureCategoryDbContext.getInstance().findCategorysInTreeExcept();
+            items.Insert(0, new Models.Infrastructure.Category { ItemID = -1, url = "" });
+            foreach (var cat in items)
+            {
+                for (int i = 0; i < cat.itemLevel; i++)
+                {
+                    cat.url = " > " + cat.url;
+                }
+            }
+            return new SelectList(items, "ItemID", "url", selectedID);
         }
 
         // GET: ArticleEditor

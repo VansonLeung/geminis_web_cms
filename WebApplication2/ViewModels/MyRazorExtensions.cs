@@ -89,6 +89,12 @@ namespace WebApplication2.ViewModels
                 {
                     //var value = "@{C:IFRAME_QPI_URL}" + str + ";jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}";
                     var value = "http://uat.quotepower.com/web/geminis/" + str + ".jsp;jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}&UpDwnColor=@{S:UPDWNCOLOR}";
+
+                    foreach (var constant in model.GetQueries())
+                    {
+                        value += "&" + constant.Key + "=" + constant.Value;
+                    }
+
                     return value;
                 }
 
@@ -107,6 +113,12 @@ namespace WebApplication2.ViewModels
                 {
                     //var value = "@{C:IFRAME_TTL_URL}" + str + ";jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}";
                     var value = "http://223.197.108.131/hks/servlet/ITradeServlet?action=hksLoginLiteAction&SessionID=@{S:SESSIONID}&clientID=@{S:CLIENTID}&jsessionID=@{S:JSESSIONID}&lang=@{S:LOCALE_TTL}&UpDwnColor=@{S:UPDWNCOLOR}&page=" + str;
+
+                    foreach (var constant in model.GetQueries())
+                    {
+                        value += "&" + constant.Key + "=" + constant.Value;
+                    }
+
                     return value;
                 }
 

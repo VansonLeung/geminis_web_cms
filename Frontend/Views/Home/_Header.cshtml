@@ -28,24 +28,40 @@
                                         </span>
                                     </a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span class='generic-button-standalone gb-primary'>
-                                        免費開戶
-                                    </span>
+                                    <a href="/@Model.lang.locale/Page/signup">
+                                        <span class='generic-button-standalone gb-primary'>
+                                            免費開戶
+                                        </span>
+                                    </a>
                                 </td>
                             </tr>
                         </table>
 
                         <div class='nav-bar-bg'>
                             <ul id="nav-mobile">
-                                @for (var i = 0; i < Model.headerMenu.Count; i++)
+                                @{
+                                    var menuCount = 0;
+                                } 
+                                @for (var i = menuCount; i < Model.headerMenu.Count; i++)
                                 {
+                                    menuCount += 1;
                                     var menuItem = Model.headerMenu[i];
                                     <li id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
                                 }
                             </ul>
                             <ul id="nav-mobile" class="right">
                                 <li style="border-right: 1px solid #999999; width: 100px; text-align: center"><a href="badges.html"><i class="fa fa-search"></i></a></li>
-                                <li><a class="c_red" href="collapsible.html">Account</a></li>
+                                @{ 
+                                    var curMenuCount = menuCount;
+                                }
+                                @for (var i = curMenuCount; i < Model.headerMenuRight.Count + curMenuCount; i++)
+                                {
+                                    var index = i - curMenuCount;
+                                    menuCount += 1;
+                                    var menuItem = Model.headerMenuRight[index];
+                                    <li id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
+                                }
+
                             </ul>
 
                         </div>
@@ -56,9 +72,60 @@
         </div>
 
         <div id="nav-overlay">
+            @{
+                var s_menuCount = 0;
+            }
+            
             @for (var i = 0; i < Model.headerMenu.Count; i++)
             {
+                s_menuCount += 1;
+
                 var menuItem = Model.headerMenu[i];
+
+                <div class='gem_form nobg zeromarginpadding nav-overlay-li' id="headerMenu_@i">
+                    <div class="row">
+                        <div class="col s3 box">
+                            <div class="font_xxxlg" style="font-weight: bolder;">@menuItem.name</div>
+                            <p class="font_sm c_grey_2" style="line-height: 1.43;">@menuItem.name</p>
+                        </div>
+                        <div class="col s3 box">
+                            <ul class="nav-sub-menu sub">
+                                @for (var j = 0; j < menuItem.submenu.Count; j++)
+                                {
+                                    var submenuItem = menuItem.submenu[j];
+                                    <a href="@submenuItem.link.GetFullURL()"><li id="headerMenu_sub_li_@j">@submenuItem.name<p class="arrow"></p></li></a>
+                                }
+                            </ul>
+                        </div>
+                        <div class="col s3 box">
+                            @for (var j = 0; j < menuItem.submenu.Count; j++)
+                            {
+                                var submenuItem = menuItem.submenu[j];
+                                <ul class="nav-sub-menu subsub headerMenu_sub_@j">
+                                    @for (var k = 0; k < submenuItem.submenu.Count; k++)
+                                    {
+                                        var subsubmenuItem = submenuItem.submenu[k];
+                                        <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name<p class="arrow"></p></li></a>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                        <div class="col s3 box">
+                            <img src="/images/menu_img1.jpg" style="width: 100%" />
+                        </div>
+                    </div>
+                </div>
+            }
+            @{
+                var s_curMenuCount = s_menuCount;
+            }
+
+            @for (var i = s_curMenuCount; i < Model.headerMenuRight.Count + s_curMenuCount; i++)
+            {
+                var index = i - s_curMenuCount;
+                s_menuCount += 1;
+                
+                var menuItem = Model.headerMenuRight[index];
 
                 <div class='gem_form nobg zeromarginpadding nav-overlay-li' id="headerMenu_@i">
                     <div class="row">

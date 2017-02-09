@@ -17,7 +17,7 @@ namespace WebApplication2.Context
         {
             if (instance == null)
             {
-                instance = new SystemMaintenanceNotificationDbContext();
+                return new SystemMaintenanceNotificationDbContext();
             }
             return instance;
         }

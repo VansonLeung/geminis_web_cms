@@ -217,6 +217,7 @@
     <Compile Include="Attributes\AccountPasswordLengthValidationAttribute.cs" />
     <Compile Include="Attributes\AccountPasswordLetterValidationAttribute.cs" />
     <Compile Include="Context\AccountDbContext.cs" />
+    <Compile Include="Context\UserCodeDbContext.cs" />
     <Compile Include="Context\ConstantDbContext.cs" />
     <Compile Include="Context\AuditLogDbContext.cs" />
     <Compile Include="Context\InfrastructureCategoryDbContext.cs" />
@@ -226,7 +227,9 @@
     <Compile Include="Context\ArticleDbContext.cs" />
     <Compile Include="Context\ArticlePublishedDbContext.cs" />
     <Compile Include="Context\BaseDbContext.cs" />
+    <Compile Include="Context\IPAddressDbContext.cs" />
     <Compile Include="Context\SystemMaintenanceNotificationDbContext.cs" />
+    <Compile Include="Context\UserDbContext.cs" />
     <Compile Include="Controllers\AccessDeniedController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleApproverController.cs" />
@@ -271,6 +274,7 @@
     <Compile Include="Models\BaseArticle.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlePublished.cs" />
+    <Compile Include="Models\UserCode.cs" />
     <Compile Include="Models\Constant.cs" />
     <Compile Include="Models\Infrastructure\BaseItem.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -278,8 +282,11 @@
     <Compile Include="Models\ContentPagePublished.cs" />
     <Compile Include="Models\ContentPage.cs" />
     <Compile Include="Models\ImageView.cs" />
+    <Compile Include="Models\IPAddress.cs" />
+    <Compile Include="Models\QPIAPIResponse.cs" />
     <Compile Include="Models\SystemMaintenanceNotification.cs" />
     <Compile Include="Helpers\DateTimeExtensions.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

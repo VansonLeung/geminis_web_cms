@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Frontend.Controllers;
-using Frontend.Models;
+using WebApplication2.Models;
 
 namespace Frontend.Security
 {
@@ -59,6 +59,7 @@ namespace Frontend.Security
 
             // Password Change Request after 90 day' Last Password Modified At
             // or Needchangepassword == true
+            /*
             var needchangepassword = false;
             if (account.LastPasswordModifiedAt.GetValueOrDefault() != null)
             {
@@ -85,6 +86,7 @@ namespace Frontend.Security
                     return;
                 }
             }
+            */
         }
     }
 }

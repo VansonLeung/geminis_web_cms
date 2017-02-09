@@ -19,7 +19,7 @@ namespace WebApplication2.Context
         {
             if (infrastructureCategoryDbContext == null)
             {
-                infrastructureCategoryDbContext = new InfrastructureCategoryDbContext();
+                return new InfrastructureCategoryDbContext();
             }
             return infrastructureCategoryDbContext;
         }
@@ -67,6 +67,75 @@ namespace WebApplication2.Context
                 .Where(item => item.ItemID != itemID)
                 .OrderBy(item => item.order)
                 .ToList();
+        }
+
+
+
+        public List<Category> findCategorysInTreeExcept(int itemLevel = 0, int? itemID = null, int? parentItemID = null, List<Category> currentCategories = null)
+        {
+            if (currentCategories == null)
+            {
+                currentCategories = new List<Category>();
+            }
+
+            List<Category> categories = null;
+
+            if (itemID != null)
+            {
+                categories = getItemDb().AsNoTracking()
+                    .Where(item => item.parentItemID == parentItemID)
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+            else
+            {
+                categories = getItemDb().AsNoTracking()
+                    .Where(item => item.ItemID != itemID && item.parentItemID == parentItemID)
+                    .OrderBy(item => item.order)
+                    .ToList();
+            }
+
+            if (categories == null || categories.Count <= 0)
+            {
+                return null;
+            }
+
+            foreach (Category cat in categories)
+            {
+                currentCategories.Add(cat);
+                cat.itemLevel = itemLevel;
+
+                var subcategories = findCategorysInTreeExcept(itemLevel + 1, itemID, cat.ItemID);
+
+                if (subcategories != null)
+                {
+                    currentCategories.AddRange(subcategories);
+                }
+            }
+
+            return currentCategories;
+        }
+
+
+        public int findHowManyParentsForCategoryByItemID(int parents = 0, int? itemID = null)
+        {
+            if (itemID == null)
+            {
+                return parents;
+            }
+
+            var category = getItemDb()
+                .Where(item => item.ItemID == itemID)
+                .FirstOrDefault();
+
+            if (category == null)
+            {
+                return parents;
+            }
+
+            parents += 1;
+
+            return findHowManyParentsForCategoryByItemID(parents, category.parentItemID);
         }
 
 

@@ -25,6 +25,7 @@ namespace Frontend.Controllers
             
             // check session if timeout
 
+            /*
             if (SessionTimeout())
             {
                 ClearSession();
@@ -33,6 +34,7 @@ namespace Frontend.Controllers
 
             KeepAlive();
             QPIKeepAlive();
+            */
 
             BaseViewModel vm = BaseViewModel.make(locale, category, id, Request, getSession());
             return View(vm);

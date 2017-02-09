@@ -1,4 +1,3 @@
-using Frontend.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,10 +5,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
-using Frontend.Attributes;
-using Frontend.Models;
 
-namespace Frontend.Models
+namespace WebApplication2.Models
 {
     public class IPAddress : BaseModel
     {

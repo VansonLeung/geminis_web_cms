@@ -414,4 +414,7 @@
   <data name="pageShouldHideTopTitle" xml:space="preserve">
     <value>Page should hide top title</value>
   </data>
+  <data name="isHeaderMenuRight" xml:space="preserve">
+    <value>Header Menu Right</value>
+  </data>
 </root>

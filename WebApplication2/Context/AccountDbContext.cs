@@ -19,7 +19,7 @@ namespace WebApplication2.Context
         {
             if (accountDbContext == null)
             {
-                accountDbContext = new AccountDbContext();
+                return new AccountDbContext();
             }
             return accountDbContext;
         }

@@ -1,5 +1,8 @@
+using WebApplication2.Context;
+using WebApplication2.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,11 +21,7 @@ namespace Frontend.Controllers
             IPAddress addr = null;
             if (ipaddress != null)
             {
-                addr = db.Find(a => a.Address == ipaddress).FirstOrDefault();
-            }
-            else
-            {
-                throw exception no ip addr
+                addr = db.AsNoTracking().Where(a => a.Address == ipaddress).FirstOrDefault();
             }
             return addr;
         }
@@ -34,49 +33,39 @@ namespace Frontend.Controllers
 
             var newAddr = new IPAddress();
             newAddr.Address = ipaddress;
-            newAddr.retries = 0;
-            var id = db.Insert ( newAddr )
+            newAddr.Failcount = 0;
+            var id = db.Add(newAddr);
+            IPAddressDbContext.getInstance().db.SaveChanges();
             return newAddr;
         }
 
         public IPAddress UpsertIPAddress()
         {
-            try
-            {
-                IPAddress addr = FindIPAddressRecord();
+            IPAddress addr = FindIPAddressRecord();
 
-                if (addr == null)
-                {
-                    return CreateNewIPAddressRecord();
-                }
-
-                return addr;            
-            } 
-            catch (Exception e)
+            if (addr == null)
             {
-                // 
+                return CreateNewIPAddressRecord();
+            }
+            else
+            {
+                return addr;
             }
         }
 
         public IPAddress RegisterIPAddressFailLoginRetries()
         {
-            try
-            {
-                IPAddress addr = UpsertIPAddress();
+            var db = IPAddressDbContext.getInstance().db;
 
-                // modify + 1 retry count
+            IPAddress addr = UpsertIPAddress();
 
-                addr.retries += 1;
+            // modify + 1 retry count
 
-                var db = IPAddressDbContext.getInstance().getItemDb();
-                db.save(addr);
+            db.Entry(addr).State = EntityState.Modified;
+            addr.Failcount += 1;
+            db.SaveChanges();
 
-                return addr;
-            }
-            catch (Exception e)
-            {
-                //
-            }
+            return addr;
         }
 
         public int GetIPAddressStatus()
@@ -85,7 +74,7 @@ namespace Frontend.Controllers
             {
                 IPAddress addr = FindIPAddressRecord();
 
-                if (addr != null && addr.retries < loginRetries)
+                if (addr != null && addr.Failcount < loginRetries)
                 {
                     return 200;
                 }
@@ -106,34 +95,40 @@ namespace Frontend.Controllers
 
                 if (addr != null)
                 {
-                    addr.retries = 0;
+                    var db = IPAddressDbContext.getInstance().db;
 
-                    var db = IPAddressDbContext.getInstance().getItemDb();
-                    db.save(addr);
+                    IPAddress _addr = UpsertIPAddress();
+
+                    db.Entry(_addr).State = EntityState.Modified;
+                    _addr.Failcount = 0;
+                    db.SaveChanges();
+
+                    addr = _addr;
                 }
 
                 return addr;
             }
             catch (Exception e)
             {
-                return 0;
+                return null;
             }
         }
 
-
+        
         public string GetIPAddress()
         {
             string VisitorsIPAddr = string.Empty;
-            if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+            if (System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
             {
-                VisitorsIPAddr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                VisitorsIPAddr = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
             }
-            else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+            else if (System.Web.HttpContext.Current.Request.UserHostAddress.Length != 0)
             {
-                VisitorsIPAddr = HttpContext.Current.Request.UserHostAddress;
+                VisitorsIPAddr = System.Web.HttpContext.Current.Request.UserHostAddress;
             }
             
             return VisitorsIPAddr;
         }
+        
     }
 }

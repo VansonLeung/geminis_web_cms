@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Frontend.Context;
-using Frontend.Models;
+using WebApplication2.Context;
+using WebApplication2.Models;
 
 namespace Frontend.Security
 {
@@ -43,6 +43,7 @@ namespace Frontend.Security
 
         public static void updateSessionForUser()
         {
+            /*
             using (UserDbContext db = new UserDbContext())
             {
                 if (account != null)
@@ -51,6 +52,7 @@ namespace Frontend.Security
                 }
                 refresh_account_last_activity();
             }
+            */
         }
 
         public static void removeSession()

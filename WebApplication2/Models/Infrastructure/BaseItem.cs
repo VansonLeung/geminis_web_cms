@@ -81,6 +81,9 @@ namespace WebApplication2.Models.Infrastructure
         [Display(Name = "isHeaderMenu", ResourceType = typeof(Resource))]
         public bool isHeaderMenu { get; set; }
 
+        [Display(Name = "isHeaderMenuRight", ResourceType = typeof(Resource))]
+        public bool isHeaderMenuRight { get; set; }
+
         [Display(Name = "isFooterMenu", ResourceType = typeof(Resource))]
         public bool isFooterMenu { get; set; }
 

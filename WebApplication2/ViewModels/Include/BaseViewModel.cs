@@ -26,6 +26,11 @@ namespace WebApplication2.ViewModels.Include
             return null;
         }
 
+        public List<Constant> GetQueries()
+        {
+            return queries;
+        }
+
         public string GetQuery(string Key)
         {
             if (Key == null)
@@ -49,6 +54,7 @@ namespace WebApplication2.ViewModels.Include
         public List<ViewCategory> breadcrumbData { get; set; }
         public ViewCategory footerData { get; set; }
         public List<Menu> headerMenu { get; set; }
+        public List<Menu> headerMenuRight { get; set; }
         public List<Menu> footerMenu { get; set; }
         public ViewCategory category { get; set; }
         public ViewContent content { get; set; }
@@ -140,7 +146,36 @@ namespace WebApplication2.ViewModels.Include
                 item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
-                item.submenu = createSubmenu(item.category.categoryItemID, lang, 
+                item.submenu = createSubmenu(item.category.categoryItemID, lang,
+                    true,
+                    false,
+                    false,
+                    false,
+                    false);
+
+                menuitems.Add(item);
+            }
+
+            return menuitems;
+        }
+        public static List<Menu> createHeaderMenuRight(int categoryItemID, Lang lang)
+        {
+            List<Menu> menuitems = new List<Menu>();
+
+            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(categoryItemID);
+            foreach (var _cat in rootCategories)
+            {
+                if (!_cat.isHeaderMenuRight)
+                {
+                    continue;
+                }
+
+                Menu item = new Menu();
+                item.name = _cat.GetName(lang.lang);
+                item.link = new Link(lang.locale, _cat.getUrl(), null, null);
+                item.category = new ViewCategory(_cat, lang);
+
+                item.submenu = createSubmenu(item.category.categoryItemID, lang,
                     true,
                     false,
                     false,
@@ -271,6 +306,15 @@ namespace WebApplication2.ViewModels.Include
                 vm.queries.Add(constant);
             }
 
+            if (vm.GetQuery("stock_code") == null)
+            {
+                Constant constant = new Constant();
+                constant.Key = "stock_code";
+                constant.Value = "00001";
+                constant.isActive = true;
+                vm.queries.Add(constant);
+            }
+
 
             int articlelist_page = 1;
             int articlelist_size = 10;
@@ -305,6 +349,8 @@ namespace WebApplication2.ViewModels.Include
             // header menu
 
             vm.headerMenu = createHeaderMenu(0, vm.lang);
+
+            vm.headerMenuRight = createHeaderMenuRight(0, vm.lang);
 
             // footer menu
 

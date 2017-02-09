@@ -19,7 +19,7 @@ namespace WebApplication2.Context
         {
             if (context == null)
             {
-                context = new ConstantDbContext();
+                return new ConstantDbContext();
             }
             return context;
         }

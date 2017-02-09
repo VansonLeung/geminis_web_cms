@@ -1,14 +1,13 @@
-﻿using Frontend.Models;
-using Frontend.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using WebApplication2.Models;
 
-namespace Frontend.Context
+namespace WebApplication2.Context
 {
-    public class UserDbContext : FrontendBaseDbContext
+    public class UserDbContext
     {
         // singleton
 
@@ -18,7 +17,7 @@ namespace Frontend.Context
         {
             if (context == null)
             {
-                context = new UserDbContext();
+                return new UserDbContext();
             }
             return context;
         }
@@ -26,7 +25,7 @@ namespace Frontend.Context
 
         // initializations 
 
-        private FrontendBaseDbContext db = FrontendBaseDbContext.getInstance();
+        private BaseDbContext db = BaseDbContext.getInstance();
 
         protected virtual DbSet<User> getItemDb()
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Security.Principal;
-using Frontend.Models;
+using WebApplication2.Models;
 
 namespace Frontend.Security
 {
@@ -14,7 +14,7 @@ namespace Frontend.Security
         public CustomPrincipal(User account)
         {
             this.User = account;
-            this.Identity = new GenericIdentity(account.Username);
+            this.Identity = new GenericIdentity(account.username);
         }
 
         public IIdentity Identity { get; set; }
@@ -25,8 +25,7 @@ namespace Frontend.Security
             {
                 return true;
             }
-            var roles = role.Split(new char[] { ',' });
-            return roles.Any(r => this.User.Role == r);
+            return false;
         }
     }
 }

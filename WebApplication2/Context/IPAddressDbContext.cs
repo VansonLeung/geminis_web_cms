@@ -1,14 +1,13 @@
-using Frontend.Models;
-using Frontend.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using WebApplication2.Models;
 
-namespace Frontend.Context
+namespace WebApplication2.Context
 {
-    public class IPAddressDbContext : FrontendBaseDbContext
+    public class IPAddressDbContext
     {
         // singleton
 
@@ -18,7 +17,7 @@ namespace Frontend.Context
         {
             if (context == null)
             {
-                context = new IPAddressDbContext();
+                return new IPAddressDbContext();
             }
             return context;
         }
@@ -26,9 +25,9 @@ namespace Frontend.Context
 
         // initializations 
 
-        private FrontendBaseDbContext db = FrontendBaseDbContext.getInstance();
+        public BaseDbContext db = BaseDbContext.getInstance();
 
-        protected virtual DbSet<IPAddress> getItemDb()
+        public virtual DbSet<IPAddress> getItemDb()
         {
             return db.ipaddressDb;
         }

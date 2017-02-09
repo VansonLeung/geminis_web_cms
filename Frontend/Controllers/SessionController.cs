@@ -1,11 +1,14 @@
 ﻿using Frontend.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication2.Models;
 
 namespace Frontend.Controllers
 {
@@ -23,7 +26,7 @@ namespace Frontend.Controllers
         {
             try
             {
-                var res = new APIController().callSoapQuery(
+                var res = new APIController().callSoapQuery<TTLITradeWSDEV.clientLoginResponseLoginResp>(
                     new TTLAPIRequest(
                         "clientLogin",
                         new Dictionary<string, object>
@@ -46,9 +49,9 @@ namespace Frontend.Controllers
 
                 setSession(resp);
 
-                var jsession = loginQPI(username, password, resp);
+                //var jsession = loginQPI(username, password, resp);
 
-                setJSession(jsession);
+                //setJSession(jsession.Result);
 
                 return this.Json(BaseResponse.MakeResponse(resp));
             }
@@ -59,7 +62,7 @@ namespace Frontend.Controllers
         }
 
 
-        public QPIAPIResponse loginQPI(string username, string password, TTLITradeWSDEV.clientLoginResponseLoginResp resp)
+        public async Task<QPIAPIResponse> loginQPI(string username, string password, TTLITradeWSDEV.clientLoginResponseLoginResp resp)
         {
 
             /* QPI */

@@ -40,7 +40,7 @@ namespace Frontend.Controllers
         {
             try
             {
-                var res = callSoapQuery(form);
+                var res = callSoapQuery<object>(form);
                 return Ok(BaseResponse.MakeResponse(res));
             }
             catch (Exception e)
@@ -55,7 +55,7 @@ namespace Frontend.Controllers
 
 
 
-        public object callSoapQuery(TTLAPIRequest form)
+        public T callSoapQuery<T>(TTLAPIRequest form)
         {
 
             TTLITradeWSDEV.ItradeWebServicesClient soap = new TTLITradeWSDEV.ItradeWebServicesClient();
@@ -164,7 +164,7 @@ namespace Frontend.Controllers
                     respHeader = (responseHeaderType)resp;
                 }
 
-                object res = p[2];
+                T res = (T)p[2];
                 return res;
             }
             catch (Exception e)

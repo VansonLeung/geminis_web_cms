@@ -18,8 +18,8 @@ namespace WebApplication2.Models
     */
     public class QPIAPIResponse
     {
-        public string session { get; set; };
-        public Header header { get; set; };
+        public string session { get; set; }
+        public Header header { get; set; }
         public Error error { get; set; }
     }
 

@@ -493,6 +493,15 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Header Menu Right.
+        /// </summary>
+        public static string isHeaderMenuRight {
+            get {
+                return ResourceManager.GetString("isHeaderMenuRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jumbotron.
         /// </summary>
         public static string isJumbotron {
