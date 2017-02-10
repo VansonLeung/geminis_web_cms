@@ -40,6 +40,11 @@ namespace Frontend.Controllers
         {
             try
             {
+                // validate form OTP here
+                
+                //if (new UserCodeController().VerifyEmailCodeCombination())
+
+
                 var res = callSoapQuery<object>(form);
                 return Ok(BaseResponse.MakeResponse(res));
             }

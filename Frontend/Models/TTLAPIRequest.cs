@@ -9,7 +9,8 @@ namespace Frontend.Models
     {
         public TTLAPIRequest(
             string name,
-            Dictionary<string, object> body
+            Dictionary<string, object> body,
+            string otp = ""
         )
         {
             this.credentials = new TTLAPIRequestCredentials();
@@ -22,9 +23,12 @@ namespace Frontend.Models
 
             this.name = name;
             this.body = body;
+
+            this.otp = otp;
     }
 
         public string name { get; set; } = "";
+        public string otp { get; set; } = "";
         public TTLAPIRequestCredentials credentials { get; set; }
         public TTLAPIRequestHeader header { get; set; }
         public Dictionary<string,object> body { get; set; }

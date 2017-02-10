@@ -74,11 +74,12 @@ namespace WebApplication2.ViewModels.Include
         public static List<Menu> createSubmenu(
             int categoryItemID,
             Lang lang,
-            bool isHeaderMenu,
-            bool isFooterMenu,
-            bool isShortcut,
-            bool isBanner,
-            bool isJumbotron)
+            bool isHeaderMenu = false,
+            bool isHeaderMenuRight = false,
+            bool isFooterMenu = false,
+            bool isShortcut = false,
+            bool isBanner = false,
+            bool isJumbotron = false)
         {
             List<Menu> menuitems = new List<Menu>();
 
@@ -86,6 +87,11 @@ namespace WebApplication2.ViewModels.Include
             foreach (var _cat in rootCategories)
             {
                 if (isHeaderMenu && !_cat.isHeaderMenu)
+                {
+                    continue;
+                }
+
+                if (isHeaderMenuRight && !_cat.isHeaderMenuRight)
                 {
                     continue;
                 }
