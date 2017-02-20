@@ -46,6 +46,28 @@ namespace Frontend.Controllers
 
 
         [HttpPost]
+        public ActionResult RegisterFromSession()
+        {
+            // register email and code combination into ip address controller
+            // will expire within 15 minutes
+            // will not register new code within 5 minute after register, but will refresh existing code's expiry time
+            // will register & override with new code after 5 minute after register has passed
+            // will also send email to the user
+
+            try
+            {
+                var res = RegisterEmailCodeCombination("kay@cherrypicks.com");
+
+                return this.Json(BaseResponse.MakeResponse(res));
+            }
+            catch (Exception e)
+            {
+                return this.Json(BaseResponse.MakeResponse("F001", e));
+            }
+        }
+
+
+        [HttpPost]
         public ActionResult VerifyAnonymous(string email, string code)
         {
             // register email and code combination into ip address controller

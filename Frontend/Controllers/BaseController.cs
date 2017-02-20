@@ -12,12 +12,18 @@ namespace Frontend.Controllers
     {
         public BaseControllerSession getSession()
         {
-            if (Session["TTLClient"] != null
-                && Session["jsessionID"] != null)
+
+            if (Session["TTLClient"] != null)
             {
                 TTLITradeWSDEV.clientLoginResponseLoginResp resp = (TTLITradeWSDEV.clientLoginResponseLoginResp)(Session["TTLClient"]);
-                string jsessionID = (string) Session["jsessionID"];
-                BaseControllerSession session = MakeBaseControllerSession(resp, jsessionID);
+                BaseControllerSession session = MakeBaseControllerSession(resp);
+
+                if (Session["jsessionID"] != null)
+                {
+                    string jsessionID = (string)Session["jsessionID"];
+                    session.jsessionID = jsessionID;
+                }
+
                 return session;
             }
             return null;
@@ -25,7 +31,7 @@ namespace Frontend.Controllers
 
 
 
-        BaseControllerSession MakeBaseControllerSession(TTLITradeWSDEV.clientLoginResponseLoginResp resp, string jsessionID)
+        BaseControllerSession MakeBaseControllerSession(TTLITradeWSDEV.clientLoginResponseLoginResp resp)
         {
             BaseControllerSession session = new BaseControllerSession();
             session.clientID = resp.clientId;
@@ -35,7 +41,6 @@ namespace Frontend.Controllers
             session.tradingAccSeq = resp.tradingAccSeq;
             session.tradingAccStatus = resp.tradingAccStatus;
             session.tradingAccList = Newtonsoft.Json.JsonConvert.SerializeObject(resp.tradingAccList);
-            session.jsessionID = jsessionID;
             return session;
         }
 
@@ -49,6 +54,47 @@ namespace Frontend.Controllers
         {
             Session["jsessionID"] = resp.session;
             Session["jsessionIDdateDT"] = resp.header.dateDT;
+        }
+
+
+
+
+        public bool SessionTimeout()
+        {
+            if (Session["keepaliveTime"] != null)
+            {
+                DateTime keepaliveTime = (DateTime)Session["keepaliveTime"];
+                DateTime now = DateTime.Now;
+                var minutes = (now - keepaliveTime).TotalMinutes;
+                if (minutes > 30)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+        public void ClearSession()
+        {
+            Session.Abandon();
+        }
+
+
+        public bool InternalKeepAlive()
+        {
+            Session["keepaliveTime"] = DateTime.Now;
+
+            if (Session["jsessionID"] != null)
+            {
+                string jsessionID = (string)Session["jsessionID"];
+                var sessionController = new SessionController();
+                bool success = sessionController.keepAliveQPI(jsessionID);
+                Session["jsessionIDkeepAlive"] = success;
+                return success;
+            }
+            return false;
         }
     }
 }

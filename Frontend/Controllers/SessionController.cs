@@ -1,4 +1,5 @@
-﻿using Frontend.Models;
+﻿using Frontend.Bindings;
+using Frontend.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,31 @@ namespace Frontend.Controllers
         {
             var constant = WebApplication2.Context.ConstantDbContext.getInstance().findActiveByKeyNoTracking("DOMAIN_API");
             return constant.Value;
+        }
+
+
+        [HttpPost]
+        public ActionResult submitSoapQuery(TTLAPIRequest form)
+        {
+            try
+            {
+                // validate form OTP here
+
+                if (form.otp != null && form.otp != "")
+                {
+                    if (!(new UserCodeController().VerifyEmailCodeCombination("kay@cherrypicks.com", form.otp)))
+                    {
+                        return this.Json(BaseResponse.MakeResponse("F002", null, null, "OTP Incorrect"));
+                    }
+                }
+
+                var res = new APIController().callSoapQuery<object>(form);
+                return this.Json(BaseResponse.MakeResponse(res));
+            }
+            catch (Exception e)
+            {
+                return this.Json(BaseResponse.MakeResponse("F001", e));
+            }
         }
 
 
@@ -49,9 +75,9 @@ namespace Frontend.Controllers
 
                 setSession(resp);
 
-                //var jsession = loginQPI(username, password, resp);
+                var jsession = loginQPI(username, password, resp);
 
-                //setJSession(jsession.Result);
+                setJSession(jsession.Result);
 
                 return this.Json(BaseResponse.MakeResponse(resp));
             }
@@ -74,13 +100,12 @@ namespace Frontend.Controllers
             string ts = DateTime.Now.ToString("yyyyMMddHHmmss");
             string env_key = "UAT";
 
-            var enq = HttpUtility.ParseQueryString(string.Empty);
-            enq["domain"] = domain;
-            enq["uid"] = uid;
-            enq["password"] = password;
-            enq["ts"] = ts;
-            enq["env_key"] = env_key;
-            string enqstr = enq.ToString();
+            var enqstr = "";
+            enqstr += "domain=" + domain;
+            enqstr += "&uid=" + uid;
+            enqstr += "&password=" + "d6sd$#sf";
+            enqstr += "&ts=" + ts;
+            enqstr += "&env_key=" + env_key;
 
             System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
             System.Text.StringBuilder hash = new System.Text.StringBuilder();
@@ -125,8 +150,11 @@ namespace Frontend.Controllers
 
 
 
+
         public ActionResult keepAlive()
         {
+            Session["keepaliveTime"] = DateTime.Now;
+
             if (Session["jsessionID"] != null)
             {
                 string jsessionID = (string) Session["jsessionID"];

@@ -26,13 +26,7 @@ namespace WebApplication2.Context
 
 
         // initializations 
-
-        private BaseDbContext db = BaseDbContext.getInstance();
-
-        protected virtual DbSet<Constant> getItemDb()
-        {
-            return db.constantDb;
-        }
+        
 
 
 
@@ -40,83 +34,107 @@ namespace WebApplication2.Context
 
         public List<Constant> find()
         {
-            return getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                return db.constantDb
                 .ToList();
+            }
         }
         public Constant findByID(int ID)
         {
-            return getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                return db.constantDb
                 .Where(acc => acc.ConstantID == ID)
                 .FirstOrDefault();
+            }
         }
 
         public Constant findByKeyNoTracking(string Key)
         {
-            return getItemDb().AsNoTracking()
+            using (var db = new BaseDbContext())
+            {
+                return db.constantDb.AsNoTracking()
                 .Where(acc => acc.Key == Key)
                 .FirstOrDefault();
+            }
         }
 
         public Constant findActiveByKeyNoTracking(string Key)
         {
-            return getItemDb().AsNoTracking()
+            using (var db = new BaseDbContext())
+            {
+                return db.constantDb.AsNoTracking()
                 .Where(acc => acc.Key == Key && acc.isActive == true)
                 .FirstOrDefault();
+            }
         }
 
         public List<Constant> findActiveNoTracking()
         {
-            return getItemDb().AsNoTracking()
+            using (var db = new BaseDbContext())
+            {
+                return db.constantDb.AsNoTracking()
                 .Where(acc => acc.isActive == true)
                 .ToList();
+            }
         }
 
 
         public string create(Constant item)
         {
-            var result = ConstantDbContext.getInstance().findByKeyNoTracking(item.Key);
-            if (result != null)
+            using (var db = new BaseDbContext())
             {
-                return "This Constant Key already exists. Please enter another Constant Key.";
-            }
+                var result = ConstantDbContext.getInstance().findByKeyNoTracking(item.Key);
+                if (result != null)
+                {
+                    return "This Constant Key already exists. Please enter another Constant Key.";
+                }
 
-            getItemDb().Add(item);
-            db.SaveChanges();
-            return null;
+                db.constantDb.Add(item);
+                db.SaveChanges();
+                return null;
+            }
         }
 
         public string edit(Constant item)
         {
-            var constant = findByID(item.ConstantID);
-
-            var result = ConstantDbContext.getInstance().findByKeyNoTracking(item.Key);
-            if (result != null)
+            using (var db = new BaseDbContext())
             {
-                if (item.ConstantID != result.ConstantID)
+                var constant = findByID(item.ConstantID);
+
+                var result = ConstantDbContext.getInstance().findByKeyNoTracking(item.Key);
+                if (result != null)
                 {
-                    return "This Constant Key already exists. Please enter another Constant Key.";
+                    if (item.ConstantID != result.ConstantID)
+                    {
+                        return "This Constant Key already exists. Please enter another Constant Key.";
+                    }
                 }
+
+                var local = db.constantDb
+                                .Local
+                                .FirstOrDefault(f => f.ConstantID == item.ConstantID);
+                if (local != null)
+                {
+                    db.Entry(local).State = EntityState.Detached;
+                }
+
+                db.Entry(constant).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return null;
             }
-
-            var local = getItemDb()
-                            .Local
-                            .FirstOrDefault(f => f.ConstantID == item.ConstantID);
-            if (local != null)
-            {
-                db.Entry(local).State = EntityState.Detached;
-            }
-
-            db.Entry(constant).State = EntityState.Modified;
-
-            db.SaveChanges();
-            return null;
         }
 
         public string delete(Constant item)
         {
-            getItemDb().Remove(item);
-            db.SaveChanges();
-            return null;
+            using (var db = new BaseDbContext())
+            {
+                db.constantDb.Remove(item);
+                db.SaveChanges();
+                return null;
+            }
         }
 
 

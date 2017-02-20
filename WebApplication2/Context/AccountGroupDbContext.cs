@@ -27,44 +27,55 @@ namespace WebApplication2.Context
 
         // initializations 
 
-        private BaseDbContext db = BaseDbContext.getInstance();
-
-        protected virtual DbSet<AccountGroup> getItemDb()
-        {
-            return db.accountGroupDb;
-        }
-
 
 
         // methods
 
         public List<AccountGroup> findGroups()
         {
-            return getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                return db.accountGroupDb
                 .ToList();
+            }
         }
         public AccountGroup findGroupByID(int ID)
         {
-            return getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                return db.accountGroupDb
                 .Where(acc => acc.AccountGroupID == ID)
                 .FirstOrDefault();
+            }
         }
 
         public List<AccountGroup> findGroupsByNameNoTracking(string name)
         {
-            return getItemDb().AsNoTracking()
+            using (var db = new BaseDbContext())
+            {
+                return db.accountGroupDb
+                .AsNoTracking()
                 .Where(acc => acc.Name == name)
                 .ToList();
+            }
         }
 
         public bool isDefaultGroupExists()
         {
-            return getItemDb().Where(acc => acc.Name == "Default Group").Count() > 0;
+            using (var db = new BaseDbContext())
+            {
+                return db.accountGroupDb
+                .Where(acc => acc.Name == "Default Group").Count() > 0;
+            }
         }
 
         public AccountGroup getDefaultGroup()
         {
-            return getItemDb().Where(acc => acc.Name == "Default Group").FirstOrDefault();
+            using (var db = new BaseDbContext())
+            {
+                return db.accountGroupDb
+                .Where(acc => acc.Name == "Default Group").FirstOrDefault();
+            }
         }
 
 
@@ -76,9 +87,12 @@ namespace WebApplication2.Context
                 return "This Account Group Name already exists. Please enter another Account Group Name.";
             }
 
-            getItemDb().Add(item);
-            db.SaveChanges();
-            return null;
+            using (var db = new BaseDbContext())
+            {
+                db.accountGroupDb.Add(item);
+                db.SaveChanges();
+                return null;
+            }
         }
 
         public string edit(AccountGroup item)
@@ -100,25 +114,31 @@ namespace WebApplication2.Context
             item.AccessibleCategories = String.Join(",", item.getAccessibleCategoryList().ToArray());
             accountGroup.AccessibleCategories = item.AccessibleCategories;
 
-            var local = getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                var local = db.accountGroupDb
                             .Local
                             .FirstOrDefault(f => f.AccountGroupID == item.AccountGroupID);
-            if (local != null)
-            {
-                db.Entry(local).State = EntityState.Detached;
+                if (local != null)
+                {
+                    db.Entry(local).State = EntityState.Detached;
+                }
+
+                db.Entry(accountGroup).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return null;
             }
-
-            db.Entry(accountGroup).State = EntityState.Modified;
-
-            db.SaveChanges();
-            return null;
         }
 
         public string delete(AccountGroup item)
         {
-            getItemDb().Remove(item);
-            db.SaveChanges();
-            return null;
+            using (var db = new BaseDbContext())
+            {
+                db.accountGroupDb.Remove(item);
+                db.SaveChanges();
+                return null;
+            }
         }
     }
 }

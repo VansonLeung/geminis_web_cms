@@ -9,16 +9,18 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.Routing;
+using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
 namespace Frontend.Controllers
 {
-    public class APIController : ApiController
+    public class APIController : BaseController
     {
-        
+        public ActionResult Index()
+        {
+            return this.Json("OK");
+        }
+
 /*
         public BaseRequest_CType getRequest(string name)
         {
@@ -33,24 +35,30 @@ namespace Frontend.Controllers
 */
 
 
+
+
         [JSONParamBinding]
         [HttpPost]
-        [Route("ttl/submitSoapQuery")]
-        public IHttpActionResult submitSoapQuery(TTLAPIRequest form)
+        public ActionResult submitSoapQuery(TTLAPIRequest form)
         {
             try
             {
                 // validate form OTP here
                 
-                //if (new UserCodeController().VerifyEmailCodeCombination())
-
+                if (form.otp != null && form.otp != "")
+                {
+                    if (!(new UserCodeController().VerifyEmailCodeCombination("kay@cherrypicks.com", form.otp)))
+                    {
+                        return this.Json(BaseResponse.MakeResponse("F002", null, null, "OTP Incorrect"));
+                    }
+                }
 
                 var res = callSoapQuery<object>(form);
-                return Ok(BaseResponse.MakeResponse(res));
+                return this.Json(BaseResponse.MakeResponse(res));
             }
             catch (Exception e)
             {
-                return Ok(BaseResponse.MakeResponse("F001", e));
+                return this.Json(BaseResponse.MakeResponse("F001", e));
             }
         }
 

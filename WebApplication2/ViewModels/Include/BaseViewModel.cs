@@ -58,6 +58,8 @@ namespace WebApplication2.ViewModels.Include
         public List<Menu> footerMenu { get; set; }
         public ViewCategory category { get; set; }
         public ViewContent content { get; set; }
+        public ViewContent nextContent { get; set; }
+        public ViewContent prevContent { get; set; }
         public Current current { get; set; }
         public Lang lang { get; set; }
         public List list { get; set; }
@@ -422,6 +424,25 @@ namespace WebApplication2.ViewModels.Include
                         vm.content.link.is_absolute = false;
                         vm.content.link.is_external = false;
                         vm.content.type = "Article";
+                        vm.content.datetime = articlePublished.datePublished;
+                        vm.content.datetime_representation = articlePublished.getDatePublished();
+
+                        var nextArticlePublished = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getNextArticlePublishedBySlugAndCategoryID(cat.ItemID, id, vm.lang.lang);
+                        var prevArticlePublished = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getPrevArticlePublishedBySlugAndCategoryID(cat.ItemID, id, vm.lang.lang);
+                        
+                        if (nextArticlePublished != null)
+                        {
+                            vm.nextContent = new ViewContent();
+                            vm.nextContent.name = nextArticlePublished.Name;
+                            vm.nextContent.slug = nextArticlePublished.Slug;
+                        }
+
+                        if (prevArticlePublished != null)
+                        {
+                            vm.prevContent = new ViewContent();
+                            vm.prevContent.name = prevArticlePublished.Name;
+                            vm.prevContent.slug = prevArticlePublished.Slug;
+                        }
                     }
                     else
                     {
@@ -469,6 +490,8 @@ namespace WebApplication2.ViewModels.Include
                         vm.content.link.is_absolute = false;
                         vm.content.link.is_external = false;
                         vm.content.type = "ContentPage";
+                        vm.content.datetime = contentPage.datePublished;
+                        vm.content.datetime_representation = contentPage.getDatePublished();
                     }
                 }
 
@@ -499,6 +522,20 @@ namespace WebApplication2.ViewModels.Include
                 }
 
                 vm.category.isNoContent = false;
+
+                if (cat.pageClassName != null)
+                {
+                    vm.content.pageClassName = cat.pageClassName;
+                }
+
+                if (cat.isUseNewsArticleDetailsTemplate)
+                {
+                    vm.content.showArticleDetailsTemplate = true;
+                }
+                else
+                {
+                    vm.content.showArticleDetailsTemplate = false;
+                }
             }
 
 

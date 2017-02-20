@@ -24,5 +24,7 @@ namespace WebApplication2.ViewModels.Include
         public string author { get; set; }
         public DateTime? datetime { get; set; }
         public string datetime_representation { get; set; }
+        public bool showArticleDetailsTemplate { get; set; }
+        public string pageClassName { get; set; }
     }
 }

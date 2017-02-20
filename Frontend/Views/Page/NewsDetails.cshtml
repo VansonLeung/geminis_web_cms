@@ -1,0 +1,132 @@
+﻿@model WebApplication2.ViewModels.Include.BaseViewModel
+@using WebApplication2.ViewModels.Include
+@using WebApplication2.ViewModels
+
+<section>
+    <div id="sercallloader" style="display: none ">
+        <div class="valgin center progress" style="margin: auto; width: 70%; overflow: hidden; border-radius: 20px; ">
+            <div class="indeterminate">&nbsp;</div>
+        </div>
+    </div>
+
+    <div class="row" style="max-width: 1200px">
+        <div class="col l9">
+            <div class="gem_form notopstripe" style="border-radius: 8px; width: auto; max-width: 896px;padding:40px 30px 0px 30px">
+                <div>
+                    <h2 style="font-size: 2.8em;line-height: 1.31;color:#000000;">@Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.name), Model)</h2>
+
+                    <p style="color:#333;font-size: 0.8em;">@Model.content.datetime_representation<span style="color:#666;line-height: 1.71;font-size: 0.7em;"></span></p>
+
+                    <p class="right-align" style="margin:0;"><img src="/images/print_btn.png" style="width:35px;height:35px;" /></p>
+
+                    <div style="border-bottom:solid 1px #979797">&nbsp;</div>
+
+                    <div id="detailsbody" style="padding:42px">
+                        @Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.desc), Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- right menu -->
+
+        <div class="col s12 m12 l3">
+            <!-- desktop show -->
+            <div class="deskshow">
+                <div class="rightButtoGrp">
+
+                    @if (Model.prevContent != null)
+                    {
+                        <div class="prevLeftBtn" style="height:132px;background-color:#2d6e68;margin: 0;line-height: 132px;border-top-left-radius:8px;border-top-right-radius:8px;">
+                            <p style="font-size:20px;color:#fff;margin:0;float:left"><a href="@Model.prevContent.link.GetFullURL()" style="color:white;"><span style="padding:0px 20px;">&lt;</span>上一則</a></p>
+                        </div>
+                    }
+
+                    @if (Model.nextContent != null)
+                    {
+                        <div class="prevRightBtn" style="height:132px;background-color:#49a076;margin: 0;line-height: 132px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;">
+                            <p style="font-size:20px;color:#fff;margin:0;float:right"><a href="@Model.nextContent.link.GetFullURL()" style="color:white;">下一則 <span style="padding:0px 20px;">&gt;</span></a></p>
+                        </div>
+                    }
+                </div>
+                <!-- iframe news -->
+
+                <div class="center valign-wrapper hidewhenmobile" style="width:100%;min-height:200px;background-color:white;margin-top: 20px;">
+                    <h5 style="width:100%">news iframe area</h5>
+                </div>
+                <!-- iframe news -->
+            </div>
+            <!-- desktop show --><!-- mobile show -->
+
+            <div class="mobileshow row">
+                <div class="col s6 m6 l6" style="padding: 0px">
+                    <div class="prevLeftBtn" style="height:132px;background-color:#2d6e68;margin: 0;line-height: 132px;">
+                        <p style="font-size:20px;margin:0;float:left"><a href="#" style="color:white;"><span style="padding:0px 20px;">&lt;</span>上一則優惠</a></p>
+                    </div>
+                </div>
+
+                <div class="col s6 m6 l6" style="padding: 0px">
+                    <div class="prevRightBtn" style="height:132px;background-color:#49a076;margin: 0;line-height: 132px;">
+                        <p style="font-size:20px;margin:0;float:right"><a href="#" style="color:white;">下一則優惠 <span style="padding:0px 20px;">&gt;</span></a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- mobile show -->
+        </div>
+        <!-- right menu -->
+    </div>
+</section>
+<script>
+
+
+$(function(){
+
+
+
+
+
+
+
+            $(window).resize(function(){
+                rewindowsize();
+            });
+
+
+
+
+            window.rewindowsize = function rewindowsize(){
+                let curwei= $(document).width();
+                let desksizetable = $(".deskshow");
+                let mosizetable = $(".mobileshow");
+                if(curwei <= 992){
+                    // isdeskStocktable = false;
+                    desksizetable.hide();
+                    mosizetable.show();
+                }else{
+                    // isdeskStocktable = true;
+                    desksizetable.show();
+                    mosizetable.hide();
+                }
+            }
+
+            rewindowsize();
+
+// init
+
+            window.prevPage = 3;
+            window.curselPage = 0;
+            window.nextPage = 1;
+            window.planLstLink = [
+            'qpwebhkfullversion',
+            'qpwebhkjuniorxversion',
+            'shhkstockconnectvas',
+            'szhkstockconnectvas'
+            ]
+            $('body').on('click','.prevLeftBtn',function(e){ window.location.href = planLstLink[prevPage]; });
+            $('body').on('click','.prevRightBtn',function(e){ window.location.href = planLstLink[nextPage]; });
+
+
+
+
+
+});
+</script>

@@ -27,370 +27,411 @@ namespace WebApplication2.Context
 
         // initializations 
 
-        private BaseDbContext db = BaseDbContext.getInstance();
-
-        protected virtual DbSet<Category> getItemDb()
-        {
-            return db.infrastructureCategoryDb;
-        }
-
 
 
         // methods
 
         public List<Category> findCategorysByParentID(int? parentItemID = null)
         {
-            if (parentItemID == null)
+            using (var db = new BaseDbContext())
             {
-                return getItemDb()
-                    .Where(item => item.parentItemID == null)
+                if (parentItemID == null)
+                {
+                    return db.infrastructureCategoryDb
+                        .Where(item => item.parentItemID == null)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+                return db.infrastructureCategoryDb
+                    .Where(item => item.parentItemID == parentItemID)
                     .OrderBy(item => item.order)
+                    .Include(item => item.parentItem)
                     .ToList();
             }
-            return getItemDb()
-                .Where(item => item.parentItemID == parentItemID)
-                .OrderBy(item => item.order)
-                .Include(item => item.parentItem)
-                .ToList();
         }
 
 
         public List<Category> findCategorysExcept(int? itemID = null)
         {
-            if (itemID == null)
+            using (var db = new BaseDbContext())
             {
-                return getItemDb()
+                if (itemID == null)
+                {
+                    return db.infrastructureCategoryDb
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+                return db.infrastructureCategoryDb
+                    .Where(item => item.ItemID != itemID)
                     .OrderBy(item => item.order)
                     .ToList();
             }
-            return getItemDb()
-                .Where(item => item.ItemID != itemID)
-                .OrderBy(item => item.order)
-                .ToList();
         }
 
 
 
         public List<Category> findCategorysInTreeExcept(int itemLevel = 0, int? itemID = null, int? parentItemID = null, List<Category> currentCategories = null)
         {
-            if (currentCategories == null)
+            using (var db = new BaseDbContext())
             {
-                currentCategories = new List<Category>();
-            }
-
-            List<Category> categories = null;
-
-            if (itemID != null)
-            {
-                categories = getItemDb().AsNoTracking()
-                    .Where(item => item.parentItemID == parentItemID)
-                    .OrderBy(item => item.order)
-                    .ToList();
-            }
-            else
-            {
-                categories = getItemDb().AsNoTracking()
-                    .Where(item => item.ItemID != itemID && item.parentItemID == parentItemID)
-                    .OrderBy(item => item.order)
-                    .ToList();
-            }
-
-            if (categories == null || categories.Count <= 0)
-            {
-                return null;
-            }
-
-            foreach (Category cat in categories)
-            {
-                currentCategories.Add(cat);
-                cat.itemLevel = itemLevel;
-
-                var subcategories = findCategorysInTreeExcept(itemLevel + 1, itemID, cat.ItemID);
-
-                if (subcategories != null)
+                if (currentCategories == null)
                 {
-                    currentCategories.AddRange(subcategories);
+                    currentCategories = new List<Category>();
                 }
-            }
 
-            return currentCategories;
+                List<Category> categories = null;
+
+                if (itemID != null)
+                {
+                    categories = db.infrastructureCategoryDb.AsNoTracking()
+                        .Where(item => item.parentItemID == parentItemID)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+                else
+                {
+                    categories = db.infrastructureCategoryDb.AsNoTracking()
+                        .Where(item => item.ItemID != itemID && item.parentItemID == parentItemID)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+
+                if (categories == null || categories.Count <= 0)
+                {
+                    return null;
+                }
+
+                foreach (Category cat in categories)
+                {
+                    currentCategories.Add(cat);
+                    cat.itemLevel = itemLevel;
+
+                    var subcategories = findCategorysInTreeExcept(itemLevel + 1, itemID, cat.ItemID);
+
+                    if (subcategories != null)
+                    {
+                        currentCategories.AddRange(subcategories);
+                    }
+                }
+
+                return currentCategories;
+            }
         }
 
 
         public int findHowManyParentsForCategoryByItemID(int parents = 0, int? itemID = null)
         {
-            if (itemID == null)
+            using (var db = new BaseDbContext())
             {
-                return parents;
+                if (itemID == null)
+                {
+                    return parents;
+                }
+
+                var category = db.infrastructureCategoryDb
+                    .Where(item => item.ItemID == itemID)
+                    .FirstOrDefault();
+
+                if (category == null)
+                {
+                    return parents;
+                }
+
+                parents += 1;
+
+                return findHowManyParentsForCategoryByItemID(parents, category.parentItemID);
             }
-
-            var category = getItemDb()
-                .Where(item => item.ItemID == itemID)
-                .FirstOrDefault();
-
-            if (category == null)
-            {
-                return parents;
-            }
-
-            parents += 1;
-
-            return findHowManyParentsForCategoryByItemID(parents, category.parentItemID);
         }
 
 
         public List<Category> findCategorysByParentIDAsNoTracking(int? parentItemID = null)
         {
-            if (parentItemID == null || parentItemID == 0)
+            using (var db = new BaseDbContext())
             {
-                return getItemDb()
-                    .AsNoTracking()
-                    .Where(item => item.parentItemID == null)
+                if (parentItemID == null || parentItemID == 0)
+                {
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .Where(item => item.parentItemID == null)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+                return db.infrastructureCategoryDb
+                    .Where(item => item.parentItemID == parentItemID)
                     .OrderBy(item => item.order)
+                    .Include(item => item.parentItem)
                     .ToList();
             }
-            return getItemDb()
-                .Where(item => item.parentItemID == parentItemID)
-                .OrderBy(item => item.order)
-                .Include(item => item.parentItem)
-                .ToList();
         }
 
         public List<Category> findActiveCategorysByParentIDAsNoTracking(int? parentItemID = null)
         {
-            if (parentItemID == null || parentItemID == 0)
+            using (var db = new BaseDbContext())
             {
-                return getItemDb()
-                    .AsNoTracking()
-                    .Where(item => item.parentItemID == null 
-                    && item.isEnabled == true)
+                if (parentItemID == null || parentItemID == 0)
+                {
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .Where(item => item.parentItemID == null
+                        && item.isEnabled == true)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+                return db.infrastructureCategoryDb
+                    .Where(item => item.parentItemID == parentItemID
+                        && item.isEnabled == true)
                     .OrderBy(item => item.order)
+                    .Include(item => item.parentItem)
                     .ToList();
             }
-            return getItemDb()
-                .Where(item => item.parentItemID == parentItemID
-                    && item.isEnabled == true)
-                .OrderBy(item => item.order)
-                .Include(item => item.parentItem)
-                .ToList();
         }
 
         public List<Category> findAllCategorysContentPagesAsNoTracking()
         {
-            var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
-
-            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            using (var db = new BaseDbContext())
             {
-                return getItemDb()
-                    .AsNoTracking()
-                    .Where(item => item.isContentPage == true)
-                    .OrderBy(item => item.order)
-                    .ToList();
-            }
+                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
 
-            if (SessionPersister.account != null)
-            {
-                return getItemDb()
-                    .AsNoTracking()
-                    .Where(item => item.isContentPage == true &&
-                    categories.Contains(item.ItemID))
-                    .OrderBy(item => item.order)
-                    .ToList();
-            }
+                if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+                {
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .Where(item => item.isContentPage == true)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
 
-            return new List<Category>();
+                if (SessionPersister.account != null)
+                {
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .Where(item => item.isContentPage == true &&
+                        categories.Contains(item.ItemID))
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+
+                return new List<Category>();
+            }
         }
 
         public List<Category> findAllCategorysArticleListsAsNoTracking()
         {
-            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            using (var db = new BaseDbContext())
             {
-                return getItemDb()
-                    .AsNoTracking()
-                    .Where(item => item.isArticleList == true)
-                    .OrderBy(item => item.order)
-                    .ToList();
+                if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+                {
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .Where(item => item.isArticleList == true)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+
+                if (SessionPersister.account != null)
+                {
+                    var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
+
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .Where(item => item.isArticleList == true &&
+                        categories.Contains(item.ItemID))
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+
+                return new List<Category>();
             }
-
-            if (SessionPersister.account != null)
-            {
-                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
-
-                return getItemDb()
-                    .AsNoTracking()
-                    .Where(item => item.isArticleList == true &&
-                    categories.Contains(item.ItemID))
-                    .OrderBy(item => item.order)
-                    .ToList();
-            }
-
-            return new List<Category>();
         }
 
 
 
         public List<Category> findAllCategorysAsNoTracking()
         {
-            if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+            using (var db = new BaseDbContext())
             {
-                return getItemDb()
-                    .AsNoTracking()
-                    .OrderBy(item => item.order)
-                    .ToList();
+                if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmin())
+                {
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+
+                if (SessionPersister.account != null)
+                {
+                    var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
+
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .Where(item =>
+                        categories.Contains(item.ItemID))
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+
+                return new List<Category>();
             }
-
-            if (SessionPersister.account != null)
-            {
-                var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
-
-                return getItemDb()
-                    .AsNoTracking()
-                    .Where(item => 
-                    categories.Contains(item.ItemID))
-                    .OrderBy(item => item.order)
-                    .ToList();
-            }
-
-            return new List<Category>();
         }
 
 
         public List<Category> findEnabledCategorysByParentID(int? parentItemID = null)
         {
-            if (parentItemID == null)
+            using (var db = new BaseDbContext())
             {
-                return getItemDb()
-                    .Where(item => item.parentItemID == null && item.isEnabled == true)
+                if (parentItemID == null)
+                {
+                    return db.infrastructureCategoryDb
+                        .Where(item => item.parentItemID == null && item.isEnabled == true)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
+                return db.infrastructureCategoryDb
+                    .Where(item => item.parentItemID == parentItemID && item.isEnabled == true)
                     .OrderBy(item => item.order)
+                    .Include(item => item.parentItem)
                     .ToList();
             }
-            return getItemDb()
-                .Where(item => item.parentItemID == parentItemID && item.isEnabled == true)
-                .OrderBy(item => item.order)
-                .Include(item => item.parentItem)
-                .ToList();
         }
 
 
         public Category findCategoryByID(int? itemID)
         {
-            if (itemID == null) return null;
-            return getItemDb()
-                .Where(item => item.ItemID == itemID)
-                .OrderBy(item => item.order)
-                .Include(item => item.parentItem)
-                .FirstOrDefault();
+            using (var db = new BaseDbContext())
+            {
+                if (itemID == null) return null;
+                return db.infrastructureCategoryDb
+                    .Where(item => item.ItemID == itemID)
+                    .OrderBy(item => item.order)
+                    .Include(item => item.parentItem)
+                    .FirstOrDefault();
+            }
         }
 
 
         public Category findCategoryByURL(string URL)
         {
-            if (URL == null) return null;
-            return getItemDb()
-                .Where(item => item.url == URL)
-                .OrderBy(item => item.order)
-                .Include(item => item.parentItem)
-                .FirstOrDefault();
+            using (var db = new BaseDbContext())
+            {
+                if (URL == null) return null;
+                return db.infrastructureCategoryDb
+                    .Where(item => item.url == URL)
+                    .OrderBy(item => item.order)
+                    .Include(item => item.parentItem)
+                    .FirstOrDefault();
+            }
         }
 
         public Category findCategoryByIDNoTracking(int? itemID)
         {
-            if (itemID == null) return null;
-            return getItemDb()
-                .AsNoTracking()
-                .Where(item => item.ItemID == itemID)
-                .OrderBy(item => item.order)
-                .Include(item => item.parentItem)
-                .FirstOrDefault();
+            using (var db = new BaseDbContext())
+            {
+                if (itemID == null) return null;
+                return db.infrastructureCategoryDb
+                    .AsNoTracking()
+                    .Where(item => item.ItemID == itemID)
+                    .OrderBy(item => item.order)
+                    .Include(item => item.parentItem)
+                    .FirstOrDefault();
+            }
         }
 
         public string create(Category category)
         {
-            var categorys = findCategorysByParentID(category.parentItemID);
-            int maxOrder = 0;
-            for (int i = 0; i < categorys.Count(); i++)
+            using (var db = new BaseDbContext())
             {
-                var item = categorys.ElementAt(i);
-                if (item.order > maxOrder)
+                var categorys = findCategorysByParentID(category.parentItemID);
+                int maxOrder = 0;
+                for (int i = 0; i < categorys.Count(); i++)
                 {
-                    maxOrder = item.order;
+                    var item = categorys.ElementAt(i);
+                    if (item.order > maxOrder)
+                    {
+                        maxOrder = item.order;
+                    }
                 }
-            }
-            category.order = maxOrder + 1;
-            if (category.parentItemID < 0)
-            {
-                category.parentItemID = null;
-            }
+                category.order = maxOrder + 1;
+                if (category.parentItemID < 0)
+                {
+                    category.parentItemID = null;
+                }
 
-            if (category.imagePath != null && category.imagePath.Equals("____EMPTY"))
-            {
-                category.imagePath = null;
-            }
+                if (category.imagePath != null && category.imagePath.Equals("____EMPTY"))
+                {
+                    category.imagePath = null;
+                }
 
-            getItemDb().Add(category);
-            db.SaveChanges();
-            return null;
+                db.infrastructureCategoryDb.Add(category);
+                db.SaveChanges();
+                return null;
+            }
         }
 
         public string edit(Category category)
         {
-            if (category.parentItemID == category.ItemID)
+            using (var db = new BaseDbContext())
             {
-                return "Parent Item ID should not be the same as its own item ID.";
-            }
+                if (category.parentItemID == category.ItemID)
+                {
+                    return "Parent Item ID should not be the same as its own item ID.";
+                }
 
-            var _category = findCategoryByIDNoTracking(category.ItemID);
-            category.created_at = _category.created_at;
+                var _category = findCategoryByIDNoTracking(category.ItemID);
+                category.created_at = _category.created_at;
 
-            var local = getItemDb()
-                            .Local
-                            .FirstOrDefault(f => f.ItemID == category.ItemID);
-            if (local != null)
-            {
-                db.Entry(local).State = EntityState.Detached;
-            }
+                var local = db.infrastructureCategoryDb
+                                .Local
+                                .FirstOrDefault(f => f.ItemID == category.ItemID);
+                if (local != null)
+                {
+                    db.Entry(local).State = EntityState.Detached;
+                }
 
-            if (category.parentItemID < 0)
-            {
-                category.parentItemID = null;
-            }
+                if (category.parentItemID < 0)
+                {
+                    category.parentItemID = null;
+                }
 
-            if (category.imagePath != null && category.imagePath.Equals("____EMPTY"))
-            {
-                category.imagePath = null;
-            }
-            else if (category.imagePath == null)
-            {
-                category.imagePath = _category.imagePath;
-            }
+                if (category.imagePath != null && category.imagePath.Equals("____EMPTY"))
+                {
+                    category.imagePath = null;
+                }
+                else if (category.imagePath == null)
+                {
+                    category.imagePath = _category.imagePath;
+                }
 
-            db.Entry(category).State = EntityState.Modified;
-            db.SaveChanges();
-            return null;
+                db.Entry(category).State = EntityState.Modified;
+                db.SaveChanges();
+                return null;
+            }
         }
 
         public string delete(Category category, bool isRecursive)
         {
-            var articles = ArticleDbContext.getInstance().findArticlesByCategoryID(category.ItemID);
-            var contentPages = ContentPageDbContext.getInstance().findArticlesByCategoryID(category.ItemID);
-
-            if (articles.Count > 0 || contentPages.Count > 0)
+            using (var db = new BaseDbContext())
             {
-                return "Could not delete this category when it is linked with any article / content page.";
-            }
+                var articles = ArticleDbContext.getInstance().findArticlesByCategoryID(category.ItemID);
+                var contentPages = ContentPageDbContext.getInstance().findArticlesByCategoryID(category.ItemID);
 
-            if (isRecursive)
-            {
-               // var children = findCategorysByParentID(category.parentItemID);
-               /// for (int i = children.Count() - 1; i >= 0; i--)
-               // {
-               //     delete(children.ElementAt(i), true);
-               // }
-            }
+                if (articles.Count > 0 || contentPages.Count > 0)
+                {
+                    return "Could not delete this category when it is linked with any article / content page.";
+                }
 
-            getItemDb().Remove(category);
-            db.SaveChanges();
-            return null;
+                if (isRecursive)
+                {
+                    // var children = findCategorysByParentID(category.parentItemID);
+                    /// for (int i = children.Count() - 1; i >= 0; i--)
+                    // {
+                    //     delete(children.ElementAt(i), true);
+                    // }
+                }
+
+                db.infrastructureCategoryDb.Remove(category);
+                db.SaveChanges();
+                return null;
+            }
         }
     }
 }

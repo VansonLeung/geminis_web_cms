@@ -90,6 +90,10 @@ namespace WebApplication2.Models
 
         [Display(Name = "datePublished", ResourceType = typeof(Resource))]
         public DateTime? datePublished { get; set; }
+        public string getDatePublished()
+        {
+            return DateTimeExtensions.DateTimeToString(datePublished);
+        }
 
         [Display(Name = "datePublishStart", ResourceType = typeof(Resource))]
         public DateTime? datePublishStart { get; set; }

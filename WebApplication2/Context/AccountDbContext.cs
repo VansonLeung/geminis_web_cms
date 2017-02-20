@@ -28,35 +28,40 @@ namespace WebApplication2.Context
 
         // initializations
 
-        private BaseDbContext db = BaseDbContext.getInstance();
-
-        protected DbSet<Account> getAccountDb()
-        {
-            return db.accountDb;
-        }
-
 
 
         // methods
 
         public bool isSuperadminExists()
         {
-            return getAccountDb().Where(acc => acc.Role.Contains("superadmin")).Count() > 0;
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.Where(acc => acc.Role.Contains("superadmin")).Count() > 0;
+            }
         }
 
         public bool isEditorExists()
         {
-            return getAccountDb().Where(acc => acc.Role.Contains("editor")).Count() > 0;
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.Where(acc => acc.Role.Contains("editor")).Count() > 0;
+            }
         }
 
         public bool isApproverExists()
         {
-            return getAccountDb().Where(acc => acc.Role.Contains("approver")).Count() > 0;
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.Where(acc => acc.Role.Contains("approver")).Count() > 0;
+            }
         }
 
         public bool isPublisherExists()
         {
-            return getAccountDb().Where(acc => acc.Role.Contains("publisher")).Count() > 0;
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.Where(acc => acc.Role.Contains("publisher")).Count() > 0;
+            }
         }
 
 
@@ -69,48 +74,69 @@ namespace WebApplication2.Context
 
         public List<Account> findAccounts()
         {
-            return getAccountDb()
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb
                 .Include(acc => acc.Group)
                 .ToList();
+            }
         }
 
         public Account findAccountByID(int accountID)
         {
-            return getAccountDb().Where(acc => acc.AccountID == accountID)
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.Where(acc => acc.AccountID == accountID)
                 .Include(acc => acc.Group)
                 .FirstOrDefault();
+            }
         }
 
         public Account findAccountByAccountUsername(Account account)
         {
-            return getAccountDb().Where(acc => acc.Username == account.Username)
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.Where(acc => acc.Username == account.Username)
                 .Include(acc => acc.Group)
                 .FirstOrDefault();
+            }
         }
 
         public List<Account> findAccountsByEmail(string email)
         {
-            return getAccountDb().Where(acc => acc.Email == email)
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.Where(acc => acc.Email == email)
                 .ToList();
+            }
         }
 
         public Account findAccountByAccountUsernameNoTracking(Account account)
         {
-            return getAccountDb().AsNoTracking().Where(acc => acc.Username == account.Username)
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.AsNoTracking().Where(acc => acc.Username == account.Username)
                 .Include(acc => acc.Group)
                 .FirstOrDefault();
+            }
         }
 
         public List<Account> findAccountsByEmailNoTracking(string email)
         {
-            return getAccountDb().AsNoTracking().Where(acc => acc.Email == email)
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.AsNoTracking().Where(acc => acc.Email == email)
                 .ToList();
+            }
         }
 
         public List<Account> findAccountsByRole(string role)
         {
-            return getAccountDb().Where(acc => acc.Role.Contains(role))
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.Where(acc => acc.Role.Contains(role))
                 .ToList();
+            }
         }
 
         public List<Account> findAccountsByAccountGroupsToEmailNotify(List<AccountGroup> accountGroups, BaseArticle baseArticle)
@@ -132,38 +158,39 @@ namespace WebApplication2.Context
             {
                 ownerAccountID = SessionPersister.account.AccountID;
             }
-
-
-            return getAccountDb().AsNoTracking().Where(acc =>
-            (
+            using (var db = new BaseDbContext())
+            {
+                return db.accountDb.AsNoTracking().Where(acc =>
                 (
                     (
-                        acc.EmailNotifications == 0 && accountGroupIDs.Contains(acc.GroupID ?? 1)
+                        (
+                            acc.EmailNotifications == 0 && accountGroupIDs.Contains(acc.GroupID ?? 1)
+                        )
+                        ||
+                        (
+                            acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.createdBy ?? -2)
+                        )
+                        ||
+                        (
+                            acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.approvedBy ?? -2)
+                        )
+                        ||
+                        (
+                            acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.publishedBy ?? -2)
+                        )
                     )
-                    ||
+                    &&
                     (
-                        acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.createdBy ?? -2)
+                        (
+                            acc.AccountID != ownerAccountID
+                        )
+                        ||
+                        (
+                            acc.AccountID == ownerAccountID && !acc.EmailNotificationsNotNotifyOwnChangesToMySelf
+                        )
                     )
-                    ||
-                    (
-                        acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.approvedBy ?? -2)
-                    )
-                    ||
-                    (
-                        acc.EmailNotifications == 1 && acc.AccountID == (baseArticle.publishedBy ?? -2)
-                    )
-                )
-                &&
-                (
-                    (
-                        acc.AccountID != ownerAccountID
-                    )
-                    ||
-                    (
-                        acc.AccountID == ownerAccountID && !acc.EmailNotificationsNotNotifyOwnChangesToMySelf
-                    )
-                )
-            )).ToList();
+                )).ToList();
+            }
         }
 
 
@@ -173,34 +200,37 @@ namespace WebApplication2.Context
 
         public Account tryLoginAccountByAccount(Account account)
         {
-            var encPassword = account.MakeEncryptedPassword(account.Password);
-            Account _account = findAccountByAccountUsername(account);
-            if (_account != null)
+            using (var db = new BaseDbContext())
             {
-                if (_account.Password == encPassword)
+                var encPassword = account.MakeEncryptedPassword(account.Password);
+                Account _account = findAccountByAccountUsername(account);
+                if (_account != null)
                 {
-                    if (!_account.isEnabled)
+                    if (_account.Password == encPassword)
                     {
-                        return _account;
+                        if (!_account.isEnabled)
+                        {
+                            return _account;
+                        }
+                        else if (_account.LoginFails < 3)
+                        {
+                            db.Entry(_account).State = EntityState.Modified;
+                            _account.LastLogin = DateTime.UtcNow;
+                            _account.LoginFails = 0;
+                            db.SaveChanges();
+                            SessionPersister.createSessionForAccount(_account);
+                        }
                     }
-                    else if (_account.LoginFails < 3)
+                    else
                     {
                         db.Entry(_account).State = EntityState.Modified;
-                        _account.LastLogin = DateTime.UtcNow;
-                        _account.LoginFails = 0;
+                        _account.LoginFails = _account.LoginFails + 1;
                         db.SaveChanges();
-                        SessionPersister.createSessionForAccount(_account);
+                        return null;
                     }
                 }
-                else
-                {
-                    db.Entry(_account).State = EntityState.Modified;
-                    _account.LoginFails = _account.LoginFails + 1;
-                    db.SaveChanges();
-                    return null;
-                }
+                return _account;
             }
-            return _account;
         }
 
         public void tryLogout()
@@ -287,9 +317,11 @@ namespace WebApplication2.Context
                 EmailHelper.SendEmailToAccountOnPasswordCreate(account, rawPassword);
             }
 
-            getAccountDb().Add(account);
-            db.SaveChanges();
-
+            using (var db = new BaseDbContext())
+            {
+                db.accountDb.Add(account);
+                db.SaveChanges();
+            }
             return null;
         }
 
@@ -324,17 +356,20 @@ namespace WebApplication2.Context
                 }
                 else
                 {
-                    db.Entry(_account).State = EntityState.Modified;
-                    _account.LoginFails = 0;
-
-                    if (SessionPersister.account != null && _account.AccountID != SessionPersister.account.AccountID)
+                    using (var db = new BaseDbContext())
                     {
-                        _account.NeedChangePassword = true;
+                        db.Entry(_account).State = EntityState.Modified;
+                        _account.LoginFails = 0;
 
-                        EmailHelper.SendEmailToAccountOnPasswordReset(_account, rawPassword);
+                        if (SessionPersister.account != null && _account.AccountID != SessionPersister.account.AccountID)
+                        {
+                            _account.NeedChangePassword = true;
+
+                            EmailHelper.SendEmailToAccountOnPasswordReset(_account, rawPassword);
+                        }
+
+                        db.SaveChanges();
                     }
-
-                    db.SaveChanges();
                 }
             }
 
@@ -370,26 +405,29 @@ namespace WebApplication2.Context
 
 
 
-                db.Entry(_account).State = EntityState.Modified;
-                _account.Password = encPassword;
-                _account.ConfirmPassword = encPassword;
-                _account.LastPasswordModifiedAt = DateTime.UtcNow;
-
-                if (shouldInvalidateResetPasswordNeeds)
+                using (var db = new BaseDbContext())
                 {
-                    _account.NeedChangePassword = false;
-                }
+                    db.Entry(_account).State = EntityState.Modified;
+                    _account.Password = encPassword;
+                    _account.ConfirmPassword = encPassword;
+                    _account.LastPasswordModifiedAt = DateTime.UtcNow;
 
-                passwords.Add(encPassword);
-                while (passwords.Count > 9)
-                {
-                    passwords.RemoveAt(0);
-                }
+                    if (shouldInvalidateResetPasswordNeeds)
+                    {
+                        _account.NeedChangePassword = false;
+                    }
 
-                _account.historyPasswords = _account.historyPasswordsFromList(passwords);
-                SessionPersister.updateSessionForAccount();
-                db.SaveChanges();
-                return null;
+                    passwords.Add(encPassword);
+                    while (passwords.Count > 9)
+                    {
+                        passwords.RemoveAt(0);
+                    }
+
+                    _account.historyPasswords = _account.historyPasswordsFromList(passwords);
+                    SessionPersister.updateSessionForAccount();
+                    db.SaveChanges();
+                    return null;
+                }
             }
             else
             {
@@ -402,28 +440,31 @@ namespace WebApplication2.Context
             Account _account = findAccountByID(account.AccountID);
             if (_account != null)
             {
-                db.Entry(_account).State = EntityState.Modified;
-
-                if (account.RoleList != null)
+                using (var db = new BaseDbContext())
                 {
-                    account.Role = String.Join(",", account.RoleList);
-                }
-                else if (account.Role == null)
-                {
-                    account.Role = "";
-                }
+                    db.Entry(_account).State = EntityState.Modified;
 
-                _account.Role = account.Role;
-                _account.Username = account.Username;
-                _account.Email = account.Email;
-                _account.Firstname = account.Firstname;
-                _account.Lastname = account.Lastname;
-                _account.GroupID = account.GroupID;
-                _account.isEnabled = account.isEnabled;
+                    if (account.RoleList != null)
+                    {
+                        account.Role = String.Join(",", account.RoleList);
+                    }
+                    else if (account.Role == null)
+                    {
+                        account.Role = "";
+                    }
 
-                SessionPersister.updateSessionForAccount();
-                db.SaveChanges();
-                return null;
+                    _account.Role = account.Role;
+                    _account.Username = account.Username;
+                    _account.Email = account.Email;
+                    _account.Firstname = account.Firstname;
+                    _account.Lastname = account.Lastname;
+                    _account.GroupID = account.GroupID;
+                    _account.isEnabled = account.isEnabled;
+
+                    SessionPersister.updateSessionForAccount();
+                    db.SaveChanges();
+                    return null;
+                }
             }
             else
             {
@@ -435,9 +476,12 @@ namespace WebApplication2.Context
 
         public string tryDeleteAccount(Account account)
         {
-            getAccountDb().Remove(account);
-            db.SaveChanges();
-            return null;
+            using (var db = new BaseDbContext())
+            {
+                db.accountDb.Remove(account);
+                db.SaveChanges();
+                return null;
+            }
         }
 
     }

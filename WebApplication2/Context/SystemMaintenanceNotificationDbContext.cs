@@ -24,30 +24,29 @@ namespace WebApplication2.Context
 
 
         // initialization
-
-        private BaseDbContext db = BaseDbContext.getInstance();
-
-        protected DbSet<SystemMaintenanceNotification> getItemDb()
-        {
-            return db.systemMaintenanceNotificationDb;
-        }
-
+        
 
 
         // query
 
         public List<SystemMaintenanceNotification> findAllNotifications()
         {
-            return getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                return db.systemMaintenanceNotificationDb
                 .OrderByDescending(item => item.modified_at)
                 .ToList();
+            }
         }
 
         public SystemMaintenanceNotification findNotificationByID(int ID)
         {
-            return getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                return db.systemMaintenanceNotificationDb
                 .Where(item => item.NotificationID == ID)
                 .FirstOrDefault();
+            }
         }
 
 
@@ -55,65 +54,77 @@ namespace WebApplication2.Context
         
         public string createScheduledNotification(SystemMaintenanceNotification item)
         {
-            var startDate = item.startDate;
-            if (startDate == null)
+            using (var db = new BaseDbContext())
             {
-                return "Start Date must be set for creating scheduled notification.";
+                var startDate = item.startDate;
+                if (startDate == null)
+                {
+                    return "Start Date must be set for creating scheduled notification.";
+                }
+
+                var endDate = item.endDate;
+                if (endDate == null)
+                {
+                    return "End Date must be set for creating scheduled notification.";
+                }
+
+                db.systemMaintenanceNotificationDb.Add(item);
+                db.SaveChanges();
+
+                return null;
             }
-
-            var endDate = item.endDate;
-            if (endDate == null)
-            {
-                return "End Date must be set for creating scheduled notification.";
-            }
-
-            getItemDb().Add(item);
-            db.SaveChanges();
-
-            return null;
         }
 
         public string editNotification(SystemMaintenanceNotification item)
         {
-            var local = getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                var local = db.systemMaintenanceNotificationDb
                             .Local
                             .FirstOrDefault(f => f.NotificationID == item.NotificationID);
-            if (local != null)
-            {
-                db.Entry(local).State = EntityState.Detached;
-            }
+                if (local != null)
+                {
+                    db.Entry(local).State = EntityState.Detached;
+                }
 
-            var startDate = item.startDate;
-            if (startDate == null)
-            {
-                return "Start Date must be set for creating scheduled notification.";
-            }
+                var startDate = item.startDate;
+                if (startDate == null)
+                {
+                    return "Start Date must be set for creating scheduled notification.";
+                }
 
-            var endDate = item.endDate;
-            if (endDate == null)
-            {
-                return "End Date must be set for creating scheduled notification.";
-            }
+                var endDate = item.endDate;
+                if (endDate == null)
+                {
+                    return "End Date must be set for creating scheduled notification.";
+                }
 
-            db.Entry(item).State = EntityState.Modified;
-            db.SaveChanges();
-            return null;
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+                return null;
+            }
         }
 
         public string activateNotification(SystemMaintenanceNotification item)
         {
-            db.Entry(item).State = EntityState.Modified;
-            item.isActive = true;
-            db.SaveChanges();
-            return null;
+            using (var db = new BaseDbContext())
+            {
+                db.Entry(item).State = EntityState.Modified;
+                item.isActive = true;
+                db.SaveChanges();
+                return null;
+            }
         }
 
         public string deactivateNotification(SystemMaintenanceNotification item)
         {
-            db.Entry(item).State = EntityState.Modified;
-            item.isActive = false;
-            db.SaveChanges();
-            return null;
+            using (var db = new BaseDbContext())
+            {
+                db.Entry(item).State = EntityState.Modified;
+                item.isActive = false;
+                db.SaveChanges();
+                return null;
+            }
         }
     }
 }

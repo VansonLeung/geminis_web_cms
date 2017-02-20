@@ -1384,60 +1384,60 @@ table.generic-table-form {
         vertical-align: middle; }
   .gem_form .gem_form_header {
     position: relative; }
-  .gem_form > .row {
+  .gem_form .row {
     position: relative;
     padding-left: 0;
     padding-right: 0; }
-    .gem_form > .row > .col.grid-l {
+    .gem_form .row > .col.grid-l {
       /*border-right: 1px solid #BCBCBC;*/ }
-    .gem_form > .row > .col.grid-r {
+    .gem_form .row > .col.grid-r {
       border-left: 1px solid #BCBCBC; }
-    .gem_form > .row > .col.grid-t {
+    .gem_form .row > .col.grid-t {
       border-top: 1px solid #BCBCBC; }
-    .gem_form > .row > .col.grid-b {
+    .gem_form .row > .col.grid-b {
       border-bottom: 1px solid #BCBCBC; }
-    .gem_form > .row > .col.input-field {
+    .gem_form .row > .col.input-field {
       position: relative;
       margin-top: 0; }
-      .gem_form > .row > .col.input-field input {
-        border-bottom-width: 0;
-        box-shadow: 0 0 0 0 transparent; }
-      .gem_form > .row > .col.input-field label.active {
+      .gem_form .row > .col.input-field input {
+        border-bottom-width: 0 !important;
+        box-shadow: 0 0 0 0 transparent !important; }
+      .gem_form .row > .col.input-field label.active {
         left: 0em; }
-      .gem_form > .row > .col.input-field .wrapper {
+      .gem_form .row > .col.input-field .wrapper {
         position: relative;
         top: 20px;
         padding-bottom: 15px; }
-    .gem_form > .row > .col.other-field {
+    .gem_form .row > .col.other-field {
       padding-top: 25px;
       padding-bottom: 25px; }
-    .gem_form > .row > .col > .remarks {
+    .gem_form .row > .col > .remarks {
       margin-top: 10px;
       margin-bottom: 20px;
       text-align: right;
       color: #1A92FC;
       font-size: 0.8em; }
-    .gem_form > .row > .col > .title_remarks {
+    .gem_form .row > .col > .title_remarks {
       margin-top: 44px;
       margin-bottom: 26px;
       text-align: right;
       color: #1A92FC;
       font-size: 0.8em; }
-    .gem_form > .row > .col > .title {
+    .gem_form .row > .col > .title {
       margin-top: 36px;
       margin-bottom: 20px;
       text-align: left;
       color: #000;
       font-size: 1.2em;
       font-weight: bold; }
-    .gem_form > .row.gem_form_header {
+    .gem_form .row.gem_form_header {
       background: #DEDEDE;
       padding-top: 14px;
       padding-bottom: 6px;
       margin: 0px;
       min-height: 66px;
       position: relative; }
-      .gem_form > .row.gem_form_header > .col {
+      .gem_form .row.gem_form_header > .col {
         padding-left: 10px;
         padding-right: 10px;
         margin: 0px;
@@ -8471,3 +8471,83 @@ label {
   .materialize [type="radio"]:disabled:checked + label:after {
     background-color: rgba(0, 0, 0, 0.26);
     border-color: #BDBDBD; }
+
+/*=================================================================================================
+
+ * @name: Popelt plugin CSS
+
+ * @author: (c) Elton Jain - @eltonjain
+
+ *=================================================================================================*/
+.noscroll {
+  overflow: hidden; }
+
+.pop-screen {
+  background: #000;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9994;
+  display: none; }
+
+.pop-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9995;
+  overflow: auto;
+  display: none; }
+
+.pop-container {
+  margin: 40px auto;
+  display: block;
+  width: 600px;
+  background: white;
+  position: relative; }
+
+.pop-block {
+  position: relative; }
+
+.pop-content {
+  padding: 20px;
+  color: #333;
+  word-wrap: break-word;
+  overflow: auto; }
+
+.pop-content h1:first-child, .pop-content h2:first-child, .pop-content p:first-child {
+  margin-top: 0; }
+
+.pop-action-block {
+  background: #eee;
+  padding: 15px 20px;
+  border-top: 1px solid #ccc;
+  text-align: right; }
+
+.pop-title {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 28px;
+  padding: 20px;
+  margin-bottom: 0; }
+
+.pop-btn-close {
+  font-family: arial,sans-serif;
+  position: absolute;
+  color: #888;
+  font-size: 28px;
+  width: 30px;
+  height: 30px;
+  line-height: 31px;
+  text-align: center;
+  cursor: pointer;
+  right: 0px;
+  top: 0px;
+  background: white; }

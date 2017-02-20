@@ -87,6 +87,15 @@ namespace Frontend
                     action = "Index"
                 }
             );
+            routes.MapRoute(
+                name: "APITTL",
+                url: "api/ttl/{action}",
+                defaults: new
+                {
+                    controller = "API",
+                    action = "Index"
+                }
+            );
         }
     }
 }

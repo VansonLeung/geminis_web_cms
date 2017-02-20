@@ -25,16 +25,18 @@ namespace Frontend.Controllers
             
             // check session if timeout
 
-            /*
+            
             if (SessionTimeout())
             {
                 ClearSession();
-                return LoginView(new Param { expired: true });
+
+                category = "login";
+                id = null;
+                BaseViewModel vml = BaseViewModel.make(locale, category, id, Request, getSession());
+                return View(vml);
             }
 
-            KeepAlive();
-            QPIKeepAlive();
-            */
+            InternalKeepAlive();
 
             BaseViewModel vm = BaseViewModel.make(locale, category, id, Request, getSession());
             return View(vm);

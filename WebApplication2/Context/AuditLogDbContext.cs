@@ -47,13 +47,7 @@ namespace WebApplication2.Context
 
 
         // initializations 
-
-        private BaseDbContext db = BaseDbContext.getInstance();
-
-        protected virtual DbSet<AuditLog> getItemDb()
-        {
-            return db.auditLogDb;
-        }
+        
 
         #endregion
 
@@ -89,42 +83,48 @@ namespace WebApplication2.Context
 
         public List<AuditLog> findAll(Query query)
         {
-            var itemDb = getItemDb();
-
-            var predicate = PredicateBuilder.True<AuditLog>();
-
-            if (!String.IsNullOrEmpty(query.accountID))
+            using (var db = new BaseDbContext())
             {
-                int id = query.getAccountID();
-                predicate = predicate.And(acc => acc.accountID == id);
-            }
-            if (!String.IsNullOrEmpty(query.logAction))
-            {
-                predicate = predicate.And(acc => acc.action == query.logAction);
-            }
-            if (!String.IsNullOrEmpty(query.startDate))
-            {
-                DateTime date = query.getStartDate();
-                predicate = predicate.And(acc => acc.created_at >= date);
-            }
-            if (!String.IsNullOrEmpty(query.endDate))
-            {
-                DateTime date = query.getEndDate();
-                predicate = predicate.And(acc => acc.created_at <= date);
-            }
+                var itemDb = db.auditLogDb;
+
+                var predicate = PredicateBuilder.True<AuditLog>();
+
+                if (!String.IsNullOrEmpty(query.accountID))
+                {
+                    int id = query.getAccountID();
+                    predicate = predicate.And(acc => acc.accountID == id);
+                }
+                if (!String.IsNullOrEmpty(query.logAction))
+                {
+                    predicate = predicate.And(acc => acc.action == query.logAction);
+                }
+                if (!String.IsNullOrEmpty(query.startDate))
+                {
+                    DateTime date = query.getStartDate();
+                    predicate = predicate.And(acc => acc.created_at >= date);
+                }
+                if (!String.IsNullOrEmpty(query.endDate))
+                {
+                    DateTime date = query.getEndDate();
+                    predicate = predicate.And(acc => acc.created_at <= date);
+                }
 
 
-            return itemDb.AsExpandable()
-                .Where(predicate)
-                .OrderByDescending(item => item.modified_at)
-                .ToList();
+                return itemDb.AsExpandable()
+                    .Where(predicate)
+                    .OrderByDescending(item => item.modified_at)
+                    .ToList();
+            }
         }
 
         public AuditLog findByID(int ID)
         {
-            return getItemDb()
+            using (var db = new BaseDbContext())
+            {
+                return db.auditLogDb
                 .Where(item => item.logID == ID)
                 .FirstOrDefault();
+            }
         }
 
         #endregion
@@ -136,10 +136,13 @@ namespace WebApplication2.Context
 
         public string createAuditLog(AuditLog item)
         {
-            getItemDb().Add(item);
-            db.SaveChanges();
+            using (var db = new BaseDbContext())
+            {
+                db.auditLogDb.Add(item);
+                db.SaveChanges();
 
-            return null;
+                return null;
+            }
         }
 
         public string createAuditLogArticleAction(Article article, string action)

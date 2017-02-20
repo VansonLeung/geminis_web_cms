@@ -7,6 +7,11 @@ namespace Frontend.Models
 {
     public class TTLAPIRequest
     {
+        public TTLAPIRequest()
+        {
+
+        }
+
         public TTLAPIRequest(
             string name,
             Dictionary<string, object> body,

@@ -499,6 +499,7 @@
     <Content Include="images\triangle-copy.png" />
     <Content Include="images\watchlist_btn.png" />
     <Content Include="images\watchlist_dropdown_icon.png" />
+    <Content Include="js\fullcalendarv310.js" />
     <Content Include="js\iframeResizer.contentWindow.js" />
     <Content Include="js\iframeResizer.contentWindow.min.js" />
     <Content Include="js\iframeResizer.js" />
@@ -506,8 +507,12 @@
     <Content Include="js\init.js" />
     <Content Include="js\init_iframe.js" />
     <Content Include="js\jquerymin.js" />
+    <Content Include="js\jschannel.js" />
     <Content Include="js\materialize.js" />
     <Content Include="js\materialize.min.js" />
+    <Content Include="js\msg_receiver.js" />
+    <Content Include="js\popelt.js" />
+    <Content Include="js\popelt.min.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1026,6 +1031,7 @@
     <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl" />
     <Content Include="Views\Page\Topsubmenu.cshtml" />
     <Content Include="Views\Page\Sidebar.cshtml" />
+    <Content Include="Views\Page\NewsDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
