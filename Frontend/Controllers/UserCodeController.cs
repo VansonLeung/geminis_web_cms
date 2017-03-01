@@ -56,7 +56,7 @@ namespace Frontend.Controllers
 
             try
             {
-                var res = RegisterEmailCodeCombination("kay@cherrypicks.com");
+                var res = RegisterEmailCodeCombination("kaycheung@cherrypicks.com");
 
                 return this.Json(BaseResponse.MakeResponse(res));
             }

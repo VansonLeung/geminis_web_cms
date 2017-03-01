@@ -122,8 +122,10 @@ namespace Frontend.Controllers
 
             if (form.body != null)
             {
-                string json = new JavaScriptSerializer().Serialize(form.body);
-                json = JsonConvert.SerializeObject(form.body);
+                string json = JsonConvert.SerializeObject(form.body, Formatting.None, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                });
                 query = (BaseRequest_CType)JsonConvert.DeserializeObject(json, query.GetType());
 
                 /*
@@ -170,15 +172,22 @@ namespace Frontend.Controllers
                 };
 
                 var p = parameters.ToArray();
-                object resp = mth.Invoke(soap, p);
-
-                if (respHeader.GetType().IsAssignableFrom(resp.GetType()))
+                try
                 {
-                    respHeader = (responseHeaderType)resp;
+                    object resp = mth.Invoke(soap, p);
+                    if (respHeader.GetType().IsAssignableFrom(resp.GetType()))
+                    {
+                        respHeader = (responseHeaderType)resp;
+                    }
+
+                    T res = (T)p[2];
+                    return res;
+                }
+                catch (Exception e)
+                {
+                    throw e;
                 }
 
-                T res = (T)p[2];
-                return res;
             }
             catch (Exception e)
             {

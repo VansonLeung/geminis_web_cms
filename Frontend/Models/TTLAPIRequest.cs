@@ -7,6 +7,11 @@ namespace Frontend.Models
 {
     public class TTLAPIRequest
     {
+        public class TTLAPIRequestForm
+        {
+            public TTLAPIRequest form { get; set; }
+        }
+
         public TTLAPIRequest()
         {
 

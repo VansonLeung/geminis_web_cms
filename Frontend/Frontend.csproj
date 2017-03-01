@@ -109,6 +109,10 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RouteDebugger, Version=2.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\routedebugger.2.1.5\lib\net40\RouteDebugger.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -197,11 +201,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\AccountPasswordLengthValidationAttribute.cs" />
     <Compile Include="Attributes\AccountPasswordLetterValidationAttribute.cs" />
+    <Compile Include="Attributes\ForceApplicationJsonContentTypeAttribute.cs" />
     <Compile Include="Attributes\Internationalization.cs" />
     <Compile Include="Bindings\JSONParamBinding.cs" />
     <Compile Include="Bindings\JSONParamBindingAttribute.cs" />
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CMSFileController.cs" />
     <Compile Include="Controllers\UserCodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IPAddressController.cs" />
@@ -557,6 +563,7 @@
     <Content Include="js\iframeResizer.map" />
     <Content Include="js\README.md" />
     <None Include="Properties\PublishProfiles\GeminisWeb.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalGeminisWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -637,12 +644,6 @@
     <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.createClientResponseCreateClientResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.depositCashResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.depositCashResponseDepositCashResp.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.disclaimerAgreedResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -665,12 +666,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.enterOrderResponseEnterOrderResp.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.foreignExchangeResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.foreignExchangeResponseForeignExchangeResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.getnTradeDateResponse.datasource">
@@ -994,10 +989,46 @@
     <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.updatePasswordResponseUpdatePasswordResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.withdrawCashResponse.datasource">
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.cashDepositInstructionEnquiryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.withdrawCashResponseWithdrawCashResp.datasource">
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.cashDepositInstructionEnquiryResponseCashDepositInstructionEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.cashDepositInstructionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.cashDepositInstructionResponseCashDepositInstructionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponseCashWithdrawalInstructionEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.cashWithdrawalInstructionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.cashWithdrawalInstructionResponseCashWithdrawalInstructionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponseForeignExchangeInstructionEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.foreignExchangeInstructionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.foreignExchangeInstructionResponseForeignExchangeInstructionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.settlementInstructionEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.settlementInstructionEnquiryResponseSettlementInstructionResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\TTLITradeWSDEV\Reference.svcmap">
@@ -1028,15 +1059,21 @@
     <Content Include="Views\Page\List.cshtml" />
     <Content Include="Views\Page\_Footer.cshtml" />
     <Content Include="Views\Page\_Header.cshtml" />
-    <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl" />
+    <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Views\Page\Topsubmenu.cshtml" />
     <Content Include="Views\Page\Sidebar.cshtml" />
     <Content Include="Views\Page\NewsDetails.cshtml" />
+    <None Include="Web.ReleaseLocal.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Context\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Views\CMSFile\" />
     <Folder Include="Views\Session\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
@@ -1077,6 +1114,15 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseLocal|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

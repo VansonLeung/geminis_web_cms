@@ -14,6 +14,16 @@ namespace Frontend
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "CMSFiles",
+                url: "ckfinder/userfiles/{type}/{path}",
+                defaults: new
+                {
+                    controller = "CMSFile",
+                    action = "Redirect"
+                }
+            );
+
+            routes.MapRoute(
                     name: "Page",
                     url: "Page/{category}/{id}",
                     defaults: new
@@ -96,6 +106,7 @@ namespace Frontend
                     action = "Index"
                 }
             );
+
         }
     }
 }

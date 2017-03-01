@@ -1,4 +1,5 @@
-﻿using Frontend.Bindings;
+﻿using Frontend.Attributes;
+using Frontend.Bindings;
 using Frontend.Models;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
+using static Frontend.Models.TTLAPIRequest;
 
 namespace Frontend.Controllers
 {
@@ -22,16 +24,19 @@ namespace Frontend.Controllers
         }
 
 
+    
+        [ForceApplicationJsonContentType]
         [HttpPost]
-        public ActionResult submitSoapQuery(TTLAPIRequest form)
+        public ActionResult submitSoapQuery(TTLAPIRequestForm wrapper)
         {
             try
             {
                 // validate form OTP here
+                TTLAPIRequest form = wrapper.form;
 
                 if (form.otp != null && form.otp != "")
                 {
-                    if (!(new UserCodeController().VerifyEmailCodeCombination("kay@cherrypicks.com", form.otp)))
+                    if (!(new UserCodeController().VerifyEmailCodeCombination("kaycheung@cherrypicks.com", form.otp)))
                     {
                         return this.Json(BaseResponse.MakeResponse("F002", null, null, "OTP Incorrect"));
                     }
@@ -77,7 +82,10 @@ namespace Frontend.Controllers
 
                 var jsession = loginQPI(username, password, resp);
 
-                setJSession(jsession.Result);
+                if (jsession.Result != null)
+                {
+                    setJSession(jsession.Result);
+                }
 
                 return this.Json(BaseResponse.MakeResponse(resp));
             }
