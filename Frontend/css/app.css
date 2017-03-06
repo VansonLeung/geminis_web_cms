@@ -67,8 +67,8 @@
   cursor: pointer; }
 
 .gb-primary {
-  border: solid 2px #A50841 !important;
-  background-color: #A50841 !important;
+  border: solid 1px #ce0f00 !important;
+  background-color: #ce0f00 !important;
   color: #FFFFFF !important; }
   .gb-primary:hover {
     opacity: 0.8; }
@@ -76,7 +76,7 @@
     opacity: 0.6; }
 
 .gb-secondary {
-  border: solid 2px #858585 !important;
+  border: solid 1px #858585 !important;
   background-color: #858585 !important;
   color: #FFFFFF !important; }
   .gb-secondary:hover {
@@ -85,16 +85,16 @@
     opacity: 0.6; }
 
 .gb-primary-hollow {
-  border: solid 2px #A50841 !important;
+  border: solid 1px #ce0f00 !important;
   background-color: #fff !important;
-  color: #A50841 !important; }
+  color: #ce0f00 !important; }
   .gb-primary-hollow:hover {
     opacity: 0.8; }
   .gb-primary-hollow:active {
     opacity: 0.6; }
 
 .gb-hollow-white {
-  border: solid 2px #666666 !important;
+  border: solid 1px #666666 !important;
   background-color: #fff !important;
   color: #666666 !important; }
   .gb-hollow-white:hover {
@@ -103,7 +103,7 @@
     opacity: 0.6; }
 
 .gb-transparent-white {
-  border: solid 2px #FFFFFF !important;
+  border: solid 1px #FFFFFF !important;
   background-color: transparent !important;
   color: #FFFFFF !important; }
   .gb-transparent-white:hover {
@@ -112,9 +112,9 @@
     opacity: 0.6; }
 
 .gb-white-red {
-  border: solid 2px #FFFFFF !important;
+  border: solid 1px #FFFFFF !important;
   background-color: #FFFFFF !important;
-  color: #A50841 !important; }
+  color: #ce0f00 !important; }
   .gb-white-red:hover {
     opacity: 0.8; }
   .gb-white-red:active {
@@ -492,7 +492,8 @@ section {
   line-height: 50px;
   color: #FFF;
   font-size: 0.7em;
-  box-shadow: inset 0 6px 6px 0 rgba(0, 0, 0, 0.1); }
+  box-shadow: inset 0 6px 6px 0 rgba(0, 0, 0, 0.1);
+  padding: 0 50px; }
 
 .header-table-grid-1 {
   width: 100%; }
@@ -727,7 +728,8 @@ input[type="text"]:focus, input[type="password"]:focus {
       border-right-width: 0px !important; }
 
 .nav-bar-bg {
-  position: relative; }
+  position: relative;
+  padding: 0 50px; }
 
 #nav-overlay {
   box-shadow: 0px 25px 20px rgba(0, 0, 0, 0.5);
@@ -1148,7 +1150,10 @@ table.generic-table-form {
   overflow: hidden;
   border-radius: 10px;
   background-color: #ffffff;
-  width: 100%; }
+  width: 100%;
+  max-width: 1200px;
+  text-align: left;
+  margin: 0 auto; }
   .horizontal-menu ul {
     overflow: auto;
     white-space: nowrap;

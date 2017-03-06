@@ -78,6 +78,26 @@ namespace WebApplication2.ViewModels
             });
 
 
+            pattern = @"@{VIEWBAG:(?<key>\w+)}";
+            output = Regex.Replace(output, pattern, delegate (Match m)
+            {
+                var str = m.Value;
+                str = str.Substring(4);
+                str = str.Substring(0, str.Length - 1);
+
+                if(helper.ViewBag != null)
+                {
+                    var value = helper.ViewBag[str];
+                    if (value == null)
+                    {
+                        return "";
+                    }
+                    return value;
+                }
+
+                return "";
+            });
+
 
             pattern = @"@{IFRAME_QPI:(?<key>\w+)}";
             output = Regex.Replace(output, pattern, delegate (Match m) {

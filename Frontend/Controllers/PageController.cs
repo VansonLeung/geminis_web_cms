@@ -26,17 +26,19 @@ namespace Frontend.Controllers
             // check session if timeout
 
             
-            if (SessionTimeout())
+            if (SSO_SessionTimeout())
             {
-                ClearSession();
+                SSO_ClearSession();
 
                 category = "login";
                 id = null;
                 BaseViewModel vml = BaseViewModel.make(locale, category, id, Request, getSession());
+                ViewBag.message = "Session Expired";
                 return View(vml);
             }
 
-            InternalKeepAlive();
+            SSO_InternalKeepAlive();
+            SSO_InternalHeartbeat();
 
             BaseViewModel vm = BaseViewModel.make(locale, category, id, Request, getSession());
             return View(vm);

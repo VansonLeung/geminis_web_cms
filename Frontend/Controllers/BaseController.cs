@@ -12,7 +12,6 @@ namespace Frontend.Controllers
     {
         public BaseControllerSession getSession()
         {
-
             if (Session["TTLClient"] != null)
             {
                 TTLITradeWSDEV.clientLoginResponseLoginResp resp = (TTLITradeWSDEV.clientLoginResponseLoginResp)(Session["TTLClient"]);
@@ -23,7 +22,7 @@ namespace Frontend.Controllers
                     string jsessionID = (string)Session["jsessionID"];
                     session.jsessionID = jsessionID;
                 }
-
+                
                 return session;
             }
             return null;
@@ -93,6 +92,140 @@ namespace Frontend.Controllers
                 bool success = sessionController.keepAliveQPI(jsessionID);
                 Session["jsessionIDkeepAlive"] = success;
                 return success;
+            }
+            return false;
+        }
+
+
+
+
+
+
+
+
+        public string GetCurrentSessionID()
+        {
+            return System.Web.HttpContext.Current.Session.SessionID;
+        }
+
+
+
+
+
+
+
+
+        public void SSO_UpsertUser(bool isForceExpireAll = false)
+        {
+            var ttlsession = getSession();
+            var sessionID = GetCurrentSessionID();
+            string userID = null;
+            if (ttlsession != null && ttlsession.clientID != null)
+            {
+                userID = ttlsession.clientID;
+            }
+
+            if (sessionID != null && userID != null)
+            {
+                if (isForceExpireAll)
+                {
+                    SessionController.ForceAllSessionLoginExpireByUserID(userID);
+                }
+
+                string jsessionID = null;
+                if (Session["jsessionID"] != null)
+                {
+                    jsessionID = (string)Session["jsessionID"];
+                }
+
+                SessionController.UpsertSessionLogin(sessionID, userID, ttlsession, jsessionID);
+            }
+        }
+
+
+        public bool SSO_SessionTimeout()
+        {
+            var ttlsession = getSession();
+            var sessionID = GetCurrentSessionID();
+            string userID = null;
+            if (ttlsession != null && ttlsession.clientID != null)
+            {
+                userID = ttlsession.clientID;
+            }
+
+            if (sessionID != null && userID != null)
+            {
+                if (SessionController.CheckKeepaliveSessionLoginExpired(sessionID, userID)
+                    || SessionController.CheckHeartbeatSessionLoginExpired(sessionID, userID)
+                    || SessionController.CheckForcedSessionLoginExpired(sessionID, userID))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+        public void SSO_ClearSession()
+        {
+            var ttlsession = getSession();
+            var sessionID = GetCurrentSessionID();
+            string userID = null;
+            if (ttlsession != null && ttlsession.clientID != null)
+            {
+                userID = ttlsession.clientID;
+            }
+
+            if (sessionID != null && userID != null)
+            {
+                SessionController.ForceSessionLoginExpireBySessionIDAndUserID(sessionID, userID);
+            }
+
+            Session.Abandon();
+        }
+
+
+        public bool SSO_InternalKeepAlive()
+        {
+            var ttlsession = getSession();
+            var sessionID = GetCurrentSessionID();
+            string userID = null;
+            if (ttlsession != null && ttlsession.clientID != null)
+            {
+                userID = ttlsession.clientID;
+            }
+
+            if (sessionID != null && userID != null)
+            {
+                SessionController.TryKeepaliveSessionLogin(sessionID, userID);
+
+                if (Session["jsessionID"] != null)
+                {
+                    string jsessionID = (string)Session["jsessionID"];
+                    var sessionController = new SessionController();
+                    bool success = sessionController.keepAliveQPI(jsessionID);
+                    Session["jsessionIDkeepAlive"] = success;
+                    return success;
+                }
+            }
+            return false;
+        }
+
+
+        public bool SSO_InternalHeartbeat()
+        {
+            var ttlsession = getSession();
+            var sessionID = GetCurrentSessionID();
+            string userID = null;
+            if (ttlsession != null && ttlsession.clientID != null)
+            {
+                userID = ttlsession.clientID;
+            }
+
+            if (sessionID != null && userID != null)
+            {
+                SessionController.TryHeartbeatSessionLogin(sessionID, userID);
             }
             return false;
         }

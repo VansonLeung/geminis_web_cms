@@ -18,6 +18,7 @@ namespace WebApplication2.Controllers
 
         public class BaseControllerSession
         {
+            public bool isExpiredAlready { get; set; }
             public string clientID { get; set; }
             public string sessionID { get; set; }
             public int accountSeq { get; set; }

@@ -12,11 +12,240 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
 using static Frontend.Models.TTLAPIRequest;
+using static WebApplication2.Controllers.BaseController;
 
 namespace Frontend.Controllers
 {
     public class SessionController : BaseController
     {
+        public static int SessionKeepaliveMinutes = 30;
+        public static int SessionHeartbeatMinutes = 3;
+
+        public class SessionLogin
+        {
+            public string sessionID { get; set; }
+            public string userID { get; set; }
+            public BaseControllerSession ttlsession { get; set; }
+            public string jsessionID { get; set; }
+            public DateTime lastLoginDate { get; set; }
+            public DateTime keepaliveDate { get; set; }
+            public DateTime heartbeatDate { get; set; }
+            public bool isForcedExpire { get; set; }
+
+            public bool isKeepaliveDateValid()
+            {
+                if (isForcedExpire)
+                {
+                    return false;
+                }
+
+                if (keepaliveDate.AddMinutes(SessionKeepaliveMinutes) < DateTime.Now)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            public bool isHeartbeatDateValid()
+            {
+                if (isForcedExpire)
+                {
+                    return false;
+                }
+
+                if (heartbeatDate.AddMinutes(SessionHeartbeatMinutes) < DateTime.Now)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+
+        }
+
+        public static List<SessionLogin> SessionLoginMap = new List<SessionLogin>();
+        
+        public static SessionLogin GetSessionLoginBySessionID(string sessionID)
+        {
+            foreach (var sessionLogin in SessionLoginMap)
+            {
+                if (sessionLogin.sessionID == sessionID)
+                {
+                    return sessionLogin;
+                }
+            }
+            return null;
+        }
+
+        public static List<SessionLogin> GetSessionLoginByUserID(string userID)
+        {
+            var query = from sessionLogin in SessionLoginMap
+                        where sessionLogin.userID == userID
+                        select sessionLogin;
+
+            return query.ToList();
+        }
+
+        public static SessionLogin UpsertSessionLogin(string sessionID, string userID, BaseControllerSession ttlsession, string jsessionID)
+        {
+            foreach (var sessionLogin in SessionLoginMap)
+            {
+                if (sessionLogin.sessionID == sessionID
+                    && sessionLogin.userID == userID)
+                {
+                    sessionLogin.keepaliveDate = DateTime.Now;
+                    sessionLogin.heartbeatDate = DateTime.Now;
+                    sessionLogin.isForcedExpire = false;
+                    sessionLogin.ttlsession = ttlsession;
+                    sessionLogin.jsessionID = jsessionID;
+                    return sessionLogin;
+                }
+            }
+
+            SessionLogin sl = new SessionLogin();
+            sl.sessionID = sessionID;
+            sl.userID = userID;
+            sl.keepaliveDate = DateTime.Now;
+            sl.heartbeatDate = DateTime.Now;
+            sl.isForcedExpire = false;
+            sl.ttlsession = ttlsession;
+            sl.jsessionID = jsessionID;
+            SessionLoginMap.Add(sl);
+            return sl;
+        }
+
+        public static bool TryKeepaliveSessionLogin(string sessionID, string userID)
+        {
+            foreach (var sessionLogin in SessionLoginMap)
+            {
+                if (sessionLogin.sessionID == sessionID
+                    && sessionLogin.userID == userID)
+                {
+                    if (sessionLogin.isKeepaliveDateValid())
+                    {
+                        sessionLogin.keepaliveDate = DateTime.Now;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool TryHeartbeatSessionLogin(string sessionID, string userID)
+        {
+            foreach (var sessionLogin in SessionLoginMap)
+            {
+                if (sessionLogin.sessionID == sessionID
+                    && sessionLogin.userID == userID)
+                {
+                    if (sessionLogin.isHeartbeatDateValid())
+                    {
+                        sessionLogin.heartbeatDate = DateTime.Now;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool CheckKeepaliveSessionLoginExpired(string sessionID, string userID)
+        {
+            foreach (var sessionLogin in SessionLoginMap)
+            {
+                if (sessionLogin.sessionID == sessionID
+                    && sessionLogin.userID == userID)
+                {
+                    if (!sessionLogin.isKeepaliveDateValid())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public static bool CheckHeartbeatSessionLoginExpired(string sessionID, string userID)
+        {
+            foreach (var sessionLogin in SessionLoginMap)
+            {
+                if (sessionLogin.sessionID == sessionID
+                    && sessionLogin.userID == userID)
+                {
+                    if (!sessionLogin.isHeartbeatDateValid())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public static bool CheckForcedSessionLoginExpired(string sessionID, string userID)
+        {
+            foreach (var sessionLogin in SessionLoginMap)
+            {
+                if (sessionLogin.sessionID == sessionID
+                    && sessionLogin.userID == userID)
+                {
+                    if (sessionLogin.isForcedExpire)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public static void ForceAllSessionLoginExpireByUserID(string userID)
+        {
+            for (var k = SessionLoginMap.Count; k >= 0; k -= 1)
+            {
+                var sessionLogin = SessionLoginMap[k];
+                if (sessionLogin.userID == userID)
+                {
+                    SessionLoginMap.Remove(sessionLogin);
+                }
+            }
+        }
+
+
+        public static void ForceSessionLoginExpireBySessionIDAndUserID(string sessionID, string userID)
+        {
+            for (var k = SessionLoginMap.Count; k >= 0; k -= 1)
+            {
+                var sessionLogin = SessionLoginMap[k];
+                if (sessionLogin.userID == userID
+                    && sessionLogin.sessionID == sessionID)
+                {
+                    SessionLoginMap.Remove(sessionLogin);
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         public string GetAPILink()
         {
             var constant = WebApplication2.Context.ConstantDbContext.getInstance().findActiveByKeyNoTracking("DOMAIN_API");
@@ -86,6 +315,8 @@ namespace Frontend.Controllers
                 {
                     setJSession(jsession.Result);
                 }
+
+                SSO_UpsertUser();
 
                 return this.Json(BaseResponse.MakeResponse(resp));
             }
@@ -173,6 +404,26 @@ namespace Frontend.Controllers
         }
 
 
+
+
+
+        [ForceApplicationJsonContentType]
+        [HttpPost]
+        public ActionResult api_sso_keepalive()
+        {
+            return this.Json(SSO_InternalKeepAlive());
+        }
+
+
+        [ForceApplicationJsonContentType]
+        [HttpPost]
+        public ActionResult api_sso_heartbeat()
+        {
+            return this.Json(SSO_InternalHeartbeat());
+        }
+
+
+        
 
         public bool keepAliveQPI(string jsessionID)
         {

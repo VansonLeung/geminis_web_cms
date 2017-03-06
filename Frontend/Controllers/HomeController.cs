@@ -14,6 +14,24 @@ namespace Frontend.Controllers
         [Internationalization]
         public ActionResult Index()
         {
+
+            // check session if timeout
+
+
+            if (SSO_SessionTimeout())
+            {
+                SSO_ClearSession();
+
+                string category = "login";
+                string id = null;
+                BaseViewModel vml = BaseViewModel.make(null, category, id, Request, getSession());
+                ViewBag.message = "Session Expired";
+                return View(vml);
+            }
+
+            SSO_InternalKeepAlive();
+            SSO_InternalHeartbeat();
+
             BaseViewModel vm = BaseViewModel.make(null, null, null, Request, getSession());
             return View(vm);
         }
