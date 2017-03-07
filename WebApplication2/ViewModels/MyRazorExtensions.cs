@@ -82,17 +82,17 @@ namespace WebApplication2.ViewModels
             output = Regex.Replace(output, pattern, delegate (Match m)
             {
                 var str = m.Value;
-                str = str.Substring(4);
+                str = str.Substring(10);
                 str = str.Substring(0, str.Length - 1);
 
-                if(helper.ViewBag != null)
+                if(helper.ViewData != null)
                 {
-                    var value = helper.ViewBag[str];
+                    var value = helper.ViewData[str];
                     if (value == null)
                     {
                         return "";
                     }
-                    return value;
+                    return (string)value;
                 }
 
                 return "";

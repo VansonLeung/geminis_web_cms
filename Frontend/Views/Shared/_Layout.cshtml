@@ -43,5 +43,17 @@
           },
           false);
     </script>
+
+    <script type="text/javascript">
+        var loopHeartbeat = function()
+        {
+            setTimeout(function () {
+                console.log("HEARTBEAT");
+                $.post("/api/session/api_sso_heartbeat");
+                loopHeartbeat();
+            }, 60000);
+        }
+        loopHeartbeat();
+    </script>
 </body>
 </html>

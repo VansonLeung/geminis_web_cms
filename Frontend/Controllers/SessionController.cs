@@ -212,7 +212,7 @@ namespace Frontend.Controllers
 
         public static void ForceAllSessionLoginExpireByUserID(string userID)
         {
-            for (var k = SessionLoginMap.Count; k >= 0; k -= 1)
+            for (var k = SessionLoginMap.Count - 1; k >= 0; k -= 1)
             {
                 var sessionLogin = SessionLoginMap[k];
                 if (sessionLogin.userID == userID)
@@ -225,7 +225,7 @@ namespace Frontend.Controllers
 
         public static void ForceSessionLoginExpireBySessionIDAndUserID(string sessionID, string userID)
         {
-            for (var k = SessionLoginMap.Count; k >= 0; k -= 1)
+            for (var k = SessionLoginMap.Count - 1; k >= 0; k -= 1)
             {
                 var sessionLogin = SessionLoginMap[k];
                 if (sessionLogin.userID == userID
