@@ -40,5 +40,14 @@ namespace WebApplication2.Properties {
                 return ((string)(this["MS_VIDEO_UPLOAD_SRC"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/ckfinder/userfiles/files/")]
+        public string MS_FILE_UPLOAD_SRC {
+            get {
+                return ((string)(this["MS_FILE_UPLOAD_SRC"]));
+            }
+        }
     }
 }

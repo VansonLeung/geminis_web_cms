@@ -241,6 +241,7 @@
     <Compile Include="Controllers\ArticlePublisherController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\FooterController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\AccountGroupController.cs" />
@@ -1563,6 +1564,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />

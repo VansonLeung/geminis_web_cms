@@ -78,6 +78,19 @@ function receiver(message) {
 
         /**
          * function: trigger Geminis to pop-up an iframe with URL
+         * action: popup_url
+         * target: iframe popup height in string format with "px" suffix e.g.: "500px"
+         * url: pop-up URL
+         */
+        else if (msg.action === "popup_url_fullscreen")
+        {
+            window.popupIframe(msg.url, msg.target, true, true);
+        }
+
+
+
+        /**
+         * function: trigger Geminis to pop-up an iframe with URL
          * action: close_popup
          * target: iframe popup height in string format with "px" suffix e.g.: "500px"
          * url: pop-up URL

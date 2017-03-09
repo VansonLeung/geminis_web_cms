@@ -133,9 +133,16 @@ namespace WebApplication2.Context
 
         public string delete(AccountGroup item)
         {
+            var accounts = AccountDbContext.getInstance().findAccountsByAccountGroup(item);
+
+            if (accounts.Count > 0)
+            {
+                return "Cannot delete account group which exists account(s).";
+            }
+
             using (var db = new BaseDbContext())
             {
-                db.accountGroupDb.Remove(item);
+                db.Entry(item).State = EntityState.Deleted;
                 db.SaveChanges();
                 return null;
             }

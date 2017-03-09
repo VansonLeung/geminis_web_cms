@@ -139,6 +139,17 @@ namespace WebApplication2.Context
             }
         }
 
+        public List<Account> findAccountsByAccountGroup(AccountGroup accountGroup)
+        {
+            using (var db = new BaseDbContext())
+            {
+                var accounts = db.accountDb.Where(acc => acc.GroupID == accountGroup.AccountGroupID)
+                    .ToList();
+                return accounts;
+            }
+        }
+
+
         public List<Account> findAccountsByAccountGroupsToEmailNotify(List<AccountGroup> accountGroups, BaseArticle baseArticle)
         {
             List<int> accountGroupIDs = new List<int>();
@@ -350,6 +361,8 @@ namespace WebApplication2.Context
             {
                 var rawPassword = account.Password;
                 error = tryChangePassword(account, rawPassword);
+                _account.Password = account.Password;
+                _account.ConfirmPassword = account.ConfirmPassword;
                 if (error != null)
                 {
                     return error;
@@ -424,8 +437,13 @@ namespace WebApplication2.Context
                     }
 
                     _account.historyPasswords = _account.historyPasswordsFromList(passwords);
-                    SessionPersister.updateSessionForAccount();
                     db.SaveChanges();
+
+                    SessionPersister.updateSessionForAccount();
+
+                    account.Password = _account.Password;
+                    account.ConfirmPassword = _account.ConfirmPassword;
+
                     return null;
                 }
             }

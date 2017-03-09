@@ -120,44 +120,41 @@
   .gb-white-red:active {
     opacity: 0.6; }
 
-.oval-button-red {
+.oval-button {
   width: 72px;
   height: 72px;
-  border-radius: 36px;
-  background-image: linear-gradient(to top, #901717, #ce0f00) !important;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2) !important;
-  -webkit-user-select: none;
-  /* Chrome/Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+ */
-  -o-user-select: none;
-  user-select: none;
-  cursor: pointer; }
-  .oval-button-red:hover {
-    background-image: linear-gradient(to top, #800707, #be0000) !important;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4) !important; }
-
-.oval-button-white {
-  width: 72px;
-  height: 72px;
-  border-radius: 36px;
-  background-image: linear-gradient(to top, #e8e8e8, #ffffff) !important;
-  -webkit-user-select: none;
-  /* Chrome/Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+ */
-  -o-user-select: none;
-  user-select: none;
-  cursor: pointer; }
-  .oval-button-white:hover {
-    width: 72px;
-    height: 72px;
-    border-radius: 36px;
-    background-image: linear-gradient(to top, #e0e0e0, #fafafa) !important; }
+  border-radius: 36px; }
+  .oval-button.oval-button-red {
+    background-image: linear-gradient(to top, #901717, #ce0f00) !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2) !important;
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor: pointer; }
+    .oval-button.oval-button-red:hover {
+      background-image: linear-gradient(to top, #800707, #be0000) !important;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4) !important; }
+  .oval-button.oval-button-white {
+    background-image: linear-gradient(to top, #e8e8e8, #ffffff) !important;
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor: pointer; }
+    .oval-button.oval-button-white:hover {
+      width: 72px;
+      height: 72px;
+      border-radius: 36px;
+      background-image: linear-gradient(to top, #e0e0e0, #fafafa) !important; }
 
 .button_close {
   cursor: pointer;
@@ -1227,6 +1224,42 @@ table.generic-table-form {
         .horizontal-tabbar ul li.active div {
           color: #CC1514;
           border-bottom: 3px solid #CC1514; }
+
+.submenubar {
+  background-color: white;
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden; }
+
+.submenuList {
+  margin: 0;
+  overflow: auto; }
+
+.submenuList li {
+  display: inline-block;
+  margin-right: -6px; }
+
+.submenuList li:hover {
+  background-color: #ccc;
+  border-radius: 10px; }
+
+.submenuList li:hover a {
+  color: #000; }
+
+.submenuList a {
+  color: #9b9b9b;
+  font-size: 16px; }
+
+.submenuList li p {
+  width: 100%;
+  padding: 0 20px;
+  margin: 25px 0px;
+  text-align: center;
+  border-right: solid 1px #cccccc; }
+
+.submenuList li:last-child p {
+  border-right: none; }
 
 .pagination .pagination-page {
   display: inline-block;
@@ -8520,7 +8553,7 @@ label {
   position: relative; }
 
 .pop-content {
-  padding: 20px;
+  padding: 0px;
   color: #333;
   word-wrap: break-word;
   overflow: auto; }

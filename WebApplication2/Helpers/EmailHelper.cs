@@ -55,7 +55,14 @@ namespace WebApplication2.Helpers
                     client.Port = port;
                     client.UseDefaultCredentials = false;
                     client.Credentials = new NetworkCredential(userName, password);
-                    client.Send(mail);
+                    try
+                    {
+                        client.Send(mail);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                 }
             }
 

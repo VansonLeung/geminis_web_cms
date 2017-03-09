@@ -161,9 +161,17 @@ namespace WebApplication2.Controllers
                 return HttpNotFound();
             }
             var name = item.Name;
-            AccountGroupDbContext.getInstance().delete(item);
-            TempData["Message"] = "Delete '" + item.Name + "' successfully";
-            return RedirectToAction("List");
+            var error = AccountGroupDbContext.getInstance().delete(item);
+            if (error != null)
+            {
+                TempData["Message"] = error;
+                return RedirectToAction("List");
+            }
+            else
+            {
+                TempData["Message"] = "Delete '" + item.Name + "' successfully";
+                return RedirectToAction("List");
+            }
         }
 
 

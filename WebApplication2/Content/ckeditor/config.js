@@ -12,7 +12,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.extraAllowedContent = 'video [*]{*}(*);source [*]{*}(*);script [*]{*}(*);';
     config.filebrowserBrowseUrl = '/Content/ckfinder/ckfinder.html';
     config.filebrowserImageBrowseUrl = '/Content/ckfinder/ckfinder.html?type=Images';
-    config.filebrowserUploadUrl = '/fileupload/UploadNow';
+    config.filebrowserUploadUrl = '/FileUpload/UploadNow';
     config.filebrowserImageUploadUrl = '/image/UploadNow';
     config.filebrowserVideoUploadUrl = '/VideoUpload/UploadPage';
 };

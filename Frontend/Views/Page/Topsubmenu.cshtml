@@ -6,19 +6,17 @@
 {
   <div style="position:relative; padding: 20px;">
     <div>
-      <div class='horizontal-menu'>
-        <ul>
+      <div class='submenubar'>
+        <ul class="submenuList">
           @foreach (var menuItem in Model.topbarMenu)
           {
-              <a href="@menuItem.link.GetFullURL()">
-                <li>
-                  <div class='background'>
-                    <div class='text'>
-                      @menuItem.name
-                    </div>
-                  </div>
-                </li>
-              </a>
+            <li>
+                <a href="@menuItem.link.GetFullURL()">
+                    <p>
+                        @menuItem.name
+                    </p>
+                </a>
+            </li>
           }
         </ul>
       </div>
