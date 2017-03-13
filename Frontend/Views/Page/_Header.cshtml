@@ -5,7 +5,7 @@
         <div class='top-red-bar'>
         </div>
         <div class='white-space'>
-            <div class='gem_form nobg zeromarginpadding'>
+            <div class='gem_form nobg zeromarginpadding' style="overflow: visible;">
                 <div class="row">
                     <div class="col m12">
                         <table class='header-table-grid-1 font_sm'>
@@ -14,25 +14,42 @@
                                     <div class='GSL'>@Model.headerData.title</div>
                                 </td>
                                 <td>
-                                    繁中 
+                                    <span id="lang_select" style="z-index: 1000000"></span>
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
                                     字體大小
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style='font-size: 20px'>A</span>
+                                    <span style='font-size: 20px; border-bottom: 2px solid #CF0D14'><a href='#' style='text-decoration: none; color: #333' onclick='fontSmall();'>A</a></span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style='font-size: 30px'>A</span>
+                                    <span style='font-size: 30px'><a href='#' style='text-decoration: none; color: #333' onclick='fontBig();'>A</a></span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="/@Model.lang.locale/Page/login">
-                                        <span class='generic-button-standalone gb-hollow-white'>
-                                            登入／註冊
-                                        </span>
-                                    </a>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="/@Model.lang.locale/Page/signup">
-                                        <span class='generic-button-standalone gb-primary'>
-                                            免費開戶
-                                        </span>
-                                    </a>
+                                    @if (Model.current != null && Model.current.session != null)
+                                    {
+                                        <a href="/@Model.lang.locale/home/logout">
+                                            <span class='generic-button-standalone gb-hollow-white'>
+                                                登出
+                                            </span>
+                                        </a>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <a href="">
+                                            <span class='generic-button-standalone gb-primary'>
+                                                你好，@Model.current.session.fullname
+                                            </span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/@Model.lang.locale/Page/login">
+                                            <span class='generic-button-standalone gb-hollow-white'>
+                                                登入／註冊
+                                            </span>
+                                        </a>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <a href="/@Model.lang.locale/Page/signup">
+                                            <span class='generic-button-standalone gb-primary'>
+                                                免費開戶
+                                            </span>
+                                        </a>
+                                    }
                                 </td>
                             </tr>
                         </table>
@@ -188,7 +205,6 @@
             </div>
         }
     </div>
-
 </section>
 
 
@@ -263,4 +279,46 @@ $('.nav-sub-menu.subsub').find('li').on('mouseover', function (e) {
     target.addClass('active');
 })
 
+</script>
+
+
+<script>
+    window.initLangMenu = function initLangMenu(curlang, el) {
+
+        var genLang = function(lang)
+        {
+            var pathname = window.location.pathname;
+
+            var segments = pathname.split("/");
+            if (segments.length > 1) {
+                segments[1] = lang;
+            }
+
+            return segments.join("/");
+        }
+
+        var convLang = curlang;
+        var langLst = [];
+        var outputStr = '';
+        var linkLst = [
+          pathname = genLang("zh-HK"),
+          pathname = genLang("zh-CN"),
+          pathname = genLang("en-US")
+        ];
+        langLst['zh-HK'] = '繁中';
+        langLst['zh-CN'] = '简中';
+        langLst['en-US'] = 'English';
+
+        outputStr += '<div class="cust-dropdown-lang" style="z-">';
+
+        if (langLst[convLang]) {
+            outputStr += '<button class="cust-dropbtn-lang">' + langLst[convLang] + ' <img src="/images/menu_language_arrow.png" /></button>';
+        } else {
+            outputStr += '<button class="cust-dropbtn-lang">English</button>';
+        }
+        outputStr += '<div class="cust-dropdown-lang-content" style="z-index: 1000000"> <a href="' + linkLst[0] + '">繁中</a> <a href="' + linkLst[1] + '">简中</a> <a href="' + linkLst[2] + '">English</a> </div> </div>';
+        $('#' + el).empty().append(outputStr);
+    }
+
+    initLangMenu('@Model.lang.locale', 'lang_select');
 </script>

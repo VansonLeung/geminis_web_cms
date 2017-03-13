@@ -4,9 +4,9 @@
         <div class='white-space'>
             <div class='gem_form nobg zeromarginpadding' style='position:relative; overflow: visible;'>
                 <div class='row'>
-                    @for (var i = 0; i < Model.headerMenu.Count; i++)
+                    @for (var i = 0; i < Model.footerMenu.Count; i++)
                     {
-                        var menuItem = Model.headerMenu[i];
+                        var menuItem = Model.footerMenu[i];
 
                         <div class='col s12 m4'>
                             <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>

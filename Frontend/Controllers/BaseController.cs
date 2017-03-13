@@ -33,6 +33,7 @@ namespace Frontend.Controllers
         BaseControllerSession MakeBaseControllerSession(TTLITradeWSDEV.clientLoginResponseLoginResp resp)
         {
             BaseControllerSession session = new BaseControllerSession();
+            session.fullname = resp.fullname;
             session.clientID = resp.clientId;
             session.sessionID = resp.sessionID;
             session.accountSeq = resp.accountSeq;

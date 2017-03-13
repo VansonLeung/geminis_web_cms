@@ -13,9 +13,11 @@ namespace Frontend
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.RouteExistingFiles = true;
+
             routes.MapRoute(
                 name: "CMSFiles",
-                url: "ckfinder/userfiles/{type}/{path}",
+                url: "ckfinder/userfiles/{type}/{*path}",
                 defaults: new
                 {
                     controller = "CMSFile",

@@ -113,7 +113,14 @@ namespace WebApplication2.Controllers
                 Article article = form.makeBaseArticle();
                 article.BaseArticleID = 0;
                 article.Version = 0;
-                ArticleDbContext.getInstance().tryCreateNewArticle(article);
+                var error = ArticleDbContext.getInstance().tryCreateNewArticle(article);
+
+                if (error != null)
+                {
+                    ModelState.AddModelError("", error);
+                    ViewBag.categoryID = getCategoriesForSelect();
+                    return View();
+                }
 
                 var baseArticleID = article.BaseArticleID;
                 var version = article.Version;

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication2.Context;
 using WebApplication2.Models;
 using static Frontend.Models.TTLAPIRequest;
 using static WebApplication2.Controllers.BaseController;
@@ -18,11 +19,28 @@ namespace Frontend.Controllers
 {
     public class SessionController : BaseController
     {
-        public static int SessionKeepaliveMinutes = 30;
-        public static int SessionHeartbeatMinutes = 3;
-
         public class SessionLogin
         {
+            public int getSessionKeepaliveMinutes()
+            {
+                var constant = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SESSION_KEEPALIVE_MINS");
+                if (constant != null)
+                {
+                    return int.Parse(constant.Value);
+                }
+                return 30;
+            }
+
+            public int getSessionHeartbeatMinutes()
+            {
+                var constant = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SESSION_HEARTBEAT_MINS");
+                if (constant != null)
+                {
+                    return int.Parse(constant.Value);
+                }
+                return 3;
+            }
+
             public string sessionID { get; set; }
             public string userID { get; set; }
             public BaseControllerSession ttlsession { get; set; }
@@ -39,7 +57,7 @@ namespace Frontend.Controllers
                     return false;
                 }
 
-                if (keepaliveDate.AddMinutes(SessionKeepaliveMinutes) < DateTime.Now)
+                if (keepaliveDate.AddMinutes(getSessionKeepaliveMinutes()) < DateTime.Now)
                 {
                     return false;
                 }
@@ -54,7 +72,7 @@ namespace Frontend.Controllers
                     return false;
                 }
 
-                if (heartbeatDate.AddMinutes(SessionHeartbeatMinutes) < DateTime.Now)
+                if (heartbeatDate.AddMinutes(getSessionHeartbeatMinutes()) < DateTime.Now)
                 {
                     return false;
                 }
@@ -253,7 +271,14 @@ namespace Frontend.Controllers
         }
 
 
-    
+
+        public ActionResult logout()
+        {
+            SSO_ClearSession();
+            return RedirectToAction("Index", "Home");
+        }
+
+
         [ForceApplicationJsonContentType]
         [HttpPost]
         public ActionResult submitSoapQuery(TTLAPIRequestForm wrapper)
@@ -421,6 +446,7 @@ namespace Frontend.Controllers
         {
             return this.Json(SSO_InternalHeartbeat());
         }
+
 
 
         

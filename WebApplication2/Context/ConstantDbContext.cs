@@ -131,7 +131,7 @@ namespace WebApplication2.Context
         {
             using (var db = new BaseDbContext())
             {
-                db.constantDb.Remove(item);
+                db.Entry(item).State = EntityState.Deleted;
                 db.SaveChanges();
                 return null;
             }

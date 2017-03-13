@@ -724,11 +724,19 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                         error = ResHelper.S("itemisfrozen");
                         return error;
                     }
-                    db.articleDb.RemoveRange(db.articleDb.Where((acc) => acc.BaseArticleID == _article.BaseArticleID));
+
+
+                    var articlesToDelete = db.articleDb.Where((acc) => acc.BaseArticleID == _article.BaseArticleID);
+                    foreach (var a in articlesToDelete)
+                    {
+                        db.Entry(a).State = EntityState.Deleted;
+                    }
+                    db.SaveChanges();
+                    return null;
                 }
                 else
                 {
-                    db.articleDb.Remove(article);
+                    db.Entry(article).State = EntityState.Deleted;
                 }
                 db.SaveChanges();
 

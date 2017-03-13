@@ -12,8 +12,17 @@ namespace Frontend.Controllers
     public class HomeController : BaseController
     {
         [Internationalization]
-        public ActionResult Index()
+        public ActionResult Index(string locale)
         {
+            var keys = Request.QueryString.Keys;
+            for (var i = 0; i < keys.Count; i++)
+            {
+                var val = Request.QueryString[keys[i]];
+                if (keys[i] == "lang" && val != null && val != "")
+                {
+                    locale = val;
+                }
+            }
 
             // check session if timeout
 
@@ -34,6 +43,13 @@ namespace Frontend.Controllers
 
             BaseViewModel vm = BaseViewModel.make(null, null, null, Request, getSession());
             return View(vm);
+        }
+
+
+        public ActionResult logout(string locale)
+        {
+            SSO_ClearSession();
+            return Redirect("/" + locale);
         }
 
         [Internationalization]

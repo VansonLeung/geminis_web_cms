@@ -27,6 +27,7 @@ namespace WebApplication2.Controllers
             public string tradingAccStatus { get; set; }
             public string tradingAccList { get; set; }
             public string jsessionID { get; set; }
+            public string fullname { get; set; }
         }
     }
 }
