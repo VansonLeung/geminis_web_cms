@@ -79,7 +79,7 @@ namespace WebApplication2.ViewModels
 
 
 
-            pattern = @"@{IFRAME_QPI:(?<key>\w+)}";
+            pattern = @"@{IFRAME_QPI:(?<key>.*?)}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
                 var str = m.Value;
                 str = str.Substring(13);
@@ -103,7 +103,7 @@ namespace WebApplication2.ViewModels
 
 
 
-            pattern = @"@{IFRAME_TTL:(?<key>\w+)}";
+            pattern = @"@{IFRAME_TTL:(?<key>.*?)}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
                 var str = m.Value;
                 str = str.Substring(13);
