@@ -352,6 +352,53 @@ namespace Frontend.Controllers
         }
 
 
+        public ActionResult get_qpi_login_params()
+        {
+            /* QPI (Client side) */
+            BaseControllerSession session = getSession();
+
+            string domain = "GEMINIS";
+            string uid = session.clientID;
+            string ts = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string env_key = "UAT";
+            string password = "d6sd$#sf";
+
+            var enqstr = "";
+            enqstr += "domain=" + domain;
+            enqstr += "&uid=" + uid;
+            enqstr += "&password=" + password;
+            enqstr += "&ts=" + ts;
+            enqstr += "&env_key=" + env_key;
+
+            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+            System.Text.StringBuilder hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(enqstr), 0, Encoding.UTF8.GetByteCount(enqstr));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            string hashstr = hash.ToString();
+
+            return this.Json(BaseResponse.MakeResponse(new Dictionary<string, string> {
+                domain: domain,
+                uid: uid,
+                ts: ts,
+                env_key: env_key,
+                token: hashstr,
+                password: password
+            }));
+        }
+
+
+        [ForceApplicationJsonContentType]
+        [HttpPost]
+        public ActionResult set_qpi_login_token(QPIAPIResponse jsession)
+        {
+            setJSession(jsession.Result);
+            return this.Json(BaseResponse.MakeResponse("true"));
+        }
+
+
         public async Task<QPIAPIResponse> loginQPI(string username, string password, TTLITradeWSDEV.clientLoginResponseLoginResp resp)
         {
 

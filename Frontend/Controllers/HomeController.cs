@@ -41,7 +41,7 @@ namespace Frontend.Controllers
             SSO_InternalKeepAlive();
             SSO_InternalHeartbeat();
 
-            BaseViewModel vm = BaseViewModel.make(null, null, null, Request, getSession());
+            BaseViewModel vm = BaseViewModel.make(null, "home", null, Request, getSession());
             return View(vm);
         }
 

@@ -56,6 +56,8 @@ namespace WebApplication2.ViewModels.Include
         public List<Menu> headerMenu { get; set; }
         public List<Menu> headerMenuRight { get; set; }
         public List<Menu> footerMenu { get; set; }
+        public List<Menu> jumbotronMenu { get; set; }
+        public List<Menu> shortcutMenu { get; set; }
         public ViewCategory category { get; set; }
         public ViewContent content { get; set; }
         public ViewContent nextContent { get; set; }
@@ -221,6 +223,56 @@ namespace WebApplication2.ViewModels.Include
             return menuitems;
         }
 
+        public static List<Menu> createShortcutMenu(int categoryItemID, Lang lang)
+        {
+            List<Menu> menuitems = new List<Menu>();
+
+            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(categoryItemID);
+            foreach (var _cat in rootCategories)
+            {
+                Menu item = new Menu();
+                item.name = _cat.GetName(lang.lang);
+                item.link = new Link(lang.locale, _cat.getUrl(), null, null);
+                item.category = new ViewCategory(_cat, lang);
+
+                item.submenu = createSubmenu(item.category.categoryItemID, lang,
+                    false,
+                    false,
+                    true,
+                    false,
+                    false);
+
+                menuitems.Add(item);
+            }
+
+            return menuitems;
+        }
+
+        public static List<Menu> createJumbotronMenu(int categoryItemID, Lang lang)
+        {
+            List<Menu> menuitems = new List<Menu>();
+
+            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(categoryItemID);
+            foreach (var _cat in rootCategories)
+            {
+                Menu item = new Menu();
+                item.name = _cat.GetName(lang.lang);
+                item.link = new Link(lang.locale, _cat.getUrl(), null, null);
+                item.category = new ViewCategory(_cat, lang);
+
+                item.submenu = createSubmenu(item.category.categoryItemID, lang,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true);
+
+                menuitems.Add(item);
+            }
+
+            return menuitems;
+        }
+
 
         public static ViewCategory getCategoryRecursively(int categoryItemID, Lang lang)
         {
@@ -363,6 +415,16 @@ namespace WebApplication2.ViewModels.Include
             // footer menu
 
             vm.footerMenu = createFooterMenu(0, vm.lang);
+
+
+            // shortcut menu
+
+            vm.shortcutMenu = createShortcutMenu(0, vm.lang);
+
+
+            // jumbotron menu
+
+            vm.jumbotronMenu = createJumbotronMenu(0, vm.lang);
 
 
 
