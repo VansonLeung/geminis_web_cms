@@ -37,6 +37,7 @@ namespace Frontend.Controllers
                     "createClient",
                     new Dictionary<string, object>
                     {
+                        ["username"] = username,
                         ["name"] = firstname,
                         ["cname"] = lastname,
                         ["birthday"] = "1989-01-01",
