@@ -127,6 +127,7 @@ namespace WebApplication2.ViewModels.Include
 
                 item.submenu = createSubmenu(item.category.categoryItemID, lang, 
                     isHeaderMenu,
+                    isHeaderMenuRight,
                     isFooterMenu,
                     isShortcut,
                     isBanner,
@@ -210,14 +211,17 @@ namespace WebApplication2.ViewModels.Include
                 item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
-                item.submenu = createSubmenu(item.category.categoryItemID, lang,
-                    false,
-                    true,
-                    false,
-                    false,
-                    false);
+                if (_cat.isFooterMenu)
+                {
+                    item.submenu = createSubmenu(item.category.categoryItemID, lang,
+                        false,
+                        true,
+                        false,
+                        false,
+                        false);
 
-                menuitems.Add(item);
+                    menuitems.Add(item);
+                }
             }
 
             return menuitems;
@@ -235,14 +239,17 @@ namespace WebApplication2.ViewModels.Include
                 item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
-                item.submenu = createSubmenu(item.category.categoryItemID, lang,
-                    false,
-                    false,
-                    true,
-                    false,
-                    false);
+                if (_cat.isShortcut)
+                {
+                    item.submenu = createSubmenu(item.category.categoryItemID, lang,
+                        false,
+                        false,
+                        true,
+                        false,
+                        false);
 
-                menuitems.Add(item);
+                    menuitems.Add(item);
+                }
             }
 
             return menuitems;
@@ -260,14 +267,30 @@ namespace WebApplication2.ViewModels.Include
                 item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
-                item.submenu = createSubmenu(item.category.categoryItemID, lang,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true);
+                if (_cat.isJumbotron)
+                {
+                    item.submenu = createSubmenu(item.category.categoryItemID, lang,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true);
+                    
+                    WebApplication2.Models.ArticlePublished contentPage = null;
+                    var contentPages = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlesPublishedByCategory(_cat, lang.lang);
+                    if (contentPages.Count > 0)
+                    {
+                        contentPage = contentPages[0];
+                    }
 
-                menuitems.Add(item);
+                    if (contentPage != null)
+                    {
+                        item.desc = contentPage.Desc;
+                    }
+
+                    menuitems.Add(item);
+                }
             }
 
             return menuitems;

@@ -23,10 +23,10 @@ namespace WebApplication2
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             log4net.Config.XmlConfigurator.Configure();
             
-            var configuration = new Migrations.Configuration();
-            configuration.AutomaticMigrationDataLossAllowed = true;
-            var migrator = new DbMigrator(configuration);
-            migrator.Update();
+            //var configuration = new Migrations.Configuration();
+            //configuration.AutomaticMigrationDataLossAllowed = true;
+            //var migrator = new DbMigrator(configuration);
+            //migrator.Update();
         }
 
         protected void Session_End(object sender, EventArgs e)

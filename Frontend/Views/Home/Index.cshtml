@@ -1,85 +1,109 @@
 ﻿@model WebApplication2.ViewModels.Include.BaseViewModel
+@using WebApplication2.ViewModels.Include
+@using WebApplication2.ViewModels
 
 @{
     ViewBag.Title = "Home Page";
 }
 @Html.Partial("_Header", Model)
 
+@{ 
+    var page_class_name = "";
+    if (Model.content != null && Model.content.pageClassName != null)
+    {
+        page_class_name = Model.content.pageClassName;
+    }
+}
 
-<section class='front'>
+<div class="@page_class_name"
+        style='background-image: url("/images/index/inedx_bg.jpg"); background-size: contain; background-repeat: no-repeat; background-position-y: 0px; min-height: 800px;'>
 
-    <div class='gem_form shortbottom'>
-        <div class='row'>
-            <div class='col s12 m8'>
-                <div class="landingpage_banner">
-                    <table style="height: 100%">
-                        <tr>
-                            <td>
-                                <div>
-                                    <img src="/images/index/banner_txt.png" style="width: 100%; max-width: 560px" />
-                                    <div style="height: 2px; width: 60%; max-width: 406px; background-color: #fff"></div>
-                                    <br />
-                                    <table class='generic-table-form font_lg' style="width: auto !important;">
-                                        <tr>
-                                            <td class='font_sm'><div class='generic-button-big gb-primary font_lg'>儲存</div></td>
-                                            <td class='font_sm'><div class='generic-button-big gb-white-red font_lg'>重設</div></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </td>
-                            <td style="width: 228px;">
-                                <ul class="landingpage_banner_button">
-                                    @for (var i = 0; i < Model.jumbotronMenu.Count; i++)
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <section class='front'>
+
+            <div class='gem_form shortbottom' style="background-color: transparent !important">
+                <div class='row' style="background-color:transparent !important">
+                    <div class='col s12 m8'>
+                        <div class="landingpage_banner">
+                            <table style="height: 100%">
+                                <tr>
+                                    <td>
+                                        @for (var i = 0; i < Model.jumbotronMenu.Count; i++)
+                                        {
+                                            var menuItem = Model.jumbotronMenu[i];
+
+                                            if (i == 0)
+                                            {
+                                                <div class="jumbotron_html jumbotron_html_@i">
+                                                    @Html.RazorEncode(HttpUtility.HtmlDecode(menuItem.desc), Model)
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="jumbotron_html jumbotron_html_@i" style="display: none">
+                                                    @Html.RazorEncode(HttpUtility.HtmlDecode(menuItem.desc), Model)
+                                                </div>
+                                            }
+                                        }
+                                    </td>
+                                    <td style="width: 228px;">
+                                        <ul class="landingpage_banner_button">
+                                            @for (var i = 0; i < Model.jumbotronMenu.Count; i++)
+                                            {
+                                                var menuItem = Model.jumbotronMenu[i];
+
+                                                <li><a style='color: #fff' href="#">@menuItem.name</a><p class="arrow"></p></li>
+                                            }
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <div class="landingpage_shortcut">
+                            <table>
+                                <tr>
+                                    @for (var i = 0; i < Model.shortcutMenu.Count; i++)
                                     {
-                                        var menuItem = Model.jumbotronMenu[i];
-    
-                                        <li><a style='color: #fff' href="@menuItem.link.GetFullURL()">@menuItem.name</a><p class="arrow"></p></li>
-                                    }      
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <br />
-                <div class="landingpage_shortcut">
-                    <table>
-                        <tr>
-                            @for (var i = 0; i < Model.shortcutMenu.Count; i++)
-                            {
-                                var menuItem = Model.shortcutMenu[i];
+                                        var menuItem = Model.shortcutMenu[i];
 
-                                <td>
-                                    <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
-                                </td>
-                            }      
-                        </tr>
-                    </table>
+                                        <td>
+                                            <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
+                                        </td>
+                                    }
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    @{
+                        var iframe_src = "<div class='col s12 m4'><iframe class='if-flexible' frameborder='0' id='i1' scrolling='no' src='@{IFRAME_QPI:stock_quoter}'></iframe></div>";
+                    }
+                    @Html.RazorEncode(HttpUtility.HtmlDecode(iframe_src), Model)
+
                 </div>
             </div>
 
-            <div class='col s12 m4'>
-                <iframe class='if-flexible' id='i7' src='/html/stock_quoter.html' frameborder="0" scrolling="no"></iframe>
+            <script type="text/javascript">
+                $('.landingpage_banner_button').find('li').on('mouseover', function (e) {
+                    var target = $(e.target).closest('li');
+                    var siblings = target.siblings('li');
+                    siblings.removeClass('active');
+                    target.addClass('active');
+                    var index = target.index();
+                    $('.jumbotron_html').hide();
+                    $('.jumbotron_html_' + index).show();
+                })
+            </script>
+
+            <div class='row'>
+                <div class='col s12 m12'>
+                    @Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.desc), Model)
+                </div>
             </div>
 
-        </div>
+        </section>
     </div>
-
-    <script type="text/javascript">
-            $('.landingpage_banner_button').find('li').on('mouseover', function (e) {
-                var target = $(e.target).closest('li');
-                var siblings = target.siblings('li');
-                siblings.removeClass('active');
-                target.addClass('active');
-            })
-    </script>
-
-    <div class='row'>
-        <div class='col s12 m12'>
-            @Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.desc), Model)
-        </div>
-    </div>
-
-</section>
-
+</div>
 @Html.Partial("_Footer", Model)
 

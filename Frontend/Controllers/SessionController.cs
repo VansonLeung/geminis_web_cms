@@ -352,6 +352,7 @@ namespace Frontend.Controllers
         }
 
 
+        [HttpPost]
         public ActionResult get_qpi_login_params()
         {
             /* QPI (Client side) */
@@ -380,12 +381,12 @@ namespace Frontend.Controllers
             string hashstr = hash.ToString();
 
             return this.Json(BaseResponse.MakeResponse(new Dictionary<string, string> {
-                domain: domain,
-                uid: uid,
-                ts: ts,
-                env_key: env_key,
-                token: hashstr,
-                password: password
+                ["domain"] = domain,
+                ["uid"] = uid,
+                ["ts"] = ts,
+                ["env_key"] = env_key,
+                ["token"] = hashstr,
+                ["password"] = password
             }));
         }
 
@@ -394,7 +395,7 @@ namespace Frontend.Controllers
         [HttpPost]
         public ActionResult set_qpi_login_token(QPIAPIResponse jsession)
         {
-            setJSession(jsession.Result);
+            setJSession(jsession);
             return this.Json(BaseResponse.MakeResponse("true"));
         }
 

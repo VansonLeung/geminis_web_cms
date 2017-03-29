@@ -369,6 +369,7 @@
     <Content Include="images\index\index_market_icon.png" />
     <Content Include="images\index\index_product_cbbcs.png" />
     <Content Include="images\index\index_product_cn.png" />
+    <Content Include="images\index\index_product_head.jpg" />
     <Content Include="images\index\index_product_hk.png" />
     <Content Include="images\index\index_product_icon.png" />
     <Content Include="images\index\index_product_ipo.png" />
@@ -510,11 +511,14 @@
     <Content Include="js\init_iframe.js" />
     <Content Include="js\jquerymin.js" />
     <Content Include="js\jschannel.js" />
+    <Content Include="js\js_qpi.js" />
+    <Content Include="js\js_sha256.js" />
     <Content Include="js\materialize.js" />
     <Content Include="js\materialize.min.js" />
     <Content Include="js\msg_receiver.js" />
     <Content Include="js\popelt.js" />
     <Content Include="js\popelt.min.js" />
+    <Content Include="js\sly.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />

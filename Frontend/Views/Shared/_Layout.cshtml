@@ -32,6 +32,94 @@
 
     @Scripts.Render("~/js/iframeResizer.contentWindow.min.js")
     @Scripts.Render("~/js/init_iframe.js")
+    @Scripts.Render("~/js/sly.js")
+
+    <script>
+    var SlyFrames = [];
+    var frame = null;
+
+    //ao iniciar
+    $(document).ready(function () {
+        resize();
+        criaSlides();
+    });
+
+    //ao redimencionar a janela
+    $(window).resize(function (e) {
+        resize();
+        SlyReload();
+    });
+
+    /**
+     * cria os slides pela marcação da classe no html
+     */
+    function criaSlides(){
+        frames = document.getElementsByClassName('basic');
+        for (var i = 0; i < frames.length; i++) {
+            SlyFrames[i] = newSly(frames[i]);
+        }
+    }
+
+    /**
+     * cria um Sly Object
+     */
+    function newSly(frame){
+        var $wrap = $(frame).parent();
+
+        return new Sly(frame, {
+            horizontal: 1,
+            itemNav: 'basic',
+            smart: 0,
+            activateOn: 'click',
+            mouseDragging: 1,
+            touchDragging: 1,
+            releaseSwing: 1,
+            startAt: 0,
+            scrollBy: 1,
+            pagesBar: $wrap.find('.pages'),
+            activatePageOn: 'click',
+            speed: 300,
+            elasticBounds: 1,
+            easing: 'easeOutExpo',
+            dragHandle: 1,
+            dynamicHandle: 1,
+            clickBar: 1,
+            // Buttons
+            prevPage: $wrap.find('.prevPage'),
+            nextPage: $wrap.find('.nextPage')
+        }).init();
+    }
+
+    /**
+     * força a responsividade dos slides
+     */
+    function resize(){
+        var col;
+        var wdt = $(".frame").width();
+        if(wdt <= 500){
+            col = 1;
+        }else if(wdt > 500 && wdt <= 750){
+            col = 2;
+        }else if(wdt > 750 && wdt <= 960){
+            col = 3;
+        }else if(wdt > 960 && wdt <= 1200){
+            col = 4;
+        }else {
+            col = 5;
+        }
+        var tm = ($(".frame").width() / col);
+        $(".clearfix li").css("width", Math.round(tm));
+    }
+
+    /**
+     * recarrega slides
+     */
+    function SlyReload(){
+        for (var i = 0; i < SlyFrames.length; i++) {
+            SlyFrames[i].reload();
+        }
+    }
+    </script>
 
 
     <script type='text/javascript'>

@@ -1,13 +1,11 @@
-<script type="text/javascript">
-
 window.js_qpi_login = function(_callback)
 {
 	var get_qpi_login_params = function(callback)
 	{
-		$.get(
+		$.post(
 		    "/api/session/get_qpi_login_params",
 		    function(response) {
-		        var json = JSON.parse(response);
+		        var json = response;
 		        if (json.success)
 		        {
 		        	var data = json.data;
@@ -21,7 +19,7 @@ window.js_qpi_login = function(_callback)
 		);
 	}
 
-	var login = function(callback)
+	var login = function(params, callback)
 	{
 		var url = "http://uat.quotepower.com/web/geminis/login.jsp";
 
@@ -41,8 +39,12 @@ window.js_qpi_login = function(_callback)
 
 		$.get(
 		    fullurl,
-		    function(data) {
-		        var json = JSON.parse(response);
+		    function (response) {
+		        var json = response;
+		        if (typeof response === 'string')
+		        {
+		            json = JSON.parse(response);
+		        }
 		        callback(response);
 		    }
 		);
@@ -68,12 +70,10 @@ window.js_qpi_login = function(_callback)
 	}
 
 	get_qpi_login_params(function(response1) {
-		login(function(response2) {
+		login(response1, function(response2) {
 			set_qpi_login_token(response2, function(response3) {
 				_callback(response3);
 			})
 		})
 	})
 }
-
-</script>

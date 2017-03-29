@@ -13,5 +13,6 @@ namespace WebApplication2.ViewModels.Include
         public bool is_active { get; set; }
         public bool is_highlighted { get; set; }
         public List<Menu> submenu { get; set; }
+        public string desc { get; set; }
     }
 }
