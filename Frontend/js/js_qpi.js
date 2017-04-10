@@ -1,5 +1,6 @@
 var get_qpi_login_params = function(callback)
 {
+    console.log("get_qpi_login_params");
     $.post(
         "/api/session/get_qpi_login_params",
         function(response) {
@@ -18,6 +19,9 @@ var get_qpi_login_params = function(callback)
 }
 
 var keep_alive = function (params, callback) {
+
+    console.log("keep_alive", params);
+
     var url = params.keep_alive_url;
 
     var jsessionid = params.jsessionid;
@@ -46,6 +50,9 @@ var keep_alive = function (params, callback) {
 
 var login = function(params, callback)
 {
+
+    console.log("login", params);
+
     var url = params.login_url;
 
     var domain = params.domain;
@@ -117,8 +124,10 @@ window.js_qpi_keep_alive = function(_callback)
 }
 
 
-
-window.js_qpi_keep_alive(function (result) {
-    console.log("Keep Alive...", result);
+$(function () {
+    window.js_qpi_keep_alive(function (result) {
+        console.log("Keep Alive...", result);
+    })
 })
+
 

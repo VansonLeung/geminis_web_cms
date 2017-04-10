@@ -2,7 +2,16 @@ function receiver(message) {
     // var trusteddomain = "http://fiddle.jshell.net";
     // if (message.origin == trusteddomain) 
     {
-    	var msg = JSON.parse(message.data);
+        var data = null;
+        try
+        {
+            data = JSON.parse(message.data);
+        }
+        catch (e)
+        {
+            return;
+        }
+        var msg = data;
 
 
         /**

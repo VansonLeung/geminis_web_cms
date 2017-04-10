@@ -358,10 +358,21 @@ namespace Frontend.Controllers
             /* QPI (Client side) */
             BaseControllerSession session = getSession();
 
+            if (session == null)
+            {
+                return this.Json(BaseResponse.MakeResponse(new Dictionary<string, string>
+                {
+                }));
+            }
+
             string login_url = "";
             string keep_alive_url = "";
             var qpisession = getSession();
-            string jsessionid = qpisession.jsessionID;
+            string jsessionid = null;
+            if (qpisession != null)
+            {
+                jsessionid = qpisession.jsessionID;
+            }
 
             login_url = "http://uat.quotepower.com/web/geminis/login.jsp";
             var _constant = ConstantDbContext.getInstance().findActiveByKeyNoTracking("IFRAME_QPI_URL");
