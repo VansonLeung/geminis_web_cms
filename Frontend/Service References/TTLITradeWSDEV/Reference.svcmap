@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bcfa1c34-05c3-495c-a737-088ca7f2adb5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7b8adcde-e971-4602-9d0e-ae924ab5aabb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -13,18 +13,16 @@
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
-    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
-    <ReferencedAssemblies>
-      <ReferencedAssembly AssemblyName="API" />
-    </ReferencedAssemblies>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
     <ReferencedDataContractTypes />
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://223.197.108.131/mobile/services/ItradeWebServices?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://ttl.anuemoney.com/mobile/services/ItradeWebServices?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ItradeWebServicesService.wsdl" MetadataType="Wsdl" ID="0e0dcd6f-c4cc-4d95-88a7-6021efcb58fd" SourceId="1" SourceUrl="http://223.197.108.131/mobile/services/ItradeWebServices?wsdl" />
+    <MetadataFile FileName="ItradeWebServicesService.wsdl" MetadataType="Wsdl" ID="63b3c88e-47af-4d1e-bd1a-a3fe297282d6" SourceId="1" SourceUrl="https://ttl.anuemoney.com/mobile/services/ItradeWebServices?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

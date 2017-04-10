@@ -325,6 +325,30 @@
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cancelOrderResponseCancelOrderResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponseCashDepositInstructionEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cashDepositInstructionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cashDepositInstructionResponseCashDepositInstructionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponseCashWithdrawalInstructionEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cashWithdrawalInstructionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.cashWithdrawalInstructionResponseCashWithdrawalInstructionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.changePasswordResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -361,12 +385,6 @@
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.createClientResponseCreateClientResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.depositCashResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.depositCashResponseDepositCashResp.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.disclaimerAgreedResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -391,10 +409,16 @@
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.enterOrderResponseEnterOrderResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.foreignExchangeResponse.datasource">
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.foreignExchangeResponseForeignExchangeResp.datasource">
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponseForeignExchangeInstructionEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.foreignExchangeInstructionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.foreignExchangeInstructionResponseForeignExchangeInstructionResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.getnTradeDateResponse.datasource">
@@ -646,6 +670,12 @@
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.searchInstrumentResponseSearchInstrumentInfoResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.settlementInstructionEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.settlementInstructionEnquiryResponseSettlementInstructionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.settlementInstructionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -716,12 +746,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.updatePasswordResponseUpdatePasswordResp.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.withdrawCashResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\TTLITradeWSDEV\API.TTLITradeWSDEV.withdrawCashResponseWithdrawCashResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\TTLITradeWSDEV\configuration91.svcinfo" />

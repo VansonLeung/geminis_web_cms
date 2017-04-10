@@ -29,11 +29,11 @@ namespace API.TTLITradeWSDEV {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
-        API.TTLITradeWSDEV.depositCashResponse depositCash(API.TTLITradeWSDEV.depositCash request);
+        API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponse cashWithdrawalInstructionEnquiry(API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiry request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        System.Threading.Tasks.Task<API.TTLITradeWSDEV.depositCashResponse> depositCashAsync(API.TTLITradeWSDEV.depositCash request);
+        System.Threading.Tasks.Task<API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponse> cashWithdrawalInstructionEnquiryAsync(API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiry request);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -139,6 +139,36 @@ namespace API.TTLITradeWSDEV {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
+        API.TTLITradeWSDEV.cashWithdrawalInstructionResponse cashWithdrawalInstruction(API.TTLITradeWSDEV.cashWithdrawalInstruction request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<API.TTLITradeWSDEV.cashWithdrawalInstructionResponse> cashWithdrawalInstructionAsync(API.TTLITradeWSDEV.cashWithdrawalInstruction request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
+        API.TTLITradeWSDEV.settlementInstructionEnquiryResponse settlementInstructionEnquiry(API.TTLITradeWSDEV.settlementInstructionEnquiry request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<API.TTLITradeWSDEV.settlementInstructionEnquiryResponse> settlementInstructionEnquiryAsync(API.TTLITradeWSDEV.settlementInstructionEnquiry request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
+        API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponse foreignExchangeInstructionEnquiry(API.TTLITradeWSDEV.foreignExchangeInstructionEnquiry request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponse> foreignExchangeInstructionEnquiryAsync(API.TTLITradeWSDEV.foreignExchangeInstructionEnquiry request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
         API.TTLITradeWSDEV.queryClientInfoResponse queryClientInfo(API.TTLITradeWSDEV.queryClientInfo request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
@@ -194,16 +224,6 @@ namespace API.TTLITradeWSDEV {
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<API.TTLITradeWSDEV.queryCreateClientOptionItemResponse> queryCreateClientOptionItemAsync(API.TTLITradeWSDEV.queryCreateClientOptionItem request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
-        API.TTLITradeWSDEV.foreignExchangeResponse foreignExchange(API.TTLITradeWSDEV.foreignExchange request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        System.Threading.Tasks.Task<API.TTLITradeWSDEV.foreignExchangeResponse> foreignExchangeAsync(API.TTLITradeWSDEV.foreignExchange request);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -369,6 +389,16 @@ namespace API.TTLITradeWSDEV {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
+        API.TTLITradeWSDEV.cashDepositInstructionResponse cashDepositInstruction(API.TTLITradeWSDEV.cashDepositInstruction request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<API.TTLITradeWSDEV.cashDepositInstructionResponse> cashDepositInstructionAsync(API.TTLITradeWSDEV.cashDepositInstruction request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
         API.TTLITradeWSDEV.subscribeMarketDataResponse subscribeMarketData(API.TTLITradeWSDEV.subscribeMarketData request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
@@ -479,6 +509,16 @@ namespace API.TTLITradeWSDEV {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
+        API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponse cashDepositInstructionEnquiry(API.TTLITradeWSDEV.cashDepositInstructionEnquiry request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponse> cashDepositInstructionEnquiryAsync(API.TTLITradeWSDEV.cashDepositInstructionEnquiry request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
         API.TTLITradeWSDEV.queryChannelInfoResponse queryChannelInfo(API.TTLITradeWSDEV.queryChannelInfo request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
@@ -544,6 +584,16 @@ namespace API.TTLITradeWSDEV {
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<API.TTLITradeWSDEV.checkNominalClosingPriceDerivationResponse> checkNominalClosingPriceDerivationAsync(API.TTLITradeWSDEV.checkNominalClosingPriceDerivation request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
+        API.TTLITradeWSDEV.foreignExchangeInstructionResponse foreignExchangeInstruction(API.TTLITradeWSDEV.foreignExchangeInstruction request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<API.TTLITradeWSDEV.foreignExchangeInstructionResponse> foreignExchangeInstructionAsync(API.TTLITradeWSDEV.foreignExchangeInstruction request);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -664,16 +714,6 @@ namespace API.TTLITradeWSDEV {
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         System.Threading.Tasks.Task<API.TTLITradeWSDEV.queryIPOInfoResponse> queryIPOInfoAsync(API.TTLITradeWSDEV.queryIPOInfo request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseResponse_CType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseRequest_CType))]
-        API.TTLITradeWSDEV.withdrawCashResponse withdrawCash(API.TTLITradeWSDEV.withdrawCash request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        System.Threading.Tasks.Task<API.TTLITradeWSDEV.withdrawCashResponse> withdrawCashAsync(API.TTLITradeWSDEV.withdrawCash request);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2685,6 +2725,178 @@ namespace API.TTLITradeWSDEV {
             set {
                 this.startTimeField = value;
                 this.RaisePropertyChanged("startTime");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
+    public partial class CashDepositInstructionEnquiry_CType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string transactionIDField;
+        
+        private string channelIDField;
+        
+        private decimal amountField;
+        
+        private bool amountFieldSpecified;
+        
+        private string currencyIDField;
+        
+        private string settleMethodField;
+        
+        private string remarkField;
+        
+        private string bankAccountField;
+        
+        private string bankIDField;
+        
+        private string creationTimeField;
+        
+        private string statusField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string transactionID {
+            get {
+                return this.transactionIDField;
+            }
+            set {
+                this.transactionIDField = value;
+                this.RaisePropertyChanged("transactionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string channelID {
+            get {
+                return this.channelIDField;
+            }
+            set {
+                this.channelIDField = value;
+                this.RaisePropertyChanged("channelID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public decimal amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+                this.RaisePropertyChanged("amount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool amountSpecified {
+            get {
+                return this.amountFieldSpecified;
+            }
+            set {
+                this.amountFieldSpecified = value;
+                this.RaisePropertyChanged("amountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string currencyID {
+            get {
+                return this.currencyIDField;
+            }
+            set {
+                this.currencyIDField = value;
+                this.RaisePropertyChanged("currencyID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string settleMethod {
+            get {
+                return this.settleMethodField;
+            }
+            set {
+                this.settleMethodField = value;
+                this.RaisePropertyChanged("settleMethod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string remark {
+            get {
+                return this.remarkField;
+            }
+            set {
+                this.remarkField = value;
+                this.RaisePropertyChanged("remark");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string bankAccount {
+            get {
+                return this.bankAccountField;
+            }
+            set {
+                this.bankAccountField = value;
+                this.RaisePropertyChanged("bankAccount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string bankID {
+            get {
+                return this.bankIDField;
+            }
+            set {
+                this.bankIDField = value;
+                this.RaisePropertyChanged("bankID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string creationTime {
+            get {
+                return this.creationTimeField;
+            }
+            set {
+                this.creationTimeField = value;
+                this.RaisePropertyChanged("creationTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+                this.RaisePropertyChanged("status");
             }
         }
         
@@ -7696,6 +7908,480 @@ namespace API.TTLITradeWSDEV {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
+    public partial class ForeignExchangeInstructionEnquiry_CType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string transactionIDField;
+        
+        private string channelIDField;
+        
+        private string fromCurrencyField;
+        
+        private decimal fromAmountField;
+        
+        private bool fromAmountFieldSpecified;
+        
+        private decimal exchangeRateField;
+        
+        private bool exchangeRateFieldSpecified;
+        
+        private string toCurrencyField;
+        
+        private decimal toAmountField;
+        
+        private bool toAmountFieldSpecified;
+        
+        private string creationTimeField;
+        
+        private string statusField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string transactionID {
+            get {
+                return this.transactionIDField;
+            }
+            set {
+                this.transactionIDField = value;
+                this.RaisePropertyChanged("transactionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string channelID {
+            get {
+                return this.channelIDField;
+            }
+            set {
+                this.channelIDField = value;
+                this.RaisePropertyChanged("channelID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string fromCurrency {
+            get {
+                return this.fromCurrencyField;
+            }
+            set {
+                this.fromCurrencyField = value;
+                this.RaisePropertyChanged("fromCurrency");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public decimal fromAmount {
+            get {
+                return this.fromAmountField;
+            }
+            set {
+                this.fromAmountField = value;
+                this.RaisePropertyChanged("fromAmount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fromAmountSpecified {
+            get {
+                return this.fromAmountFieldSpecified;
+            }
+            set {
+                this.fromAmountFieldSpecified = value;
+                this.RaisePropertyChanged("fromAmountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public decimal exchangeRate {
+            get {
+                return this.exchangeRateField;
+            }
+            set {
+                this.exchangeRateField = value;
+                this.RaisePropertyChanged("exchangeRate");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool exchangeRateSpecified {
+            get {
+                return this.exchangeRateFieldSpecified;
+            }
+            set {
+                this.exchangeRateFieldSpecified = value;
+                this.RaisePropertyChanged("exchangeRateSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string toCurrency {
+            get {
+                return this.toCurrencyField;
+            }
+            set {
+                this.toCurrencyField = value;
+                this.RaisePropertyChanged("toCurrency");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public decimal toAmount {
+            get {
+                return this.toAmountField;
+            }
+            set {
+                this.toAmountField = value;
+                this.RaisePropertyChanged("toAmount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool toAmountSpecified {
+            get {
+                return this.toAmountFieldSpecified;
+            }
+            set {
+                this.toAmountFieldSpecified = value;
+                this.RaisePropertyChanged("toAmountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string creationTime {
+            get {
+                return this.creationTimeField;
+            }
+            set {
+                this.creationTimeField = value;
+                this.RaisePropertyChanged("creationTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+                this.RaisePropertyChanged("status");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
+    public partial class SettlementInstructionEnquiry_CType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string transactionIDField;
+        
+        private string instructionField;
+        
+        private string settlementMethodField;
+        
+        private string counterpartyNameField;
+        
+        private string counterpartyAccountNoField;
+        
+        private string counterpartyContactPersonField;
+        
+        private string counterpartyTelNoField;
+        
+        private string creationTimeField;
+        
+        private string statusField;
+        
+        private StockInformation_CType[] stockInformationListField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string transactionID {
+            get {
+                return this.transactionIDField;
+            }
+            set {
+                this.transactionIDField = value;
+                this.RaisePropertyChanged("transactionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string instruction {
+            get {
+                return this.instructionField;
+            }
+            set {
+                this.instructionField = value;
+                this.RaisePropertyChanged("instruction");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string settlementMethod {
+            get {
+                return this.settlementMethodField;
+            }
+            set {
+                this.settlementMethodField = value;
+                this.RaisePropertyChanged("settlementMethod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string counterpartyName {
+            get {
+                return this.counterpartyNameField;
+            }
+            set {
+                this.counterpartyNameField = value;
+                this.RaisePropertyChanged("counterpartyName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string counterpartyAccountNo {
+            get {
+                return this.counterpartyAccountNoField;
+            }
+            set {
+                this.counterpartyAccountNoField = value;
+                this.RaisePropertyChanged("counterpartyAccountNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string counterpartyContactPerson {
+            get {
+                return this.counterpartyContactPersonField;
+            }
+            set {
+                this.counterpartyContactPersonField = value;
+                this.RaisePropertyChanged("counterpartyContactPerson");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string counterpartyTelNo {
+            get {
+                return this.counterpartyTelNoField;
+            }
+            set {
+                this.counterpartyTelNoField = value;
+                this.RaisePropertyChanged("counterpartyTelNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string creationTime {
+            get {
+                return this.creationTimeField;
+            }
+            set {
+                this.creationTimeField = value;
+                this.RaisePropertyChanged("creationTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+                this.RaisePropertyChanged("status");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("stockInformationList", IsNullable=true, Order=9)]
+        public StockInformation_CType[] stockInformationList {
+            get {
+                return this.stockInformationListField;
+            }
+            set {
+                this.stockInformationListField = value;
+                this.RaisePropertyChanged("stockInformationList");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
+    public partial class StockInformation_CType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string marketIDField;
+        
+        private string instrumentIDField;
+        
+        private string instrumentNameField;
+        
+        private decimal qtyField;
+        
+        private bool qtyFieldSpecified;
+        
+        private decimal amountField;
+        
+        private bool amountFieldSpecified;
+        
+        private string remarksField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string marketID {
+            get {
+                return this.marketIDField;
+            }
+            set {
+                this.marketIDField = value;
+                this.RaisePropertyChanged("marketID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string instrumentID {
+            get {
+                return this.instrumentIDField;
+            }
+            set {
+                this.instrumentIDField = value;
+                this.RaisePropertyChanged("instrumentID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string instrumentName {
+            get {
+                return this.instrumentNameField;
+            }
+            set {
+                this.instrumentNameField = value;
+                this.RaisePropertyChanged("instrumentName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public decimal qty {
+            get {
+                return this.qtyField;
+            }
+            set {
+                this.qtyField = value;
+                this.RaisePropertyChanged("qty");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool qtySpecified {
+            get {
+                return this.qtyFieldSpecified;
+            }
+            set {
+                this.qtyFieldSpecified = value;
+                this.RaisePropertyChanged("qtySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public decimal amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+                this.RaisePropertyChanged("amount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool amountSpecified {
+            get {
+                return this.amountFieldSpecified;
+            }
+            set {
+                this.amountFieldSpecified = value;
+                this.RaisePropertyChanged("amountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string remarks {
+            get {
+                return this.remarksField;
+            }
+            set {
+                this.remarksField = value;
+                this.RaisePropertyChanged("remarks");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
     public partial class Fees_CType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private decimal amountField;
@@ -8178,122 +8864,6 @@ namespace API.TTLITradeWSDEV {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
-    public partial class StockInformation_CType : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string instrumentIDField;
-        
-        private string instrumentNameField;
-        
-        private decimal qtyField;
-        
-        private bool qtyFieldSpecified;
-        
-        private decimal amountField;
-        
-        private bool amountFieldSpecified;
-        
-        private string remarksField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string instrumentID {
-            get {
-                return this.instrumentIDField;
-            }
-            set {
-                this.instrumentIDField = value;
-                this.RaisePropertyChanged("instrumentID");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string instrumentName {
-            get {
-                return this.instrumentNameField;
-            }
-            set {
-                this.instrumentNameField = value;
-                this.RaisePropertyChanged("instrumentName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public decimal qty {
-            get {
-                return this.qtyField;
-            }
-            set {
-                this.qtyField = value;
-                this.RaisePropertyChanged("qty");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool qtySpecified {
-            get {
-                return this.qtyFieldSpecified;
-            }
-            set {
-                this.qtyFieldSpecified = value;
-                this.RaisePropertyChanged("qtySpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public decimal amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                this.amountField = value;
-                this.RaisePropertyChanged("amount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool amountSpecified {
-            get {
-                return this.amountFieldSpecified;
-            }
-            set {
-                this.amountFieldSpecified = value;
-                this.RaisePropertyChanged("amountSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string remarks {
-            get {
-                return this.remarksField;
-            }
-            set {
-                this.remarksField = value;
-                this.RaisePropertyChanged("remarks");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
     public partial class GetIPOLotSizes_CType : object, System.ComponentModel.INotifyPropertyChanged {
         
         private decimal appliedQtyField;
@@ -8349,6 +8919,220 @@ namespace API.TTLITradeWSDEV {
             set {
                 this.overrideAmountFieldSpecified = value;
                 this.RaisePropertyChanged("overrideAmountSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
+    public partial class CashWithdrawalInstructionEnquiry_CType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string transactionIDField;
+        
+        private string channelIDField;
+        
+        private decimal amountField;
+        
+        private bool amountFieldSpecified;
+        
+        private string currencyIDField;
+        
+        private string settleMethodField;
+        
+        private string remarkField;
+        
+        private string bankAccountField;
+        
+        private string bankIDField;
+        
+        private string bankNameField;
+        
+        private string bankAccountNameField;
+        
+        private string bankSwiftCodeField;
+        
+        private string creationTimeField;
+        
+        private string statusField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string transactionID {
+            get {
+                return this.transactionIDField;
+            }
+            set {
+                this.transactionIDField = value;
+                this.RaisePropertyChanged("transactionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string channelID {
+            get {
+                return this.channelIDField;
+            }
+            set {
+                this.channelIDField = value;
+                this.RaisePropertyChanged("channelID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public decimal amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+                this.RaisePropertyChanged("amount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool amountSpecified {
+            get {
+                return this.amountFieldSpecified;
+            }
+            set {
+                this.amountFieldSpecified = value;
+                this.RaisePropertyChanged("amountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string currencyID {
+            get {
+                return this.currencyIDField;
+            }
+            set {
+                this.currencyIDField = value;
+                this.RaisePropertyChanged("currencyID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string settleMethod {
+            get {
+                return this.settleMethodField;
+            }
+            set {
+                this.settleMethodField = value;
+                this.RaisePropertyChanged("settleMethod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string remark {
+            get {
+                return this.remarkField;
+            }
+            set {
+                this.remarkField = value;
+                this.RaisePropertyChanged("remark");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string bankAccount {
+            get {
+                return this.bankAccountField;
+            }
+            set {
+                this.bankAccountField = value;
+                this.RaisePropertyChanged("bankAccount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string bankID {
+            get {
+                return this.bankIDField;
+            }
+            set {
+                this.bankIDField = value;
+                this.RaisePropertyChanged("bankID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string bankName {
+            get {
+                return this.bankNameField;
+            }
+            set {
+                this.bankNameField = value;
+                this.RaisePropertyChanged("bankName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string bankAccountName {
+            get {
+                return this.bankAccountNameField;
+            }
+            set {
+                this.bankAccountNameField = value;
+                this.RaisePropertyChanged("bankAccountName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public string bankSwiftCode {
+            get {
+                return this.bankSwiftCodeField;
+            }
+            set {
+                this.bankSwiftCodeField = value;
+                this.RaisePropertyChanged("bankSwiftCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public string creationTime {
+            get {
+                return this.creationTimeField;
+            }
+            set {
+                this.creationTimeField = value;
+                this.RaisePropertyChanged("creationTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+                this.RaisePropertyChanged("status");
             }
         }
         
@@ -9511,119 +10295,7 @@ namespace API.TTLITradeWSDEV {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
-    public partial class depositCashDepositCashReq : BaseRequest_CType {
-        
-        private string channelIDField;
-        
-        private decimal amountField;
-        
-        private bool amountFieldSpecified;
-        
-        private string currencyIDField;
-        
-        private string settleMethodField;
-        
-        private string statementRemarkField;
-        
-        private string bankAccountField;
-        
-        private string bankIDField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string channelID {
-            get {
-                return this.channelIDField;
-            }
-            set {
-                this.channelIDField = value;
-                this.RaisePropertyChanged("channelID");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public decimal amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                this.amountField = value;
-                this.RaisePropertyChanged("amount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool amountSpecified {
-            get {
-                return this.amountFieldSpecified;
-            }
-            set {
-                this.amountFieldSpecified = value;
-                this.RaisePropertyChanged("amountSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string currencyID {
-            get {
-                return this.currencyIDField;
-            }
-            set {
-                this.currencyIDField = value;
-                this.RaisePropertyChanged("currencyID");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string settleMethod {
-            get {
-                return this.settleMethodField;
-            }
-            set {
-                this.settleMethodField = value;
-                this.RaisePropertyChanged("settleMethod");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string statementRemark {
-            get {
-                return this.statementRemarkField;
-            }
-            set {
-                this.statementRemarkField = value;
-                this.RaisePropertyChanged("statementRemark");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string bankAccount {
-            get {
-                return this.bankAccountField;
-            }
-            set {
-                this.bankAccountField = value;
-                this.RaisePropertyChanged("bankAccount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string bankID {
-            get {
-                return this.bankIDField;
-            }
-            set {
-                this.bankIDField = value;
-                this.RaisePropertyChanged("bankID");
-            }
-        }
+    public partial class cashWithdrawalInstructionEnquiryCashWithdrawalInstructionEnquiryReq : BaseRequest_CType {
     }
     
     /// <remarks/>
@@ -9632,74 +10304,60 @@ namespace API.TTLITradeWSDEV {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
-    public partial class depositCashResponseDepositCashResp : BaseResponse_CType {
+    public partial class cashWithdrawalInstructionEnquiryResponseCashWithdrawalInstructionEnquiryResp : BaseResponse_CType {
         
-        private string isSuccessField;
-        
-        private string transactionIDField;
+        private CashWithdrawalInstructionEnquiry_CType[] cashWithdrawInstructionListField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string isSuccess {
+        [System.Xml.Serialization.XmlElementAttribute("cashWithdrawInstructionList", IsNullable=true, Order=0)]
+        public CashWithdrawalInstructionEnquiry_CType[] cashWithdrawInstructionList {
             get {
-                return this.isSuccessField;
+                return this.cashWithdrawInstructionListField;
             }
             set {
-                this.isSuccessField = value;
-                this.RaisePropertyChanged("isSuccess");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string transactionID {
-            get {
-                return this.transactionIDField;
-            }
-            set {
-                this.transactionIDField = value;
-                this.RaisePropertyChanged("transactionID");
+                this.cashWithdrawInstructionListField = value;
+                this.RaisePropertyChanged("cashWithdrawInstructionList");
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="depositCash", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
-    public partial class depositCash {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cashWithdrawalInstructionEnquiry", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class cashWithdrawalInstructionEnquiry {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
         public API.TTLITradeWSDEV.requestHeaderType requestInformation;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
-        public API.TTLITradeWSDEV.depositCashDepositCashReq DepositCashReq;
+        public API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryCashWithdrawalInstructionEnquiryReq CashWithdrawalInstructionEnquiryReq;
         
-        public depositCash() {
+        public cashWithdrawalInstructionEnquiry() {
         }
         
-        public depositCash(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.depositCashDepositCashReq DepositCashReq) {
+        public cashWithdrawalInstructionEnquiry(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryCashWithdrawalInstructionEnquiryReq CashWithdrawalInstructionEnquiryReq) {
             this.requestInformation = requestInformation;
-            this.DepositCashReq = DepositCashReq;
+            this.CashWithdrawalInstructionEnquiryReq = CashWithdrawalInstructionEnquiryReq;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="depositCashResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
-    public partial class depositCashResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cashWithdrawalInstructionEnquiryResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class cashWithdrawalInstructionEnquiryResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
         public API.TTLITradeWSDEV.responseHeaderType replyInformation;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
-        public API.TTLITradeWSDEV.depositCashResponseDepositCashResp DepositCashResp;
+        public API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponseCashWithdrawalInstructionEnquiryResp CashWithdrawalInstructionEnquiryResp;
         
-        public depositCashResponse() {
+        public cashWithdrawalInstructionEnquiryResponse() {
         }
         
-        public depositCashResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.depositCashResponseDepositCashResp DepositCashResp) {
+        public cashWithdrawalInstructionEnquiryResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponseCashWithdrawalInstructionEnquiryResp CashWithdrawalInstructionEnquiryResp) {
             this.replyInformation = replyInformation;
-            this.DepositCashResp = DepositCashResp;
+            this.CashWithdrawalInstructionEnquiryResp = CashWithdrawalInstructionEnquiryResp;
         }
     }
     
@@ -10261,8 +10919,6 @@ namespace API.TTLITradeWSDEV {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
     public partial class settlementInstructionSettlementInstructionReq : BaseRequest_CType {
         
-        private string marketIDField;
-        
         private string instrumentIDField;
         
         private string instructionField;
@@ -10281,18 +10937,6 @@ namespace API.TTLITradeWSDEV {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string marketID {
-            get {
-                return this.marketIDField;
-            }
-            set {
-                this.marketIDField = value;
-                this.RaisePropertyChanged("marketID");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
         public string instrumentID {
             get {
                 return this.instrumentIDField;
@@ -10304,7 +10948,7 @@ namespace API.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
         public string instruction {
             get {
                 return this.instructionField;
@@ -10316,7 +10960,7 @@ namespace API.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
         public string settlementMethod {
             get {
                 return this.settlementMethodField;
@@ -10328,7 +10972,7 @@ namespace API.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string counterpartyName {
             get {
                 return this.counterpartyNameField;
@@ -10340,7 +10984,7 @@ namespace API.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public string counterpartyAccountNo {
             get {
                 return this.counterpartyAccountNoField;
@@ -10352,7 +10996,7 @@ namespace API.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
         public string counterpartyContactPerson {
             get {
                 return this.counterpartyContactPersonField;
@@ -10364,7 +11008,7 @@ namespace API.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string counterpartyTelNo {
             get {
                 return this.counterpartyTelNoField;
@@ -10376,7 +11020,7 @@ namespace API.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("stockInformationList", IsNullable=true, Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute("stockInformationList", IsNullable=true, Order=7)]
         public StockInformation_CType[] stockInformationList {
             get {
                 return this.stockInformationListField;
@@ -12795,6 +13439,8 @@ namespace API.TTLITradeWSDEV {
         
         private string swiftCodeField;
         
+        private string isNonTradingAccField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string name {
@@ -13142,6 +13788,18 @@ namespace API.TTLITradeWSDEV {
                 this.RaisePropertyChanged("swiftCode");
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        public string isNonTradingAcc {
+            get {
+                return this.isNonTradingAccField;
+            }
+            set {
+                this.isNonTradingAccField = value;
+                this.RaisePropertyChanged("isNonTradingAcc");
+            }
+        }
     }
     
     /// <remarks/>
@@ -13346,6 +14004,390 @@ namespace API.TTLITradeWSDEV {
         public buyingPowerEnquiryResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.buyingPowerEnquiryResponseBuyingPowerResp buyingPowerResp) {
             this.replyInformation = replyInformation;
             this.buyingPowerResp = buyingPowerResp;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class cashWithdrawalInstructionCashWithdrawalInstructionReq : BaseRequest_CType {
+        
+        private string channelIDField;
+        
+        private decimal amountField;
+        
+        private bool amountFieldSpecified;
+        
+        private string currencyIDField;
+        
+        private string settleMethodField;
+        
+        private string remarkField;
+        
+        private string bankAccountField;
+        
+        private string bankIDField;
+        
+        private string bankNameField;
+        
+        private string bankAccountNameField;
+        
+        private string bankSwiftCodeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string channelID {
+            get {
+                return this.channelIDField;
+            }
+            set {
+                this.channelIDField = value;
+                this.RaisePropertyChanged("channelID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public decimal amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+                this.RaisePropertyChanged("amount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool amountSpecified {
+            get {
+                return this.amountFieldSpecified;
+            }
+            set {
+                this.amountFieldSpecified = value;
+                this.RaisePropertyChanged("amountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string currencyID {
+            get {
+                return this.currencyIDField;
+            }
+            set {
+                this.currencyIDField = value;
+                this.RaisePropertyChanged("currencyID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string settleMethod {
+            get {
+                return this.settleMethodField;
+            }
+            set {
+                this.settleMethodField = value;
+                this.RaisePropertyChanged("settleMethod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string remark {
+            get {
+                return this.remarkField;
+            }
+            set {
+                this.remarkField = value;
+                this.RaisePropertyChanged("remark");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string bankAccount {
+            get {
+                return this.bankAccountField;
+            }
+            set {
+                this.bankAccountField = value;
+                this.RaisePropertyChanged("bankAccount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string bankID {
+            get {
+                return this.bankIDField;
+            }
+            set {
+                this.bankIDField = value;
+                this.RaisePropertyChanged("bankID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public string bankName {
+            get {
+                return this.bankNameField;
+            }
+            set {
+                this.bankNameField = value;
+                this.RaisePropertyChanged("bankName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public string bankAccountName {
+            get {
+                return this.bankAccountNameField;
+            }
+            set {
+                this.bankAccountNameField = value;
+                this.RaisePropertyChanged("bankAccountName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public string bankSwiftCode {
+            get {
+                return this.bankSwiftCodeField;
+            }
+            set {
+                this.bankSwiftCodeField = value;
+                this.RaisePropertyChanged("bankSwiftCode");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class cashWithdrawalInstructionResponseCashWithdrawalInstructionResp : BaseResponse_CType {
+        
+        private string isSuccessField;
+        
+        private string transactionIDField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string isSuccess {
+            get {
+                return this.isSuccessField;
+            }
+            set {
+                this.isSuccessField = value;
+                this.RaisePropertyChanged("isSuccess");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string transactionID {
+            get {
+                return this.transactionIDField;
+            }
+            set {
+                this.transactionIDField = value;
+                this.RaisePropertyChanged("transactionID");
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cashWithdrawalInstruction", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class cashWithdrawalInstruction {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.requestHeaderType requestInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.cashWithdrawalInstructionCashWithdrawalInstructionReq CashWithdrawalInstructionReq;
+        
+        public cashWithdrawalInstruction() {
+        }
+        
+        public cashWithdrawalInstruction(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.cashWithdrawalInstructionCashWithdrawalInstructionReq CashWithdrawalInstructionReq) {
+            this.requestInformation = requestInformation;
+            this.CashWithdrawalInstructionReq = CashWithdrawalInstructionReq;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cashWithdrawalInstructionResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class cashWithdrawalInstructionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.responseHeaderType replyInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.cashWithdrawalInstructionResponseCashWithdrawalInstructionResp CashWithdrawalInstructionResp;
+        
+        public cashWithdrawalInstructionResponse() {
+        }
+        
+        public cashWithdrawalInstructionResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.cashWithdrawalInstructionResponseCashWithdrawalInstructionResp CashWithdrawalInstructionResp) {
+            this.replyInformation = replyInformation;
+            this.CashWithdrawalInstructionResp = CashWithdrawalInstructionResp;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class settlementInstructionEnquirySettlementInstructionReq : BaseRequest_CType {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class settlementInstructionEnquiryResponseSettlementInstructionResp : BaseResponse_CType {
+        
+        private SettlementInstructionEnquiry_CType[] settlementInstructionListField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("settlementInstructionList", IsNullable=true, Order=0)]
+        public SettlementInstructionEnquiry_CType[] settlementInstructionList {
+            get {
+                return this.settlementInstructionListField;
+            }
+            set {
+                this.settlementInstructionListField = value;
+                this.RaisePropertyChanged("settlementInstructionList");
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="settlementInstructionEnquiry", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class settlementInstructionEnquiry {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.requestHeaderType requestInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.settlementInstructionEnquirySettlementInstructionReq SettlementInstructionReq;
+        
+        public settlementInstructionEnquiry() {
+        }
+        
+        public settlementInstructionEnquiry(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.settlementInstructionEnquirySettlementInstructionReq SettlementInstructionReq) {
+            this.requestInformation = requestInformation;
+            this.SettlementInstructionReq = SettlementInstructionReq;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="settlementInstructionEnquiryResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class settlementInstructionEnquiryResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.responseHeaderType replyInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.settlementInstructionEnquiryResponseSettlementInstructionResp SettlementInstructionResp;
+        
+        public settlementInstructionEnquiryResponse() {
+        }
+        
+        public settlementInstructionEnquiryResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.settlementInstructionEnquiryResponseSettlementInstructionResp SettlementInstructionResp) {
+            this.replyInformation = replyInformation;
+            this.SettlementInstructionResp = SettlementInstructionResp;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class foreignExchangeInstructionEnquiryForeignExchangeInstructionEnquiryReq : BaseRequest_CType {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class foreignExchangeInstructionEnquiryResponseForeignExchangeInstructionEnquiryResp : BaseResponse_CType {
+        
+        private ForeignExchangeInstructionEnquiry_CType[] foreignExchangeInstructionListField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("foreignExchangeInstructionList", IsNullable=true, Order=0)]
+        public ForeignExchangeInstructionEnquiry_CType[] foreignExchangeInstructionList {
+            get {
+                return this.foreignExchangeInstructionListField;
+            }
+            set {
+                this.foreignExchangeInstructionListField = value;
+                this.RaisePropertyChanged("foreignExchangeInstructionList");
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="foreignExchangeInstructionEnquiry", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class foreignExchangeInstructionEnquiry {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.requestHeaderType requestInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryForeignExchangeInstructionEnquiryReq ForeignExchangeInstructionEnquiryReq;
+        
+        public foreignExchangeInstructionEnquiry() {
+        }
+        
+        public foreignExchangeInstructionEnquiry(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryForeignExchangeInstructionEnquiryReq ForeignExchangeInstructionEnquiryReq) {
+            this.requestInformation = requestInformation;
+            this.ForeignExchangeInstructionEnquiryReq = ForeignExchangeInstructionEnquiryReq;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="foreignExchangeInstructionEnquiryResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class foreignExchangeInstructionEnquiryResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.responseHeaderType replyInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponseForeignExchangeInstructionEnquiryResp ForeignExchangeInstructionEnquiryResp;
+        
+        public foreignExchangeInstructionEnquiryResponse() {
+        }
+        
+        public foreignExchangeInstructionEnquiryResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponseForeignExchangeInstructionEnquiryResp ForeignExchangeInstructionEnquiryResp) {
+            this.replyInformation = replyInformation;
+            this.ForeignExchangeInstructionEnquiryResp = ForeignExchangeInstructionEnquiryResp;
         }
     }
     
@@ -15033,232 +16075,6 @@ namespace API.TTLITradeWSDEV {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
-    public partial class foreignExchangeForeignExchangeReq : BaseRequest_CType {
-        
-        private string channelIDField;
-        
-        private string fromCurrencyField;
-        
-        private decimal fromAmountField;
-        
-        private bool fromAmountFieldSpecified;
-        
-        private decimal exchangeRateField;
-        
-        private bool exchangeRateFieldSpecified;
-        
-        private string toCurrencyField;
-        
-        private string toBankField;
-        
-        private decimal toAmountField;
-        
-        private bool toAmountFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string channelID {
-            get {
-                return this.channelIDField;
-            }
-            set {
-                this.channelIDField = value;
-                this.RaisePropertyChanged("channelID");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string fromCurrency {
-            get {
-                return this.fromCurrencyField;
-            }
-            set {
-                this.fromCurrencyField = value;
-                this.RaisePropertyChanged("fromCurrency");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public decimal fromAmount {
-            get {
-                return this.fromAmountField;
-            }
-            set {
-                this.fromAmountField = value;
-                this.RaisePropertyChanged("fromAmount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool fromAmountSpecified {
-            get {
-                return this.fromAmountFieldSpecified;
-            }
-            set {
-                this.fromAmountFieldSpecified = value;
-                this.RaisePropertyChanged("fromAmountSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public decimal exchangeRate {
-            get {
-                return this.exchangeRateField;
-            }
-            set {
-                this.exchangeRateField = value;
-                this.RaisePropertyChanged("exchangeRate");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool exchangeRateSpecified {
-            get {
-                return this.exchangeRateFieldSpecified;
-            }
-            set {
-                this.exchangeRateFieldSpecified = value;
-                this.RaisePropertyChanged("exchangeRateSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string toCurrency {
-            get {
-                return this.toCurrencyField;
-            }
-            set {
-                this.toCurrencyField = value;
-                this.RaisePropertyChanged("toCurrency");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string toBank {
-            get {
-                return this.toBankField;
-            }
-            set {
-                this.toBankField = value;
-                this.RaisePropertyChanged("toBank");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public decimal toAmount {
-            get {
-                return this.toAmountField;
-            }
-            set {
-                this.toAmountField = value;
-                this.RaisePropertyChanged("toAmount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool toAmountSpecified {
-            get {
-                return this.toAmountFieldSpecified;
-            }
-            set {
-                this.toAmountFieldSpecified = value;
-                this.RaisePropertyChanged("toAmountSpecified");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
-    public partial class foreignExchangeResponseForeignExchangeResp : BaseResponse_CType {
-        
-        private string isSuccessField;
-        
-        private string transactionIDField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string isSuccess {
-            get {
-                return this.isSuccessField;
-            }
-            set {
-                this.isSuccessField = value;
-                this.RaisePropertyChanged("isSuccess");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string transactionID {
-            get {
-                return this.transactionIDField;
-            }
-            set {
-                this.transactionIDField = value;
-                this.RaisePropertyChanged("transactionID");
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="foreignExchange", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
-    public partial class foreignExchange {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
-        public API.TTLITradeWSDEV.requestHeaderType requestInformation;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
-        public API.TTLITradeWSDEV.foreignExchangeForeignExchangeReq ForeignExchangeReq;
-        
-        public foreignExchange() {
-        }
-        
-        public foreignExchange(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.foreignExchangeForeignExchangeReq ForeignExchangeReq) {
-            this.requestInformation = requestInformation;
-            this.ForeignExchangeReq = ForeignExchangeReq;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="foreignExchangeResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
-    public partial class foreignExchangeResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
-        public API.TTLITradeWSDEV.responseHeaderType replyInformation;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
-        public API.TTLITradeWSDEV.foreignExchangeResponseForeignExchangeResp ForeignExchangeResp;
-        
-        public foreignExchangeResponse() {
-        }
-        
-        public foreignExchangeResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.foreignExchangeResponseForeignExchangeResp ForeignExchangeResp) {
-            this.replyInformation = replyInformation;
-            this.ForeignExchangeResp = ForeignExchangeResp;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
     public partial class priceAlertDeletePriceAlertDeleteReq : BaseRequest_CType {
         
         private string alertIDField;
@@ -16060,6 +16876,8 @@ namespace API.TTLITradeWSDEV {
         private string isDirectMarketingRefusedField;
         
         private string referenceCodeField;
+        
+        private string isNonTradingAccField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -16946,6 +17764,18 @@ namespace API.TTLITradeWSDEV {
             set {
                 this.referenceCodeField = value;
                 this.RaisePropertyChanged("referenceCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=71)]
+        public string isNonTradingAcc {
+            get {
+                return this.isNonTradingAccField;
+            }
+            set {
+                this.isNonTradingAccField = value;
+                this.RaisePropertyChanged("isNonTradingAcc");
             }
         }
     }
@@ -19197,6 +20027,204 @@ namespace API.TTLITradeWSDEV {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class cashDepositInstructionCashDepositInstructionReq : BaseRequest_CType {
+        
+        private string channelIDField;
+        
+        private decimal amountField;
+        
+        private bool amountFieldSpecified;
+        
+        private string currencyIDField;
+        
+        private string settleMethodField;
+        
+        private string remarkField;
+        
+        private string bankAccountField;
+        
+        private string bankIDField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string channelID {
+            get {
+                return this.channelIDField;
+            }
+            set {
+                this.channelIDField = value;
+                this.RaisePropertyChanged("channelID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public decimal amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+                this.RaisePropertyChanged("amount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool amountSpecified {
+            get {
+                return this.amountFieldSpecified;
+            }
+            set {
+                this.amountFieldSpecified = value;
+                this.RaisePropertyChanged("amountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string currencyID {
+            get {
+                return this.currencyIDField;
+            }
+            set {
+                this.currencyIDField = value;
+                this.RaisePropertyChanged("currencyID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string settleMethod {
+            get {
+                return this.settleMethodField;
+            }
+            set {
+                this.settleMethodField = value;
+                this.RaisePropertyChanged("settleMethod");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string remark {
+            get {
+                return this.remarkField;
+            }
+            set {
+                this.remarkField = value;
+                this.RaisePropertyChanged("remark");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string bankAccount {
+            get {
+                return this.bankAccountField;
+            }
+            set {
+                this.bankAccountField = value;
+                this.RaisePropertyChanged("bankAccount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string bankID {
+            get {
+                return this.bankIDField;
+            }
+            set {
+                this.bankIDField = value;
+                this.RaisePropertyChanged("bankID");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class cashDepositInstructionResponseCashDepositInstructionResp : BaseResponse_CType {
+        
+        private string isSuccessField;
+        
+        private string transactionIDField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string isSuccess {
+            get {
+                return this.isSuccessField;
+            }
+            set {
+                this.isSuccessField = value;
+                this.RaisePropertyChanged("isSuccess");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string transactionID {
+            get {
+                return this.transactionIDField;
+            }
+            set {
+                this.transactionIDField = value;
+                this.RaisePropertyChanged("transactionID");
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cashDepositInstruction", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class cashDepositInstruction {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.requestHeaderType requestInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.cashDepositInstructionCashDepositInstructionReq CashDepositInstructionReq;
+        
+        public cashDepositInstruction() {
+        }
+        
+        public cashDepositInstruction(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.cashDepositInstructionCashDepositInstructionReq CashDepositInstructionReq) {
+            this.requestInformation = requestInformation;
+            this.CashDepositInstructionReq = CashDepositInstructionReq;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cashDepositInstructionResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class cashDepositInstructionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.responseHeaderType replyInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.cashDepositInstructionResponseCashDepositInstructionResp CashDepositInstructionResp;
+        
+        public cashDepositInstructionResponse() {
+        }
+        
+        public cashDepositInstructionResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.cashDepositInstructionResponseCashDepositInstructionResp CashDepositInstructionResp) {
+            this.replyInformation = replyInformation;
+            this.CashDepositInstructionResp = CashDepositInstructionResp;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
     public partial class subscribeMarketDataMarketDataSubscriptionReq : BaseRequest_CType {
         
         private string subscriptionPlanField;
@@ -20634,6 +21662,8 @@ namespace API.TTLITradeWSDEV {
         
         private string aAStockTokenField;
         
+        private string tradingAccStatusField;
+        
         private TradingAccountInfo_CType[] tradingAccListField;
         
         /// <remarks/>
@@ -20877,7 +21907,19 @@ namespace API.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("tradingAccList", IsNullable=true, Order=20)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public string tradingAccStatus {
+            get {
+                return this.tradingAccStatusField;
+            }
+            set {
+                this.tradingAccStatusField = value;
+                this.RaisePropertyChanged("tradingAccStatus");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("tradingAccList", IsNullable=true, Order=21)]
         public TradingAccountInfo_CType[] tradingAccList {
             get {
                 return this.tradingAccListField;
@@ -21092,6 +22134,20 @@ namespace API.TTLITradeWSDEV {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
     public partial class queryAccountDetailsQueryAccountDetailsReq : BaseRequest_CType {
+        
+        private string isNonTradingAccField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string isNonTradingAcc {
+            get {
+                return this.isNonTradingAccField;
+            }
+            set {
+                this.isNonTradingAccField = value;
+                this.RaisePropertyChanged("isNonTradingAcc");
+            }
+        }
     }
     
     /// <remarks/>
@@ -21688,6 +22744,78 @@ namespace API.TTLITradeWSDEV {
         public stockPriceInfoResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.stockPriceInfoResponseStockPriceInfoResp stockPriceInfoResp) {
             this.replyInformation = replyInformation;
             this.stockPriceInfoResp = stockPriceInfoResp;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class cashDepositInstructionEnquiryCashDepositInstructionEnquiryReq : BaseRequest_CType {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class cashDepositInstructionEnquiryResponseCashDepositInstructionEnquiryResp : BaseResponse_CType {
+        
+        private CashDepositInstructionEnquiry_CType[] cashDepositInstructionListField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cashDepositInstructionList", IsNullable=true, Order=0)]
+        public CashDepositInstructionEnquiry_CType[] cashDepositInstructionList {
+            get {
+                return this.cashDepositInstructionListField;
+            }
+            set {
+                this.cashDepositInstructionListField = value;
+                this.RaisePropertyChanged("cashDepositInstructionList");
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cashDepositInstructionEnquiry", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class cashDepositInstructionEnquiry {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.requestHeaderType requestInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.cashDepositInstructionEnquiryCashDepositInstructionEnquiryReq CashDepositInstructionEnquiryReq;
+        
+        public cashDepositInstructionEnquiry() {
+        }
+        
+        public cashDepositInstructionEnquiry(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.cashDepositInstructionEnquiryCashDepositInstructionEnquiryReq CashDepositInstructionEnquiryReq) {
+            this.requestInformation = requestInformation;
+            this.CashDepositInstructionEnquiryReq = CashDepositInstructionEnquiryReq;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="cashDepositInstructionEnquiryResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class cashDepositInstructionEnquiryResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.responseHeaderType replyInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponseCashDepositInstructionEnquiryResp CashDepositInstructionEnquiryResp;
+        
+        public cashDepositInstructionEnquiryResponse() {
+        }
+        
+        public cashDepositInstructionEnquiryResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponseCashDepositInstructionEnquiryResp CashDepositInstructionEnquiryResp) {
+            this.replyInformation = replyInformation;
+            this.CashDepositInstructionEnquiryResp = CashDepositInstructionEnquiryResp;
         }
     }
     
@@ -22822,6 +23950,218 @@ namespace API.TTLITradeWSDEV {
         public checkNominalClosingPriceDerivationResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.checkNominalClosingPriceDerivationResponseCheckNominalClosingPriceDerivationResp checkNominalClosingPriceDerivationResp) {
             this.replyInformation = replyInformation;
             this.checkNominalClosingPriceDerivationResp = checkNominalClosingPriceDerivationResp;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class foreignExchangeInstructionForeignExchangeInstructionReq : BaseRequest_CType {
+        
+        private string channelIDField;
+        
+        private string fromCurrencyField;
+        
+        private decimal fromAmountField;
+        
+        private bool fromAmountFieldSpecified;
+        
+        private decimal exchangeRateField;
+        
+        private bool exchangeRateFieldSpecified;
+        
+        private string toCurrencyField;
+        
+        private decimal toAmountField;
+        
+        private bool toAmountFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string channelID {
+            get {
+                return this.channelIDField;
+            }
+            set {
+                this.channelIDField = value;
+                this.RaisePropertyChanged("channelID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string fromCurrency {
+            get {
+                return this.fromCurrencyField;
+            }
+            set {
+                this.fromCurrencyField = value;
+                this.RaisePropertyChanged("fromCurrency");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public decimal fromAmount {
+            get {
+                return this.fromAmountField;
+            }
+            set {
+                this.fromAmountField = value;
+                this.RaisePropertyChanged("fromAmount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fromAmountSpecified {
+            get {
+                return this.fromAmountFieldSpecified;
+            }
+            set {
+                this.fromAmountFieldSpecified = value;
+                this.RaisePropertyChanged("fromAmountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public decimal exchangeRate {
+            get {
+                return this.exchangeRateField;
+            }
+            set {
+                this.exchangeRateField = value;
+                this.RaisePropertyChanged("exchangeRate");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool exchangeRateSpecified {
+            get {
+                return this.exchangeRateFieldSpecified;
+            }
+            set {
+                this.exchangeRateFieldSpecified = value;
+                this.RaisePropertyChanged("exchangeRateSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string toCurrency {
+            get {
+                return this.toCurrencyField;
+            }
+            set {
+                this.toCurrencyField = value;
+                this.RaisePropertyChanged("toCurrency");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public decimal toAmount {
+            get {
+                return this.toAmountField;
+            }
+            set {
+                this.toAmountField = value;
+                this.RaisePropertyChanged("toAmount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool toAmountSpecified {
+            get {
+                return this.toAmountFieldSpecified;
+            }
+            set {
+                this.toAmountFieldSpecified = value;
+                this.RaisePropertyChanged("toAmountSpecified");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
+    public partial class foreignExchangeInstructionResponseForeignExchangeInstructionResp : BaseResponse_CType {
+        
+        private string isSuccessField;
+        
+        private string transactionIDField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string isSuccess {
+            get {
+                return this.isSuccessField;
+            }
+            set {
+                this.isSuccessField = value;
+                this.RaisePropertyChanged("isSuccess");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string transactionID {
+            get {
+                return this.transactionIDField;
+            }
+            set {
+                this.transactionIDField = value;
+                this.RaisePropertyChanged("transactionID");
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="foreignExchangeInstruction", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class foreignExchangeInstruction {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.requestHeaderType requestInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.foreignExchangeInstructionForeignExchangeInstructionReq ForeignExchangeInstructionReq;
+        
+        public foreignExchangeInstruction() {
+        }
+        
+        public foreignExchangeInstruction(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.foreignExchangeInstructionForeignExchangeInstructionReq ForeignExchangeInstructionReq) {
+            this.requestInformation = requestInformation;
+            this.ForeignExchangeInstructionReq = ForeignExchangeInstructionReq;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="foreignExchangeInstructionResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
+    public partial class foreignExchangeInstructionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
+        public API.TTLITradeWSDEV.responseHeaderType replyInformation;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
+        public API.TTLITradeWSDEV.foreignExchangeInstructionResponseForeignExchangeInstructionResp ForeignExchangeInstructionResp;
+        
+        public foreignExchangeInstructionResponse() {
+        }
+        
+        public foreignExchangeInstructionResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.foreignExchangeInstructionResponseForeignExchangeInstructionResp ForeignExchangeInstructionResp) {
+            this.replyInformation = replyInformation;
+            this.ForeignExchangeInstructionResp = ForeignExchangeInstructionResp;
         }
     }
     
@@ -24913,246 +26253,6 @@ namespace API.TTLITradeWSDEV {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
-    public partial class withdrawCashWithdrawCashReq : BaseRequest_CType {
-        
-        private string channelIDField;
-        
-        private decimal amountField;
-        
-        private bool amountFieldSpecified;
-        
-        private string currencyIDField;
-        
-        private string settleMethodField;
-        
-        private string statementRemarkField;
-        
-        private string bankAccountField;
-        
-        private string bankIDField;
-        
-        private string bankNameField;
-        
-        private string bankAccountNameField;
-        
-        private string bankSwiftCodeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string channelID {
-            get {
-                return this.channelIDField;
-            }
-            set {
-                this.channelIDField = value;
-                this.RaisePropertyChanged("channelID");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public decimal amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                this.amountField = value;
-                this.RaisePropertyChanged("amount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool amountSpecified {
-            get {
-                return this.amountFieldSpecified;
-            }
-            set {
-                this.amountFieldSpecified = value;
-                this.RaisePropertyChanged("amountSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string currencyID {
-            get {
-                return this.currencyIDField;
-            }
-            set {
-                this.currencyIDField = value;
-                this.RaisePropertyChanged("currencyID");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string settleMethod {
-            get {
-                return this.settleMethodField;
-            }
-            set {
-                this.settleMethodField = value;
-                this.RaisePropertyChanged("settleMethod");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string statementRemark {
-            get {
-                return this.statementRemarkField;
-            }
-            set {
-                this.statementRemarkField = value;
-                this.RaisePropertyChanged("statementRemark");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string bankAccount {
-            get {
-                return this.bankAccountField;
-            }
-            set {
-                this.bankAccountField = value;
-                this.RaisePropertyChanged("bankAccount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string bankID {
-            get {
-                return this.bankIDField;
-            }
-            set {
-                this.bankIDField = value;
-                this.RaisePropertyChanged("bankID");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public string bankName {
-            get {
-                return this.bankNameField;
-            }
-            set {
-                this.bankNameField = value;
-                this.RaisePropertyChanged("bankName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public string bankAccountName {
-            get {
-                return this.bankAccountNameField;
-            }
-            set {
-                this.bankAccountNameField = value;
-                this.RaisePropertyChanged("bankAccountName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public string bankSwiftCode {
-            get {
-                return this.bankSwiftCodeField;
-            }
-            set {
-                this.bankSwiftCodeField = value;
-                this.RaisePropertyChanged("bankSwiftCode");
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
-    public partial class withdrawCashResponseWithdrawCashResp : BaseResponse_CType {
-        
-        private string isSuccessField;
-        
-        private string transactionIDField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string isSuccess {
-            get {
-                return this.isSuccessField;
-            }
-            set {
-                this.isSuccessField = value;
-                this.RaisePropertyChanged("isSuccess");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string transactionID {
-            get {
-                return this.transactionIDField;
-            }
-            set {
-                this.transactionIDField = value;
-                this.RaisePropertyChanged("transactionID");
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="withdrawCash", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
-    public partial class withdrawCash {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
-        public API.TTLITradeWSDEV.requestHeaderType requestInformation;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
-        public API.TTLITradeWSDEV.withdrawCashWithdrawCashReq WithdrawCashReq;
-        
-        public withdrawCash() {
-        }
-        
-        public withdrawCash(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.withdrawCashWithdrawCashReq WithdrawCashReq) {
-            this.requestInformation = requestInformation;
-            this.WithdrawCashReq = WithdrawCashReq;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="withdrawCashResponse", WrapperNamespace="http://ws.itrade.com/", IsWrapped=true)]
-    public partial class withdrawCashResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=0)]
-        public API.TTLITradeWSDEV.responseHeaderType replyInformation;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.itrade.com/", Order=1)]
-        public API.TTLITradeWSDEV.withdrawCashResponseWithdrawCashResp WithdrawCashResp;
-        
-        public withdrawCashResponse() {
-        }
-        
-        public withdrawCashResponse(API.TTLITradeWSDEV.responseHeaderType replyInformation, API.TTLITradeWSDEV.withdrawCashResponseWithdrawCashResp WithdrawCashResp) {
-            this.replyInformation = replyInformation;
-            this.WithdrawCashResp = WithdrawCashResp;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
     public partial class disclaimerAgreedDisclaimerAgreedReq : BaseRequest_CType {
         
         private string agreedField;
@@ -25917,21 +27017,21 @@ namespace API.TTLITradeWSDEV {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        API.TTLITradeWSDEV.depositCashResponse API.TTLITradeWSDEV.ItradeWebServices.depositCash(API.TTLITradeWSDEV.depositCash request) {
-            return base.Channel.depositCash(request);
+        API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponse API.TTLITradeWSDEV.ItradeWebServices.cashWithdrawalInstructionEnquiry(API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiry request) {
+            return base.Channel.cashWithdrawalInstructionEnquiry(request);
         }
         
-        public API.TTLITradeWSDEV.responseHeaderType depositCash(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.depositCashDepositCashReq DepositCashReq, out API.TTLITradeWSDEV.depositCashResponseDepositCashResp DepositCashResp) {
-            API.TTLITradeWSDEV.depositCash inValue = new API.TTLITradeWSDEV.depositCash();
+        public API.TTLITradeWSDEV.responseHeaderType cashWithdrawalInstructionEnquiry(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryCashWithdrawalInstructionEnquiryReq CashWithdrawalInstructionEnquiryReq, out API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponseCashWithdrawalInstructionEnquiryResp CashWithdrawalInstructionEnquiryResp) {
+            API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiry inValue = new API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiry();
             inValue.requestInformation = requestInformation;
-            inValue.DepositCashReq = DepositCashReq;
-            API.TTLITradeWSDEV.depositCashResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).depositCash(inValue);
-            DepositCashResp = retVal.DepositCashResp;
+            inValue.CashWithdrawalInstructionEnquiryReq = CashWithdrawalInstructionEnquiryReq;
+            API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).cashWithdrawalInstructionEnquiry(inValue);
+            CashWithdrawalInstructionEnquiryResp = retVal.CashWithdrawalInstructionEnquiryResp;
             return retVal.replyInformation;
         }
         
-        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.depositCashResponse> depositCashAsync(API.TTLITradeWSDEV.depositCash request) {
-            return base.Channel.depositCashAsync(request);
+        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiryResponse> cashWithdrawalInstructionEnquiryAsync(API.TTLITradeWSDEV.cashWithdrawalInstructionEnquiry request) {
+            return base.Channel.cashWithdrawalInstructionEnquiryAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -26115,6 +27215,60 @@ namespace API.TTLITradeWSDEV {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        API.TTLITradeWSDEV.cashWithdrawalInstructionResponse API.TTLITradeWSDEV.ItradeWebServices.cashWithdrawalInstruction(API.TTLITradeWSDEV.cashWithdrawalInstruction request) {
+            return base.Channel.cashWithdrawalInstruction(request);
+        }
+        
+        public API.TTLITradeWSDEV.responseHeaderType cashWithdrawalInstruction(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.cashWithdrawalInstructionCashWithdrawalInstructionReq CashWithdrawalInstructionReq, out API.TTLITradeWSDEV.cashWithdrawalInstructionResponseCashWithdrawalInstructionResp CashWithdrawalInstructionResp) {
+            API.TTLITradeWSDEV.cashWithdrawalInstruction inValue = new API.TTLITradeWSDEV.cashWithdrawalInstruction();
+            inValue.requestInformation = requestInformation;
+            inValue.CashWithdrawalInstructionReq = CashWithdrawalInstructionReq;
+            API.TTLITradeWSDEV.cashWithdrawalInstructionResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).cashWithdrawalInstruction(inValue);
+            CashWithdrawalInstructionResp = retVal.CashWithdrawalInstructionResp;
+            return retVal.replyInformation;
+        }
+        
+        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.cashWithdrawalInstructionResponse> cashWithdrawalInstructionAsync(API.TTLITradeWSDEV.cashWithdrawalInstruction request) {
+            return base.Channel.cashWithdrawalInstructionAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        API.TTLITradeWSDEV.settlementInstructionEnquiryResponse API.TTLITradeWSDEV.ItradeWebServices.settlementInstructionEnquiry(API.TTLITradeWSDEV.settlementInstructionEnquiry request) {
+            return base.Channel.settlementInstructionEnquiry(request);
+        }
+        
+        public API.TTLITradeWSDEV.responseHeaderType settlementInstructionEnquiry(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.settlementInstructionEnquirySettlementInstructionReq SettlementInstructionReq, out API.TTLITradeWSDEV.settlementInstructionEnquiryResponseSettlementInstructionResp SettlementInstructionResp) {
+            API.TTLITradeWSDEV.settlementInstructionEnquiry inValue = new API.TTLITradeWSDEV.settlementInstructionEnquiry();
+            inValue.requestInformation = requestInformation;
+            inValue.SettlementInstructionReq = SettlementInstructionReq;
+            API.TTLITradeWSDEV.settlementInstructionEnquiryResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).settlementInstructionEnquiry(inValue);
+            SettlementInstructionResp = retVal.SettlementInstructionResp;
+            return retVal.replyInformation;
+        }
+        
+        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.settlementInstructionEnquiryResponse> settlementInstructionEnquiryAsync(API.TTLITradeWSDEV.settlementInstructionEnquiry request) {
+            return base.Channel.settlementInstructionEnquiryAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponse API.TTLITradeWSDEV.ItradeWebServices.foreignExchangeInstructionEnquiry(API.TTLITradeWSDEV.foreignExchangeInstructionEnquiry request) {
+            return base.Channel.foreignExchangeInstructionEnquiry(request);
+        }
+        
+        public API.TTLITradeWSDEV.responseHeaderType foreignExchangeInstructionEnquiry(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryForeignExchangeInstructionEnquiryReq ForeignExchangeInstructionEnquiryReq, out API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponseForeignExchangeInstructionEnquiryResp ForeignExchangeInstructionEnquiryResp) {
+            API.TTLITradeWSDEV.foreignExchangeInstructionEnquiry inValue = new API.TTLITradeWSDEV.foreignExchangeInstructionEnquiry();
+            inValue.requestInformation = requestInformation;
+            inValue.ForeignExchangeInstructionEnquiryReq = ForeignExchangeInstructionEnquiryReq;
+            API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).foreignExchangeInstructionEnquiry(inValue);
+            ForeignExchangeInstructionEnquiryResp = retVal.ForeignExchangeInstructionEnquiryResp;
+            return retVal.replyInformation;
+        }
+        
+        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.foreignExchangeInstructionEnquiryResponse> foreignExchangeInstructionEnquiryAsync(API.TTLITradeWSDEV.foreignExchangeInstructionEnquiry request) {
+            return base.Channel.foreignExchangeInstructionEnquiryAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         API.TTLITradeWSDEV.queryClientInfoResponse API.TTLITradeWSDEV.ItradeWebServices.queryClientInfo(API.TTLITradeWSDEV.queryClientInfo request) {
             return base.Channel.queryClientInfo(request);
         }
@@ -26220,24 +27374,6 @@ namespace API.TTLITradeWSDEV {
         
         public System.Threading.Tasks.Task<API.TTLITradeWSDEV.queryCreateClientOptionItemResponse> queryCreateClientOptionItemAsync(API.TTLITradeWSDEV.queryCreateClientOptionItem request) {
             return base.Channel.queryCreateClientOptionItemAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        API.TTLITradeWSDEV.foreignExchangeResponse API.TTLITradeWSDEV.ItradeWebServices.foreignExchange(API.TTLITradeWSDEV.foreignExchange request) {
-            return base.Channel.foreignExchange(request);
-        }
-        
-        public API.TTLITradeWSDEV.responseHeaderType foreignExchange(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.foreignExchangeForeignExchangeReq ForeignExchangeReq, out API.TTLITradeWSDEV.foreignExchangeResponseForeignExchangeResp ForeignExchangeResp) {
-            API.TTLITradeWSDEV.foreignExchange inValue = new API.TTLITradeWSDEV.foreignExchange();
-            inValue.requestInformation = requestInformation;
-            inValue.ForeignExchangeReq = ForeignExchangeReq;
-            API.TTLITradeWSDEV.foreignExchangeResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).foreignExchange(inValue);
-            ForeignExchangeResp = retVal.ForeignExchangeResp;
-            return retVal.replyInformation;
-        }
-        
-        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.foreignExchangeResponse> foreignExchangeAsync(API.TTLITradeWSDEV.foreignExchange request) {
-            return base.Channel.foreignExchangeAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -26529,6 +27665,24 @@ namespace API.TTLITradeWSDEV {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        API.TTLITradeWSDEV.cashDepositInstructionResponse API.TTLITradeWSDEV.ItradeWebServices.cashDepositInstruction(API.TTLITradeWSDEV.cashDepositInstruction request) {
+            return base.Channel.cashDepositInstruction(request);
+        }
+        
+        public API.TTLITradeWSDEV.responseHeaderType cashDepositInstruction(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.cashDepositInstructionCashDepositInstructionReq CashDepositInstructionReq, out API.TTLITradeWSDEV.cashDepositInstructionResponseCashDepositInstructionResp CashDepositInstructionResp) {
+            API.TTLITradeWSDEV.cashDepositInstruction inValue = new API.TTLITradeWSDEV.cashDepositInstruction();
+            inValue.requestInformation = requestInformation;
+            inValue.CashDepositInstructionReq = CashDepositInstructionReq;
+            API.TTLITradeWSDEV.cashDepositInstructionResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).cashDepositInstruction(inValue);
+            CashDepositInstructionResp = retVal.CashDepositInstructionResp;
+            return retVal.replyInformation;
+        }
+        
+        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.cashDepositInstructionResponse> cashDepositInstructionAsync(API.TTLITradeWSDEV.cashDepositInstruction request) {
+            return base.Channel.cashDepositInstructionAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         API.TTLITradeWSDEV.subscribeMarketDataResponse API.TTLITradeWSDEV.ItradeWebServices.subscribeMarketData(API.TTLITradeWSDEV.subscribeMarketData request) {
             return base.Channel.subscribeMarketData(request);
         }
@@ -26727,6 +27881,24 @@ namespace API.TTLITradeWSDEV {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponse API.TTLITradeWSDEV.ItradeWebServices.cashDepositInstructionEnquiry(API.TTLITradeWSDEV.cashDepositInstructionEnquiry request) {
+            return base.Channel.cashDepositInstructionEnquiry(request);
+        }
+        
+        public API.TTLITradeWSDEV.responseHeaderType cashDepositInstructionEnquiry(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.cashDepositInstructionEnquiryCashDepositInstructionEnquiryReq CashDepositInstructionEnquiryReq, out API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponseCashDepositInstructionEnquiryResp CashDepositInstructionEnquiryResp) {
+            API.TTLITradeWSDEV.cashDepositInstructionEnquiry inValue = new API.TTLITradeWSDEV.cashDepositInstructionEnquiry();
+            inValue.requestInformation = requestInformation;
+            inValue.CashDepositInstructionEnquiryReq = CashDepositInstructionEnquiryReq;
+            API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).cashDepositInstructionEnquiry(inValue);
+            CashDepositInstructionEnquiryResp = retVal.CashDepositInstructionEnquiryResp;
+            return retVal.replyInformation;
+        }
+        
+        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.cashDepositInstructionEnquiryResponse> cashDepositInstructionEnquiryAsync(API.TTLITradeWSDEV.cashDepositInstructionEnquiry request) {
+            return base.Channel.cashDepositInstructionEnquiryAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         API.TTLITradeWSDEV.queryChannelInfoResponse API.TTLITradeWSDEV.ItradeWebServices.queryChannelInfo(API.TTLITradeWSDEV.queryChannelInfo request) {
             return base.Channel.queryChannelInfo(request);
         }
@@ -26850,6 +28022,24 @@ namespace API.TTLITradeWSDEV {
         
         public System.Threading.Tasks.Task<API.TTLITradeWSDEV.checkNominalClosingPriceDerivationResponse> checkNominalClosingPriceDerivationAsync(API.TTLITradeWSDEV.checkNominalClosingPriceDerivation request) {
             return base.Channel.checkNominalClosingPriceDerivationAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        API.TTLITradeWSDEV.foreignExchangeInstructionResponse API.TTLITradeWSDEV.ItradeWebServices.foreignExchangeInstruction(API.TTLITradeWSDEV.foreignExchangeInstruction request) {
+            return base.Channel.foreignExchangeInstruction(request);
+        }
+        
+        public API.TTLITradeWSDEV.responseHeaderType foreignExchangeInstruction(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.foreignExchangeInstructionForeignExchangeInstructionReq ForeignExchangeInstructionReq, out API.TTLITradeWSDEV.foreignExchangeInstructionResponseForeignExchangeInstructionResp ForeignExchangeInstructionResp) {
+            API.TTLITradeWSDEV.foreignExchangeInstruction inValue = new API.TTLITradeWSDEV.foreignExchangeInstruction();
+            inValue.requestInformation = requestInformation;
+            inValue.ForeignExchangeInstructionReq = ForeignExchangeInstructionReq;
+            API.TTLITradeWSDEV.foreignExchangeInstructionResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).foreignExchangeInstruction(inValue);
+            ForeignExchangeInstructionResp = retVal.ForeignExchangeInstructionResp;
+            return retVal.replyInformation;
+        }
+        
+        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.foreignExchangeInstructionResponse> foreignExchangeInstructionAsync(API.TTLITradeWSDEV.foreignExchangeInstruction request) {
+            return base.Channel.foreignExchangeInstructionAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -27066,24 +28256,6 @@ namespace API.TTLITradeWSDEV {
         
         public System.Threading.Tasks.Task<API.TTLITradeWSDEV.queryIPOInfoResponse> queryIPOInfoAsync(API.TTLITradeWSDEV.queryIPOInfo request) {
             return base.Channel.queryIPOInfoAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        API.TTLITradeWSDEV.withdrawCashResponse API.TTLITradeWSDEV.ItradeWebServices.withdrawCash(API.TTLITradeWSDEV.withdrawCash request) {
-            return base.Channel.withdrawCash(request);
-        }
-        
-        public API.TTLITradeWSDEV.responseHeaderType withdrawCash(API.TTLITradeWSDEV.requestHeaderType requestInformation, API.TTLITradeWSDEV.withdrawCashWithdrawCashReq WithdrawCashReq, out API.TTLITradeWSDEV.withdrawCashResponseWithdrawCashResp WithdrawCashResp) {
-            API.TTLITradeWSDEV.withdrawCash inValue = new API.TTLITradeWSDEV.withdrawCash();
-            inValue.requestInformation = requestInformation;
-            inValue.WithdrawCashReq = WithdrawCashReq;
-            API.TTLITradeWSDEV.withdrawCashResponse retVal = ((API.TTLITradeWSDEV.ItradeWebServices)(this)).withdrawCash(inValue);
-            WithdrawCashResp = retVal.WithdrawCashResp;
-            return retVal.replyInformation;
-        }
-        
-        public System.Threading.Tasks.Task<API.TTLITradeWSDEV.withdrawCashResponse> withdrawCashAsync(API.TTLITradeWSDEV.withdrawCash request) {
-            return base.Channel.withdrawCashAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

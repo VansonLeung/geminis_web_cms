@@ -14,7 +14,7 @@ namespace WebApplication2.Helpers
     {
         public static bool SendEmail(List<string> emailTo, string mailbody, string subject)
         {
-            var from = new MailAddress("geministest1@gmail.com");
+            var from = new MailAddress("uattest@geminisgroup.com");
 
             var useDefaultCredentials = false;
             var enableSsl = true;
@@ -24,12 +24,12 @@ namespace WebApplication2.Helpers
             var port = 587;
             var host = "smtp.gmail.com";
 
-            userName = "geministest1@gmail.com"; // setup here the username; 
-            password = "geministes"; // setup here the password; 
+            userName = "uattest@geminisgroup.com"; // setup here the username; 
+            password = "test@1557"; // setup here the password; 
             bool.TryParse("false", out useDefaultCredentials); //setup here if it uses defaault credentials 
             bool.TryParse("true", out enableSsl); //setup here if it uses ssl 
-            int.TryParse("587", out port); //setup here the port 
-            host = "smtp.gmail.com"; //setup here the host 
+            int.TryParse("443", out port); //setup here the port 
+            host = "mail.geminisgroup.com"; //setup here the host 
 
             using (var mail = new MailMessage())
             {

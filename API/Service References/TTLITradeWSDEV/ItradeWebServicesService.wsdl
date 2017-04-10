@@ -513,6 +513,107 @@
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
+      <xs:element name="CashDepositInstructionEnquiryReq_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseRequest_CType">
+              <xs:sequence />
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CashDepositInstructionEnquiryResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseResponse_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="cashDepositInstructionList" nillable="true" type="tns:CashDepositInstructionEnquiry_CType" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CashDepositInstructionReq_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseRequest_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
+                <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="remark" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CashDepositInstructionResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseResponse_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CashWithdrawalInstructionEnquiryReq_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseRequest_CType">
+              <xs:sequence />
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CashWithdrawalInstructionEnquiryResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseResponse_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="cashWithdrawInstructionList" nillable="true" type="tns:CashWithdrawalInstructionEnquiry_CType" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CashWithdrawalInstructionReq_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseRequest_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
+                <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="remark" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="bankName" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="bankAccountName" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="bankSwiftCode" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CashWithdrawalInstructionResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseResponse_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="ChangePasswordReq_CType">
         <xs:complexType>
           <xs:complexContent mixed="false">
@@ -641,6 +742,7 @@
                 <xs:element minOccurs="0" form="qualified" name="dataFeedClientLevel" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="dataFeedCompanyCodeForStreaming" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="aAStockToken" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="tradingAccStatus" type="xs:string" />
                 <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="tradingAccList" nillable="true" type="tns:TradingAccountInfo_CType" />
               </xs:sequence>
             </xs:extension>
@@ -746,6 +848,7 @@
                 <xs:element minOccurs="0" form="qualified" name="largeVoteRightCompanyName" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="isDirectMarketingRefused" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="referenceCode" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="isNonTradingAcc" type="xs:string" />
               </xs:sequence>
             </xs:extension>
           </xs:complexContent>
@@ -759,35 +862,6 @@
                 <xs:element minOccurs="0" form="qualified" name="clientID" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="acOpenDate" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="instructionID" type="xs:string" />
-              </xs:sequence>
-            </xs:extension>
-          </xs:complexContent>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="DepositCashReq_CType">
-        <xs:complexType>
-          <xs:complexContent mixed="false">
-            <xs:extension base="tns:BaseRequest_CType">
-              <xs:sequence>
-                <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
-                <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="statementRemark" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
-              </xs:sequence>
-            </xs:extension>
-          </xs:complexContent>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="DepositCashResp_CType">
-        <xs:complexType>
-          <xs:complexContent mixed="false">
-            <xs:extension base="tns:BaseResponse_CType">
-              <xs:sequence>
-                <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
               </xs:sequence>
             </xs:extension>
           </xs:complexContent>
@@ -942,7 +1016,27 @@
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
-      <xs:element name="ForeignExchangeReq_CType">
+      <xs:element name="ForeignExchangeInstructionEnquiryReq_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseRequest_CType">
+              <xs:sequence />
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ForeignExchangeInstructionEnquiryResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseResponse_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="foreignExchangeInstructionList" nillable="true" type="tns:ForeignExchangeInstructionEnquiry_CType" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ForeignExchangeInstructionReq_CType">
         <xs:complexType>
           <xs:complexContent mixed="false">
             <xs:extension base="tns:BaseRequest_CType">
@@ -952,14 +1046,13 @@
                 <xs:element minOccurs="0" form="qualified" name="fromAmount" type="xs:decimal" />
                 <xs:element minOccurs="0" form="qualified" name="exchangeRate" type="xs:decimal" />
                 <xs:element minOccurs="0" form="qualified" name="toCurrency" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="toBank" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="toAmount" type="xs:decimal" />
               </xs:sequence>
             </xs:extension>
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
-      <xs:element name="ForeignExchangeResp_CType">
+      <xs:element name="ForeignExchangeInstructionResp_CType">
         <xs:complexType>
           <xs:complexContent mixed="false">
             <xs:extension base="tns:BaseResponse_CType">
@@ -971,56 +1064,95 @@
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
+      <xs:element name="GenerateQPITokenReq_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseRequest_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="domain" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="uid" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GenerateQPITokenResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseResponse_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="session" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetIndexReq_CType">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" form="qualified" name="marketID" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="indexID" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="token" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="multi" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="language" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetIndexResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:Index_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="ErrorCode" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="ErrorMessage" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="TimeStamp" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetMultiIndexResp_CType">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="List" nillable="true" type="tns:Index_CType" />
+            <xs:element minOccurs="0" form="qualified" name="ErrorCode" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="ErrorMessage" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="TimeStamp" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetMultiQuoteResp_CType">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="List" nillable="true" type="tns:Quote_CType" />
+            <xs:element minOccurs="0" form="qualified" name="ErrorCode" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="ErrorMessage" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="TimeStamp" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="GetQuoteReq_CType">
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" form="qualified" name="marketID" type="xs:string" />
             <xs:element minOccurs="0" form="qualified" name="instrumentID" type="xs:string" />
             <xs:element minOccurs="0" form="qualified" name="token" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="multi" type="xs:string" />
             <xs:element minOccurs="0" form="qualified" name="language" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetQuoteResp_CType">
         <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" form="qualified" name="ID" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="Symbol" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="QuoteType" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="Desp" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="IndustryDesp" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="NomType" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="BidSpread" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="AskSpread" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Nominal" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Last" type="xs:decimal" />
-            <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="Bid" nillable="true" type="xs:decimal" />
-            <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="Ask" nillable="true" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Open" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="PrevClose" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="High" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Low" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Volume" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Turnover" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="EPS" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Yield" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="PERatio" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Dividend" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="MarketCap" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="LotSize" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Change" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="PctChange" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Suspension" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="Currency" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="BidBestPrice" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="AskBestPrice" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="BidBestQty" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="AskBestQty" type="xs:decimal" />
-            <xs:element minOccurs="0" form="qualified" name="Real" type="xs:int" />
-            <xs:element minOccurs="0" form="qualified" name="ErrorCode" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="ErrorMessage" type="xs:string" />
-            <xs:element minOccurs="0" form="qualified" name="TimeStamp" type="xs:string" />
-          </xs:sequence>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:Quote_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="ErrorCode" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="ErrorMessage" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="TimeStamp" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetnTradeDateReq_CType">
@@ -1300,6 +1432,7 @@
                 <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="bankAddress" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="swiftCode" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="isNonTradingAcc" type="xs:string" />
               </xs:sequence>
             </xs:extension>
           </xs:complexContent>
@@ -1539,7 +1672,9 @@
         <xs:complexType>
           <xs:complexContent mixed="false">
             <xs:extension base="tns:BaseRequest_CType">
-              <xs:sequence />
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="isNonTradingAcc" type="xs:string" />
+              </xs:sequence>
             </xs:extension>
           </xs:complexContent>
         </xs:complexType>
@@ -2155,12 +2290,31 @@
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SettlementInstructionEnquiryReq_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseRequest_CType">
+              <xs:sequence />
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SettlementInstructionEnquiryResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseResponse_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="settlementInstructionList" nillable="true" type="tns:SettlementInstructionEnquiry_CType" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="SettlementInstructionReq_CType">
         <xs:complexType>
           <xs:complexContent mixed="false">
             <xs:extension base="tns:BaseRequest_CType">
               <xs:sequence>
-                <xs:element minOccurs="0" form="qualified" name="marketID" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="instrumentID" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="instruction" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="settlementMethod" type="xs:string" />
@@ -2478,38 +2632,6 @@
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
-      <xs:element name="WithdrawCashReq_CType">
-        <xs:complexType>
-          <xs:complexContent mixed="false">
-            <xs:extension base="tns:BaseRequest_CType">
-              <xs:sequence>
-                <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
-                <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="statementRemark" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="bankName" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="bankAccountName" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="bankSwiftCode" type="xs:string" />
-              </xs:sequence>
-            </xs:extension>
-          </xs:complexContent>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="WithdrawCashResp_CType">
-        <xs:complexType>
-          <xs:complexContent mixed="false">
-            <xs:extension base="tns:BaseResponse_CType">
-              <xs:sequence>
-                <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
-              </xs:sequence>
-            </xs:extension>
-          </xs:complexContent>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="accountBalanceEnquiry" type="tns:accountBalanceEnquiry" />
       <xs:element name="accountBalanceEnquiryResponse" type="tns:accountBalanceEnquiryResponse" />
       <xs:element name="applyIPO" type="tns:applyIPO" />
@@ -2520,6 +2642,14 @@
       <xs:element name="buyingPowerEnquiryResponse" type="tns:buyingPowerEnquiryResponse" />
       <xs:element name="cancelOrder" type="tns:cancelOrder" />
       <xs:element name="cancelOrderResponse" type="tns:cancelOrderResponse" />
+      <xs:element name="cashDepositInstruction" type="tns:cashDepositInstruction" />
+      <xs:element name="cashDepositInstructionEnquiry" type="tns:cashDepositInstructionEnquiry" />
+      <xs:element name="cashDepositInstructionEnquiryResponse" type="tns:cashDepositInstructionEnquiryResponse" />
+      <xs:element name="cashDepositInstructionResponse" type="tns:cashDepositInstructionResponse" />
+      <xs:element name="cashWithdrawalInstruction" type="tns:cashWithdrawalInstruction" />
+      <xs:element name="cashWithdrawalInstructionEnquiry" type="tns:cashWithdrawalInstructionEnquiry" />
+      <xs:element name="cashWithdrawalInstructionEnquiryResponse" type="tns:cashWithdrawalInstructionEnquiryResponse" />
+      <xs:element name="cashWithdrawalInstructionResponse" type="tns:cashWithdrawalInstructionResponse" />
       <xs:element name="changePassword" type="tns:changePassword" />
       <xs:element name="changePasswordResponse" type="tns:changePasswordResponse" />
       <xs:element name="checkNominalClosingPriceDerivation" type="tns:checkNominalClosingPriceDerivation" />
@@ -2532,8 +2662,6 @@
       <xs:element name="clientLogoutResponse" type="tns:clientLogoutResponse" />
       <xs:element name="createClient" type="tns:createClient" />
       <xs:element name="createClientResponse" type="tns:createClientResponse" />
-      <xs:element name="depositCash" type="tns:depositCash" />
-      <xs:element name="depositCashResponse" type="tns:depositCashResponse" />
       <xs:element name="disclaimerAgreed" type="tns:disclaimerAgreed" />
       <xs:element name="disclaimerAgreedResponse" type="tns:disclaimerAgreedResponse" />
       <xs:element name="eMessageDelete" type="tns:eMessageDelete" />
@@ -2542,8 +2670,10 @@
       <xs:element name="eMessageEnquiryResponse" type="tns:eMessageEnquiryResponse" />
       <xs:element name="enterOrder" type="tns:enterOrder" />
       <xs:element name="enterOrderResponse" type="tns:enterOrderResponse" />
-      <xs:element name="foreignExchange" type="tns:foreignExchange" />
-      <xs:element name="foreignExchangeResponse" type="tns:foreignExchangeResponse" />
+      <xs:element name="foreignExchangeInstruction" type="tns:foreignExchangeInstruction" />
+      <xs:element name="foreignExchangeInstructionEnquiry" type="tns:foreignExchangeInstructionEnquiry" />
+      <xs:element name="foreignExchangeInstructionEnquiryResponse" type="tns:foreignExchangeInstructionEnquiryResponse" />
+      <xs:element name="foreignExchangeInstructionResponse" type="tns:foreignExchangeInstructionResponse" />
       <xs:element name="getSpreadTable" type="tns:getSpreadTable" />
       <xs:element name="getSpreadTableResponse" type="tns:getSpreadTableResponse" />
       <xs:element name="getnTradeDate" type="tns:getnTradeDate" />
@@ -2621,6 +2751,8 @@
       <xs:element name="searchInstrument" type="tns:searchInstrument" />
       <xs:element name="searchInstrumentResponse" type="tns:searchInstrumentResponse" />
       <xs:element name="settlementInstruction" type="tns:settlementInstruction" />
+      <xs:element name="settlementInstructionEnquiry" type="tns:settlementInstructionEnquiry" />
+      <xs:element name="settlementInstructionEnquiryResponse" type="tns:settlementInstructionEnquiryResponse" />
       <xs:element name="settlementInstructionResponse" type="tns:settlementInstructionResponse" />
       <xs:element name="setupClientMSP" type="tns:setupClientMSP" />
       <xs:element name="setupClientMSPResponse" type="tns:setupClientMSPResponse" />
@@ -2644,8 +2776,6 @@
       <xs:element name="transactionHistoryResponse" type="tns:transactionHistoryResponse" />
       <xs:element name="updatePassword" type="tns:updatePassword" />
       <xs:element name="updatePasswordResponse" type="tns:updatePasswordResponse" />
-      <xs:element name="withdrawCash" type="tns:withdrawCash" />
-      <xs:element name="withdrawCashResponse" type="tns:withdrawCashResponse" />
       <xs:complexType name="orderHistoryEnquiry">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
@@ -2752,6 +2882,7 @@
       </xs:complexType>
       <xs:complexType name="StockInformation_CType">
         <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="marketID" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="instrumentID" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="instrumentName" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="qty" type="xs:decimal" />
@@ -2997,6 +3128,23 @@
           <xs:element minOccurs="0" form="qualified" name="lotSize" type="xs:int" />
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="CashWithdrawalInstructionEnquiry_CType">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="remark" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="bankName" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="bankAccountName" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="bankSwiftCode" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="creationTime" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="status" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="TradingAccountInfo_CType">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="accountSeq" type="xs:string" />
@@ -3179,6 +3327,20 @@
           <xs:element minOccurs="0" form="qualified" name="isCancelable" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="CashDepositInstructionEnquiry_CType">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="remark" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="creationTime" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="status" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="CreateClientOptionItem_CType">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="name" type="xs:string" />
@@ -3261,6 +3423,20 @@
           <xs:element minOccurs="0" form="qualified" name="roDeposits" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="oatCl" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="oatTl" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SettlementInstructionEnquiry_CType">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="instruction" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="settlementMethod" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="counterpartyName" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="counterpartyAccountNo" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="counterpartyContactPerson" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="counterpartyTelNo" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="creationTime" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="status" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="stockInformationList" nillable="true" type="tns:StockInformation_CType" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="IPOStock_CType">
@@ -3536,38 +3712,42 @@
           <xs:element minOccurs="0" form="qualified" name="message" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="depositCash">
+      <xs:complexType name="ForeignExchangeInstructionEnquiry_CType">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="fromCurrency" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="fromAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="exchangeRate" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="toCurrency" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="toAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="creationTime" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="status" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cashWithdrawalInstructionEnquiry">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
-          <xs:element minOccurs="0" form="qualified" name="DepositCashReq">
+          <xs:element minOccurs="0" form="qualified" name="CashWithdrawalInstructionEnquiryReq">
             <xs:complexType>
               <xs:complexContent mixed="false">
                 <xs:extension base="tns:BaseRequest_CType">
-                  <xs:sequence>
-                    <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
-                    <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="statementRemark" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
-                  </xs:sequence>
+                  <xs:sequence />
                 </xs:extension>
               </xs:complexContent>
             </xs:complexType>
           </xs:element>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="depositCashResponse">
+      <xs:complexType name="cashWithdrawalInstructionEnquiryResponse">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
-          <xs:element minOccurs="0" form="qualified" name="DepositCashResp">
+          <xs:element minOccurs="0" form="qualified" name="CashWithdrawalInstructionEnquiryResp">
             <xs:complexType>
               <xs:complexContent mixed="false">
                 <xs:extension base="tns:BaseResponse_CType">
                   <xs:sequence>
-                    <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="cashWithdrawInstructionList" nillable="true" type="tns:CashWithdrawalInstructionEnquiry_CType" />
                   </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
@@ -3669,7 +3849,6 @@
               <xs:complexContent mixed="false">
                 <xs:extension base="tns:BaseRequest_CType">
                   <xs:sequence>
-                    <xs:element minOccurs="0" form="qualified" name="marketID" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="instrumentID" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="instruction" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="settlementMethod" type="xs:string" />
@@ -3985,6 +4164,7 @@
                     <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="bankAddress" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="swiftCode" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="isNonTradingAcc" type="xs:string" />
                   </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
@@ -4035,6 +4215,108 @@
                     <xs:element minOccurs="0" form="qualified" name="currencyId" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="buyingPower" type="xs:decimal" />
                     <xs:element minOccurs="0" form="qualified" name="tPlusXBuyingPower" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cashWithdrawalInstruction">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="CashWithdrawalInstructionReq">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseRequest_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
+                    <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="remark" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="bankName" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="bankAccountName" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="bankSwiftCode" type="xs:string" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cashWithdrawalInstructionResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="CashWithdrawalInstructionResp">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseResponse_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="settlementInstructionEnquiry">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="SettlementInstructionReq">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseRequest_CType">
+                  <xs:sequence />
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="settlementInstructionEnquiryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="SettlementInstructionResp">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseResponse_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="settlementInstructionList" nillable="true" type="tns:SettlementInstructionEnquiry_CType" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="foreignExchangeInstructionEnquiry">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="ForeignExchangeInstructionEnquiryReq">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseRequest_CType">
+                  <xs:sequence />
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="foreignExchangeInstructionEnquiryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="ForeignExchangeInstructionEnquiryResp">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseResponse_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="foreignExchangeInstructionList" nillable="true" type="tns:ForeignExchangeInstructionEnquiry_CType" />
                   </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
@@ -4309,45 +4591,6 @@
           </xs:element>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="foreignExchange">
-        <xs:sequence>
-          <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
-          <xs:element minOccurs="0" form="qualified" name="ForeignExchangeReq">
-            <xs:complexType>
-              <xs:complexContent mixed="false">
-                <xs:extension base="tns:BaseRequest_CType">
-                  <xs:sequence>
-                    <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="fromCurrency" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="fromAmount" type="xs:decimal" />
-                    <xs:element minOccurs="0" form="qualified" name="exchangeRate" type="xs:decimal" />
-                    <xs:element minOccurs="0" form="qualified" name="toCurrency" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="toBank" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="toAmount" type="xs:decimal" />
-                  </xs:sequence>
-                </xs:extension>
-              </xs:complexContent>
-            </xs:complexType>
-          </xs:element>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="foreignExchangeResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
-          <xs:element minOccurs="0" form="qualified" name="ForeignExchangeResp">
-            <xs:complexType>
-              <xs:complexContent mixed="false">
-                <xs:extension base="tns:BaseResponse_CType">
-                  <xs:sequence>
-                    <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
-                  </xs:sequence>
-                </xs:extension>
-              </xs:complexContent>
-            </xs:complexType>
-          </xs:element>
-        </xs:sequence>
-      </xs:complexType>
       <xs:complexType name="priceAlertDelete">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
@@ -4572,6 +4815,7 @@
                     <xs:element minOccurs="0" form="qualified" name="largeVoteRightCompanyName" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="isDirectMarketingRefused" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="referenceCode" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="isNonTradingAcc" type="xs:string" />
                   </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
@@ -5021,6 +5265,45 @@
           </xs:element>
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="cashDepositInstruction">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="CashDepositInstructionReq">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseRequest_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
+                    <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="remark" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cashDepositInstructionResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="CashDepositInstructionResp">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseResponse_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="subscribeMarketData">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
@@ -5339,6 +5622,7 @@
                     <xs:element minOccurs="0" form="qualified" name="dataFeedClientLevel" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="dataFeedCompanyCodeForStreaming" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="aAStockToken" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="tradingAccStatus" type="xs:string" />
                     <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="tradingAccList" nillable="true" type="tns:TradingAccountInfo_CType" />
                   </xs:sequence>
                 </xs:extension>
@@ -5391,7 +5675,9 @@
             <xs:complexType>
               <xs:complexContent mixed="false">
                 <xs:extension base="tns:BaseRequest_CType">
-                  <xs:sequence />
+                  <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="isNonTradingAcc" type="xs:string" />
+                  </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
             </xs:complexType>
@@ -5467,6 +5753,36 @@
                 <xs:extension base="tns:BaseResponse_CType">
                   <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="stockPriceList" nillable="true" type="tns:StockPriceLoop_CType" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cashDepositInstructionEnquiry">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="CashDepositInstructionEnquiryReq">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseRequest_CType">
+                  <xs:sequence />
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cashDepositInstructionEnquiryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="CashDepositInstructionEnquiryResp">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseResponse_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="cashDepositInstructionList" nillable="true" type="tns:CashDepositInstructionEnquiry_CType" />
                   </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
@@ -5723,6 +6039,44 @@
                     <xs:element minOccurs="0" form="qualified" name="pass" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="priceDerivation" type="xs:decimal" />
                     <xs:element minOccurs="0" form="qualified" name="priceDerivationType" type="xs:string" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="foreignExchangeInstruction">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="ForeignExchangeInstructionReq">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseRequest_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="fromCurrency" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="fromAmount" type="xs:decimal" />
+                    <xs:element minOccurs="0" form="qualified" name="exchangeRate" type="xs:decimal" />
+                    <xs:element minOccurs="0" form="qualified" name="toCurrency" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="toAmount" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:extension>
+              </xs:complexContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="foreignExchangeInstructionResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
+          <xs:element minOccurs="0" form="qualified" name="ForeignExchangeInstructionResp">
+            <xs:complexType>
+              <xs:complexContent mixed="false">
+                <xs:extension base="tns:BaseResponse_CType">
+                  <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
                   </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
@@ -6168,48 +6522,6 @@
           </xs:element>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="withdrawCash">
-        <xs:sequence>
-          <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
-          <xs:element minOccurs="0" form="qualified" name="WithdrawCashReq">
-            <xs:complexType>
-              <xs:complexContent mixed="false">
-                <xs:extension base="tns:BaseRequest_CType">
-                  <xs:sequence>
-                    <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
-                    <xs:element minOccurs="0" form="qualified" name="currencyID" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="settleMethod" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="statementRemark" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="bankAccount" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="bankID" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="bankName" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="bankAccountName" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="bankSwiftCode" type="xs:string" />
-                  </xs:sequence>
-                </xs:extension>
-              </xs:complexContent>
-            </xs:complexType>
-          </xs:element>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="withdrawCashResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" form="qualified" name="replyInformation" type="tns:responseHeaderType" />
-          <xs:element minOccurs="0" form="qualified" name="WithdrawCashResp">
-            <xs:complexType>
-              <xs:complexContent mixed="false">
-                <xs:extension base="tns:BaseResponse_CType">
-                  <xs:sequence>
-                    <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="transactionID" type="xs:string" />
-                  </xs:sequence>
-                </xs:extension>
-              </xs:complexContent>
-            </xs:complexType>
-          </xs:element>
-        </xs:sequence>
-      </xs:complexType>
       <xs:complexType name="disclaimerAgreed">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="requestInformation" type="tns:requestHeaderType" />
@@ -6386,14 +6698,62 @@
           </xs:element>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="SessionManagementResponse_CType">
+      <xs:complexType name="Quote_CType">
         <xs:sequence>
-          <xs:element form="qualified" name="returnCode" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="ID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Symbol" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="QuoteType" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Desp" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="IndustryDesp" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="NomType" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="BidSpread" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="AskSpread" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Nominal" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Last" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="Bid" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="Ask" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Open" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="PrevClose" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="High" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Low" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Volume" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Turnover" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="EPS" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Yield" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="PERatio" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Dividend" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="MarketCap" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="LotSize" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Change" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="PctChange" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Suspension" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Currency" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="BidBestPrice" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="AskBestPrice" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="BidBestQty" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="AskBestQty" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="W52High" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="W52Low" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Real" type="xs:int" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="CaptchaManagementResponse_CType">
+      <xs:complexType name="Index_CType">
         <xs:sequence>
-          <xs:element form="qualified" name="returnCode" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="ID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Symbol" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Exchange" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Desp" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Last" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Open" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Close" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="PrevClose" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="High" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Low" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Volume" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Turnover" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Change" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="PctChange" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Real" type="xs:int" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="SessionManagementRequest_CType">
@@ -6408,6 +6768,16 @@
           <xs:element form="qualified" name="answer" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="CaptchaManagementResponse_CType">
+        <xs:sequence>
+          <xs:element form="qualified" name="returnCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SessionManagementResponse_CType">
+        <xs:sequence>
+          <xs:element form="qualified" name="returnCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
       <xs:simpleType name="theme_SType">
         <xs:restriction base="xs:string">
           <xs:enumeration value="dark" />
@@ -6418,9 +6788,6 @@
   </wsdl:types>
   <wsdl:message name="priceAlertDeleteResponse">
     <wsdl:part name="parameters" element="tns:priceAlertDeleteResponse" />
-  </wsdl:message>
-  <wsdl:message name="depositCash">
-    <wsdl:part name="parameters" element="tns:depositCash" />
   </wsdl:message>
   <wsdl:message name="orderPlacementPreviewResponse">
     <wsdl:part name="parameters" element="tns:orderPlacementPreviewResponse" />
@@ -6443,6 +6810,9 @@
   <wsdl:message name="enterOrder">
     <wsdl:part name="parameters" element="tns:enterOrder" />
   </wsdl:message>
+  <wsdl:message name="foreignExchangeInstructionEnquiryResponse">
+    <wsdl:part name="parameters" element="tns:foreignExchangeInstructionEnquiryResponse" />
+  </wsdl:message>
   <wsdl:message name="settlementInstructionResponse">
     <wsdl:part name="parameters" element="tns:settlementInstructionResponse" />
   </wsdl:message>
@@ -6455,6 +6825,9 @@
   <wsdl:message name="checkNominalClosingPriceDerivationResponse">
     <wsdl:part name="parameters" element="tns:checkNominalClosingPriceDerivationResponse" />
   </wsdl:message>
+  <wsdl:message name="cashWithdrawalInstruction">
+    <wsdl:part name="parameters" element="tns:cashWithdrawalInstruction" />
+  </wsdl:message>
   <wsdl:message name="shareHoldersListResponse">
     <wsdl:part name="parameters" element="tns:shareHoldersListResponse" />
   </wsdl:message>
@@ -6463,6 +6836,9 @@
   </wsdl:message>
   <wsdl:message name="searchInstrumentResponse">
     <wsdl:part name="parameters" element="tns:searchInstrumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="cashWithdrawalInstructionResponse">
+    <wsdl:part name="parameters" element="tns:cashWithdrawalInstructionResponse" />
   </wsdl:message>
   <wsdl:message name="portfolioEnquiryByInstrument">
     <wsdl:part name="parameters" element="tns:portfolioEnquiryByInstrument" />
@@ -6478,9 +6854,6 @@
   </wsdl:message>
   <wsdl:message name="portfolioEnquiryByInstrumentResponse">
     <wsdl:part name="parameters" element="tns:portfolioEnquiryByInstrumentResponse" />
-  </wsdl:message>
-  <wsdl:message name="foreignExchange">
-    <wsdl:part name="parameters" element="tns:foreignExchange" />
   </wsdl:message>
   <wsdl:message name="queryClientInfoResponse">
     <wsdl:part name="parameters" element="tns:queryClientInfoResponse" />
@@ -6518,6 +6891,9 @@
   <wsdl:message name="accountBalanceEnquiry">
     <wsdl:part name="parameters" element="tns:accountBalanceEnquiry" />
   </wsdl:message>
+  <wsdl:message name="cashDepositInstruction">
+    <wsdl:part name="parameters" element="tns:cashDepositInstruction" />
+  </wsdl:message>
   <wsdl:message name="subscribeMarketData">
     <wsdl:part name="parameters" element="tns:subscribeMarketData" />
   </wsdl:message>
@@ -6545,11 +6921,11 @@
   <wsdl:message name="queryClientJointAccountInfoResponse">
     <wsdl:part name="parameters" element="tns:queryClientJointAccountInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="cashWithdrawalInstructionEnquiryResponse">
+    <wsdl:part name="parameters" element="tns:cashWithdrawalInstructionEnquiryResponse" />
+  </wsdl:message>
   <wsdl:message name="queryOrderExecution">
     <wsdl:part name="parameters" element="tns:queryOrderExecution" />
-  </wsdl:message>
-  <wsdl:message name="depositCashResponse">
-    <wsdl:part name="parameters" element="tns:depositCashResponse" />
   </wsdl:message>
   <wsdl:message name="queryIPOSystemOnResponse">
     <wsdl:part name="parameters" element="tns:queryIPOSystemOnResponse" />
@@ -6572,9 +6948,6 @@
   <wsdl:message name="isClientLogin">
     <wsdl:part name="parameters" element="tns:isClientLogin" />
   </wsdl:message>
-  <wsdl:message name="foreignExchangeResponse">
-    <wsdl:part name="parameters" element="tns:foreignExchangeResponse" />
-  </wsdl:message>
   <wsdl:message name="getSpreadTable">
     <wsdl:part name="parameters" element="tns:getSpreadTable" />
   </wsdl:message>
@@ -6583,6 +6956,9 @@
   </wsdl:message>
   <wsdl:message name="queryOrderInfoResponse">
     <wsdl:part name="parameters" element="tns:queryOrderInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="foreignExchangeInstruction">
+    <wsdl:part name="parameters" element="tns:foreignExchangeInstruction" />
   </wsdl:message>
   <wsdl:message name="stockQuoteEnquiry">
     <wsdl:part name="parameters" element="tns:stockQuoteEnquiry" />
@@ -6626,9 +7002,6 @@
   <wsdl:message name="queryIPOInfo">
     <wsdl:part name="parameters" element="tns:queryIPOInfo" />
   </wsdl:message>
-  <wsdl:message name="withdrawCash">
-    <wsdl:part name="parameters" element="tns:withdrawCash" />
-  </wsdl:message>
   <wsdl:message name="stockQuoteEnquiryResponse">
     <wsdl:part name="parameters" element="tns:stockQuoteEnquiryResponse" />
   </wsdl:message>
@@ -6650,6 +7023,9 @@
   <wsdl:message name="orderHistoryEnquiry">
     <wsdl:part name="parameters" element="tns:orderHistoryEnquiry" />
   </wsdl:message>
+  <wsdl:message name="cashWithdrawalInstructionEnquiry">
+    <wsdl:part name="parameters" element="tns:cashWithdrawalInstructionEnquiry" />
+  </wsdl:message>
   <wsdl:message name="applyIPO">
     <wsdl:part name="parameters" element="tns:applyIPO" />
   </wsdl:message>
@@ -6668,8 +7044,17 @@
   <wsdl:message name="queryClientBankAccountInfoResponse">
     <wsdl:part name="parameters" element="tns:queryClientBankAccountInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="cashDepositInstructionResponse">
+    <wsdl:part name="parameters" element="tns:cashDepositInstructionResponse" />
+  </wsdl:message>
   <wsdl:message name="modifyAccountDetails">
     <wsdl:part name="parameters" element="tns:modifyAccountDetails" />
+  </wsdl:message>
+  <wsdl:message name="settlementInstructionEnquiry">
+    <wsdl:part name="parameters" element="tns:settlementInstructionEnquiry" />
+  </wsdl:message>
+  <wsdl:message name="foreignExchangeInstructionEnquiry">
+    <wsdl:part name="parameters" element="tns:foreignExchangeInstructionEnquiry" />
   </wsdl:message>
   <wsdl:message name="queryClientInfo">
     <wsdl:part name="parameters" element="tns:queryClientInfo" />
@@ -6722,6 +7107,9 @@
   <wsdl:message name="priceAlertSubscription">
     <wsdl:part name="parameters" element="tns:priceAlertSubscription" />
   </wsdl:message>
+  <wsdl:message name="cashDepositInstructionEnquiryResponse">
+    <wsdl:part name="parameters" element="tns:cashDepositInstructionEnquiryResponse" />
+  </wsdl:message>
   <wsdl:message name="shareHoldersInputResponse">
     <wsdl:part name="parameters" element="tns:shareHoldersInputResponse" />
   </wsdl:message>
@@ -6730,6 +7118,9 @@
   </wsdl:message>
   <wsdl:message name="getnTradeDateResponse">
     <wsdl:part name="parameters" element="tns:getnTradeDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="settlementInstructionEnquiryResponse">
+    <wsdl:part name="parameters" element="tns:settlementInstructionEnquiryResponse" />
   </wsdl:message>
   <wsdl:message name="queryAppParamInfo">
     <wsdl:part name="parameters" element="tns:queryAppParamInfo" />
@@ -6779,6 +7170,12 @@
   <wsdl:message name="changePasswordResponse">
     <wsdl:part name="parameters" element="tns:changePasswordResponse" />
   </wsdl:message>
+  <wsdl:message name="cashDepositInstructionEnquiry">
+    <wsdl:part name="parameters" element="tns:cashDepositInstructionEnquiry" />
+  </wsdl:message>
+  <wsdl:message name="foreignExchangeInstructionResponse">
+    <wsdl:part name="parameters" element="tns:foreignExchangeInstructionResponse" />
+  </wsdl:message>
   <wsdl:message name="modifyAccountDetailsResponse">
     <wsdl:part name="parameters" element="tns:modifyAccountDetailsResponse" />
   </wsdl:message>
@@ -6821,9 +7218,6 @@
   <wsdl:message name="updatePassword">
     <wsdl:part name="parameters" element="tns:updatePassword" />
   </wsdl:message>
-  <wsdl:message name="withdrawCashResponse">
-    <wsdl:part name="parameters" element="tns:withdrawCashResponse" />
-  </wsdl:message>
   <wsdl:message name="IPOListEnquiry">
     <wsdl:part name="parameters" element="tns:IPOListEnquiry" />
   </wsdl:message>
@@ -6847,9 +7241,9 @@
       <wsdl:input name="orderHistoryEnquiry" message="tns:orderHistoryEnquiry" />
       <wsdl:output name="orderHistoryEnquiryResponse" message="tns:orderHistoryEnquiryResponse" />
     </wsdl:operation>
-    <wsdl:operation name="depositCash">
-      <wsdl:input name="depositCash" message="tns:depositCash" />
-      <wsdl:output name="depositCashResponse" message="tns:depositCashResponse" />
+    <wsdl:operation name="cashWithdrawalInstructionEnquiry">
+      <wsdl:input name="cashWithdrawalInstructionEnquiry" message="tns:cashWithdrawalInstructionEnquiry" />
+      <wsdl:output name="cashWithdrawalInstructionEnquiryResponse" message="tns:cashWithdrawalInstructionEnquiryResponse" />
     </wsdl:operation>
     <wsdl:operation name="applyIPO">
       <wsdl:input name="applyIPO" message="tns:applyIPO" />
@@ -6891,6 +7285,18 @@
       <wsdl:input name="buyingPowerEnquiry" message="tns:buyingPowerEnquiry" />
       <wsdl:output name="buyingPowerEnquiryResponse" message="tns:buyingPowerEnquiryResponse" />
     </wsdl:operation>
+    <wsdl:operation name="cashWithdrawalInstruction">
+      <wsdl:input name="cashWithdrawalInstruction" message="tns:cashWithdrawalInstruction" />
+      <wsdl:output name="cashWithdrawalInstructionResponse" message="tns:cashWithdrawalInstructionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="settlementInstructionEnquiry">
+      <wsdl:input name="settlementInstructionEnquiry" message="tns:settlementInstructionEnquiry" />
+      <wsdl:output name="settlementInstructionEnquiryResponse" message="tns:settlementInstructionEnquiryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="foreignExchangeInstructionEnquiry">
+      <wsdl:input name="foreignExchangeInstructionEnquiry" message="tns:foreignExchangeInstructionEnquiry" />
+      <wsdl:output name="foreignExchangeInstructionEnquiryResponse" message="tns:foreignExchangeInstructionEnquiryResponse" />
+    </wsdl:operation>
     <wsdl:operation name="queryClientInfo">
       <wsdl:input name="queryClientInfo" message="tns:queryClientInfo" />
       <wsdl:output name="queryClientInfoResponse" message="tns:queryClientInfoResponse" />
@@ -6914,10 +7320,6 @@
     <wsdl:operation name="queryCreateClientOptionItem">
       <wsdl:input name="queryCreateClientOptionItem" message="tns:queryCreateClientOptionItem" />
       <wsdl:output name="queryCreateClientOptionItemResponse" message="tns:queryCreateClientOptionItemResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="foreignExchange">
-      <wsdl:input name="foreignExchange" message="tns:foreignExchange" />
-      <wsdl:output name="foreignExchangeResponse" message="tns:foreignExchangeResponse" />
     </wsdl:operation>
     <wsdl:operation name="priceAlertDelete">
       <wsdl:input name="priceAlertDelete" message="tns:priceAlertDelete" />
@@ -6983,6 +7385,10 @@
       <wsdl:input name="accountBalanceEnquiry" message="tns:accountBalanceEnquiry" />
       <wsdl:output name="accountBalanceEnquiryResponse" message="tns:accountBalanceEnquiryResponse" />
     </wsdl:operation>
+    <wsdl:operation name="cashDepositInstruction">
+      <wsdl:input name="cashDepositInstruction" message="tns:cashDepositInstruction" />
+      <wsdl:output name="cashDepositInstructionResponse" message="tns:cashDepositInstructionResponse" />
+    </wsdl:operation>
     <wsdl:operation name="subscribeMarketData">
       <wsdl:input name="subscribeMarketData" message="tns:subscribeMarketData" />
       <wsdl:output name="subscribeMarketDataResponse" message="tns:subscribeMarketDataResponse" />
@@ -7027,6 +7433,10 @@
       <wsdl:input name="stockPriceInfo" message="tns:stockPriceInfo" />
       <wsdl:output name="stockPriceInfoResponse" message="tns:stockPriceInfoResponse" />
     </wsdl:operation>
+    <wsdl:operation name="cashDepositInstructionEnquiry">
+      <wsdl:input name="cashDepositInstructionEnquiry" message="tns:cashDepositInstructionEnquiry" />
+      <wsdl:output name="cashDepositInstructionEnquiryResponse" message="tns:cashDepositInstructionEnquiryResponse" />
+    </wsdl:operation>
     <wsdl:operation name="queryChannelInfo">
       <wsdl:input name="queryChannelInfo" message="tns:queryChannelInfo" />
       <wsdl:output name="queryChannelInfoResponse" message="tns:queryChannelInfoResponse" />
@@ -7054,6 +7464,10 @@
     <wsdl:operation name="checkNominalClosingPriceDerivation">
       <wsdl:input name="checkNominalClosingPriceDerivation" message="tns:checkNominalClosingPriceDerivation" />
       <wsdl:output name="checkNominalClosingPriceDerivationResponse" message="tns:checkNominalClosingPriceDerivationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="foreignExchangeInstruction">
+      <wsdl:input name="foreignExchangeInstruction" message="tns:foreignExchangeInstruction" />
+      <wsdl:output name="foreignExchangeInstructionResponse" message="tns:foreignExchangeInstructionResponse" />
     </wsdl:operation>
     <wsdl:operation name="stockQuoteEnquiry">
       <wsdl:input name="stockQuoteEnquiry" message="tns:stockQuoteEnquiry" />
@@ -7103,10 +7517,6 @@
       <wsdl:input name="queryIPOInfo" message="tns:queryIPOInfo" />
       <wsdl:output name="queryIPOInfoResponse" message="tns:queryIPOInfoResponse" />
     </wsdl:operation>
-    <wsdl:operation name="withdrawCash">
-      <wsdl:input name="withdrawCash" message="tns:withdrawCash" />
-      <wsdl:output name="withdrawCashResponse" message="tns:withdrawCashResponse" />
-    </wsdl:operation>
     <wsdl:operation name="disclaimerAgreed">
       <wsdl:input name="disclaimerAgreed" message="tns:disclaimerAgreed" />
       <wsdl:output name="disclaimerAgreedResponse" message="tns:disclaimerAgreedResponse" />
@@ -7139,12 +7549,12 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="depositCash">
+    <wsdl:operation name="cashWithdrawalInstructionEnquiry">
       <soap:operation soapAction="" style="document" />
-      <wsdl:input name="depositCash">
+      <wsdl:input name="cashWithdrawalInstructionEnquiry">
         <soap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="depositCashResponse">
+      <wsdl:output name="cashWithdrawalInstructionEnquiryResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -7211,15 +7621,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="modifyAccountDetails">
-      <soap:operation soapAction="" style="document" />
-      <wsdl:input name="modifyAccountDetails">
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="modifyAccountDetailsResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="enterOrder">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="enterOrder">
@@ -7229,12 +7630,48 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="modifyAccountDetails">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="modifyAccountDetails">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="modifyAccountDetailsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="buyingPowerEnquiry">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="buyingPowerEnquiry">
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="buyingPowerEnquiryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cashWithdrawalInstruction">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cashWithdrawalInstruction">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cashWithdrawalInstructionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="settlementInstructionEnquiry">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="settlementInstructionEnquiry">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="settlementInstructionEnquiryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="foreignExchangeInstructionEnquiry">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="foreignExchangeInstructionEnquiry">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="foreignExchangeInstructionEnquiryResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -7289,15 +7726,6 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="queryCreateClientOptionItemResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="foreignExchange">
-      <soap:operation soapAction="" style="document" />
-      <wsdl:input name="foreignExchange">
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="foreignExchangeResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -7445,6 +7873,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="cashDepositInstruction">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cashDepositInstruction">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cashDepositInstructionResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="subscribeMarketData">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="subscribeMarketData">
@@ -7544,6 +7981,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="cashDepositInstructionEnquiry">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cashDepositInstructionEnquiry">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cashDepositInstructionEnquiryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="queryChannelInfo">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="queryChannelInfo">
@@ -7604,6 +8050,15 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="checkNominalClosingPriceDerivationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="foreignExchangeInstruction">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="foreignExchangeInstruction">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="foreignExchangeInstructionResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -7715,15 +8170,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="withdrawCash">
-      <soap:operation soapAction="" style="document" />
-      <wsdl:input name="withdrawCash">
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="withdrawCashResponse">
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="disclaimerAgreed">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="disclaimerAgreed">
@@ -7772,7 +8218,7 @@
   </wsdl:binding>
   <wsdl:service name="ItradeWebServicesService">
     <wsdl:port name="ItradeWebServices" binding="tns:ItradeWebServicesServiceSoapBinding">
-      <soap:address location="http://223.197.108.131/mobile/services/ItradeWebServices" />
+      <soap:address location="http://172.16.200.204:18443/mobile/services/ItradeWebServices" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

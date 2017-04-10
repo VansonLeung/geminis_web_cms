@@ -1,4 +1,5 @@
-﻿using Lucene.Net.Analysis.Standard;
+﻿using ICSharpCode.SharpZipLib.Zip;
+using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.QueryParsers;
@@ -10,7 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
+using System.Xml;
 
 namespace WebApplication2.Helpers
 {
@@ -142,7 +145,7 @@ namespace WebApplication2.Helpers
                     writer.Dispose();
                 }
             }
-            catch (Exception)
+            catch (java.lang.Exception e)
             {
                 return false;
             }
@@ -346,14 +349,14 @@ namespace WebApplication2.Helpers
         public string ExtractText()
         {
             if (string.IsNullOrEmpty(docxFile))
-                throw new Exception("Input file not specified.");
+                throw new java.lang.Exception("Input file not specified.");
 
             // Usually it is "/word/document.xml"
 
             docxFileLocation = FindDocumentXmlLocation();
 
             if (string.IsNullOrEmpty(docxFileLocation))
-                throw new Exception("It is not a valid Docx file.");
+                throw new java.lang.Exception("It is not a valid Docx file.");
 
             return ReadDocumentXml();
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="UXUa7qugzDLfT0hJRgIUF0kZpDs=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="yxBE6/9JME+fGNutJ5bhr91PdrY=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="ItradeWebServicesServiceSoapBinding">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="ItradeWebServices" contract="TTLITradeWSDEV.ItradeWebServices" bindingType="basicHttpBinding" address="http://223.197.108.131/mobile/services/ItradeWebServices" bindingConfiguration="ItradeWebServicesServiceSoapBinding">
+    <endpoint name="ItradeWebServices" contract="TTLITradeWSDEV.ItradeWebServices" bindingType="basicHttpBinding" address="http://172.16.200.204:18443/mobile/services/ItradeWebServices" bindingConfiguration="ItradeWebServicesServiceSoapBinding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://223.197.108.131/mobile/services/ItradeWebServices</serializedValue>
+          <serializedValue>http://172.16.200.204:18443/mobile/services/ItradeWebServices</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

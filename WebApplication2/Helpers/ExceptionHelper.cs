@@ -84,6 +84,6 @@ public sealed class ExceptionUtility
         sw.Close();
         string str = sb.ToString();
 
-        EmailHelper.SendEmail(new List<string> { "geministest1@gmail.com" }, str, "Geminis CMS Exception");
+        EmailHelper.SendEmail(new List<string> { "uattest@geminisgroup.com" }, str, "Geminis CMS Exception");
     }
 }
