@@ -358,6 +358,26 @@ namespace Frontend.Controllers
             /* QPI (Client side) */
             BaseControllerSession session = getSession();
 
+            string login_url = "";
+            string keep_alive_url = "";
+            var qpisession = getSession();
+            string jsessionid = qpisession.jsessionID;
+
+            login_url = "http://uat.quotepower.com/web/geminis/login.jsp";
+            var _constant = ConstantDbContext.getInstance().findActiveByKeyNoTracking("IFRAME_QPI_URL");
+            if (_constant != null)
+            {
+                login_url = _constant.Value + "login.jsp";
+            }
+
+
+            keep_alive_url = "http://uat.quotepower.com/web/luso/json/heartbeat.jsp";
+            _constant = ConstantDbContext.getInstance().findActiveByKeyNoTracking("IFRAME_QPI_LUSO");
+            if (_constant != null)
+            {
+                keep_alive_url = _constant.Value + "json/heartbeat.jsp";
+            }
+
             string domain = "GEMINIS";
             string uid = session.clientID;
             string ts = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -386,7 +406,10 @@ namespace Frontend.Controllers
                 ["ts"] = ts,
                 ["env_key"] = env_key,
                 ["token"] = hashstr,
-                ["password"] = password
+                ["password"] = password,
+                ["login_url"] = login_url,
+                ["keep_alive_url"] = keep_alive_url,
+                ["jsessionid"] = jsessionid
             }));
         }
 
