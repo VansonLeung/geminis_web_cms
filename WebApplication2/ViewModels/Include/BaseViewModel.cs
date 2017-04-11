@@ -152,6 +152,11 @@ namespace WebApplication2.ViewModels.Include
                     continue;
                 }
 
+                if (_cat.isHeaderMenuRight)
+                {
+                    continue;
+                }
+
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
                 item.link = new Link(lang.locale, _cat.getUrl(), null, null);
