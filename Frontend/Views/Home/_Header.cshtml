@@ -63,11 +63,11 @@
                                 {
                                     menuCount += 1;
                                     var menuItem = Model.headerMenu[i];
-                                    <li id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
+                                    <li class="headerMenuActive" id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
                                 }
                             </ul>
                             <ul id="nav-mobile" class="right">
-                                <li style="border-right: 1px solid #999999; width: 100px; text-align: center"><a href="badges.html"><i class="fa fa-search"></i></a></li>
+                                <li id="headerMenu_search_li" style="border-right: 1px solid #999999; width: 100px; text-align: center"><a href="badges.html"><i class="fa fa-search"></i></a></li>
                                 @{
                                     var curMenuCount = menuCount;
                                 }
@@ -76,7 +76,7 @@
                                     var index = i - curMenuCount;
                                     menuCount += 1;
                                     var menuItem = Model.headerMenuRight[index];
-                                    <li id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
+                                    <li class="headerMenuActive" id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
                                 }
 
                             </ul>
@@ -128,7 +128,38 @@
                             }
                         </div>
                         <div class="col s3 box">
-                            <img src="/images/menu_img1.jpg" style="width: 100%" />
+                            @if (menuItem.category != null &&
+menuItem.category.thumbURL != null)
+                            {
+                                <img src="@menuItem.category.thumbURL" style="width: 100%" />
+                            }
+
+                            @for (var j = 0; j < menuItem.submenu.Count; j++)
+                            {
+                                var submenuItem = menuItem.submenu[j];
+                                @if (submenuItem.category != null &&
+submenuItem.category.thumbURL != null)
+                                {
+                                    <img src="@submenuItem.category.thumbURL" class="img_headerMenu_sub_li_@j" style="display: none; width: 100%" />
+                                }
+                            }
+
+                            @for (var j = 0; j < menuItem.submenu.Count; j++)
+                            {
+                                var submenuItem = menuItem.submenu[j];
+                                <ul class="nav-sub-menu subsub headerMenu_sub_@j">
+                                    @for (var k = 0; k < submenuItem.submenu.Count; k++)
+                                    {
+                                        var subsubmenuItem = submenuItem.submenu[k];
+                                        @if (subsubmenuItem.category != null &&
+subsubmenuItem.category.thumbURL != null)
+                                        {
+                                            <img src="@subsubmenuItem.category.thumbURL" class="img_headerMenu_subsub_li_@j_@k" style="display: none; width: 100%" />
+                                        }
+                                    }
+                                </ul>
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -167,18 +198,74 @@
                                     @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                     {
                                         var subsubmenuItem = submenuItem.submenu[k];
-                                        <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name<p class="arrow"></p></li></a>
+                                        <a href="@subsubmenuItem.link.GetFullURL()"><li id="headerMenu_subsub_li_@j_@k">@subsubmenuItem.name<p class="arrow"></p></li></a>
                                     }
                                 </ul>
                             }
                         </div>
                         <div class="col s3 box">
-                            <img src="/images/menu_img1.jpg" style="width: 100%" />
+                            @if (menuItem.category != null &&
+menuItem.category.thumbURL != null)
+                            {
+                                <img src="@menuItem.category.thumbURL" style="width: 100%" />
+                            }
+
+                            @for (var j = 0; j < menuItem.submenu.Count; j++)
+                            {
+                                var submenuItem = menuItem.submenu[j];
+                                @if (submenuItem.category != null &&
+submenuItem.category.thumbURL != null)
+                                {
+                                    <img src="@submenuItem.category.thumbURL" class="img_headerMenu_sub_li_@j" style="display: none; width: 100%" />
+                                }
+                            }
+
+                            @for (var j = 0; j < menuItem.submenu.Count; j++)
+                            {
+                                var submenuItem = menuItem.submenu[j];
+                                <ul class="nav-sub-menu subsub headerMenu_sub_@j">
+                                    @for (var k = 0; k < submenuItem.submenu.Count; k++)
+                                    {
+                                        var subsubmenuItem = submenuItem.submenu[k];
+                                        @if (subsubmenuItem.category != null &&
+subsubmenuItem.category.thumbURL != null)
+                                        {
+                                            <img src="@subsubmenuItem.category.thumbURL" class="img_headerMenu_subsub_li_@j_@k" style="display: none; width: 100%" />
+                                        }
+                                    }
+                                </ul>
+                            }
+
                         </div>
                     </div>
                 </div>
             }
         </div>
+
+
+
+
+        @if (Model.breadcrumbData != null)
+        {
+            <div class='breadcrumb-bar-bg'>
+                <div class='gem_form nobg zeromarginpadding'>
+                    <div class="row">
+                        <div class="col m12">
+                            @for (var k = 0; k < Model.breadcrumbData.Count; k++)
+                            {
+                                var arrow = "";
+                                if (k + 1 < Model.breadcrumbData.Count)
+                                {
+                                    arrow = " > ";
+                                }
+                                var data = Model.breadcrumbData[k];
+                                <a href="@data.link.GetFullURL()" style="color: white;">@data.title</a> @arrow
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </section>
 
@@ -186,7 +273,7 @@
 <script type="text/javascript">
 var overlay_time = null;
 
-$('.nav-bar-bg').find('li').on('mouseover', function (e) {
+$('.nav-bar-bg').find('li.headerMenuActive').on('mouseover', function (e) {
     var target = $(e.target).closest('li');
     var siblings = target.closest('.nav-bar-bg').find('li');
 
@@ -215,13 +302,22 @@ $('.nav-bar-bg').find('li').on('mouseover', function (e) {
     }
 });
 
+$('.nav-bar-bg').find('li.headerMenuActive').on('mouseout', function (e) {
+    overlay_time = setTimeout(function () {
+        $('#nav-overlay').hide();
+        var siblings = $('.nav-bar-bg').find('li');
+        siblings.removeClass('highlighted');
+    }, 250);
+});
+
+
 $('#nav-overlay').on('mouseout', function(e)
 {
     overlay_time = setTimeout(function() {
         $('#nav-overlay').hide();
         var siblings = $('.nav-bar-bg').find('li');
         siblings.removeClass('highlighted');
-    }, 500);
+    }, 250);
 });
 $('#nav-overlay').on('mouseover', function(e)
 {
@@ -244,6 +340,11 @@ $('.nav-sub-menu.sub').find('li').on('mouseover', function (e) {
     var headerMenu_sub_li_id = headerMenu_sub_li_.replace("headerMenu_sub_li_", "headerMenu_sub_");
     $('#nav-overlay').find('.' + headerMenu_sub_li_id).show();
     $('#nav-overlay').find('.' + headerMenu_sub_li_id).siblings('.nav-sub-menu.subsub').hide();
+
+    var img_headerMenu_sub_li_id = headerMenu_sub_li_.replace("headerMenu_sub_li_", "img_headerMenu_sub_li_");
+
+    $('#nav-overlay').find('.' + img_headerMenu_sub_li_id).show();
+    $('#nav-overlay').find('.' + img_headerMenu_sub_li_id).siblings('img').hide();
 })
 
 $('.nav-sub-menu.subsub').find('li').on('mouseover', function (e) {
@@ -252,6 +353,15 @@ $('.nav-sub-menu.subsub').find('li').on('mouseover', function (e) {
 
     siblings.removeClass('active');
     target.addClass('active');
+
+    $('#nav-overlay').find('.' + 'img_headerMenu_subsub_li_' + headerMenu_sub_li_id).show();
+    $('#nav-overlay').find('.' + 'img_headerMenu_subsub_li_' + headerMenu_sub_li_id).siblings('img').hide();
+
+    var headerMenu_subsub_li_ = target.attr('id');
+    var img_headerMenu_sub_li_id = headerMenu_subsub_li_.replace("headerMenu_subsub_li_", "img_headerMenu_subsub_li_");
+
+    $('#nav-overlay').find('.' + img_headerMenu_subsub_li_id).show();
+    $('#nav-overlay').find('.' + img_headerMenu_subsub_li_id).siblings('img').hide();
 })
 
 </script>

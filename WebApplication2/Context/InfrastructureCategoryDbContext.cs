@@ -356,6 +356,16 @@ namespace WebApplication2.Context
                     category.parentItemID = null;
                 }
 
+                if (category.iconPath != null && category.iconPath.Equals("____EMPTY"))
+                {
+                    category.iconPath = null;
+                }
+
+                if (category.thumbPath != null && category.thumbPath.Equals("____EMPTY"))
+                {
+                    category.thumbPath = null;
+                }
+
                 if (category.imagePath != null && category.imagePath.Equals("____EMPTY"))
                 {
                     category.imagePath = null;
@@ -390,6 +400,24 @@ namespace WebApplication2.Context
                 if (category.parentItemID < 0)
                 {
                     category.parentItemID = null;
+                }
+
+                if (category.iconPath != null && category.iconPath.Equals("____EMPTY"))
+                {
+                    category.iconPath = null;
+                }
+                else if (category.iconPath == null)
+                {
+                    category.iconPath = _category.iconPath;
+                }
+
+                if (category.thumbPath != null && category.thumbPath.Equals("____EMPTY"))
+                {
+                    category.thumbPath = null;
+                }
+                else if (category.thumbPath == null)
+                {
+                    category.thumbPath = _category.thumbPath;
                 }
 
                 if (category.imagePath != null && category.imagePath.Equals("____EMPTY"))

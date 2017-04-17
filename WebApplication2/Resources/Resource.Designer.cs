@@ -403,6 +403,15 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Icon Path.
+        /// </summary>
+        public static string iconPath {
+            get {
+                return ResourceManager.GetString("iconPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image Path.
         /// </summary>
         public static string imagePath {
@@ -930,6 +939,15 @@ namespace WebApplication2.Resources {
         public static string startDate {
             get {
                 return ResourceManager.GetString("startDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thumb Path.
+        /// </summary>
+        public static string thumbPath {
+            get {
+                return ResourceManager.GetString("thumbPath", resourceCulture);
             }
         }
         

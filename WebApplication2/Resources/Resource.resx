@@ -417,4 +417,10 @@
   <data name="isHeaderMenuRight" xml:space="preserve">
     <value>Header Menu Right</value>
   </data>
+  <data name="iconPath" xml:space="preserve">
+    <value>Icon Path</value>
+  </data>
+  <data name="thumbPath" xml:space="preserve">
+    <value>Thumb Path</value>
+  </data>
 </root>

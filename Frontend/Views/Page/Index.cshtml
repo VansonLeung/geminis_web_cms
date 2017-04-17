@@ -17,8 +17,16 @@ else
     {
         page_class_name = Model.content.pageClassName;
     }
+
+    var background_image = "/images/bg_img/hkstock_bg.jpg";
+
+    if (Model.category.backgroundURL != null)
+    {
+        background_image = Model.category.backgroundURL;
+    }
+
     <div class="@page_class_name"
-         style='background-image: url("/images/bg_img/hkstock_bg.jpg"); background-size: contain; background-repeat: no-repeat; background-position-y: 0px; min-height: 800px;'>
+         style='background-image: url("@background_image"); background-size: contain; background-repeat: no-repeat; background-position-y: 0px; min-height: 800px;'>
 
         <section class='back'>
             @if (Model.category.hideTopTitle)
@@ -32,6 +40,11 @@ else
                         <tr>
                             <td>
                                 <div class='title'>
+                                    @if (Model.category != null
+                                        && Model.category.iconURL != null)
+                                    {
+                                        <img src="@HttpUtility.HtmlDecode(Model.category.iconURL)" style="width: 60px; height: 60px"/>
+                                    }
                                     @Html.RazorEncode(HttpUtility.HtmlDecode(Model.category.title), Model)
                                 </div>
                                 <div class='hr'></div>

@@ -154,6 +154,29 @@ namespace WebApplication2.Context
         }
 
 
+
+
+        public bool hasArticlesPublishedByCategory(Category category, string lang = "en")
+        {
+            using (var db = new BaseDbContext())
+            {
+                var now = DateTime.Now;
+
+                return (db.articlePublishedDb.AsNoTracking().Where(acc =>
+                acc.categoryID == category.ItemID
+                && acc.Lang == lang
+                && (!acc.datePublishStart.HasValue || acc.datePublishStart.Value <= now)
+                && (!acc.datePublishEnd.HasValue || acc.datePublishEnd.Value >= now)
+                ).OrderByDescending(acc => acc.ArticleID))
+                    .Include(acc => acc.createdByAccount)
+                    .Include(acc => acc.approvedByAccount)
+                    .Include(acc => acc.publishedByAccount).Count() > 0;
+            }
+        }
+
+
+
+
         public int getArticlesPublishedByCategoryTotalCount(Category category, string lang = "en")
         {
             using (var db = new BaseDbContext())

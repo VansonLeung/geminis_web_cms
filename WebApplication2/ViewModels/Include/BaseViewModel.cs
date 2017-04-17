@@ -133,6 +133,24 @@ namespace WebApplication2.ViewModels.Include
                     isBanner,
                     isJumbotron);
 
+
+                var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+                if (hasArticles)
+                {
+                    item.is_has_published_content = true;
+                }
+                else if (item.submenu != null)
+                {
+                    foreach (Menu m in item.submenu)
+                    {
+                        if (m.is_has_published_content)
+                        {
+                            item.link = m.link;
+                            break;
+                        }
+                    }
+                }
+
                 menuitems.Add(item);
             }
 
@@ -169,6 +187,25 @@ namespace WebApplication2.ViewModels.Include
                     false,
                     false);
 
+
+                var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+                if (hasArticles)
+                {
+                    item.is_has_published_content = true;
+                }
+                else if (item.submenu != null)
+                {
+                    foreach (Menu m in item.submenu)
+                    {
+                        if (m.is_has_published_content)
+                        {
+                            item.link = m.link;
+                            break;
+                        }
+                    }
+                }
+
+
                 menuitems.Add(item);
             }
 
@@ -198,6 +235,25 @@ namespace WebApplication2.ViewModels.Include
                     false,
                     false);
 
+
+                var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+                if (hasArticles)
+                {
+                    item.is_has_published_content = true;
+                }
+                else if (item.submenu != null)
+                {
+                    foreach (Menu m in item.submenu)
+                    {
+                        if (m.is_has_published_content)
+                        {
+                            item.link = m.link;
+                            break;
+                        }
+                    }
+                }
+
+
                 menuitems.Add(item);
             }
 
@@ -224,6 +280,25 @@ namespace WebApplication2.ViewModels.Include
                         false,
                         false,
                         false);
+
+
+                    var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+                    if (hasArticles)
+                    {
+                        item.is_has_published_content = true;
+                    }
+                    else if (item.submenu != null)
+                    {
+                        foreach (Menu m in item.submenu)
+                        {
+                            if (m.is_has_published_content)
+                            {
+                                item.link = m.link;
+                                break;
+                            }
+                        }
+                    }
+
 
                     menuitems.Add(item);
                 }
@@ -252,6 +327,25 @@ namespace WebApplication2.ViewModels.Include
                         true,
                         false,
                         false);
+
+
+                    var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+                    if (hasArticles)
+                    {
+                        item.is_has_published_content = true;
+                    }
+                    else if (item.submenu != null)
+                    {
+                        foreach (Menu m in item.submenu)
+                        {
+                            if (m.is_has_published_content)
+                            {
+                                item.link = m.link;
+                                break;
+                            }
+                        }
+                    }
+
 
                     menuitems.Add(item);
                 }
@@ -294,6 +388,25 @@ namespace WebApplication2.ViewModels.Include
                         item.desc = contentPage.Desc;
                     }
 
+
+                    var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+                    if (hasArticles)
+                    {
+                        item.is_has_published_content = true;
+                    }
+                    else if (item.submenu != null)
+                    {
+                        foreach (Menu m in item.submenu)
+                        {
+                            if (m.is_has_published_content)
+                            {
+                                item.link = m.link;
+                                break;
+                            }
+                        }
+                    }
+
+
                     menuitems.Add(item);
                 }
             }
@@ -332,6 +445,17 @@ namespace WebApplication2.ViewModels.Include
             ViewCategory category = getCategoryRecursively(categoryItemID, lang);
             List<ViewCategory> breadcrumbData = new List<ViewCategory>();
             breadcrumbData = convertCategoryRecursiveToList(breadcrumbData, category);
+            if (breadcrumbData.Count > 0)
+            {
+                var cat = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findCategoryByURL("home");
+                if (cat != null)
+                {
+                    ViewCategory home = new ViewCategory();
+                    home.link = new Link(lang.locale, null, null, null);
+                    home.title = cat.GetName(lang.locale);
+                    breadcrumbData.Insert(0, home);
+                }
+            }
             return breadcrumbData;
         }
 

@@ -57,6 +57,32 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.iconPath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @if (Model.iconPath != null)
+                {
+                    <img src="@ServerHelper.GetImage(Model.iconPath)" width="64" />
+                }
+                <input type="file" class="file-input" name="icon" />
+                <input type="checkbox" name="iconPath" value="____EMPTY" /><label for="iconPath">Remove icon upon submit</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.thumbPath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @if (Model.thumbPath != null)
+                {
+                    <img src="@ServerHelper.GetImage(Model.thumbPath)" width="96" />
+                }
+                <input type="file" class="file-input" name="thumb" />
+                <input type="checkbox" name="thumbPath" value="____EMPTY" /><label for="thumbPath">Remove thumb upon submit</label>
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.imagePath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 

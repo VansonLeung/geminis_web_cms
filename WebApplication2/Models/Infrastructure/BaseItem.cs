@@ -53,6 +53,12 @@ namespace WebApplication2.Models.Infrastructure
         [Display(Name = "name_cn", ResourceType = typeof(Resource))]
         public string name_cn { get; set; }
 
+        [Display(Name = "iconPath", ResourceType = typeof(Resource))]
+        public string iconPath { get; set; }
+
+        [Display(Name = "thumbPath", ResourceType = typeof(Resource))]
+        public string thumbPath { get; set; }
+
         [Display(Name = "imagePath", ResourceType = typeof(Resource))]
         public string imagePath { get; set; }
 

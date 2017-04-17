@@ -63,11 +63,11 @@
                                 {
                                     menuCount += 1;
                                     var menuItem = Model.headerMenu[i];
-                                    <li id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
+                                    <li class="headerMenuActive" id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
                                 }
                             </ul>
                             <ul id="nav-mobile" class="right">
-                                <li style="border-right: 1px solid #999999; width: 100px; text-align: center"><a href="badges.html"><i class="fa fa-search"></i></a></li>
+                                <li id="headerMenu_search_li" style="border-right: 1px solid #999999; width: 100px; text-align: center"><a href="badges.html"><i class="fa fa-search"></i></a></li>
                                 @{
                                     var curMenuCount = menuCount;
                                 }
@@ -76,7 +76,7 @@
                                     var index = i - curMenuCount;
                                     menuCount += 1;
                                     var menuItem = Model.headerMenuRight[index];
-                                    <li id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
+                                    <li class="headerMenuActive" id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
                                 }
 
                             </ul>
@@ -128,7 +128,11 @@
                             }
                         </div>
                         <div class="col s3 box">
-                            <img src="/images/menu_img1.jpg" style="width: 100%" />
+                            @if (menuItem.category != null &&
+                                menuItem.category.thumbURL != null)
+                            {
+                               <img src="@menuItem.category.thumbURL" style="width: 100%" />
+                            }
                         </div>
                     </div>
                 </div>
@@ -173,7 +177,11 @@
                             }
                         </div>
                         <div class="col s3 box">
-                            <img src="/images/menu_img1.jpg" style="width: 100%" />
+                            @if (menuItem.category != null &&
+                    menuItem.category.thumbURL != null)
+                            {
+                                <img src="@menuItem.category.thumbURL" style="width: 100%" />
+                            }
                         </div>
                     </div>
                 </div>
@@ -211,7 +219,7 @@
 <script type="text/javascript">
 var overlay_time = null;
 
-$('.nav-bar-bg').find('li').on('mouseover', function (e) {
+$('.nav-bar-bg').find('li.headerMenuActive').on('mouseover', function (e) {
     var target = $(e.target).closest('li');
     var siblings = target.closest('.nav-bar-bg').find('li');
 
@@ -240,13 +248,22 @@ $('.nav-bar-bg').find('li').on('mouseover', function (e) {
     }
 });
 
+$('.nav-bar-bg').find('li.headerMenuActive').on('mouseout', function (e) {
+    overlay_time = setTimeout(function () {
+        $('#nav-overlay').hide();
+        var siblings = $('.nav-bar-bg').find('li');
+        siblings.removeClass('highlighted');
+    }, 250);
+});
+
+
 $('#nav-overlay').on('mouseout', function(e)
 {
     overlay_time = setTimeout(function() {
         $('#nav-overlay').hide();
         var siblings = $('.nav-bar-bg').find('li');
         siblings.removeClass('highlighted');
-    }, 500);
+    }, 250);
 });
 $('#nav-overlay').on('mouseover', function(e)
 {

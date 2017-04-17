@@ -55,10 +55,26 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.iconPath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" class="file-input" name="icon" />
+                <input type="checkbox" name="iconPath" value="____EMPTY" class="" />&nbsp;<label for="iconPath" class="control-label">Remove icon upon submit</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.thumbPath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" class="file-input" name="thumb" />
+                <input type="checkbox" name="thumbPath" value="____EMPTY" class="" />&nbsp;<label for="thumbPath" class="control-label">Remove thumb upon submit</label>
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.imagePath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" class="file-input" name="image" />
-                <input type="checkbox" name="imagePath" value="____EMPTY" class = "" />&nbsp;<label for="imagePath" class = "control-label">Remove image upon submit</label>
+                <input type="checkbox" name="imagePath" value="____EMPTY" class="" />&nbsp;<label for="imagePath" class="control-label">Remove image upon submit</label>
             </div>
         </div>
 

@@ -72,10 +72,34 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin")]
-        public ActionResult Create(Category item, HttpPostedFileBase image)
+        public ActionResult Create(
+            Category item,
+            HttpPostedFileBase icon,
+            HttpPostedFileBase thumb,
+            HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (icon != null)
+                {
+                    string ImageName = Path.GetFileName(icon.FileName);
+                    string[] FileNames = ImageName.Split('\\');
+                    string FileName = FileNames[FileNames.Length - 1];
+                    string path = System.IO.Path.Combine(Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC), FileName);
+                    icon.SaveAs(path);
+                    item.iconPath = FileName;
+                }
+
+                if (thumb != null)
+                {
+                    string ImageName = Path.GetFileName(thumb.FileName);
+                    string[] FileNames = ImageName.Split('\\');
+                    string FileName = FileNames[FileNames.Length - 1];
+                    string path = System.IO.Path.Combine(Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC), FileName);
+                    thumb.SaveAs(path);
+                    item.thumbPath = FileName;
+                }
+
                 if (image != null)
                 {
                     string ImageName = Path.GetFileName(image.FileName);
@@ -122,10 +146,34 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [CustomAuthorize(Roles = "superadmin")]
-        public ActionResult Edit(Category item, HttpPostedFileBase image)
+        public ActionResult Edit(
+            Category item,
+            HttpPostedFileBase icon,
+            HttpPostedFileBase thumb,
+            HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (icon != null)
+                {
+                    string ImageName = Path.GetFileName(icon.FileName);
+                    string[] FileNames = ImageName.Split('\\');
+                    string FileName = FileNames[FileNames.Length - 1];
+                    string path = System.IO.Path.Combine(Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC), FileName);
+                    icon.SaveAs(path);
+                    item.iconPath = FileName;
+                }
+
+                if (thumb != null)
+                {
+                    string ImageName = Path.GetFileName(thumb.FileName);
+                    string[] FileNames = ImageName.Split('\\');
+                    string FileName = FileNames[FileNames.Length - 1];
+                    string path = System.IO.Path.Combine(Server.MapPath("~" + Settings.Default.MS_IMAGE_UPLOAD_SRC), FileName);
+                    thumb.SaveAs(path);
+                    item.thumbPath = FileName;
+                }
+
                 if (image != null)
                 {
                     string ImageName = Path.GetFileName(image.FileName);

@@ -40,6 +40,16 @@ namespace Frontend.Controllers
             SSO_InternalKeepAlive();
             SSO_InternalHeartbeat();
 
+            if (category != null && category.ToLower() == "home")
+            {
+                return RedirectToRoute(new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    locale = locale
+                });
+            }
+
             BaseViewModel vm = BaseViewModel.make(locale, category, id, Request, getSession());
             return View(vm);
         }

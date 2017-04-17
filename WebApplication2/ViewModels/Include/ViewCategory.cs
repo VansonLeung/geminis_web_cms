@@ -26,6 +26,18 @@ namespace WebApplication2.ViewModels.Include
                 this.link = new Link(lang.locale, cat.getUrl(), null, null);
                 this.hideTopTitle = cat.pageShouldHideTopTitle;
                 this.showTopsubmenuBar = cat.pageShouldShowTopbarmenu;
+                if (cat.iconPath != null)
+                {
+                    this.iconURL = "/ckfinder/userfiles/" + "images" + "/" + cat.iconPath;
+                }
+                if (cat.thumbPath != null)
+                {
+                    this.thumbURL = "/ckfinder/userfiles/" + "images" + "/" + cat.thumbPath;
+                }
+                if (cat.imagePath != null)
+                {
+                    this.backgroundURL = "/ckfinder/userfiles/" + "images" + "/" + cat.imagePath;
+                }
             }
         }
         
@@ -33,6 +45,9 @@ namespace WebApplication2.ViewModels.Include
         public string locale { get; set; }
         public string name { get; set; }
         public string title { get; set; }
+        public string iconURL { get; set; }
+        public string thumbURL { get; set; }
+        public string backgroundURL { get; set; }
         public Link link { get; set; }
         public string type { get; set; }
         public bool is_active { get; set; }
