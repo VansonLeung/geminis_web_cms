@@ -121,8 +121,9 @@
                                 <ul class="nav-sub-menu subsub headerMenu_sub_@j">
                                     @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                     {
+                                        var jk = j + "_" + k;
                                         var subsubmenuItem = submenuItem.submenu[k];
-                                        <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name<p class="arrow"></p></li></a>
+                                        <a href="@subsubmenuItem.link.GetFullURL()"><li id="headerMenu_subsub_li_@jk">@subsubmenuItem.name<p class="arrow"></p></li></a>
                                     }
                                 </ul>
                             }
@@ -131,13 +132,13 @@
                             @if (menuItem.category != null &&
 menuItem.category.thumbURL != null)
                             {
-                                <img src="@menuItem.category.thumbURL" style="width: 100%" />
+                                <img src="@menuItem.category.thumbURL" style="width: 100%" class="img_headerMenu" />
                             }
 
                             @for (var j = 0; j < menuItem.submenu.Count; j++)
                             {
                                 var submenuItem = menuItem.submenu[j];
-                                @if (submenuItem.category != null &&
+                                if (submenuItem.category != null &&
 submenuItem.category.thumbURL != null)
                                 {
                                     <img src="@submenuItem.category.thumbURL" class="img_headerMenu_sub_li_@j" style="display: none; width: 100%" />
@@ -150,11 +151,12 @@ submenuItem.category.thumbURL != null)
                                 <ul class="nav-sub-menu subsub headerMenu_sub_@j">
                                     @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                     {
+                                        var jk = j + "_" + k;
                                         var subsubmenuItem = submenuItem.submenu[k];
-                                        @if (subsubmenuItem.category != null &&
+                                        if (subsubmenuItem.category != null &&
 subsubmenuItem.category.thumbURL != null)
                                         {
-                                            <img src="@subsubmenuItem.category.thumbURL" class="img_headerMenu_subsub_li_@j_@k" style="display: none; width: 100%" />
+                                            <img src="@subsubmenuItem.category.thumbURL" class="img_headerMenu_subsub_li_@jk" style="display: none; width: 100%" />
                                         }
                                     }
                                 </ul>
@@ -197,8 +199,9 @@ subsubmenuItem.category.thumbURL != null)
                                 <ul class="nav-sub-menu subsub headerMenu_sub_@j">
                                     @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                     {
+                                        var jk = j + "_" + k;
                                         var subsubmenuItem = submenuItem.submenu[k];
-                                        <a href="@subsubmenuItem.link.GetFullURL()"><li id="headerMenu_subsub_li_@j_@k">@subsubmenuItem.name<p class="arrow"></p></li></a>
+                                        <a href="@subsubmenuItem.link.GetFullURL()"><li id="headerMenu_subsub_li_@jk">@subsubmenuItem.name<p class="arrow"></p></li></a>
                                     }
                                 </ul>
                             }
@@ -207,13 +210,13 @@ subsubmenuItem.category.thumbURL != null)
                             @if (menuItem.category != null &&
 menuItem.category.thumbURL != null)
                             {
-                                <img src="@menuItem.category.thumbURL" style="width: 100%" />
+                                <img src="@menuItem.category.thumbURL" style="width: 100%" class="img_headerMenu" />
                             }
 
                             @for (var j = 0; j < menuItem.submenu.Count; j++)
                             {
                                 var submenuItem = menuItem.submenu[j];
-                                @if (submenuItem.category != null &&
+                                if (submenuItem.category != null &&
 submenuItem.category.thumbURL != null)
                                 {
                                     <img src="@submenuItem.category.thumbURL" class="img_headerMenu_sub_li_@j" style="display: none; width: 100%" />
@@ -226,11 +229,12 @@ submenuItem.category.thumbURL != null)
                                 <ul class="nav-sub-menu subsub headerMenu_sub_@j">
                                     @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                     {
+                                        var jk = j + "_" + k;
                                         var subsubmenuItem = submenuItem.submenu[k];
-                                        @if (subsubmenuItem.category != null &&
-subsubmenuItem.category.thumbURL != null)
+                                        if (subsubmenuItem.category != null &&
+                subsubmenuItem.category.thumbURL != null)
                                         {
-                                            <img src="@subsubmenuItem.category.thumbURL" class="img_headerMenu_subsub_li_@j_@k" style="display: none; width: 100%" />
+                                            <img src="@subsubmenuItem.category.thumbURL" class="img_headerMenu_subsub_li_@jk" style="display: none; width: 100%" />
                                         }
                                     }
                                 </ul>
@@ -295,6 +299,8 @@ $('.nav-bar-bg').find('li.headerMenuActive').on('mouseover', function (e) {
     $('#nav-overlay').find('#' + headerMenu_li_id).show();
     $('#nav-overlay').find('#' + headerMenu_li_id).siblings('.nav-overlay-li').hide();
 
+    $('#nav-overlay').find('.img_headerMenu').show();
+    $('#nav-overlay').find('.img_headerMenu').siblings('img').hide();
 
     if (overlay_time) {
         clearTimeout(overlay_time);
