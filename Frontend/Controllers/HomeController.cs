@@ -33,7 +33,7 @@ namespace Frontend.Controllers
 
                 string category = "login";
                 string id = null;
-                BaseViewModel vml = BaseViewModel.make(null, category, id, Request, getSession());
+                BaseViewModel vml = BaseViewModel.make(locale, category, id, Request, getSession());
                 ViewBag.message = "Session Expired";
                 return View(vml);
             }
@@ -41,7 +41,7 @@ namespace Frontend.Controllers
             SSO_InternalKeepAlive();
             SSO_InternalHeartbeat();
 
-            BaseViewModel vm = BaseViewModel.make(null, "home", null, Request, getSession());
+            BaseViewModel vm = BaseViewModel.make(locale, "home", null, Request, getSession());
             return View(vm);
         }
 

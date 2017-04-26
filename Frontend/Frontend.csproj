@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EmbeddedResourceVirtualPathProvider, Version=1.3.48.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmbeddedResourceVirtualPathProvider.1.3.48\lib\net40\EmbeddedResourceVirtualPathProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -101,6 +105,22 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.JQuery.DataTables, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc.JQuery.DataTables.1.5.31\lib\net451\Mvc.JQuery.DataTables.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mvc.JQuery.DataTables.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc.JQuery.DataTables.Common.1.5.15\lib\net451\Mvc.JQuery.DataTables.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mvc.JQuery.Datatables.Templates, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc.JQuery.Datatables.Templates.1.5.31\lib\net451\Mvc.JQuery.Datatables.Templates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NReco.VideoConverter, Version=1.1.1.0, Culture=neutral, PublicKeyToken=395ccb334978a0cd, processorArchitecture=MSIL">
       <HintPath>..\packages\NReco.VideoConverter.1.1.1\lib\net20\NReco.VideoConverter.dll</HintPath>
       <Private>True</Private>
@@ -112,6 +132,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.Core.1.0.6.10\lib\net452\System.Linq.Dynamic.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -180,18 +204,18 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\EmbeddedResourceVirtualPathProviderStart.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -237,6 +261,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="addon.css" />
     <Content Include="calendarjquerycss3\css\calendar.css" />
     <Content Include="calendarjquerycss3\img\arrows.png" />
     <Content Include="calendarjquerycss3\img\bg.png" />
@@ -249,6 +274,47 @@
     <Content Include="calendarjquerycss3\index.html" />
     <Content Include="calendarjquerycss3\js\jquery-ui-datepicker.min.js" />
     <Content Include="calendarjquerycss3\readme.txt" />
+    <Content Include="Content\jquery-datatables-column-filter\jquery-ui-timepicker-addon.css" />
+    <Content Include="Content\jquery-datatables-column-filter\jquery-ui-timepicker-addon.js" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\demo_page.css" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\demo_table.css" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\demo_table_jui.css" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\demo_validation.css" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\jquery.multiselect.css" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\site_jui.ccss.css" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\css\themes\base\jquery-ui.css" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\back_disabled.jpg" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\back_disabled.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\back_enabled.jpg" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\back_enabled.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\DataTables.jpg" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\favicon.ico" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\forward_disabled.jpg" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\forward_disabled.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\forward_enabled.jpg" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\forward_enabled.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\sort_asc.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\sort_asc_disabled.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\sort_both.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\sort_desc.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\sort_desc_disabled.png" />
+    <Content Include="Content\jquery-datatables-column-filter\media\images\unchecked.gif" />
+    <Content Include="Content\jquery-datatables-column-filter\media\js\jquery.dataTables.columnFilter.css" />
+    <Content Include="Content\jquery-datatables-column-filter\media\js\jquery.dataTables.columnFilter.js" />
+    <Content Include="Content\jquery-datatables-column-filter\media\js\jquery.multiselect.js" />
     <Content Include="css\app.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -1037,6 +1103,7 @@
     </None>
     <Content Include="slick\slick.css" />
     <Content Include="slick\slick.min.js" />
+    <Content Include="timepicker-addon.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1063,6 +1130,7 @@
     <Content Include="Views\Page\Sidebar.cshtml" />
     <Content Include="Views\Page\NewsDetails.cshtml" />
     <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl" />
+    <Content Include="Views\Shared\DataTable.cshtml" />
     <None Include="Web.ReleaseLocal.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
