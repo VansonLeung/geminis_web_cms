@@ -1768,7 +1768,7 @@
     <Content Include="Views\Constant\Delete.cshtml" />
     <Content Include="Views\Preview\Index.cshtml" />
     <Content Include="Views\Shared\DataTable.cshtml" />
-    <Content Include="Views\Constant\Datatable.cshtml" />
+    <Content Include="Views\Shared\CDataTable.cshtml" />
     <None Include="Web.ReleaseLocal.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

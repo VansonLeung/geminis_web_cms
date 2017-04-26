@@ -11,51 +11,57 @@
     @Html.ActionLink("Create New Content Page", "CreateWithViewModelForm")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.createdBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modified_at)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @item.getUrl()
-        </td>
-        <td>
-            @if (item.createdByAccount != null)
-            {
-                @item.createdByAccount.Username
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.modified_at)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-            @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })<br />
-        </td>
-    </tr>
-}
-
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.createdBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.modified_at)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @item.getUrl()
+                </td>
+                <td>
+                    @if (item.createdByAccount != null)
+                {
+                        @item.createdByAccount.Username
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.created_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modified_at)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })<br />
+                    @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })<br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+
+@Html.Partial("CDataTable")

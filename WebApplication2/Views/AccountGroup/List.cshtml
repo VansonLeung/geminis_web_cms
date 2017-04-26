@@ -11,37 +11,42 @@
     @Html.ActionLink("Create New Group", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccessibleCategories)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @item.getAccessibleCategoryListRepresentation()
-        </td>
-        <td>
-            @if (@item.isDefaultGroup)
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.AccountGroupID })
-            }
-            else
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.AccountGroupID }) 
-                @(" | ")
-                @Html.ActionLink("Delete", "Delete", new { id = item.AccountGroupID })
-            }
-        </td>
-    </tr>
-}
-
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessibleCategories)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @item.getAccessibleCategoryListRepresentation()
+                </td>
+                <td>
+                    @if (@item.isDefaultGroup)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.AccountGroupID })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.AccountGroupID }) <br />
+                        @Html.ActionLink("Delete", "Delete", new { id = item.AccountGroupID })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+
+@Html.Partial("CDataTable")

@@ -47,8 +47,8 @@
                 @if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("superadmin"))
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ConstantID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ConstantID }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ConstantID })<br />
+                        @Html.ActionLink("Details", "Details", new { id = item.ConstantID })<br />
                         @Html.ActionLink("Delete", "Delete", new { id = item.ConstantID })
                     </td>
                 }
@@ -58,18 +58,4 @@
 
 </table>
 
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
-
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.js">
-</script>
-
-<script type="text/javascript" charset="utf8">
-    $(document).ready( function () {
-        $('.table').DataTable();
-    } );
-</script>
+@Html.Partial("CDataTable")

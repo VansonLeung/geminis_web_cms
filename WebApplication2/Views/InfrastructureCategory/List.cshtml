@@ -19,164 +19,166 @@ else
 }
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name_en)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name_zh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name_cn)
-        </th>
-        <th>
-            Parent
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.iconPath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.thumbPath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.imagePath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isEnabled)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isContentPage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isArticleList)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isVisibleToVisitorOnly)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isVisibleToMembersOnly)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isVisibleToTradingOnly)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.order)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isHeaderMenu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isFooterMenu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isShortcut)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isJumbotron)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isBanner)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modified_at)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.url)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name_en)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name_zh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name_cn)
-        </td>
-        <td>
-            @if (item.parentItem != null)
-            {
-                @item.parentItem.GetName()
-            }
-        </td>
-        <td>
-            @if (item.iconPath != null)
-            {
-                <img src="@ServerHelper.GetImage(item.iconPath)" width="96" />
-            }
-        </td>
-        <td>
-            @if (item.thumbPath != null)
-            {
-                <img src="@ServerHelper.GetImage(item.thumbPath)" width="96" />
-            }
-        </td>
-        <td>
-            @if (item.imagePath != null)
-            {
-                <img src="@ServerHelper.GetImage(item.imagePath)" width="96" />
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isContentPage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isArticleList)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isVisibleToVisitorOnly)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isVisibleToMembersOnly)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isVisibleToTradingOnly)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.order)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isHeaderMenu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isFooterMenu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isShortcut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isJumbotron)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isBanner)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.modified_at)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |
-            @Html.ActionLink("Sub-Categories", "List", new { parentItemID = item.ItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
-        </td>
-    </tr>
-}
-
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name_en)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name_zh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name_cn)
+            </th>
+            <th>
+                Parent
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iconPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.thumbPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isEnabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isContentPage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isArticleList)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isVisibleToVisitorOnly)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isVisibleToMembersOnly)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isVisibleToTradingOnly)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isHeaderMenu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isFooterMenu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isShortcut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isJumbotron)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isBanner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.modified_at)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.url)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name_en)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name_zh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name_cn)
+                </td>
+                <td>
+                    @if (item.parentItem != null)
+                    {
+                        @item.parentItem.GetName()
+                    }
+                </td>
+                <td>
+                    @if (item.iconPath != null)
+                    {
+                        <img src="@ServerHelper.GetImage(item.iconPath)" width="96" />
+                    }
+                </td>
+                <td>
+                    @if (item.thumbPath != null)
+                    {
+                        <img src="@ServerHelper.GetImage(item.thumbPath)" width="96" />
+                    }
+                </td>
+                <td>
+                    @if (item.imagePath != null)
+                    {
+                        <img src="@ServerHelper.GetImage(item.imagePath)" width="96" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isEnabled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isContentPage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isArticleList)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isVisibleToVisitorOnly)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isVisibleToMembersOnly)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isVisibleToTradingOnly)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.order)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isHeaderMenu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isFooterMenu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isShortcut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isJumbotron)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isBanner)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.created_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modified_at)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })<br />
+                    @Html.ActionLink("Sub-Categories", "List", new { parentItemID = item.ItemID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 @if (ViewBag.subcategory != null)
@@ -185,3 +187,5 @@ else
         @Html.ActionLink("Back to Categories", "List")
     </p>
 }
+
+@Html.Partial("CDataTable")

@@ -21,40 +21,7 @@ namespace WebApplication2.Controllers
             var items = ConstantDbContext.getInstance().find();
             return View(items);
         }
-
-        [CustomAuthorize()]
-        public ActionResult Datatable()
-        {
-            var getDataUrl = Url.Action(nameof(GetDatatableData));
-            var vm = DataTablesHelper.DataTableVm<Constant>("table-id", getDataUrl);
-            
-            vm.Filter = true; //Enable filtering 
-            vm.ShowFilterInput = true; //Show or hide the search-across-all-columns input
-            vm.UseColumnFilterPlugin = true;
-/*
-            vm //Fluently configure, or use attributes on the ViewModel 
-                .FilterOn("Position", new { sSelector = "#custom-filter-placeholder-position" }, new { sSearch = "Tester" }).Select("Engineer", "Tester", "Manager")
-                .FilterOn("Id").NumberRange()
-                .FilterOn("Salary", new { sSelector = "#custom-filter-placeholder-salary" }).NumberRange();
-*/
-            vm.LengthMenu = LengthMenuVm.Default(); // 5,10,25,50,All
-            vm.PageLength = 25; //... and set a default
-            
-            return View(vm);
-        }
-
-
-        public DataTablesResult<Constant> GetDatatableData(DataTablesParam dataTableParam)
-        {
-            using (var db = new BaseDbContext())
-            {
-                IQueryable<Constant> items = db.constantDb.AsQueryable().Cast<Constant>();
-                var itemsView = items.Select(u => u);
-                return DataTablesResult.Create(itemsView, dataTableParam);
-            }
-        }
-
-
+        
         // GET: Constant/Details/5
         [CustomAuthorize()]
         public ActionResult Details(int id)

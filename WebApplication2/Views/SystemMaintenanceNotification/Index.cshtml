@@ -11,84 +11,90 @@
     @Html.ActionLink("Create Scheduled Notification", "CreateScheduled")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name_en)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name_zh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name_cn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.desc_en)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.desc_zh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.desc_cn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.startDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.endDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modified_at)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name_en)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name_zh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name_cn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.desc_en)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.desc_zh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.desc_cn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.startDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.endDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.modified_at)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NotificationID }) |
-            @Html.ActionLink("Activate", "Activate", new { id = item.NotificationID }) |
-            @Html.ActionLink("Deactivate", "Deactivate", new { id = item.NotificationID })
-        </td>
-    </tr>
-}
-
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name_en)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name_zh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name_cn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.desc_en)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.desc_zh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.desc_cn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.startDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.modified_at)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name_en)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name_zh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name_cn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc_en)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc_zh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc_cn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.created_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modified_at)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.NotificationID })<br />
+                    @Html.ActionLink("Activate", "Activate", new { id = item.NotificationID })<br />
+                    @Html.ActionLink("Deactivate", "Deactivate", new { id = item.NotificationID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+
+@Html.Partial("CDataTable")
