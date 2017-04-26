@@ -123,6 +123,8 @@ namespace WebApplication2.Context
                 db.Entry(constant).State = EntityState.Modified;
 
                 constant.Value = item.Value;
+                constant.Key = item.Key;
+                constant.isActive = item.isActive;
 
                 db.SaveChanges();
                 return null;

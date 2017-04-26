@@ -39,13 +39,17 @@ namespace WebApplication2.Controllers
             string accountID = "",
             string logAction = "", 
             string startDate = "", 
-            string endDate = "")
+            string endDate = "",
+            string category = "",
+            string article = "")
         {
             var query = new AuditLogDbContext.Query();
             query.accountID = accountID;
             query.logAction = logAction;
             query.startDate = startDate;
             query.endDate = endDate;
+            query.category = category;
+            query.article = article;
 
             var list = AuditLogDbContext.getInstance().findAll(query);
             if (!accountID.Equals(""))

@@ -26,6 +26,12 @@ namespace WebApplication2.Models
         public int? categoryID { get; set; }
         public string category { get; set; }
 
+        public int? targetAccountID { get; set; }
+        public string targetAccount { get; set; }
+
+        public int? systemMaintenanceNotificationID { get; set; }
+        public string systemMaintenanceNotification { get; set; }
+
         [Display(Name = "Action", ResourceType = typeof(Resource))]
         public string action { get; set; }
     }

@@ -110,6 +110,18 @@ else
             }
         </td>
         <td>
+            @if (item.iconPath != null)
+            {
+                <img src="@ServerHelper.GetImage(item.iconPath)" width="96" />
+            }
+        </td>
+        <td>
+            @if (item.thumbPath != null)
+            {
+                <img src="@ServerHelper.GetImage(item.thumbPath)" width="96" />
+            }
+        </td>
+        <td>
             @if (item.imagePath != null)
             {
                 <img src="@ServerHelper.GetImage(item.imagePath)" width="96" />

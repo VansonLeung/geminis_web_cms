@@ -25,6 +25,9 @@ namespace WebApplication2.Context
         public static string ACTION_UNAPPROVE = "UNAPPROVE";
         public static string ACTION_PUBLISH = "PUBLISH";
         public static string ACTION_UNPUBLISH = "UNPUBLISH";
+        public static string ACTION_CHANGE_PASSWORD = "CHANGE_PASSWORD";
+        public static string ACTION_ACTIVATE = "ACTIVATE";
+        public static string ACTION_DEACTIVATE = "DEACTIVATE";
 
         #endregion
 
@@ -62,6 +65,8 @@ namespace WebApplication2.Context
             public string logAction = "";
             public string startDate = "";
             public string endDate = "";
+            public string category = "";
+            public string article = "";
 
             public int getAccountID()
             {
@@ -89,7 +94,7 @@ namespace WebApplication2.Context
 
                 var predicate = PredicateBuilder.True<AuditLog>();
 
-                if (!String.IsNullOrEmpty(query.accountID))
+                if (!String.IsNullOrEmpty(query.accountID) && query.accountID != "0")
                 {
                     int id = query.getAccountID();
                     predicate = predicate.And(acc => acc.accountID == id);
@@ -107,6 +112,16 @@ namespace WebApplication2.Context
                 {
                     DateTime date = query.getEndDate();
                     predicate = predicate.And(acc => acc.created_at <= date);
+                }
+                if (!String.IsNullOrEmpty(query.category))
+                {
+                    String category = query.category;
+                    predicate = predicate.And(acc => acc.category == category);
+                }
+                if (!String.IsNullOrEmpty(query.article))
+                {
+                    String article = query.article;
+                    predicate = predicate.And(acc => acc.article == article);
                 }
 
 
@@ -214,6 +229,44 @@ namespace WebApplication2.Context
             item.account = account.Username;
             item.categoryID = category.ItemID;
             item.category = category.GetName();
+            item.action = action;
+
+            return createAuditLog(item);
+        }
+
+
+        public string createAuditLogAccountAction(Account targetAccount, string action)
+        {
+            var account = SessionPersister.account;
+            if (account == null)
+            {
+                return null;
+            }
+
+            AuditLog item = new AuditLog();
+            item.accountID = account.AccountID;
+            item.account = account.Username;
+            item.targetAccountID = targetAccount.AccountID;
+            item.targetAccount = targetAccount.Username;
+            item.action = action;
+
+            return createAuditLog(item);
+        }
+
+
+        public string createAuditLogSystemMaintenanceNotificationAction(SystemMaintenanceNotification systemMaintenanceNotification, string action)
+        {
+            var account = SessionPersister.account;
+            if (account == null)
+            {
+                return null;
+            }
+
+            AuditLog item = new AuditLog();
+            item.accountID = account.AccountID;
+            item.account = account.Username;
+            item.systemMaintenanceNotificationID = systemMaintenanceNotification.NotificationID;
+            item.systemMaintenanceNotification = systemMaintenanceNotification.name_en;
             item.action = action;
 
             return createAuditLog(item);

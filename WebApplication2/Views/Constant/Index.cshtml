@@ -8,46 +8,68 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Constants</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Key)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Value)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isActive)
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Key)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Key)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isActive)
-        </td>
 
-        @if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("superadmin"))
+        @foreach (var item in Model)
         {
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ConstantID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ConstantID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ConstantID })
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isActive)
+                </td>
+
+                @if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("superadmin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ConstantID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ConstantID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ConstantID })
+                    </td>
+                }
+            </tr>
         }
-    </tr>
-}
+    </tbody>
 
 </table>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css">
+
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.js">
+</script>
+
+<script type="text/javascript" charset="utf8">
+    $(document).ready( function () {
+        $('.table').DataTable();
+    } );
+</script>

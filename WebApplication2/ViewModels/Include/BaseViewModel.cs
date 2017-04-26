@@ -72,6 +72,7 @@ namespace WebApplication2.ViewModels.Include
         public bool isError { get; set; } 
         public int errorCode { get; set; }
         public string errorMessage { get; set; }
+        public string currentYear { get; set; }
 
 
 
@@ -445,6 +446,20 @@ namespace WebApplication2.ViewModels.Include
             ViewCategory category = getCategoryRecursively(categoryItemID, lang);
             List<ViewCategory> breadcrumbData = new List<ViewCategory>();
             breadcrumbData = convertCategoryRecursiveToList(breadcrumbData, category);
+
+
+            for (var k = breadcrumbData.Count - 1; k >= 0; k--)
+            {
+                var cate = breadcrumbData[k];
+                var _cat = cate.categoryItemID;
+                var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategoryID(_cat, lang.lang);
+                if (!hasArticles && breadcrumbData.Count - 1 > k)
+                {
+                    cate.link = breadcrumbData[k + 1].link;
+                }
+            }
+
+
             if (breadcrumbData.Count > 0)
             {
                 var cat = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findCategoryByURL("home");
@@ -452,7 +467,7 @@ namespace WebApplication2.ViewModels.Include
                 {
                     ViewCategory home = new ViewCategory();
                     home.link = new Link(lang.locale, null, null, null);
-                    home.title = cat.GetName(lang.locale);
+                    home.title = cat.GetName(lang.lang);
                     breadcrumbData.Insert(0, home);
                 }
             }
@@ -487,6 +502,7 @@ namespace WebApplication2.ViewModels.Include
             vm.lang.lang = language;
             vm.lang.culture = culture;
 
+            vm.currentYear = DateTime.Now.Year.ToString();
 
             // sessions
             vm.current = new Current(session, null, null);

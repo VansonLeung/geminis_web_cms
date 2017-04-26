@@ -333,6 +333,7 @@ namespace WebApplication2.Context
                 db.accountDb.Add(account);
                 db.SaveChanges();
             }
+            AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_CREATE);
             return null;
         }
 
@@ -392,6 +393,7 @@ namespace WebApplication2.Context
                 return error;
             }
 
+            AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_EDIT);
 
             return null;
         }
@@ -443,9 +445,10 @@ namespace WebApplication2.Context
 
                     account.Password = _account.Password;
                     account.ConfirmPassword = _account.ConfirmPassword;
-
-                    return null;
                 }
+
+                AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_CHANGE_PASSWORD);
+                return null;
             }
             else
             {
@@ -481,8 +484,10 @@ namespace WebApplication2.Context
 
                     SessionPersister.updateSessionForAccount();
                     db.SaveChanges();
-                    return null;
                 }
+
+                AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_EDIT);
+                return null;
             }
             else
             {
@@ -494,12 +499,14 @@ namespace WebApplication2.Context
 
         public string tryDeleteAccount(Account account)
         {
+            AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_DELETE);
+
             using (var db = new BaseDbContext())
             {
                 db.accountDb.Remove(account);
                 db.SaveChanges();
-                return null;
             }
+            return null;
         }
 
     }

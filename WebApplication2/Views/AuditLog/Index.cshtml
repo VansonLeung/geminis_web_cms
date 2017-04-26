@@ -9,6 +9,8 @@
 
 <div style="position:relative;">
     <form>
+        @Html.TextBox("category", null, htmlAttributes: new { @placeholder = "Category" })
+        @Html.TextBox("article", null, htmlAttributes: new { @placeholder = "Article" })
         @Html.DropDownList("accountID", null, htmlAttributes: new { @placeholder = "Account" })
         @Html.DropDownList("logAction", null, htmlAttributes: new { @placeholder = "Action" })
         @Html.Editor("startDate", null, new { htmlAttributes = new { @class = "datepicker", placeholder = "Start Date" } })
@@ -30,6 +32,12 @@
         </th>
         <th>
             Content Page
+        </th>
+        <th>
+            Account
+        </th>
+        <th>
+            System Maintenance Notification
         </th>
         <th>
             @Html.DisplayNameFor(model => model.action)
@@ -58,6 +66,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.contentPage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.targetAccount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.systemMaintenanceNotification)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.action)

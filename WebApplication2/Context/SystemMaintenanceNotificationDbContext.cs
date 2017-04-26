@@ -70,9 +70,9 @@ namespace WebApplication2.Context
 
                 db.systemMaintenanceNotificationDb.Add(item);
                 db.SaveChanges();
-
-                return null;
             }
+            AuditLogDbContext.getInstance().createAuditLogSystemMaintenanceNotificationAction(item, AuditLogDbContext.ACTION_CREATE);
+            return null;
         }
 
         public string editNotification(SystemMaintenanceNotification item)
@@ -101,8 +101,9 @@ namespace WebApplication2.Context
 
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
-                return null;
             }
+            AuditLogDbContext.getInstance().createAuditLogSystemMaintenanceNotificationAction(item, AuditLogDbContext.ACTION_EDIT);
+            return null;
         }
 
         public string activateNotification(SystemMaintenanceNotification item)
@@ -112,8 +113,9 @@ namespace WebApplication2.Context
                 db.Entry(item).State = EntityState.Modified;
                 item.isActive = true;
                 db.SaveChanges();
-                return null;
             }
+            AuditLogDbContext.getInstance().createAuditLogSystemMaintenanceNotificationAction(item, AuditLogDbContext.ACTION_ACTIVATE);
+            return null;
         }
 
         public string deactivateNotification(SystemMaintenanceNotification item)
@@ -123,8 +125,9 @@ namespace WebApplication2.Context
                 db.Entry(item).State = EntityState.Modified;
                 item.isActive = false;
                 db.SaveChanges();
-                return null;
             }
+            AuditLogDbContext.getInstance().createAuditLogSystemMaintenanceNotificationAction(item, AuditLogDbContext.ACTION_DEACTIVATE);
+            return null;
         }
     }
 }
