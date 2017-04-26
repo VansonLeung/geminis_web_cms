@@ -52,6 +52,11 @@ namespace Frontend.Controllers
 
         public void setJSession(QPIAPIResponse resp)
         {
+            if (resp == null)
+            {
+                Session["jsessionID"] = null;
+                Session["jsessionIDdateDT"] = null;
+            }
             Session["jsessionID"] = resp.session;
             Session["jsessionIDdateDT"] = resp.header.dateDT;
         }
@@ -78,6 +83,8 @@ namespace Frontend.Controllers
 
         public void ClearSession()
         {
+            setSession(null);
+            setJSession(null);
             Session.Abandon();
         }
 
