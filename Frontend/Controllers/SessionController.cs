@@ -31,6 +31,15 @@ namespace Frontend.Controllers
                 return 30;
             }
 
+            public static int getFontSizeNormal()
+            {
+                return 20;
+            }
+            public static int getFontSizeBig()
+            {
+                return 25;
+            }
+
             public int getSessionHeartbeatMinutes()
             {
                 var constant = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SESSION_HEARTBEAT_MINS");
@@ -329,7 +338,7 @@ namespace Frontend.Controllers
 
                 if (resp.errorCode != null || resp.errorMessage != null)
                 {
-                    return this.Json(BaseResponse.MakeResponse("F001", resp.errorCode, resp, resp.errorMessage));
+                    return this.Json(BaseResponse.MakeResponse("F001", resp.errorCode, null, resp.errorMessage));
                 }
 
                 setSession(resp);

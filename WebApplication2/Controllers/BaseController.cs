@@ -28,6 +28,18 @@ namespace WebApplication2.Controllers
             public string tradingAccList { get; set; }
             public string jsessionID { get; set; }
             public string fullname { get; set; }
+            
+            public bool isLoggedIn { get; set; }
+            public int fontSize { get; set; }
+
+            public bool hasTradingAcc { get; set; }
+
+            public string ttL_accountSeqField { get; set; }
+            public string ttL_tradingAccSeqField { get; set; }
+            public string ttL_accountTypeField { get; set; }
+            public string ttL_investorTypeIDField { get; set; }
+            public string ttL_tradingAccStatusField { get; set; }
+            public string ttL_defaultSubAccountField { get; set; }
         }
     }
 }

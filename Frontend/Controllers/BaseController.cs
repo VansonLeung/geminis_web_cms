@@ -4,30 +4,45 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
+using static Frontend.Controllers.SessionController;
 using static WebApplication2.Controllers.BaseController;
 
 namespace Frontend.Controllers
 {
     public class BaseController : Controller
     {
-        public BaseControllerSession getSession()
+        public BaseControllerSession getSession(bool excludePostLogin = false)
         {
-            if (Session["TTLClient"] != null)
+            BaseControllerSession session = new BaseControllerSession();
+            session.isLoggedIn = false;
+
+            if (!excludePostLogin)
             {
-                TTLITradeWSDEV.clientLoginResponseLoginResp resp = (TTLITradeWSDEV.clientLoginResponseLoginResp)(Session["TTLClient"]);
-                BaseControllerSession session = MakeBaseControllerSession(resp);
-
-                if (Session["jsessionID"] != null)
+                if (Session["TTLClient"] != null)
                 {
-                    string jsessionID = (string)Session["jsessionID"];
-                    session.jsessionID = jsessionID;
-                }
-                
-                return session;
-            }
-            return null;
-        }
+                    TTLITradeWSDEV.clientLoginResponseLoginResp resp = (TTLITradeWSDEV.clientLoginResponseLoginResp)(Session["TTLClient"]);
+                    session = MakeBaseControllerSession(resp);
+                    session.isLoggedIn = true;
 
+                    if (Session["jsessionID"] != null)
+                    {
+                        string jsessionID = (string)Session["jsessionID"];
+                        session.jsessionID = jsessionID;
+                    }
+
+                    return session;
+                }
+            }
+
+            session.fontSize = SessionLogin.getFontSizeNormal();
+            if (Session["fontSize"] != null)
+            {
+                session.fontSize = (int)Session["fontSize"];
+            }
+
+            return session;
+        }
+        
 
 
         BaseControllerSession MakeBaseControllerSession(TTLITradeWSDEV.clientLoginResponseLoginResp resp)
@@ -41,6 +56,20 @@ namespace Frontend.Controllers
             session.tradingAccSeq = resp.tradingAccSeq;
             session.tradingAccStatus = resp.tradingAccStatus;
             session.tradingAccList = Newtonsoft.Json.JsonConvert.SerializeObject(resp.tradingAccList);
+            if (resp.tradingAccList != null && resp.tradingAccList.Length > 0)
+            {
+                var acc = resp.tradingAccList[0];
+                if (acc != null)
+                {
+                    session.hasTradingAcc = true;
+                    session.ttL_accountSeqField = acc.accountSeq;
+                    session.ttL_accountTypeField = acc.accountType;
+                    session.ttL_defaultSubAccountField = acc.defaultSubAccount;
+                    session.ttL_investorTypeIDField = acc.investorTypeID;
+                    session.ttL_tradingAccSeqField = acc.tradingAccSeq;
+                    session.ttL_tradingAccStatusField = acc.tradingAccStatus;
+                }
+            }
             return session;
         }
 
@@ -85,7 +114,6 @@ namespace Frontend.Controllers
         {
             setSession(null);
             setJSession(null);
-            Session.Abandon();
         }
 
 
@@ -236,6 +264,19 @@ namespace Frontend.Controllers
                 SessionController.TryHeartbeatSessionLogin(sessionID, userID);
             }
             return false;
+        }
+
+
+
+
+        public void SetFontSizeNormal()
+        {
+            Session["fontSize"] = SessionLogin.getFontSizeNormal();
+        }
+
+        public void SetFontSizeBig()
+        {
+            Session["fontSize"] = SessionLogin.getFontSizeBig();
         }
     }
 }

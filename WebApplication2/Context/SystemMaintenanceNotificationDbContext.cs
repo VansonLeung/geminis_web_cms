@@ -49,9 +49,24 @@ namespace WebApplication2.Context
             }
         }
 
+        public List<SystemMaintenanceNotification> findAllActivatedNotifications()
+        {
+            using (var db = new BaseDbContext())
+            {
+                var now = new DateTime();
+                return db.systemMaintenanceNotificationDb
+                    .Where(item => 
+                    item.isActive == true
+                    && item.startDate <= now
+                    && item.endDate >= now
+                    )
+                .OrderBy(item => item.startDate)
+                .ToList();
+            }
+        }
 
         // edit
-        
+
         public string createScheduledNotification(SystemMaintenanceNotification item)
         {
             using (var db = new BaseDbContext())

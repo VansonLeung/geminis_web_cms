@@ -1,4 +1,6 @@
 ﻿@model WebApplication2.ViewModels.Include.BaseViewModel
+@using WebApplication2.ViewModels.Include
+@using WebApplication2.ViewModels
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +17,31 @@
 </head>
 
 <body>
+
+    <style>
+        body {
+            font-size: @(Model.current.session.fontSize)px !important;
+        }
+        .top_warning {
+            padding: 10px;
+            background-color: #000;
+        }
+
+            .top_warning .content {
+                color: #fff;
+                text-align: center;
+            }
+    </style>
+
+    @foreach (var msg in Model.topWarningMessages)
+    {
+        <div class="top_warning">
+            <div class="content">
+                @Html.RazorEncode(HttpUtility.HtmlDecode(msg), Model)
+            </div>
+        </div>
+    }
+
     @Scripts.Render("~/js/js_sha256.js")
     @Scripts.Render("~/js/jquerymin.js")
     @Scripts.Render("~/js/materialize.min.js")

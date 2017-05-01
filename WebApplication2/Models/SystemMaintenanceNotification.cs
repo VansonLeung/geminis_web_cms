@@ -14,6 +14,46 @@ namespace WebApplication2.Models
         [Key]
         public int NotificationID { get; set; }
 
+        public string GetName(string locale = null)
+        {
+            if (locale != null)
+            {
+                if (locale.Equals("en"))
+                {
+                    return name_en;
+                }
+                if (locale.Equals("zh"))
+                {
+                    return name_zh;
+                }
+                if (locale.Equals("cn"))
+                {
+                    return name_cn;
+                }
+            }
+            return name_en;
+        }
+
+        public string GetDesc(string locale = null)
+        {
+            if (locale != null)
+            {
+                if (locale.Equals("en"))
+                {
+                    return desc_en;
+                }
+                if (locale.Equals("zh"))
+                {
+                    return desc_zh;
+                }
+                if (locale.Equals("cn"))
+                {
+                    return desc_cn;
+                }
+            }
+            return desc_en;
+        }
+
         [Display( Name = "name_en", ResourceType = typeof(Resource))]
         public string name_en { get; set; }
 

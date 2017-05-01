@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication2.Context;
 using WebApplication2.Models;
 using static WebApplication2.Controllers.BaseController;
 
@@ -56,6 +57,7 @@ namespace WebApplication2.ViewModels.Include
         public List<Menu> headerMenu { get; set; }
         public List<Menu> headerMenuRight { get; set; }
         public List<Menu> footerMenu { get; set; }
+        public List<Menu> bottomMenu { get; set; }
         public List<Menu> jumbotronMenu { get; set; }
         public List<Menu> shortcutMenu { get; set; }
         public ViewCategory category { get; set; }
@@ -74,6 +76,7 @@ namespace WebApplication2.ViewModels.Include
         public string errorMessage { get; set; }
         public string currentYear { get; set; }
 
+        public List<string> topWarningMessages { get; set; }
 
 
         public static List<Menu> createSubmenu(
@@ -84,7 +87,8 @@ namespace WebApplication2.ViewModels.Include
             bool isFooterMenu = false,
             bool isShortcut = false,
             bool isBanner = false,
-            bool isJumbotron = false)
+            bool isJumbotron = false,
+            bool isBottomMenu = false)
         {
             List<Menu> menuitems = new List<Menu>();
 
@@ -121,6 +125,11 @@ namespace WebApplication2.ViewModels.Include
                     continue;
                 }
 
+                if (isBottomMenu && !_cat.isBottomMenu)
+                {
+                    continue;
+                }
+
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
                 item.link = new Link(lang.locale, _cat.getUrl(), null, null);
@@ -132,7 +141,8 @@ namespace WebApplication2.ViewModels.Include
                     isFooterMenu,
                     isShortcut,
                     isBanner,
-                    isJumbotron);
+                    isJumbotron,
+                    isBottomMenu);
 
 
                 var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
@@ -416,6 +426,56 @@ namespace WebApplication2.ViewModels.Include
         }
 
 
+        public static List<Menu> createBottomMenu(int categoryItemID, Lang lang)
+        {
+            List<Menu> menuitems = new List<Menu>();
+
+            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(categoryItemID);
+            foreach (var _cat in rootCategories)
+            {
+                Menu item = new Menu();
+                item.name = _cat.GetName(lang.lang);
+                item.link = new Link(lang.locale, _cat.getUrl(), null, null);
+                item.category = new ViewCategory(_cat, lang);
+
+                if (_cat.isBottomMenu)
+                {
+                    item.submenu = createSubmenu(item.category.categoryItemID, lang,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true);
+
+
+                    var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+                    if (hasArticles)
+                    {
+                        item.is_has_published_content = true;
+                    }
+                    else if (item.submenu != null)
+                    {
+                        foreach (Menu m in item.submenu)
+                        {
+                            if (m.is_has_published_content)
+                            {
+                                item.link = m.link;
+                                break;
+                            }
+                        }
+                    }
+
+
+                    menuitems.Add(item);
+                }
+            }
+
+            return menuitems;
+        }
+
+
         public static ViewCategory getCategoryRecursively(int categoryItemID, Lang lang)
         {
             ViewCategory category = null;
@@ -496,6 +556,21 @@ namespace WebApplication2.ViewModels.Include
 
             }
 
+            if (culture != null && culture == "CN")
+            {
+                language = "cn";
+            }
+
+            if (culture != null && culture == "HK")
+            {
+                language = "zh";
+            }
+
+            if (culture != null && culture == "TW")
+            {
+                language = "zh";
+            }
+
             BaseViewModel vm = new BaseViewModel();
             vm.lang = new Lang();
             vm.lang.locale = locale;
@@ -507,6 +582,17 @@ namespace WebApplication2.ViewModels.Include
             // sessions
             vm.current = new Current(session, null, null);
 
+
+
+
+            // top warning
+
+            vm.topWarningMessages = new List<string>();
+            var systemMaintenanceNotifications = SystemMaintenanceNotificationDbContext.getInstance().findAllActivatedNotifications();
+            foreach (var item in systemMaintenanceNotifications)
+            {
+                vm.topWarningMessages.Add(item.GetDesc(language));
+            }
 
             // constants
 
@@ -583,6 +669,11 @@ namespace WebApplication2.ViewModels.Include
             // footer menu
 
             vm.footerMenu = createFooterMenu(0, vm.lang);
+
+
+            // bottom menu
+
+            vm.bottomMenu = createBottomMenu(0, vm.lang);
 
 
             // shortcut menu

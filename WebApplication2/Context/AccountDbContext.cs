@@ -486,7 +486,6 @@ namespace WebApplication2.Context
                     db.SaveChanges();
                 }
 
-                AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_EDIT);
                 return null;
             }
             else

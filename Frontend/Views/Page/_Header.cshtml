@@ -20,11 +20,24 @@
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
                                     字體大小
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style='font-size: 20px; border-bottom: 2px solid #CF0D14'><a href='#' style='text-decoration: none; color: #333' onclick='fontSmall();'>A</a></span>
+                                    @{ 
+                                        var spsm = "";
+                                        var bigsm = "";
+                                    }
+                                    @if (Model.current.session.fontSize <= 20)
+                                    {
+                                        spsm = " border-bottom: 2px solid #CF0D14";
+                                    }
+                                    else if (Model.current.session.fontSize > 20)
+                                    {
+                                        bigsm = " border-bottom: 2px solid #CF0D14";
+                                    }
+                                    <span style='font-size: 20px; @(spsm)'><a href='#' style='text-decoration: none; color: #333' onclick='fontSmall();'>A</a></span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style='font-size: 30px'><a href='#' style='text-decoration: none; color: #333' onclick='fontBig();'>A</a></span>
+                                    <span style='font-size: 30px; @(bigsm)'><a href='#' style='text-decoration: none; color: #333' onclick='fontBig();'>A</a></span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    @if (Model.current != null && Model.current.session != null)
+                                    @if (Model.current != null && Model.current.session != null
+                                        && Model.current.session.isLoggedIn)
                                     {
                                         <a href="/@Model.lang.locale/home/logout">
                                             <span class='generic-button-standalone gb-hollow-white'>
@@ -78,7 +91,7 @@
                                     var index = i - curMenuCount;
                                     menuCount += 1;
                                     var menuItem = Model.headerMenuRight[index];
-                                    <li class="headerMenuActive" id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
+                                    <li class="headerMenuActive li_right" id="headerMenu_li_@i"><a href="@menuItem.link.GetFullURL()">@menuItem.name</a></li>
                                 }
 
                             </ul>
@@ -279,6 +292,47 @@ menuItem.category.thumbURL != null)
 <script type="text/javascript">
 var overlay_time = null;
 
+$('.nav-bar-bg').find('li#headerMenu_search_li').on('mouseover', function (e) {
+    var target = $(e.target).closest('li');
+    var siblings = target.closest('.nav-bar-bg').find('li');
+
+    if (!target.hasClass('highlighted')) {
+        $('.nav-sub-menu.sub').find('li').removeClass('active');
+        $('.nav-sub-menu.subsub').hide();
+        $('.nav-sub-menu.subsub').find('li').removeClass('active');
+    }
+
+    siblings.removeClass('highlighted');
+    target.addClass('highlighted')
+
+    $('#nav-overlay').show();
+
+    if (target.hasClass('li_right')) {
+        $('#nav-overlay').addClass('right');
+    }
+    else {
+        $('#nav-overlay').removeClass('right');
+    }
+
+
+    var headerMenu_li_ = target.attr('id');
+    $('#nav-overlay').find('#' + headerMenu_li_).show();
+    $('#nav-overlay').find('#' + headerMenu_li_).siblings('.nav-overlay-li').hide();
+
+    if (overlay_time) {
+        clearTimeout(overlay_time);
+        overlay_time = null;
+    }
+});
+    /*
+$('.nav-bar-bg').find('li#headerMenu_search_li').on('mouseout', function (e) {
+    overlay_time = setTimeout(function () {
+        $('#nav-overlay').hide();
+        var siblings = $('.nav-bar-bg').find('li');
+        siblings.removeClass('highlighted');
+    }, 250);
+});*/
+
 $('.nav-bar-bg').find('li.headerMenuActive').on('mouseover', function (e) {
     var target = $(e.target).closest('li');
     var siblings = target.closest('.nav-bar-bg').find('li');
@@ -294,6 +348,14 @@ $('.nav-bar-bg').find('li.headerMenuActive').on('mouseover', function (e) {
     target.addClass('highlighted')
 
     $('#nav-overlay').show();
+
+    if (target.hasClass('li_right')) {
+        $('#nav-overlay').addClass('right');
+    }
+    else {
+        $('#nav-overlay').removeClass('right');
+    }
+
 
 
     var headerMenu_li_ = target.attr('id');
@@ -372,6 +434,19 @@ $('.nav-sub-menu.subsub').find('li').on('mouseover', function (e) {
     $('#nav-overlay').find('.' + img_headerMenu_subsub_li_id).siblings('img').hide();
 })
 
+</script>
+
+
+
+<script>
+    window.fontSmall = function fontSmall() {
+        var pathname = window.location.pathname;
+        window.location.href = "/@Model.lang.locale/home/changeFontSizeNormal?redirect=" + pathname;
+    }
+    window.fontBig = function fontBig() {
+        var pathname = window.location.pathname;
+        window.location.href = "/@Model.lang.locale/home/changeFontSizeBig?redirect=" + pathname;
+    }
 </script>
 
 
