@@ -13,6 +13,18 @@ namespace WebApplication2
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.RouteExistingFiles = true;
+
+            routes.MapRoute(
+                name: "ICMSFiles",
+                url: "ckfinder/userfiles/{type}/{*path}",
+                defaults: new
+                {
+                    controller = "CMSFile",
+                    action = "Redirect"
+                }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

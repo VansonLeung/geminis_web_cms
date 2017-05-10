@@ -10,16 +10,46 @@
         <ul class="submenuList">
           @foreach (var menuItem in Model.topbarMenu)
           {
-            <li>
-                <a href="@menuItem.link.GetFullURL()">
-                    <p>
-                        @menuItem.name
-                    </p>
-                </a>
-            </li>
+              if (menuItem.category == null
+                  ||
+                  !menuItem.category.hideTopsubmenuBarItem)
+              {
+                  if (menuItem.is_highlighted)
+                  {
+                    <li class="is_highlighted">
+                        <a href="@menuItem.link.GetFullURL()">
+                            <p>
+                                @menuItem.name
+                            </p>
+                        </a>
+                    </li>
+                  }
+                  else
+                  {
+                    <li>
+                        <a href="@menuItem.link.GetFullURL()">
+                            <p>
+                                @menuItem.name
+                            </p>
+                        </a>
+                    </li>
+                  }
+              }
           }
         </ul>
       </div>
     </div>
+
+    <style>
+        .submenuList li.is_highlighted
+        {
+            background-color: #ccc;
+            border-radius: 10px;
+        }
+        .submenuList li.is_highlighted a
+        {
+            color: #000;
+        }
+    </style>
   </div>
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebApplication2.Models.ContentPage>
+﻿@using WebApplication2.Helpers
+@model IEnumerable<WebApplication2.Models.ContentPage>
 
 @{
     ViewBag.Title = "List";
@@ -48,10 +49,10 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.created_at)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.created_at)</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.modified_at)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.modified_at)</span>
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })<br />

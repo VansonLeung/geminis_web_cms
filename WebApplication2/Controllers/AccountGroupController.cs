@@ -14,6 +14,37 @@ namespace WebApplication2.Controllers
     {
         MultiSelectList getAccessibleCategories(string selectedIDs = null)
         {
+            var parentItemsForSelect = InfrastructureCategoryDbContext.getInstance().findCategorysInTreeExcept(0, null);
+            parentItemsForSelect.Insert(0, new Category { ItemID = -1, url = "" });
+            foreach (var cat in parentItemsForSelect)
+            {
+                for (int i = 0; i < cat.itemLevel; i++)
+                {
+                    cat.url = " > " + cat.url;
+                }
+            }
+
+            List<int> ids = new List<int>();
+            if (selectedIDs != null)
+            {
+                var selIDs = selectedIDs.Split(',');
+                for (int i = 0; i < selIDs.Count(); i++)
+                {
+                    var id = selIDs.ElementAt(i);
+                    if (!id.Equals(""))
+                    {
+                        ids.Add(Convert.ToInt32(selIDs.ElementAt(i)));
+                    }
+                }
+            }
+
+            return new MultiSelectList(parentItemsForSelect, "ItemID", "url", ids.ToArray());
+        }
+
+        /*
+
+        MultiSelectList getAccessibleCategories(string selectedIDs = null)
+        {
             List<int> ids = new List<int>();
             if (selectedIDs != null)
             {
@@ -32,7 +63,7 @@ namespace WebApplication2.Controllers
             return new MultiSelectList(items, "ItemID", "name_en", ids.ToArray());
         }
 
-        
+        */
 
 
         // GET: InfrastructureCategory

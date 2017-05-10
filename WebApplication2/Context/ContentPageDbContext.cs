@@ -673,7 +673,7 @@ namespace WebApplication2.Context
             _article.isApproved = true;
             _article.isUnapproved = false;
             _article.isFrozen = true;
-            _article.dateApproved = DateTime.UtcNow;
+            _article.dateApproved = DateTimeExtensions.GetServerTime();
             _article.approvalRemarks = article.approvalRemarks;
             _article.approvedBy = SessionPersister.account.AccountID;
 
@@ -686,7 +686,7 @@ namespace WebApplication2.Context
                     _a.isApproved = true;
                     _a.isUnapproved = false;
                     _a.isFrozen = true;
-                    _a.dateApproved = DateTime.UtcNow;
+                    _a.dateApproved = DateTimeExtensions.GetServerTime();
                     _a.approvalRemarks = article.approvalRemarks;
                     _a.approvedBy = SessionPersister.account.AccountID;
                 }
@@ -722,7 +722,7 @@ namespace WebApplication2.Context
             _article.isUnapproved = true;
             _article.isFrozen = true;
             _article.dateApproved = null;
-            _article.dateUnapproved = DateTime.UtcNow;
+            _article.dateUnapproved = DateTimeExtensions.GetServerTime();
             _article.approvalRemarks = article.approvalRemarks;
             _article.approvedBy = SessionPersister.account.AccountID;
 
@@ -736,7 +736,7 @@ namespace WebApplication2.Context
                     _a.isUnapproved = true;
                     _a.isFrozen = true;
                     _a.dateApproved = null;
-                    _a.dateUnapproved = DateTime.UtcNow;
+                    _a.dateUnapproved = DateTimeExtensions.GetServerTime();
                     _a.approvalRemarks = article.approvalRemarks;
                     _a.approvedBy = SessionPersister.account.AccountID;
                 }

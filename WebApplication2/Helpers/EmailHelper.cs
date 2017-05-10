@@ -61,7 +61,12 @@ namespace WebApplication2.Helpers
                     }
                     catch (Exception e)
                     {
-
+                        AuditLogDbContext.getInstance().createAuditLog(new WebApplication2.Models.AuditLog
+                        {
+                            action = "[EMAIL API TEST]",
+                            remarks = "Response Exception: " + e.Message + " " + "uattest@geminisgroup.com:443" + " " + "mail.geminisgroup.com",
+                            is_private = true,
+                        });
                     }
                 }
             }

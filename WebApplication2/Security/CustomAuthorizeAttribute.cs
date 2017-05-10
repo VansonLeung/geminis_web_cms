@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Controllers;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
 
 namespace WebApplication2.Security
@@ -52,7 +53,7 @@ namespace WebApplication2.Security
 
             if (accountLastActivity.GetValueOrDefault() != null)
             {
-                if ((DateTime.UtcNow - accountLastActivity.GetValueOrDefault()).TotalMinutes > 30)
+                if ((DateTimeExtensions.GetServerTime() - accountLastActivity.GetValueOrDefault()).TotalMinutes > 30)
                 {
                     isLastActivityExpired = true;
                 }
@@ -89,7 +90,7 @@ namespace WebApplication2.Security
             var needchangepassword = false;
             if (account.LastPasswordModifiedAt.GetValueOrDefault() != null)
             {
-                if ((DateTime.UtcNow - account.LastPasswordModifiedAt.GetValueOrDefault()).TotalDays > 90)
+                if ((DateTimeExtensions.GetServerTime() - account.LastPasswordModifiedAt.GetValueOrDefault()).TotalDays > 90)
                 {
                     needchangepassword = true;
                 }

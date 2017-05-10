@@ -704,7 +704,7 @@ namespace WebApplication2.ViewModels.Include
 
                 // top bar menu
 
-                if (cat.pageShouldShowTopbarmenu && cat.parentItemID.HasValue)
+                if (cat != null && cat.pageShouldShowTopbarmenu && cat.parentItemID.HasValue)
                 {
                     vm.topbarMenu = createSubmenu(cat.parentItemID.Value, vm.lang, false,false,false,false,false);
                 }
@@ -712,6 +712,20 @@ namespace WebApplication2.ViewModels.Include
                 if (vm.topbarMenu != null && vm.topbarMenu.Count <= 0)
                 {
                     vm.topbarMenu = null;
+                }
+                else if (vm.topbarMenu != null)
+                {
+                    foreach (Menu menuItem in vm.topbarMenu)
+                    {
+                        if (menuItem.category.categoryItemID == cat.ItemID)
+                        {
+                            menuItem.is_highlighted = true;
+                        }
+                        else
+                        {
+                            menuItem.is_highlighted = false;
+                        }
+                    }
                 }
 
 

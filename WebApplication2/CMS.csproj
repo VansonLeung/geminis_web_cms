@@ -270,6 +270,7 @@
     <Compile Include="Controllers\ArticleApproverController.cs" />
     <Compile Include="Controllers\AuditLogController.cs" />
     <Compile Include="Controllers\BaseArticleController.cs" />
+    <Compile Include="Controllers\ICMSFileController.cs" />
     <Compile Include="Controllers\ConstantController.cs" />
     <Compile Include="Controllers\ContentPageEditorController.cs" />
     <Compile Include="Controllers\ArticleEditorController.cs" />
@@ -1769,6 +1770,7 @@
     <Content Include="Views\Preview\Index.cshtml" />
     <Content Include="Views\Shared\DataTable.cshtml" />
     <Content Include="Views\Shared\CDataTable.cshtml" />
+    <Content Include="Views\AuditLog\Private.cshtml" />
     <None Include="Web.ReleaseLocal.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

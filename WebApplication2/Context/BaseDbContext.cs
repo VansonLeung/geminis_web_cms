@@ -7,6 +7,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
 using WebApplication2.Models.Infrastructure;
 
@@ -190,10 +191,10 @@ namespace WebApplication2.Context
             {
                 if (entity.State == EntityState.Added)
                 {
-                    ((BaseModel)entity.Entity).created_at = DateTime.UtcNow;
+                    ((BaseModel)entity.Entity).created_at = DateTimeExtensions.GetServerTime();
                 }
 
-                ((BaseModel)entity.Entity).modified_at = DateTime.UtcNow;
+                ((BaseModel)entity.Entity).modified_at = DateTimeExtensions.GetServerTime();
             }
 
         }

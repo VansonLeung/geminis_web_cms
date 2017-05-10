@@ -43,6 +43,12 @@ namespace WebApplication2.Controllers
                 if (rootItem != null)
                 {
                     ViewBag.subcategory = rootItem;
+                    if (rootItem.parentItem != null
+                        && rootItem.parentItem.ItemID > 0)
+                    {
+                        ViewBag.parentItemName = rootItem.parentItem.name_en;
+                        ViewBag.parentItemID = rootItem.parentItem.ItemID;
+                    }
                 }
             }
 

@@ -423,4 +423,10 @@
   <data name="thumbPath" xml:space="preserve">
     <value>Thumb Path</value>
   </data>
+  <data name="isBottomMenu" xml:space="preserve">
+    <value>Is Bottom Menu</value>
+  </data>
+  <data name="pageShouldHideFromHorizontalMenu" xml:space="preserve">
+    <value>Page should hide from horizontal menu bar</value>
+  </data>
 </root>

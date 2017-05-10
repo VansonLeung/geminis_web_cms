@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using WebApplication2.Context;
 
 namespace Frontend.Controllers
 {
@@ -127,39 +128,44 @@ namespace Frontend.Controllers
                     ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 });
                 query = (BaseRequest_CType)JsonConvert.DeserializeObject(json, query.GetType());
-
-                /*
-                var keys = form.body.Keys;
-                foreach (string key in keys)
+                AuditLogDbContext.getInstance().createAuditLog(new WebApplication2.Models.AuditLog
                 {
-                    var val = form.body[key];
-                    if (val != null)
-                    {
+                    action = "[TTL API TEST]",
+                    remarks = "1. " + form.name,
+                });
 
-                        var property = query.GetType().GetProperty(key);
-                        if (property == null)
-                        {
-                            continue;
-                        }
+        /*
+        var keys = form.body.Keys;
+        foreach (string key in keys)
+        {
+            var val = form.body[key];
+            if (val != null)
+            {
 
-                        if (property.PropertyType == typeof(string)
-                            || property.PropertyType == typeof(int)
-                            || property.PropertyType == typeof(bool)
-                            || property.PropertyType == typeof(decimal)
-                            || property.PropertyType == typeof(float)
-                            || property.PropertyType == typeof(double))
-                        {
-                            property.SetValue(query, Convert.ChangeType(val, property.PropertyType), null);
-                        }
-                        else
-                        {
-                            object ob = Newtonsoft.Json.JsonConvert.DeserializeObject<property.PropertyType>(Json Object);
-                            property.SetValue(query, )
-                        }
-                    }
+                var property = query.GetType().GetProperty(key);
+                if (property == null)
+                {
+                    continue;
                 }
-                */
+
+                if (property.PropertyType == typeof(string)
+                    || property.PropertyType == typeof(int)
+                    || property.PropertyType == typeof(bool)
+                    || property.PropertyType == typeof(decimal)
+                    || property.PropertyType == typeof(float)
+                    || property.PropertyType == typeof(double))
+                {
+                    property.SetValue(query, Convert.ChangeType(val, property.PropertyType), null);
+                }
+                else
+                {
+                    object ob = Newtonsoft.Json.JsonConvert.DeserializeObject<property.PropertyType>(Json Object);
+                    property.SetValue(query, )
+                }
             }
+        }
+        */
+    }
 
             try
             {
@@ -175,6 +181,14 @@ namespace Frontend.Controllers
                 try
                 {
                     object resp = mth.Invoke(soap, p);
+
+                    AuditLogDbContext.getInstance().createAuditLog(new WebApplication2.Models.AuditLog
+                    {
+                        action = "[TTL API TEST]",
+                        remarks = "Response: " + resp.ToString(),
+                        is_private = true,
+                    });
+
                     if (respHeader.GetType().IsAssignableFrom(resp.GetType()))
                     {
                         respHeader = (responseHeaderType)resp;
@@ -185,12 +199,24 @@ namespace Frontend.Controllers
                 }
                 catch (Exception e)
                 {
+                    AuditLogDbContext.getInstance().createAuditLog(new WebApplication2.Models.AuditLog
+                    {
+                        action = "[TTL API TEST]",
+                        remarks = "Response Format Parsing Error: " + e.Message + " " + form.name,
+                        is_private = true,
+                    });
                     throw e;
                 }
 
             }
             catch (Exception e)
             {
+                AuditLogDbContext.getInstance().createAuditLog(new WebApplication2.Models.AuditLog
+                {
+                    action = "[TTL API TEST]",
+                    remarks = "Generic Error: " + e.Message + " " + form.name,
+                    is_private = true,
+                });
                 throw e;
             }
         }

@@ -53,7 +53,7 @@ namespace WebApplication2.Context
         {
             using (var db = new BaseDbContext())
             {
-                var now = new DateTime();
+                var now = DateTime.Now;
                 return db.systemMaintenanceNotificationDb
                     .Where(item => 
                     item.isActive == true
@@ -92,13 +92,23 @@ namespace WebApplication2.Context
 
         public string editNotification(SystemMaintenanceNotification item)
         {
+            List<string> modified_fields = new List<string>();
+
             using (var db = new BaseDbContext())
             {
                 var local = db.systemMaintenanceNotificationDb
                             .Local
                             .FirstOrDefault(f => f.NotificationID == item.NotificationID);
+
                 if (local != null)
                 {
+                    if (local.desc_en != item.desc_en) { modified_fields.Add("desc_en"); } 
+                    if (local.desc_zh != item.desc_zh) { modified_fields.Add("desc_zh"); } 
+                    if (local.desc_cn != item.desc_cn) { modified_fields.Add("desc_cn"); } 
+                    if (local.startDate != item.startDate) { modified_fields.Add("startDate"); } 
+                    if (local.endDate != item.endDate) { modified_fields.Add("endDate"); } 
+                    if (local.isActive != item.isActive) { modified_fields.Add("isActive"); } 
+
                     db.Entry(local).State = EntityState.Detached;
                 }
 
@@ -117,7 +127,7 @@ namespace WebApplication2.Context
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            AuditLogDbContext.getInstance().createAuditLogSystemMaintenanceNotificationAction(item, AuditLogDbContext.ACTION_EDIT);
+            AuditLogDbContext.getInstance().createAuditLogSystemMaintenanceNotificationAction(item, AuditLogDbContext.ACTION_EDIT, modified_fields);
             return null;
         }
 

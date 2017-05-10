@@ -619,6 +619,17 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
 
             using (var db = new BaseDbContext())
             {
+                List<string> modified_fields = new List<string>();
+
+                if (_article.Name != article.Name) { modified_fields.Add("Name"); }
+                if (_article.Desc != article.Desc) { modified_fields.Add("Desc"); }
+                if (_article.Slug != article.Slug) { modified_fields.Add("Slug"); }
+                if (_article.Keywords != article.Keywords) { modified_fields.Add("Keywords"); }
+                if (_article.MetaData != article.MetaData) { modified_fields.Add("MetaData"); }
+                if (_article.MetaKeywords != article.MetaKeywords) { modified_fields.Add("MetaKeywords"); }
+                if (_article.Excerpt != article.Excerpt) { modified_fields.Add("Excerpt"); }
+
+
                 db.Entry(_article).State = EntityState.Modified;
                 _article.Name = article.Name;
                 _article.Desc = article.Desc;
@@ -629,7 +640,7 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                 _article.Excerpt = article.Excerpt;
                 db.SaveChanges();
 
-                AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_EDIT);
+                AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_EDIT, modified_fields);
 
                 return null;
             }
@@ -663,9 +674,16 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                 return error;
             }
 
+            List<string> modified_fields = new List<string>();
+
             using (var db = new BaseDbContext())
             {
                 db.Entry(_article).State = EntityState.Modified;
+
+                if (_article.Url != article.Url) { modified_fields.Add("Url"); }
+                if (_article.Slug != article.Slug) { modified_fields.Add("Slug"); }
+                if (_article.categoryID != article.categoryID) { modified_fields.Add("categoryID"); }
+
                 _article.Url = article.Url;
                 _article.Slug = article.Slug;
                 _article.categoryID = article.categoryID;
@@ -676,6 +694,11 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                     foreach (var _a in _localeArticles)
                     {
                         db.Entry(_a).State = EntityState.Modified;
+
+                        if (_a.Url != article.Url) { modified_fields.Add("Url"); }
+                        if (_a.Slug != article.Slug) { modified_fields.Add("Slug"); }
+                        if (_a.categoryID != article.categoryID) { modified_fields.Add("categoryID"); }
+
                         _a.Url = article.Url;
                         _a.Slug = article.Slug;
                         _a.categoryID = article.categoryID;
@@ -684,7 +707,7 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
 
                 db.SaveChanges();
 
-                AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_EDIT_PROPERTIES);
+                AuditLogDbContext.getInstance().createAuditLogArticleAction(article, AuditLogDbContext.ACTION_EDIT_PROPERTIES, modified_fields);
 
                 return null;
             }
@@ -827,7 +850,7 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                 _article.isApproved = true;
                 _article.isUnapproved = false;
                 _article.isFrozen = true;
-                _article.dateApproved = DateTime.UtcNow;
+                _article.dateApproved = DateTimeExtensions.GetServerTime();
                 _article.approvalRemarks = article.approvalRemarks;
                 _article.approvedBy = SessionPersister.account.AccountID;
 
@@ -840,7 +863,7 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                         _a.isApproved = true;
                         _a.isUnapproved = false;
                         _a.isFrozen = true;
-                        _a.dateApproved = DateTime.UtcNow;
+                        _a.dateApproved = DateTimeExtensions.GetServerTime();
                         _a.approvalRemarks = article.approvalRemarks;
                         _a.approvedBy = SessionPersister.account.AccountID;
                     }
@@ -879,7 +902,7 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                 _article.isUnapproved = true;
                 _article.isFrozen = true;
                 _article.dateApproved = null;
-                _article.dateUnapproved = DateTime.UtcNow;
+                _article.dateUnapproved = DateTimeExtensions.GetServerTime();
                 _article.approvalRemarks = article.approvalRemarks;
                 _article.approvedBy = SessionPersister.account.AccountID;
 
@@ -893,7 +916,7 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                         _a.isUnapproved = true;
                         _a.isFrozen = true;
                         _a.dateApproved = null;
-                        _a.dateUnapproved = DateTime.UtcNow;
+                        _a.dateUnapproved = DateTimeExtensions.GetServerTime();
                         _a.approvalRemarks = article.approvalRemarks;
                         _a.approvedBy = SessionPersister.account.AccountID;
                     }

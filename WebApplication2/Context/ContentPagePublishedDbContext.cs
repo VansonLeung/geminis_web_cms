@@ -74,7 +74,7 @@ namespace WebApplication2.Context
         {
             var _article = ContentPagePublished.makeNewContentPagePublishedByCloningContent(article);
             _article.isPublished = true;
-            _article.datePublished = DateTime.UtcNow;
+            _article.datePublished = DateTimeExtensions.GetServerTime();
             getArticlePublishedDb().Add(_article);
 
             var articles = ContentPageDbContext.getInstance().findAllLocaleArticlesByBaseArticleAndVersion(article);
@@ -82,7 +82,7 @@ namespace WebApplication2.Context
             {
                 var ___article = ContentPagePublished.makeNewContentPagePublishedByCloningContent(__article);
                 ___article.isPublished = true;
-                ___article.datePublished = DateTime.UtcNow;
+                ___article.datePublished = DateTimeExtensions.GetServerTime();
                 getArticlePublishedDb().Add(___article);
             }
             db.SaveChanges();
@@ -138,7 +138,7 @@ namespace WebApplication2.Context
 
             db.Entry(_article).State = EntityState.Modified;
             _article.isPublished = true;
-            _article.datePublished = DateTime.UtcNow;
+            _article.datePublished = DateTimeExtensions.GetServerTime();
             _article.publishedBy = SessionPersister.account.AccountID;
 
             if (allLocales)
@@ -148,7 +148,7 @@ namespace WebApplication2.Context
                 {
                     db.Entry(_a).State = EntityState.Modified;
                     _a.isPublished = true;
-                    _a.datePublished = DateTime.UtcNow;
+                    _a.datePublished = DateTimeExtensions.GetServerTime();
                     _a.publishedBy = SessionPersister.account.AccountID;
                 }
             }

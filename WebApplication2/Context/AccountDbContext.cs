@@ -226,7 +226,7 @@ namespace WebApplication2.Context
                         else if (_account.LoginFails < 3)
                         {
                             db.Entry(_account).State = EntityState.Modified;
-                            _account.LastLogin = DateTime.UtcNow;
+                            _account.LastLogin = DateTimeExtensions.GetServerTime();
                             _account.LoginFails = 0;
                             db.SaveChanges();
                             SessionPersister.createSessionForAccount(_account);
@@ -309,7 +309,7 @@ namespace WebApplication2.Context
             var encPassword = account.MakeEncryptedPassword(account.Password);
             account.Password = encPassword;
             account.ConfirmPassword = encPassword;
-            account.LastPasswordModifiedAt = DateTime.UtcNow;
+            account.LastPasswordModifiedAt = DateTimeExtensions.GetServerTime();
             account.historyPasswords = account.Password;
 
             if (account.RoleList != null)
@@ -393,8 +393,6 @@ namespace WebApplication2.Context
                 return error;
             }
 
-            AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_EDIT);
-
             return null;
         }
 
@@ -425,7 +423,7 @@ namespace WebApplication2.Context
                     db.Entry(_account).State = EntityState.Modified;
                     _account.Password = encPassword;
                     _account.ConfirmPassword = encPassword;
-                    _account.LastPasswordModifiedAt = DateTime.UtcNow;
+                    _account.LastPasswordModifiedAt = DateTimeExtensions.GetServerTime();
 
                     if (shouldInvalidateResetPasswordNeeds)
                     {
@@ -458,6 +456,8 @@ namespace WebApplication2.Context
 
         public string tryChangeProfile(Account account)
         {
+            List<string> modified_fields = new List<string>();
+
             Account _account = findAccountByID(account.AccountID);
             if (_account != null)
             {
@@ -474,6 +474,17 @@ namespace WebApplication2.Context
                         account.Role = "";
                     }
 
+
+                    if (_account.Role != account.Role) { modified_fields.Add("Role"); }
+                    if (_account.Username != account.Username) { modified_fields.Add("Username"); }
+                    if (_account.Email != account.Email) { modified_fields.Add("Email"); }
+                    if (_account.Firstname != account.Firstname) { modified_fields.Add("Firstname"); }
+                    if (_account.Lastname != account.Lastname) { modified_fields.Add("Lastname"); }
+                    if (_account.GroupID != account.GroupID) { modified_fields.Add("GroupID"); }
+                    if (_account.isEnabled != account.isEnabled) { modified_fields.Add("isEnabled"); }
+
+
+
                     _account.Role = account.Role;
                     _account.Username = account.Username;
                     _account.Email = account.Email;
@@ -485,6 +496,8 @@ namespace WebApplication2.Context
                     SessionPersister.updateSessionForAccount();
                     db.SaveChanges();
                 }
+
+                AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_EDIT, modified_fields);
 
                 return null;
             }

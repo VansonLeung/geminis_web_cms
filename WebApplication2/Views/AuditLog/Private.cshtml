@@ -1,0 +1,97 @@
+﻿@using WebApplication2.Helpers
+@model IEnumerable<WebApplication2.Models.AuditLog>
+
+@{
+    ViewBag.Title = "Private";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Private Audit Logs</h2>
+
+<div style="position:relative;">
+    <form>
+        @Html.TextBox("category", null, htmlAttributes: new { @placeholder = "Category" })
+        @Html.TextBox("article", null, htmlAttributes: new { @placeholder = "Article" })
+        @Html.DropDownList("accountID", null, htmlAttributes: new { @placeholder = "Account" })
+        @Html.DropDownList("logAction", null, htmlAttributes: new { @placeholder = "Action" })
+        @Html.Editor("startDate", null, new { htmlAttributes = new { @class = "datepicker", placeholder = "Start Date" } })
+        @Html.Editor("endDate", null, new { htmlAttributes = new { @class = "datepicker", placeholder = "End Date" } })
+        <input type="submit" value="Search" />
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Username
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Article
+            </th>
+            <th>
+                Content Page
+            </th>
+            <th>
+                Account
+            </th>
+            <th>
+                System Maintenance Notification
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.action)
+            </th>
+            <th>
+                Remarks
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created_at)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.account)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.article)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contentPage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.targetAccount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.systemMaintenanceNotification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.action)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.remarks)
+                </td>
+                <td>
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.created_at)</span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datetimepicker(); //Initialise any date pickers
+    });
+</script>
+
+@Html.Partial("CDataTable")

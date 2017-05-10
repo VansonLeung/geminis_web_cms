@@ -109,7 +109,7 @@ namespace WebApplication2.Context
             {
                 var _article = ArticlePublished.makeNewArticleByCloningContentAndVersion(article);
                 _article.isPublished = true;
-                _article.datePublished = DateTime.UtcNow;
+                _article.datePublished = DateTimeExtensions.GetServerTime();
                 _article.datePublishStart = article.datePublishStart;
                 _article.datePublishEnd = article.datePublishEnd;
                 _article.publishedBy = SessionPersister.account.AccountID;
@@ -120,7 +120,7 @@ namespace WebApplication2.Context
                 {
                     var ___article = ArticlePublished.makeNewArticleByCloningContentAndVersion(__article);
                     ___article.isPublished = true;
-                    ___article.datePublished = DateTime.UtcNow;
+                    ___article.datePublished = DateTimeExtensions.GetServerTime();
                     ___article.datePublishStart = article.datePublishStart;
                     ___article.datePublishEnd = article.datePublishEnd;
                     ___article.publishedBy = SessionPersister.account.AccountID;
@@ -394,7 +394,7 @@ namespace WebApplication2.Context
                 var _article = article;
                 db.Entry(_article).State = EntityState.Modified;
                 _article.isPublished = true;
-                _article.datePublished = DateTime.UtcNow;
+                _article.datePublished = DateTimeExtensions.GetServerTime();
                 _article.datePublishStart = article.datePublishStart;
                 _article.datePublishEnd = article.datePublishEnd;
                 _article.publishedBy = SessionPersister.account.AccountID;
@@ -406,7 +406,7 @@ namespace WebApplication2.Context
                     {
                         db.Entry(_a).State = EntityState.Modified;
                         _a.isPublished = true;
-                        _a.datePublished = DateTime.UtcNow;
+                        _a.datePublished = DateTimeExtensions.GetServerTime();
                         _a.datePublishStart = article.datePublishStart;
                         _a.datePublishEnd = article.datePublishEnd;
                         _a.publishedBy = SessionPersister.account.AccountID;

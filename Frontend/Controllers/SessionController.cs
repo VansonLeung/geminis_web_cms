@@ -343,12 +343,14 @@ namespace Frontend.Controllers
 
                 setSession(resp);
 
+                /*
                 var jsession = loginQPI(username, password, resp);
 
                 if (jsession.Result != null)
                 {
                     setJSession(jsession.Result);
                 }
+                */
 
                 SSO_UpsertUser();
 
@@ -359,6 +361,86 @@ namespace Frontend.Controllers
                 return this.Json(BaseResponse.MakeResponse("F001", e));
             }
         }
+
+        [HttpPost]
+        public ActionResult keepalive_ttl(string ClientID, string SessionID)
+        {
+            try
+            {
+                var res = new APIController().callSoapQuery<TTLITradeWSDEV.isClientLoginResponseIsLoginResp>(
+                    new TTLAPIRequest(
+                        "isClientLogin",
+                        new Dictionary<string, object>
+                        {
+                            ["ClientID"] = ClientID,
+                            ["SessionID"] = SessionID,
+                        })
+                );
+
+                //TTLITradeWSDEV.ItradeWebServicesClient soap = new TTLITradeWSDEV.ItradeWebServicesClient();
+                var resp = (TTLITradeWSDEV.isClientLoginResponseIsLoginResp)res;
+
+                if (resp.errorCode != null || resp.errorMessage != null)
+                {
+                    return this.Json(BaseResponse.MakeResponse("F001", resp.errorCode, null, resp.errorMessage));
+                }
+
+                return this.Json(BaseResponse.MakeResponse(resp));
+            }
+            catch (Exception e)
+            {
+                return this.Json(BaseResponse.MakeResponse("F001", e));
+            }
+        }
+
+        [HttpPost]
+        public bool keepalive_ttl_internal(string ClientID, string SessionID)
+        {
+            if (ClientID == null || SessionID == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                var res = new APIController().callSoapQuery<TTLITradeWSDEV.isClientLoginResponseIsLoginResp>(
+                    new TTLAPIRequest(
+                        "isClientLogin",
+                        new Dictionary<string, object>
+                        {
+                            ["ClientID"] = ClientID,
+                            ["SessionID"] = SessionID,
+                        })
+                );
+
+                //TTLITradeWSDEV.ItradeWebServicesClient soap = new TTLITradeWSDEV.ItradeWebServicesClient();
+                var resp = (TTLITradeWSDEV.isClientLoginResponseIsLoginResp)res;
+
+                if (resp.errorCode != null || resp.errorMessage != null)
+                {
+                    AuditLogDbContext.getInstance().createAuditLog(new AuditLog
+                    {
+                        is_private = true,
+                        action = "TTL INTERNAL",
+                        remarks = "FAIL KEEP ALIVE (" + ClientID + ")",
+                    });
+                    return false;
+                }
+
+                AuditLogDbContext.getInstance().createAuditLog(new AuditLog
+                {
+                    is_private = true,
+                    action = "TTL INTERNAL",
+                    remarks = "SUCCESS KEEP ALIVE (" + ClientID + ")",
+                });
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
 
 
         [HttpPost]

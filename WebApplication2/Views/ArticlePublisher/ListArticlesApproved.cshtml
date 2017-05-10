@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebApplication2.Models.Article>
+﻿@using WebApplication2.Helpers
+@model IEnumerable<WebApplication2.Models.Article>
 
 @{
     ViewBag.Title = "ListArticlesApproved";
@@ -72,7 +73,7 @@
                     @Html.DisplayFor(modelItem => item.BaseArticleID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.dateApproved)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.dateApproved)</span>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.approvalRemarks)
@@ -81,13 +82,13 @@
                     @Html.DisplayFor(modelItem => item.isPublished)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.datePublished)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.datePublished)</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.created_at)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.created_at)</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.modified_at)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.modified_at)</span>
                 </td>
                 <td>
                     @if (item.createdByAccount != null)

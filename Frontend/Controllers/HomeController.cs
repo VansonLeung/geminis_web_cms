@@ -38,15 +38,15 @@ namespace Frontend.Controllers
 
                 var min = new SessionLogin().getSessionKeepaliveMinutes();
 
-                if (locale == "zh_HK" || locale == "zh_TW")
+                if (locale == "zh-HK" || locale == "zh-TW" || locale == "zh")
                 {
                     ViewBag.message = "登入時間以空置了超過" + min + "分鐘，請重新登入";
                 }
-                if (locale == "zh_CN")
+                if (locale == "zh-CN" || locale == "cn")
                 {
                     ViewBag.message = "登入时间以空置了超过" + min + "分钟，请重新登入";
                 }
-                if (locale == "en")
+                else
                 {
                     ViewBag.message = "Session has been idled over " + min + " mins, please login again";
                 }
@@ -57,7 +57,24 @@ namespace Frontend.Controllers
             SSO_InternalKeepAlive();
             SSO_InternalHeartbeat();
 
-            BaseViewModel vm = BaseViewModel.make(locale, "home", null, Request, getSession());
+            var session = getSession();
+            if (session != null && !session.isKeptAlive)
+            {
+                Session["isKeptAlive"] = true;
+
+                if (session.hasTradingAcc)
+                {
+                    return RedirectToRoute(new
+                    {
+                        controller = "Page",
+                        action = "Index",
+                        locale = locale,
+                        category = "trading",
+                    });
+                }
+            }
+
+            BaseViewModel vm = BaseViewModel.make(locale, "home", null, Request, session);
             return View(vm);
         }
 

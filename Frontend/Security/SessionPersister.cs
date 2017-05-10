@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication2.Context;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
 
 namespace Frontend.Security
@@ -96,7 +97,7 @@ namespace Frontend.Security
 
         public static void refresh_account_last_activity()
         {
-            account_last_activity = DateTime.UtcNow;
+            account_last_activity = DateTimeExtensions.GetServerTime();
         }
     }
 }

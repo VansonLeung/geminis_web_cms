@@ -457,6 +457,15 @@ namespace WebApplication2.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Bottom Menu.
+        /// </summary>
+        public static string isBottomMenu {
+            get {
+                return ResourceManager.GetString("isBottomMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Content Page.
         /// </summary>
         public static string isContentPage {
@@ -840,6 +849,15 @@ namespace WebApplication2.Resources {
         public static string order {
             get {
                 return ResourceManager.GetString("order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page should hide from horizontal menu bar.
+        /// </summary>
+        public static string pageShouldHideFromHorizontalMenu {
+            get {
+                return ResourceManager.GetString("pageShouldHideFromHorizontalMenu", resourceCulture);
             }
         }
         

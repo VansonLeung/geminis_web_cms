@@ -26,6 +26,7 @@ namespace WebApplication2.ViewModels.Include
                 this.link = new Link(lang.locale, cat.getUrl(), null, null);
                 this.hideTopTitle = cat.pageShouldHideTopTitle;
                 this.showTopsubmenuBar = cat.pageShouldShowTopbarmenu;
+                this.hideTopsubmenuBarItem = cat.pageShouldHideFromHorizontalMenu;
                 if (cat.iconPath != null)
                 {
                     this.iconURL = "/ckfinder/userfiles/" + "images" + "/" + cat.iconPath;
@@ -59,5 +60,6 @@ namespace WebApplication2.ViewModels.Include
 
         public bool hideTopTitle { get; set; }
         public bool showTopsubmenuBar { get; set; }
+        public bool hideTopsubmenuBarItem { get; set; }
     }
 }

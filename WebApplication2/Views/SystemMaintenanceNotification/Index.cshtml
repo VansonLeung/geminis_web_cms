@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebApplication2.Models.SystemMaintenanceNotification>
+﻿@using WebApplication2.Helpers
+@model IEnumerable<WebApplication2.Models.SystemMaintenanceNotification>
 
 @{
     ViewBag.Title = "Index";
@@ -75,16 +76,16 @@
                     @Html.DisplayFor(modelItem => item.isActive)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.startDate)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.startDate)</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.endDate)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.endDate)</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.created_at)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.created_at)</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.modified_at)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.modified_at)</span>
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.NotificationID })<br />

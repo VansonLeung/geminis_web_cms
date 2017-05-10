@@ -8,6 +8,11 @@ namespace WebApplication2.Helpers
 {
     public static class DateTimeExtensions
     {
+        public static DateTime GetServerTime()
+        {
+            return DateTime.Now;
+        }
+
         public static DateTime StringToDateTime(string str)
         {
             return DateTime.ParseExact(str, "MM/dd/yyyy h:mm tt", new CultureInfo("en-US"));
@@ -22,6 +27,23 @@ namespace WebApplication2.Helpers
 
             return datetime.ToString("MM/dd/yyyy h:mm tt", new CultureInfo("en-US"));
         }
+
+        public static String DateTimeToStringBR(DateTime? dt)
+        {
+            if (!dt.HasValue)
+            {
+                return "";
+            }
+
+            var datetime = dt.GetValueOrDefault();
+            if (datetime == null)
+            {
+                return "";
+            }
+
+            return datetime.ToString("yyyy/MM/dd\nHH:mm:ss", new CultureInfo("en-US"));
+        }
+
 
         private static int DateValue(this DateTime dt)
         {

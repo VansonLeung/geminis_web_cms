@@ -82,7 +82,7 @@
                                 }
                             </ul>
                             <ul id="nav-mobile" class="right">
-                                <li id="headerMenu_search_li" style="border-right: 1px solid #999999; width: 100px; text-align: center"><a href="badges.html"><i class="fa fa-search"></i></a></li>
+                                <li id="headerMenu_search_li" style="border-right: 1px solid #999999; width: 100px; text-align: center"><div><i class="fa fa-search"></i></div></li>
                                 @{
                                     var curMenuCount = menuCount;
                                 }
@@ -118,14 +118,21 @@
                     <div class="row">
                         <div class="col s3 box">
                             <div class="font_xxxlg" style="font-weight: bolder;">@menuItem.name</div>
-                            <p class="font_sm c_grey_2" style="line-height: 1.43;">@menuItem.name</p>
                         </div>
                         <div class="col s3 box">
                             <ul class="nav-sub-menu sub">
                                 @for (var j = 0; j < menuItem.submenu.Count; j++)
                                 {
                                     var submenuItem = menuItem.submenu[j];
-                                    <a href="@submenuItem.link.GetFullURL()"><li id="headerMenu_sub_li_@j">@submenuItem.name<p class="arrow"></p></li></a>
+                                    <a href="@submenuItem.link.GetFullURL()">
+                                        <li id="headerMenu_sub_li_@j">
+                                            @submenuItem.name
+                                            @if (submenuItem.submenu.Count > 0)
+                                            {
+                                                <p class="arrow"></p>
+                                            }
+                                        </li>
+                                    </a>
                                 }
                             </ul>
                         </div>
@@ -200,14 +207,21 @@ subsubmenuItem.category.thumbURL != null)
                     <div class="row">
                         <div class="col s3 box">
                             <div class="font_xxxlg" style="font-weight: bolder;">@menuItem.name</div>
-                            <p class="font_sm c_grey_2" style="line-height: 1.43;">@menuItem.name</p>
                         </div>
                         <div class="col s3 box">
                             <ul class="nav-sub-menu sub">
                                 @for (var j = 0; j < menuItem.submenu.Count; j++)
                                 {
                                     var submenuItem = menuItem.submenu[j];
-                                    <a href="@submenuItem.link.GetFullURL()"><li id="headerMenu_sub_li_@j">@submenuItem.name<p class="arrow"></p></li></a>
+                                    <a href="@submenuItem.link.GetFullURL()">
+                                        <li id="headerMenu_sub_li_@j">
+                                            @submenuItem.name
+                                            @if (submenuItem.submenu.Count > 0)
+                                            {
+                                                <p class="arrow"></p>
+                                            }
+                                        </li>
+                                    </a>
                                 }
                             </ul>
                         </div>
@@ -286,33 +300,21 @@ $('.nav-bar-bg').find('li#headerMenu_search_li').on('mouseover', function (e) {
     siblings.removeClass('highlighted');
     target.addClass('highlighted')
 
-    $('#nav-overlay').show();
-
-    if (target.hasClass('li_right')) {
-        $('#nav-overlay').addClass('right');
-    }
-    else {
-        $('#nav-overlay').removeClass('right');
-    }
-
-
-    var headerMenu_li_ = target.attr('id');
-    $('#nav-overlay').find('#' + headerMenu_li_).show();
-    $('#nav-overlay').find('#' + headerMenu_li_).siblings('.nav-overlay-li').hide();
+    $('#nav-overlay').hide();
 
     if (overlay_time) {
         clearTimeout(overlay_time);
         overlay_time = null;
     }
 });
-    /*
+    
 $('.nav-bar-bg').find('li#headerMenu_search_li').on('mouseout', function (e) {
     overlay_time = setTimeout(function () {
         $('#nav-overlay').hide();
         var siblings = $('.nav-bar-bg').find('li');
         siblings.removeClass('highlighted');
     }, 250);
-});*/
+});
 
 $('.nav-bar-bg').find('li.headerMenuActive').on('mouseover', function (e) {
     var target = $(e.target).closest('li');
@@ -459,14 +461,26 @@ $('.nav-sub-menu.subsub').find('li').on('mouseover', function (e) {
         langLst['zh-CN'] = '简中';
         langLst['en-US'] = 'English';
 
-        outputStr += '<div class="cust-dropdown-lang" style="z-">';
+        outputStr += '<div class="cust-dropdown-lang">';
 
         if (langLst[convLang]) {
             outputStr += '<button class="cust-dropbtn-lang">' + langLst[convLang] + ' <img src="/images/menu_language_arrow.png" /></button>';
         } else {
-            outputStr += '<button class="cust-dropbtn-lang">English</button>';
+            outputStr += '<button class="cust-dropbtn-lang">繁中</button>';
         }
-        outputStr += '<div class="cust-dropdown-lang-content" style="z-index: 1000000"> <a href="' + linkLst[0] + '">繁中</a> <a href="' + linkLst[1] + '">简中</a> <a href="' + linkLst[2] + '">English</a> </div> </div>';
+        outputStr += '<div class="cust-dropdown-lang-content" style="z-index: 1000000"> ';
+
+        if (langLst[convLang]) {
+            if (convLang !== 'zh-HK') { outputStr += '<a href="' + linkLst[0] + '">繁中</a>  '; }
+            if (convLang !== 'zh-CN') { outputStr += '<a href="' + linkLst[1] + '">简中</a>  '; }
+            if (convLang !== 'en-US') { outputStr += '<a href="' + linkLst[2] + '">English</a>  '; }
+            outputStr += '</div> </div>';
+        }
+        else {
+            outputStr += '<a href="' + linkLst[1] + '">简中</a>  ' +
+            '<a href="' + linkLst[2] + '">English</a> ' +
+            '</div> </div>';
+        }
         $('#' + el).empty().append(outputStr);
     }
 

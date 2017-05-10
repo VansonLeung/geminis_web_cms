@@ -67,6 +67,7 @@ namespace WebApplication2.Context
             public string endDate = "";
             public string category = "";
             public string article = "";
+            public bool is_private = false;
 
             public int getAccountID()
             {
@@ -124,6 +125,7 @@ namespace WebApplication2.Context
                     predicate = predicate.And(acc => acc.article == article);
                 }
 
+                predicate = predicate.And(acc => acc.is_private == query.is_private);
 
                 return itemDb.AsExpandable()
                     .Where(predicate)
@@ -149,6 +151,21 @@ namespace WebApplication2.Context
 
         // edit
 
+        void manipulateRemarks(AuditLog item, List<string> modified_fields)
+        {
+            if (modified_fields == null)
+            {
+                modified_fields = new List<string>();
+            }
+
+            var unique_items = new HashSet<string>(modified_fields);
+
+            if (unique_items.Count > 0)
+            {
+                item.remarks = string.Join(",", unique_items);
+            }
+        }
+
         public string createAuditLog(AuditLog item)
         {
             using (var db = new BaseDbContext())
@@ -160,7 +177,7 @@ namespace WebApplication2.Context
             }
         }
 
-        public string createAuditLogArticleAction(Article article, string action)
+        public string createAuditLogArticleAction(Article article, string action, List<string> modified_fields = null)
         {
             var _article = ArticleDbContext.getInstance().findArticleByIDNoTracking(article.ArticleID);
             if (_article == null)
@@ -186,10 +203,13 @@ namespace WebApplication2.Context
             item.category = _article.category != null ? _article.category.GetName() : null;
             item.action = action;
 
+            manipulateRemarks(item, modified_fields);
+
             return createAuditLog(item);
         }
-        public string createAuditLogContentPageAction(ContentPage contentPage, string action)
+        public string createAuditLogContentPageAction(ContentPage contentPage, string action, List<string> modified_fields = null)
         {
+
             var _contentPage = ContentPageDbContext.getInstance().findArticleByIDNoTracking(contentPage.ArticleID);
             if (_contentPage == null)
             {
@@ -214,10 +234,13 @@ namespace WebApplication2.Context
             item.category = _contentPage.category != null ? _contentPage.category.GetName() : null;
             item.action = action;
 
+            manipulateRemarks(item, modified_fields);
+
             return createAuditLog(item);
         }
-        public string createAuditLogCategoryAction(Category category, string action)
+        public string createAuditLogCategoryAction(Category category, string action, List<string> modified_fields = null)
         {
+
             var account = SessionPersister.account;
             if (account == null)
             {
@@ -231,12 +254,15 @@ namespace WebApplication2.Context
             item.category = category.GetName();
             item.action = action;
 
+            manipulateRemarks(item, modified_fields);
+
             return createAuditLog(item);
         }
 
 
-        public string createAuditLogAccountAction(Account targetAccount, string action)
+        public string createAuditLogAccountAction(Account targetAccount, string action, List<string> modified_fields = null)
         {
+
             var account = SessionPersister.account;
             if (account == null)
             {
@@ -250,12 +276,15 @@ namespace WebApplication2.Context
             item.targetAccount = targetAccount.Username;
             item.action = action;
 
+            manipulateRemarks(item, modified_fields);
+
             return createAuditLog(item);
         }
 
 
-        public string createAuditLogSystemMaintenanceNotificationAction(SystemMaintenanceNotification systemMaintenanceNotification, string action)
+        public string createAuditLogSystemMaintenanceNotificationAction(SystemMaintenanceNotification systemMaintenanceNotification, string action, List<string> modified_fields = null)
         {
+
             var account = SessionPersister.account;
             if (account == null)
             {
@@ -268,6 +297,8 @@ namespace WebApplication2.Context
             item.systemMaintenanceNotificationID = systemMaintenanceNotification.NotificationID;
             item.systemMaintenanceNotification = systemMaintenanceNotification.name_en;
             item.action = action;
+
+            manipulateRemarks(item, modified_fields);
 
             return createAuditLog(item);
         }

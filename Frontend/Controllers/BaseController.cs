@@ -29,9 +29,12 @@ namespace Frontend.Controllers
                         string jsessionID = (string)Session["jsessionID"];
                         session.jsessionID = jsessionID;
                     }
-
-                    return session;
                 }
+            }
+
+            if (excludePostLogin || !session.isLoggedIn)
+            {
+                Session["isKeptAlive"] = false;
             }
 
             session.fontSize = SessionLogin.getFontSizeNormal();
@@ -234,6 +237,12 @@ namespace Frontend.Controllers
 
             if (sessionID != null && userID != null)
             {
+                if (ttlsession != null && ttlsession.clientID != null && ttlsession.sessionID != null)
+                {
+                    // TODO: KEEP ALIVE TTL SHOULD BLOCK LOGIN...
+                    new SessionController().keepalive_ttl_internal(ttlsession.clientID, ttlsession.sessionID);
+                }
+
                 SessionController.TryKeepaliveSessionLogin(sessionID, userID);
 
                 if (Session["jsessionID"] != null)

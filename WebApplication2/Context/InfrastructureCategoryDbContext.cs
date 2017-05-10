@@ -371,6 +371,8 @@ namespace WebApplication2.Context
                     category.imagePath = null;
                 }
 
+                AuditLogDbContext.getInstance().createAuditLogCategoryAction(category, AuditLogDbContext.ACTION_CREATE);
+
                 db.infrastructureCategoryDb.Add(category);
                 db.SaveChanges();
                 return null;
@@ -396,6 +398,38 @@ namespace WebApplication2.Context
                 {
                     db.Entry(local).State = EntityState.Detached;
                 }
+
+
+                List<string> modified_fields = new List<string>();
+
+                if (_category.url != category.url) { modified_fields.Add("url"); }
+                if (_category.name_en != category.name_en) { modified_fields.Add("name_en"); }
+                if (_category.name_zh != category.name_zh) { modified_fields.Add("name_zh"); }
+                if (_category.name_cn != category.name_cn) { modified_fields.Add("name_cn"); }
+                if (_category.iconPath != category.iconPath) { modified_fields.Add("iconPath"); }
+                if (_category.thumbPath != category.thumbPath) { modified_fields.Add("thumbPath"); }
+                if (_category.imagePath != category.imagePath) { modified_fields.Add("imagePath"); }
+                if (_category.remarks != category.remarks) { modified_fields.Add("remarks"); }
+                if (_category.pageClassName != category.pageClassName) { modified_fields.Add("pageClassName"); }
+                if (_category.isEnabled != category.isEnabled) { modified_fields.Add("isEnabled"); }
+                if (_category.isContentPage != category.isContentPage) { modified_fields.Add("isContentPage"); }
+                if (_category.isArticleList != category.isArticleList) { modified_fields.Add("isArticleList"); }
+                if (_category.isVisibleToVisitorOnly != category.isVisibleToVisitorOnly) { modified_fields.Add("isVisibleToVisitorOnly"); }
+                if (_category.isVisibleToMembersOnly != category.isVisibleToMembersOnly) { modified_fields.Add("isVisibleToMembersOnly"); }
+                if (_category.isVisibleToTradingOnly != category.isVisibleToTradingOnly) { modified_fields.Add("isVisibleToTradingOnly"); }
+                if (_category.isHeaderMenu != category.isHeaderMenu) { modified_fields.Add("isHeaderMenu"); }
+                if (_category.isHeaderMenuRight != category.isHeaderMenuRight) { modified_fields.Add("isHeaderMenuRight"); }
+                if (_category.isFooterMenu != category.isFooterMenu) { modified_fields.Add("isFooterMenu"); }
+                if (_category.isBottomMenu != category.isBottomMenu) { modified_fields.Add("isBottomMenu"); }
+                if (_category.isShortcut != category.isShortcut) { modified_fields.Add("isShortcut"); }
+                if (_category.isJumbotron != category.isJumbotron) { modified_fields.Add("isJumbotron"); }
+                if (_category.isBanner != category.isBanner) { modified_fields.Add("isBanner"); }
+                if (_category.pageShouldShowTopbarmenu != category.pageShouldShowTopbarmenu) { modified_fields.Add("pageShouldShowTopbarmenu"); }
+                if (_category.pageShouldHideTopTitle != category.pageShouldHideTopTitle) { modified_fields.Add("pageShouldHideTopTitle"); }
+                if (_category.pageShouldHideFromHorizontalMenu != category.pageShouldHideFromHorizontalMenu) { modified_fields.Add("pageShouldHideFromHorizontalMenu"); }
+                if (_category.isUseNewsArticleDetailsTemplate != category.isUseNewsArticleDetailsTemplate) { modified_fields.Add("isUseNewsArticleDetailsTemplate"); }
+
+
 
                 if (category.parentItemID < 0)
                 {
@@ -429,6 +463,8 @@ namespace WebApplication2.Context
                     category.imagePath = _category.imagePath;
                 }
 
+                AuditLogDbContext.getInstance().createAuditLogCategoryAction(category, AuditLogDbContext.ACTION_EDIT, modified_fields);
+
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return null;
@@ -456,8 +492,11 @@ namespace WebApplication2.Context
                     // }
                 }
 
-                db.infrastructureCategoryDb.Remove(category);
+                AuditLogDbContext.getInstance().createAuditLogCategoryAction(category, AuditLogDbContext.ACTION_DELETE);
+
+                db.Entry(category).State = EntityState.Deleted;
                 db.SaveChanges();
+
                 return null;
             }
         }

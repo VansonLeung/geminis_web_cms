@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebApplication2.Models.AuditLog>
+﻿@using WebApplication2.Helpers
+@model IEnumerable<WebApplication2.Models.AuditLog>
 
 @{
     ViewBag.Title = "Index";
@@ -49,9 +50,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.created_at)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.modified_at)
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -79,12 +77,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.action)
                 </td>
-                <td></td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.created_at)
+                    @Html.DisplayFor(modelItem => item.remarks)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.modified_at)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.created_at)</span>
                 </td>
             </tr>
         }
@@ -96,3 +93,5 @@
        $('.datepicker').datetimepicker(); //Initialise any date pickers
     });
 </script>
+
+@Html.Partial("CDataTable")

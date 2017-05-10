@@ -34,5 +34,9 @@ namespace WebApplication2.Models
 
         [Display(Name = "Action", ResourceType = typeof(Resource))]
         public string action { get; set; }
+
+        public string remarks { get; set; }
+
+        public bool is_private { get; set; }
     }
 }

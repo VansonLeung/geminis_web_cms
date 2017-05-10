@@ -30,6 +30,7 @@ namespace WebApplication2.Controllers
             public string fullname { get; set; }
             
             public bool isLoggedIn { get; set; }
+            public bool isKeptAlive { get; set; }
             public int fontSize { get; set; }
 
             public bool hasTradingAcc { get; set; }

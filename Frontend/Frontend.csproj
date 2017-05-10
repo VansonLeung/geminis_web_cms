@@ -1031,6 +1031,54 @@
     <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.updatePasswordResponseUpdatePasswordResp.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.clientQuetionListEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.clientQuetionListEnquiryResponseClientQuetionListEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.eStmtFileContentEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.eStmtFileContentEnquiryResponseEStmtFileContentEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.eStmtFileListEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.eStmtFileListEnquiryResponseEStmtFileListEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.otpTicketEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.otpTicketEnquiryResponseOTPTicketEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.otpTicketVerificationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.otpTicketVerificationResponseOtpTicketVerificationResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.quetionListEnquiryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.quetionListEnquiryResponseQuetionListEnquiryResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.replyResetPasswordQuestionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.replyResetPasswordQuestionResponseReplyResetPasswordQuestionResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.submitResetPasswordAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TTLITradeWSDEV\Frontend.TTLITradeWSDEV.submitResetPasswordAnswerResponseSubmitResetPasswordAnswerResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\TTLITradeWSDEV\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

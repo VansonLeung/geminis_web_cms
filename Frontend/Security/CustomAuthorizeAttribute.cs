@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Frontend.Controllers;
 using WebApplication2.Models;
+using WebApplication2.Helpers;
 
 namespace Frontend.Security
 {
@@ -28,7 +29,7 @@ namespace Frontend.Security
 
             if (accountLastActivity.GetValueOrDefault() != null)
             {
-                if ((DateTime.UtcNow - accountLastActivity.GetValueOrDefault()).TotalMinutes > 30)
+                if ((DateTimeExtensions.GetServerTime() - accountLastActivity.GetValueOrDefault()).TotalMinutes > 30)
                 {
                     isLastActivityExpired = true;
                 }
@@ -63,7 +64,7 @@ namespace Frontend.Security
             var needchangepassword = false;
             if (account.LastPasswordModifiedAt.GetValueOrDefault() != null)
             {
-                if ((DateTime.UtcNow - account.LastPasswordModifiedAt.GetValueOrDefault()).TotalDays > 90)
+                if ((DateTimeExtensions.GetServerTime() - account.LastPasswordModifiedAt.GetValueOrDefault()).TotalDays > 90)
                 {
                     needchangepassword = true;
                 }

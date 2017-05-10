@@ -1,24 +1,30 @@
-var get_qpi_login_params = function(callback)
+window.jsqpi_get_qpi_login_params = function(callback)
 {
     console.log("get_qpi_login_params");
     $.post(
-        "/api/session/get_qpi_login_params",
-        function(response) {
-            var json = response;
-            if (json.success)
-            {
-                var data = json.data;
-                callback(data);
-            }
-            else
-            {
-                Alert("qpi_login_err_1");
-            }
+        "/api/session/get_qpi_login_params"
+    )
+    .done(function (response) { 
+        console.log("0002", response);
+        var json = response;
+        if (json.success)
+        {
+            var data = json.data;
+            callback(data);
         }
-    );
+        else
+        {
+            console.log(response);
+            callback(null);
+        }
+    })
+    .fail(function (xhr, status, error) {
+        console.log("0001", status, error);
+        callback(null);
+    });
 }
 
-var keep_alive = function (params, callback) {
+window.jsqpi_keep_alive = function (params, callback) {
 
     console.log("keep_alive", params);
 
@@ -36,19 +42,24 @@ var keep_alive = function (params, callback) {
     var fullurl = url + query;
 
     $.get(
-        fullurl,
-        function (response) {
-            var json = response;
-            if (typeof response === 'string') {
-                json = JSON.parse(response);
-            }
-            callback(response);
+        fullurl
+    )
+    .done(function (response) {
+        console.log("0004", response);
+        var json = response;
+        if (typeof response === 'string') {
+            json = JSON.parse(response);
         }
-    );
+        callback(response);
+    })
+    .fail(function (xhr, status, error) {
+        console.log("0003", status, error);
+        callback(null);
+    });
 }
 
 
-var login = function(params, callback)
+window.jsqpi_login = function (params, callback)
 {
 
     console.log("login", params);
@@ -70,19 +81,23 @@ var login = function(params, callback)
     var fullurl = url + query;
 
     $.get(
-        fullurl,
-        function (response) {
-            var json = response;
-            if (typeof response === 'string')
-            {
-                json = JSON.parse(response);
-            }
-            callback(response);
+        fullurl
+    )
+    .done(function (response) {
+        console.log("0006", response);
+        var json = response;
+        if (typeof response === 'string') {
+            json = JSON.parse(response);
         }
-    );
+        callback(response);
+    })
+    .fail(function (xhr, status, error) {
+        console.log("0005", status, error);
+        callback(null);
+    });
 }
 
-var set_qpi_login_token = function(jsession, callback)
+window.jsqpi_set_qpi_login_token = function (jsession, callback)
 {
 
     $.ajax({
@@ -93,10 +108,12 @@ var set_qpi_login_token = function(jsession, callback)
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(data){
+            console.log("0008", data);
             callback(data);
         },
         failure: function(errMsg) {
-            Alert("qpi login err 2");
+            console.log("0007", errMsg);
+            callback(null);
         }
     });
 }
@@ -105,9 +122,18 @@ var set_qpi_login_token = function(jsession, callback)
 
 window.js_qpi_login = function(_callback)
 {
-    get_qpi_login_params(function(response1) {
-        login(response1, function(response2) {
-            set_qpi_login_token(response2, function(response3) {
+    window.jsqpi_get_qpi_login_params(function (response1) {
+        if (response1 == null)
+        {
+            _callback(null);
+            return;
+        }
+        window.jsqpi_login(response1, function (response2) {
+            if (response2 == null) {
+                _callback(null);
+                return;
+            }
+            window.jsqpi_set_qpi_login_token(response2, function (response3) {
                 _callback(response3);
             })
         })
@@ -116,8 +142,12 @@ window.js_qpi_login = function(_callback)
 
 window.js_qpi_keep_alive = function(_callback)
 {
-    get_qpi_login_params(function(response1) {
-        keep_alive(response1, function(response2) {
+    window.jsqpi_get_qpi_login_params(function (response1) {
+        if (response1 == null) {
+            _callback(null);
+            return;
+        }
+        window.jsqpi_keep_alive(response1, function (response2) {
             _callback(response2);
         })
     })

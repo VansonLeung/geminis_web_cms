@@ -82,6 +82,9 @@ else
                 @Html.DisplayNameFor(model => model.isBanner)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.isBottomMenu)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.created_at)
             </th>
             <th>
@@ -113,19 +116,19 @@ else
                     }
                 </td>
                 <td>
-                    @if (item.iconPath != null)
+                    @if (item.iconPath != null && item.iconPath != "")
                     {
                         <img src="@ServerHelper.GetImage(item.iconPath)" width="96" />
                     }
                 </td>
                 <td>
-                    @if (item.thumbPath != null)
+                    @if (item.thumbPath != null && item.thumbPath != "")
                     {
                         <img src="@ServerHelper.GetImage(item.thumbPath)" width="96" />
                     }
                 </td>
                 <td>
-                    @if (item.imagePath != null)
+                    @if (item.imagePath != null && item.imagePath != "")
                     {
                         <img src="@ServerHelper.GetImage(item.imagePath)" width="96" />
                     }
@@ -167,13 +170,17 @@ else
                     @Html.DisplayFor(modelItem => item.isBanner)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.created_at)
+                    @Html.DisplayFor(modelItem => item.isBottomMenu)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.modified_at)
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.created_at)</span>
+                </td>
+                <td>
+                    <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.modified_at)</span>
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })<br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })<br />
                     @Html.ActionLink("Sub-Categories", "List", new { parentItemID = item.ItemID })
                 </td>
             </tr>
@@ -186,6 +193,15 @@ else
     <p>
         @Html.ActionLink("Back to Categories", "List")
     </p>
+
+    if (ViewBag.parentItemID != null)
+    {
+        int parentItemID = ViewBag.parentItemID;
+        string parentItemName = ViewBag.parentItemName;
+        <p>
+            @Html.ActionLink("Back to Parent - " + parentItemName, "List", new { parentItemID = parentItemID })
+        </p>
+    }
 }
 
 @Html.Partial("CDataTable")

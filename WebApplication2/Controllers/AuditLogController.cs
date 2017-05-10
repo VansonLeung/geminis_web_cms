@@ -37,8 +37,8 @@ namespace WebApplication2.Controllers
         [CustomAuthorize(Roles = "superadmin")]
         public ActionResult Index(
             string accountID = "",
-            string logAction = "", 
-            string startDate = "", 
+            string logAction = "",
+            string startDate = "",
             string endDate = "",
             string category = "",
             string article = "")
@@ -50,6 +50,40 @@ namespace WebApplication2.Controllers
             query.endDate = endDate;
             query.category = category;
             query.article = article;
+
+            var list = AuditLogDbContext.getInstance().findAll(query);
+            if (!accountID.Equals(""))
+            {
+                var id = Convert.ToInt32(accountID);
+                ViewBag.accountID = getAccountIDList(id);
+            }
+            else
+            {
+                ViewBag.accountID = getAccountIDList();
+            }
+
+            ViewBag.logAction = getLogActionList(logAction);
+            return View(list);
+        }
+
+        // GET: AuditLog
+        [CustomAuthorize(Roles = "superadmin")]
+        public ActionResult Private(
+            string accountID = "",
+            string logAction = "",
+            string startDate = "",
+            string endDate = "",
+            string category = "",
+            string article = "")
+        {
+            var query = new AuditLogDbContext.Query();
+            query.accountID = accountID;
+            query.logAction = logAction;
+            query.startDate = startDate;
+            query.endDate = endDate;
+            query.category = category;
+            query.article = article;
+            query.is_private = true;
 
             var list = AuditLogDbContext.getInstance().findAll(query);
             if (!accountID.Equals(""))

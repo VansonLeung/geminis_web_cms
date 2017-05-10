@@ -216,6 +216,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.isBottomMenu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isBottomMenu)
+                    @Html.ValidationMessageFor(model => model.isBottomMenu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
         <hr />
 
         <div class="form-group">
@@ -238,6 +248,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.pageShouldHideFromHorizontalMenu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.pageShouldHideFromHorizontalMenu)
+                    @Html.ValidationMessageFor(model => model.pageShouldHideFromHorizontalMenu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        
         <hr />
 
         <div class="form-group">
