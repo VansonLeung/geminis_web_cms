@@ -2,6 +2,10 @@
 var inputChanged = false;
 var formSubmitted = false;
 
+$('input, select, textarea').on('keyup', function () {
+    inputChanged = true;
+});
+
 $('input, select, textarea').change(function () {
     inputChanged = true;
 });
@@ -23,6 +27,21 @@ if (CKEDITOR.instances.Desc_zh) {
 }
 if (CKEDITOR.instances.Desc_cn) {
     CKEDITOR.instances.Desc_cn.on('change', function () {
+        inputChanged = true;
+    });
+}
+if (CKEDITOR.instances.desc_en) {
+    CKEDITOR.instances.desc_en.on('change', function () {
+        inputChanged = true;
+    });
+}
+if (CKEDITOR.instances.desc_zh) {
+    CKEDITOR.instances.desc_zh.on('change', function () {
+        inputChanged = true;
+    });
+}
+if (CKEDITOR.instances.desc_cn) {
+    CKEDITOR.instances.desc_cn.on('change', function () {
         inputChanged = true;
     });
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication2.Context;
 using WebApplication2.Controllers;
 using WebApplication2.Helpers;
 using WebApplication2.Models;
@@ -53,7 +54,19 @@ namespace WebApplication2.Security
 
             if (accountLastActivity.GetValueOrDefault() != null)
             {
-                if ((DateTimeExtensions.GetServerTime() - accountLastActivity.GetValueOrDefault()).TotalMinutes > 30)
+                int sessionMin = 30;
+
+                Constant sessionMinConst = ConstantDbContext.getInstance().findActiveByKeyNoTracking("CMS_SESSION_KEEPALIVE_MINS");
+                if (sessionMinConst != null && sessionMinConst.Value != null)
+                {
+                    int _sessionMin = int.Parse(sessionMinConst.Value);
+                    if (_sessionMin >= 1)
+                    {
+                        sessionMin = _sessionMin;
+                    }
+                }
+
+                if ((DateTimeExtensions.GetServerTime() - accountLastActivity.GetValueOrDefault()).TotalMinutes > sessionMin)
                 {
                     isLastActivityExpired = true;
                 }

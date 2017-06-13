@@ -18,8 +18,6 @@
                                 <td>
                                     <span id="lang_select" style="z-index: 1000000"></span>
                                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    字體大小
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                     @{
                                         var spsm = "";
                                         var bigsm = "";
@@ -37,31 +35,48 @@
                                     <span style='font-size: 30px; @(bigsm)'><a href='#' style='text-decoration: none; color: #333' onclick='fontBig();'>A</a></span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     @if (Model.current != null && Model.current.session != null
-                                        && Model.current.session.isLoggedIn)
+&& Model.current.session.isLoggedIn)
                                     {
-                                        <a href="/@Model.lang.locale/home/logout">
-                                            <span class='generic-button-standalone gb-hollow-white'>
-                                                登出
-                                            </span>
-                                        </a>
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                        <a href="">
-                                            <span class='generic-button-standalone gb-primary'>
-                                                你好，@Model.current.session.fullname
-                                            </span>
-                                        </a>
+                                        if (Model.current.session.hasTradingAcc)
+                                        {
+                                            <a href="">
+                                                <span class='generic-button-standalone gb-hollow-white'>
+                                                    @Model.globalData.lbl_trading
+                                                </span>
+                                            </a>
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                            <a href="/@Model.lang.locale/home/logout">
+                                                <span class='generic-button-standalone gb-primary'>
+                                                    @(Model.current.session.fullname) (@(Model.globalData.lbl_logout))
+                                                </span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/@Model.lang.locale/home/logout">
+                                                <span class='generic-button-standalone gb-hollow-white'>
+                                                    @Model.globalData.lbl_logout
+                                                </span>
+                                            </a>
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                            <a href="">
+                                                <span class='generic-button-standalone gb-primary'>
+                                                    @(Model.globalData.lbl_welcome)@(Model.current.session.fullname)
+                                                </span>
+                                            </a>
+                                        }
                                     }
                                     else
                                     {
                                         <a href="/@Model.lang.locale/Page/login">
                                             <span class='generic-button-standalone gb-hollow-white'>
-                                                登入／註冊
+                                                @Model.globalData.lbl_login_register
                                             </span>
                                         </a>
                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                         <a href="/@Model.lang.locale/Page/signup">
                                             <span class='generic-button-standalone gb-primary'>
-                                                免費開戶
+                                                @Model.globalData.lbl_free_open_acc
                                             </span>
                                         </a>
                                     }
@@ -82,7 +97,11 @@
                                 }
                             </ul>
                             <ul id="nav-mobile" class="right">
-                                <li id="headerMenu_search_li" style="border-right: 1px solid #999999; width: 100px; text-align: center"><div><i class="fa fa-search"></i></div></li>
+                                <li id="headerMenu_search_li" style="border-right: 1px solid #999999; width: 100px; text-align: center">
+                                    <a href="/@Model.lang.locale/Home/Search">
+                                        <div><i class="fa fa-search"></i></div>
+                                    </a>
+                                </li>
                                 @{
                                     var curMenuCount = menuCount;
                                 }
@@ -103,6 +122,31 @@
 
         </div>
 
+        <div id="nav-overlay-search">
+            <div style="margin: 10px;">
+                <form method="get" action="/@Model.lang.locale/home/search">
+                    <input type="text" name="q"/>
+                </form>
+            </div>
+        </div>
+
+        <style>
+            #nav-overlay-search
+            {
+              box-shadow: 0px 25px 20px rgba(0, 0, 0, 0.5);
+              z-index: 100000;
+              display: none;
+              top: 130px;
+              width: 200px;
+              position: absolute;
+              background: #F3F3F3; 
+            }
+        </style>
+
+        <script type="text/javascript">
+            $("#nav-overlay-search").css("left", ($("#headerMenu_search_li").position().left - 100) + "px");
+        </script>
+
         <div id="nav-overlay">
             @{
                 var s_menuCount = 0;
@@ -118,6 +162,7 @@
                     <div class="row">
                         <div class="col s3 box">
                             <div class="font_xxxlg" style="font-weight: bolder;">@menuItem.name</div>
+                            <p class="font_sm c_grey_2" style="line-height: 1.43;">@menuItem.desc</p>
                         </div>
                         <div class="col s3 box">
                             <ul class="nav-sub-menu sub">
@@ -145,7 +190,7 @@
                                     {
                                         var jk = j + "_" + k;
                                         var subsubmenuItem = submenuItem.submenu[k];
-                                        <a href="@subsubmenuItem.link.GetFullURL()"><li id="headerMenu_subsub_li_@jk">@subsubmenuItem.name<p class="arrow"></p></li></a>
+                                        <a href="@subsubmenuItem.link.GetFullURL()"><li id="headerMenu_subsub_li_@jk">@subsubmenuItem.name</li></a>
                                     }
                                 </ul>
                             }
@@ -207,6 +252,7 @@ subsubmenuItem.category.thumbURL != null)
                     <div class="row">
                         <div class="col s3 box">
                             <div class="font_xxxlg" style="font-weight: bolder;">@menuItem.name</div>
+                            <p class="font_sm c_grey_2" style="line-height: 1.43;">@menuItem.desc</p>
                         </div>
                         <div class="col s3 box">
                             <ul class="nav-sub-menu sub">
@@ -234,7 +280,7 @@ subsubmenuItem.category.thumbURL != null)
                                     {
                                         var jk = j + "_" + k;
                                         var subsubmenuItem = submenuItem.submenu[k];
-                                        <a href="@subsubmenuItem.link.GetFullURL()"><li id="headerMenu_subsub_li_@jk">@subsubmenuItem.name<p class="arrow"></p></li></a>
+                                        <a href="@subsubmenuItem.link.GetFullURL()"><li id="headerMenu_subsub_li_@jk">@subsubmenuItem.name</li></a>
                                     }
                                 </ul>
                             }
@@ -301,6 +347,8 @@ $('.nav-bar-bg').find('li#headerMenu_search_li').on('mouseover', function (e) {
     target.addClass('highlighted')
 
     $('#nav-overlay').hide();
+    $('#nav-overlay-search').show();
+    $("#nav-overlay-search").css("left", ($("#headerMenu_search_li").position().left - 100) + "px");
 
     if (overlay_time) {
         clearTimeout(overlay_time);
@@ -311,6 +359,7 @@ $('.nav-bar-bg').find('li#headerMenu_search_li').on('mouseover', function (e) {
 $('.nav-bar-bg').find('li#headerMenu_search_li').on('mouseout', function (e) {
     overlay_time = setTimeout(function () {
         $('#nav-overlay').hide();
+        $('#nav-overlay-search').hide();
         var siblings = $('.nav-bar-bg').find('li');
         siblings.removeClass('highlighted');
     }, 250);
@@ -331,6 +380,7 @@ $('.nav-bar-bg').find('li.headerMenuActive').on('mouseover', function (e) {
     target.addClass('highlighted')
 
     $('#nav-overlay').show();
+    $('#nav-overlay-search').hide();
 
     if (target.hasClass('li_right')) {
         $('#nav-overlay').addClass('right');
@@ -376,6 +426,23 @@ $('#nav-overlay').on('mouseover', function(e)
 {
     if (overlay_time)
     {
+        clearTimeout(overlay_time);
+        overlay_time = null;
+    }
+});
+
+
+
+$('#nav-overlay-search').on('mouseout', function (e) {
+    overlay_time = setTimeout(function () {
+        $('#nav-overlay').hide();
+        $('#nav-overlay-search').hide();
+        var siblings = $('.nav-bar-bg').find('li');
+        siblings.removeClass('highlighted');
+    }, 250);
+});
+$('#nav-overlay-search').on('mouseover', function (e) {
+    if (overlay_time) {
         clearTimeout(overlay_time);
         overlay_time = null;
     }

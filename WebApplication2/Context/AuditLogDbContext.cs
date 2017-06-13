@@ -304,6 +304,27 @@ namespace WebApplication2.Context
         }
 
 
+        public string createAuditLogConstantAction(Constant constant, string action, List<string> modified_fields = null)
+        {
+
+            var account = SessionPersister.account;
+            if (account == null)
+            {
+                return null;
+            }
+
+            AuditLog item = new AuditLog();
+            item.accountID = account.AccountID;
+            item.account = account.Username;
+            item.article = constant.Key;
+            item.action = action;
+
+            manipulateRemarks(item, modified_fields);
+
+            return createAuditLog(item);
+        }
+
+
         #endregion
     }
 }

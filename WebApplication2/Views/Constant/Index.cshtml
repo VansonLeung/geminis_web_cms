@@ -16,6 +16,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Key)
             </th>
@@ -25,7 +26,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.isActive)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +34,14 @@
         @foreach (var item in Model)
         {
             <tr>
+                @if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("superadmin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ConstantID })<br />
+                        @Html.ActionLink("Details", "Details", new { id = item.ConstantID })<br />
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ConstantID })
+                    </td>
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.Key)
                 </td>
@@ -43,15 +51,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.isActive)
                 </td>
-
-                @if (SessionPersister.account.Role != null && SessionPersister.account.Role.Contains("superadmin"))
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ConstantID })<br />
-                        @Html.ActionLink("Details", "Details", new { id = item.ConstantID })<br />
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ConstantID })
-                    </td>
-                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desc)
+                </td>
             </tr>
         }
     </tbody>

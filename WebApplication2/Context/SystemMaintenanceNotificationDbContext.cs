@@ -102,12 +102,16 @@ namespace WebApplication2.Context
 
                 if (local != null)
                 {
-                    if (local.desc_en != item.desc_en) { modified_fields.Add("desc_en"); } 
-                    if (local.desc_zh != item.desc_zh) { modified_fields.Add("desc_zh"); } 
-                    if (local.desc_cn != item.desc_cn) { modified_fields.Add("desc_cn"); } 
+                    if (local.name_en != item.name_en) { modified_fields.Add("name_en"); }
+                    if (local.name_zh != item.name_zh) { modified_fields.Add("name_zh"); }
+                    if (local.name_cn != item.name_cn) { modified_fields.Add("name_cn"); }
+                    if (local.desc_en != item.desc_en) { modified_fields.Add("desc_en"); }
+                    if (local.desc_zh != item.desc_zh) { modified_fields.Add("desc_zh"); }
+                    if (local.desc_cn != item.desc_cn) { modified_fields.Add("desc_cn"); }
                     if (local.startDate != item.startDate) { modified_fields.Add("startDate"); } 
-                    if (local.endDate != item.endDate) { modified_fields.Add("endDate"); } 
-                    if (local.isActive != item.isActive) { modified_fields.Add("isActive"); } 
+                    if (local.endDate != item.endDate) { modified_fields.Add("endDate"); }
+                    if (local.isActive != item.isActive) { modified_fields.Add("isActive"); }
+                  //  if (local.level != item.level) { modified_fields.Add("level"); }
 
                     db.Entry(local).State = EntityState.Detached;
                 }

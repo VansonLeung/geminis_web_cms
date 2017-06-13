@@ -14,22 +14,53 @@ namespace WebApplication2.Helpers
     {
         public static bool SendEmail(List<string> emailTo, string mailbody, string subject)
         {
-            var from = new MailAddress("uattest@geminisgroup.com");
-
             var useDefaultCredentials = false;
             var enableSsl = true;
-            var replyto = ""; // set here your email; 
-            var userName = string.Empty;
-            var password = string.Empty;
+            var method = SmtpDeliveryMethod.Network;
+
+            var smtp_skip_email = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_skip_email");
+            if (smtp_skip_email != null && smtp_skip_email.Value == "1")
+            {
+                AuditLogDbContext.getInstance().createAuditLog(new AuditLog
+                {
+                    action = "[EMAIL SKIPPED]",
+                    remarks = subject + " " + mailbody,
+                    is_private = false,
+                });
+                return true;
+            }
+
+            var c_from = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_from");
+            var c_userName = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_username");
+            var c_password = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_password");
+            var c_port = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_port");
+            var c_host = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_host");
+            var c_domain = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_domain");
+
+            /*
+            var from = new MailAddress("uattest@geminisgroup.com", "Geminis");
+            var userName = "uattest@geminisgroup.com";
+            var password = "UAT@2016gem";
+            var port = 587;
+            var host = "mail.geminisgroup.com";
+            var domain = "fbgemini";
+            */
+
+            var from = new MailAddress("geministest1@gmail.com", "Geminis");
+            var userName = "geministest1@gmail.com";
+            var password = "geministes";
             var port = 587;
             var host = "smtp.gmail.com";
+            string domain = null;
 
-            userName = "uattest@geminisgroup.com"; // setup here the username; 
-            password = "test@1557"; // setup here the password; 
-            bool.TryParse("false", out useDefaultCredentials); //setup here if it uses defaault credentials 
-            bool.TryParse("true", out enableSsl); //setup here if it uses ssl 
-            int.TryParse("443", out port); //setup here the port 
-            host = "mail.geminisgroup.com"; //setup here the host 
+
+            if (c_from != null && c_from.Value != null && c_from.Value != "") { from = new MailAddress(c_from.Value, "Geminis"); }
+            if (c_userName != null && c_userName.Value != null && c_userName.Value != "") { userName = c_userName.Value; }
+            if (c_password != null && c_password.Value != null && c_password.Value != "") { password = c_password.Value; }
+            if (c_port != null && c_port.Value != null && c_port.Value != "") { port = int.Parse(c_port.Value); }
+            if (c_host != null && c_host.Value != null && c_host.Value != "") { host = c_host.Value; }
+            if (c_domain != null && c_domain.Value != null && c_domain.Value != "") { domain = c_domain.Value; }
+
 
             using (var mail = new MailMessage())
             {
@@ -51,10 +82,20 @@ namespace WebApplication2.Helpers
                 using (var client = new SmtpClient())
                 {
                     client.Host = host;
-                    client.EnableSsl = true;
+                    client.EnableSsl = enableSsl;
                     client.Port = port;
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential(userName, password);
+                    client.UseDefaultCredentials = useDefaultCredentials;
+
+                    if (domain != null)
+                    {
+                        client.Credentials = new NetworkCredential(userName, password, domain);
+                    }
+                    else
+                    {
+                        client.Credentials = new NetworkCredential(userName, password);
+                    }
+
+                    client.DeliveryMethod = method;
                     try
                     {
                         client.Send(mail);
@@ -64,8 +105,8 @@ namespace WebApplication2.Helpers
                         AuditLogDbContext.getInstance().createAuditLog(new WebApplication2.Models.AuditLog
                         {
                             action = "[EMAIL API TEST]",
-                            remarks = "Response Exception: " + e.Message + " " + "uattest@geminisgroup.com:443" + " " + "mail.geminisgroup.com",
-                            is_private = true,
+                            remarks = "Response Exception: " + e.Message + " " + userName + " " + port + " " + host,
+                            is_private = false,
                         });
                     }
                 }

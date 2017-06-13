@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using WebApplication2.Helpers;
 using WebApplication2.Resources;
 
@@ -63,12 +64,18 @@ namespace WebApplication2.Models
         [Display(Name = "name_cn", ResourceType = typeof(Resource))]
         public string name_cn { get; set; }
 
+        [AllowHtml]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "desc_en", ResourceType = typeof(Resource))]
         public string desc_en { get; set; }
 
+        [AllowHtml]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "desc_zh", ResourceType = typeof(Resource))]
         public string desc_zh { get; set; }
 
+        [AllowHtml]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "desc_cn", ResourceType = typeof(Resource))]
         public string desc_cn { get; set; }
 
@@ -90,5 +97,7 @@ namespace WebApplication2.Models
         {
             return DateTimeExtensions.DateTimeToString(endDate);
         }
+
+//        public string level { get; set; }
     }
 }

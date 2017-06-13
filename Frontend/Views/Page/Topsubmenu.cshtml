@@ -7,36 +7,36 @@
   <div style="position:relative; padding: 20px;">
     <div>
       <div class='submenubar'>
-        <ul class="submenuList">
-          @foreach (var menuItem in Model.topbarMenu)
-          {
-              if (menuItem.category == null
-                  ||
-                  !menuItem.category.hideTopsubmenuBarItem)
+          <ul class="submenuList">
+              @foreach (var menuItem in Model.topbarMenu)
               {
-                  if (menuItem.is_highlighted)
+                  if (menuItem.category == null
+                      ||
+                      !menuItem.category.hideTopsubmenuBarItem)
                   {
-                    <li class="is_highlighted">
+                      if (menuItem.is_highlighted)
+                      {
+                          <a href="@menuItem.link.GetFullURL()">
+                              <li class="is_highlighted">
+                                  <p>
+                                      @menuItem.name
+                                  </p>
+                              </li>
+                          </a>
+                      }
+                      else
+                      {
                         <a href="@menuItem.link.GetFullURL()">
-                            <p>
-                                @menuItem.name
-                            </p>
+                            <li>
+                                <p>
+                                    @menuItem.name
+                                </p>
+                            </li>
                         </a>
-                    </li>
-                  }
-                  else
-                  {
-                    <li>
-                        <a href="@menuItem.link.GetFullURL()">
-                            <p>
-                                @menuItem.name
-                            </p>
-                        </a>
-                    </li>
+                      }
                   }
               }
-          }
-        </ul>
+          </ul>
       </div>
     </div>
 

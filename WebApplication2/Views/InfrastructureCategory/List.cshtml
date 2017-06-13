@@ -21,6 +21,7 @@ else
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.url)
             </th>
@@ -84,19 +85,23 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.isBottomMenu)
             </th>
-            <th>
+            <th id="column_def_sort" data-direction="desc">
                 @Html.DisplayNameFor(model => model.created_at)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.modified_at)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })<br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })<br />
+                    @Html.ActionLink("Sub-Categories", "List", new { parentItemID = item.ItemID })
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.url)
                 </td>
@@ -177,11 +182,6 @@ else
                 </td>
                 <td>
                     <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.modified_at)</span>
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })<br />
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })<br />
-                    @Html.ActionLink("Sub-Categories", "List", new { parentItemID = item.ItemID })
                 </td>
             </tr>
         }

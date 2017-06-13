@@ -16,12 +16,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body>
-
+@{ 
+    var fontclass = "";
+    if (Model.current.session.fontSize <= 20)
+    {
+        fontclass = "";
+    }
+    else if (Model.current.session.fontSize > 20)
+    {
+        fontclass = " class=\"larger\"";
+    }
+}
+<body @fontclass>
     <style>
-        body {
-            font-size: @(Model.current.session.fontSize)px !important;
-        }
         .top_warning {
             padding: 10px;
             background-color: #000;
@@ -154,23 +161,15 @@
     </script>
 
     <script type="text/javascript">
-        window.addEventListener("message",
-          function (e) {
-              console.log(e);
-          },
-          false);
-    </script>
-
-    <script type="text/javascript">
-        var loopHeartbeat = function()
+        var loopHeartbeat = function(time)
         {
             setTimeout(function () {
                 console.log("HEARTBEAT");
                 $.post("/api/session/api_sso_heartbeat");
-                loopHeartbeat();
-            }, 60000);
+                loopHeartbeat(30000);
+            }, time);
         }
-        loopHeartbeat();
+        loopHeartbeat(2000);
     </script>
 
     <!--Begin Comm100 Live Chat Code-->

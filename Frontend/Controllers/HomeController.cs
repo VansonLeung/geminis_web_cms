@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Context;
+using WebApplication2.Helpers;
 using WebApplication2.ViewModels.Include;
 using static Frontend.Controllers.SessionController;
 
@@ -64,13 +65,7 @@ namespace Frontend.Controllers
 
                 if (session.hasTradingAcc)
                 {
-                    return RedirectToRoute(new
-                    {
-                        controller = "Page",
-                        action = "Index",
-                        locale = locale,
-                        category = "trading",
-                    });
+                    return Redirect("/"+locale+"/Page/trading");
                 }
             }
 
@@ -130,6 +125,72 @@ namespace Frontend.Controllers
         public ActionResult _Footer()
         {
             return PartialView();
+        }
+
+
+
+
+
+
+
+        [Internationalization]
+        public ActionResult Search(string locale = "en-US")
+        {
+            // check session if timeout
+            if (SSO_SessionTimeout())
+            {
+                SSO_ClearSession();
+            }
+
+            SSO_InternalKeepAlive();
+            SSO_InternalHeartbeat();
+
+            var session = getSession();
+            if (session != null && !session.isKeptAlive)
+            {
+                Session["isKeptAlive"] = true;
+            }
+
+            var keys = Request.QueryString.Keys;
+            for (var i = 0; i < keys.Count; i++)
+            {
+                var val = Request.QueryString[keys[i]];
+                if (keys[i] == "q" && val != null && val != "")
+                {
+                    List<LuceneSearchData> searchData = LuceneSearch.Search(val).ToList();
+
+                    foreach (LuceneSearchData data in searchData)
+                    {
+                        data.Name = data.GetName(locale);
+                        data.Description = data.GetDesc(locale);
+                        data.Url = data.GetURL(locale);
+                    }
+
+                    BaseViewModel vm = BaseViewModel.make(locale, "home", null, Request, session);
+                    vm.search_keywords = val;
+                    vm.search_data = searchData;
+                    return View(vm);
+                }
+            }
+            BaseViewModel vm2 = BaseViewModel.make(locale, "home", null, Request, session);
+            vm2.search_keywords = "";
+            vm2.search_data = new List<LuceneSearchData>();
+            return View(vm2);
+        }
+
+
+        public ActionResult SearchCreateIndex()
+        {
+            LuceneSearch.AddUpdateLuceneIndex(LuceneSearchDataRepository.GetAll());
+            TempData["Result"] = "Search index was created successfully!";
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult SearchOptimizeIndex()
+        {
+            LuceneSearch.Optimize();
+            TempData["Result"] = "Search index was optimized successfully!";
+            return RedirectToAction("Index");
         }
     }
 }

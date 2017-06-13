@@ -41,20 +41,22 @@ window.jsqpi_keep_alive = function (params, callback) {
 
     var fullurl = url + query;
 
-    $.get(
-        fullurl
-    )
-    .done(function (response) {
-        console.log("0004", response);
-        var json = response;
-        if (typeof response === 'string') {
-            json = JSON.parse(response);
+    $.ajax({
+        type: "GET",
+        url: fullurl,
+        // The key needs to match your method's input parameter (case-sensitive).
+        dataType: "jsonp",
+        crossDomain: true,
+        jsonp: false,
+        jsonpCallback: "callback",
+        success: function (data) {
+            console.log("0004", data);
+            callback(data);
+        },
+        error: function (errMsg) {
+            console.log("0003", errMsg);
+            callback(null);
         }
-        callback(response);
-    })
-    .fail(function (xhr, status, error) {
-        console.log("0003", status, error);
-        callback(null);
     });
 }
 
@@ -80,20 +82,22 @@ window.jsqpi_login = function (params, callback)
 
     var fullurl = url + query;
 
-    $.get(
-        fullurl
-    )
-    .done(function (response) {
-        console.log("0006", response);
-        var json = response;
-        if (typeof response === 'string') {
-            json = JSON.parse(response);
+    $.ajax({
+        type: "GET",
+        url: fullurl,
+        // The key needs to match your method's input parameter (case-sensitive).
+        dataType: "jsonp",
+        crossDomain: true,
+        jsonp: false,
+        jsonpCallback: "callback",
+        success: function (data) {
+            console.log("0006", data);
+            callback(data);
+        },
+        error: function (errMsg) {
+            console.log("0005", errMsg);
+            callback(null);
         }
-        callback(response);
-    })
-    .fail(function (xhr, status, error) {
-        console.log("0005", status, error);
-        callback(null);
     });
 }
 
@@ -105,13 +109,11 @@ window.jsqpi_set_qpi_login_token = function (jsession, callback)
         url: "/api/session/set_qpi_login_token",
         // The key needs to match your method's input parameter (case-sensitive).
         data: JSON.stringify(jsession),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(data){
+        success: function (data) {
             console.log("0008", data);
             callback(data);
         },
-        failure: function(errMsg) {
+        error: function(errMsg) {
             console.log("0007", errMsg);
             callback(null);
         }

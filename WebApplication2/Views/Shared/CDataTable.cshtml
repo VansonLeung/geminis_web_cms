@@ -9,7 +9,20 @@
 </script>
 
 <script type="text/javascript" charset="utf8">
-    $(document).ready( function () {
-        $('.table').DataTable();
+    $(document).ready(function () {
+        var order = null;
+        var ths = $('.table').find('th');
+        for (var k in ths) {
+            var th = ths[k];
+            if ($(th).attr('id') === 'column_def_sort') {
+                var direction = $(th).attr('data-direction') || 'desc';
+                order = [k, direction];
+                break;
+            }
+        }
+        var table = $('.table').DataTable({
+            pageLength: 50,
+        });
+        table.order(order).draw();
     } );
 </script>

@@ -26,7 +26,7 @@ namespace WebApplication2.ViewModels
             return new MvcHtmlString(output);
         }
 
-        private static string Render(HtmlHelper helper, string template, BaseViewModel model)
+        public static string Render(HtmlHelper helper, string template, BaseViewModel model, bool is_strict = false)
         {
             if (template == null)
             {
@@ -86,7 +86,8 @@ namespace WebApplication2.ViewModels
                 str = str.Substring(10);
                 str = str.Substring(0, str.Length - 1);
 
-                if(helper.ViewData != null)
+                if(helper != null
+                && helper.ViewData != null)
                 {
                     var value = helper.ViewData[str];
                     if (value == null)
@@ -123,6 +124,11 @@ namespace WebApplication2.ViewModels
                     return value;
                 }
 
+                if (is_strict)
+                {
+                    return "";
+                }
+
                 return m.Value;
             });
 
@@ -149,6 +155,11 @@ namespace WebApplication2.ViewModels
                     }
 
                     return value;
+                }
+
+                if (is_strict)
+                {
+                    return "";
                 }
 
                 return m.Value;

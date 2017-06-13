@@ -23,14 +23,25 @@ namespace Frontend.Controllers
             }
             */
 
-            
+
             // check session if timeout
 
-            
+
             if (SSO_SessionTimeout())
             {
                 SSO_ClearSession();
 
+                return RedirectToRoute(new
+                {
+                    controller = "Page",
+                    action = "Index",
+                    locale = locale,
+                    category = "session_timeout",
+                });
+            }
+
+            if (category == "session_timeout")
+            {
                 category = "login";
                 id = null;
                 BaseViewModel vml = BaseViewModel.make(locale, category, id, Request, getSession(true));
@@ -41,7 +52,7 @@ namespace Frontend.Controllers
                 {
                     ViewBag.message = "登入時間以空置了超過" + min + "分鐘，請重新登入";
                 }
-                if (locale == "zh-CN" || locale == "cn")
+                else if (locale == "zh-CN" || locale == "cn")
                 {
                     ViewBag.message = "登入时间以空置了超过" + min + "分钟，请重新登入";
                 }
@@ -61,6 +72,7 @@ namespace Frontend.Controllers
             {
                 Session["isKeptAlive"] = true;
 
+                /*
                 if (session.hasTradingAcc)
                 {
                     return RedirectToRoute(new
@@ -71,6 +83,7 @@ namespace Frontend.Controllers
                         category = "trading",
                     });
                 }
+                */
             }
 
             if (category != null && category.ToLower() == "home")
@@ -84,6 +97,91 @@ namespace Frontend.Controllers
             }
 
             BaseViewModel vm = BaseViewModel.make(locale, category, id, Request, session);
+
+            if (!vm.category.isVisitor)
+            {
+                if (vm.current.session == null
+                    || vm.current.session.clientID == null)
+                {
+                    // HOME
+                    var redirect_path = Request.Path;
+                    if (redirect_path.ToLower().Contains("/login")
+                        || redirect_path.ToLower().Contains("/session_timeout"))
+                    {
+                        redirect_path = "/" + locale;
+                    }
+
+                    category = "login";
+                    id = null;
+                    BaseViewModel vml = BaseViewModel.make(locale, category, id, Request, getSession(true));
+                    vml.redirectPack = vm;
+                    vml.constants.Add(new WebApplication2.Models.Constant
+                    {
+                        Key = "redirect",
+                        Value = redirect_path,
+                        isActive = true,
+                    });
+
+                    if (locale == "zh-HK" || locale == "zh-TW" || locale == "zh")
+                    {
+                        ViewBag.message = "請登入";
+                    }
+                    else if (locale == "zh-CN" || locale == "cn")
+                    {
+                        ViewBag.message = "请登入";
+                    }
+                    else
+                    {
+                        ViewBag.message = "Please login";
+                    }
+
+                    return View(vml);
+                }
+            }
+
+            if (!vm.category.isVisitor
+                && !vm.category.isMember)
+            {
+                if (vm.current.session == null
+                    || vm.current.session.clientID == null
+                    || vm.current.session.hasTradingAcc == false)
+                {
+                    // TRADING PAGE
+                    var redirect_path = Request.Path;
+                    if (redirect_path.ToLower().Contains("/login")
+                        || redirect_path.ToLower().Contains("/session_timeout"))
+                    {
+                        redirect_path = "/" + locale + "/page/trading";
+                    }
+
+                    category = "login";
+                    id = null;
+                    BaseViewModel vml = BaseViewModel.make(locale, category, id, Request, getSession(true));
+                    vml.redirectPack = vm;
+                    vml.constants.Add(new WebApplication2.Models.Constant
+                    {
+                        Key = "redirect",
+                        Value = redirect_path,
+                        isActive = true,
+                    });
+
+                    if (locale == "zh-HK" || locale == "zh-TW" || locale == "zh")
+                    {
+                        ViewBag.message = "請登入交易账号";
+                    }
+                    else if (locale == "zh-CN" || locale == "cn")
+                    {
+                        ViewBag.message = "请登入交易账号";
+                    }
+                    else
+                    {
+                        ViewBag.message = "Please login as trading account";
+                    }
+
+                    return View(vml);
+                }
+            }
+
             return View(vm);
         }
         public ActionResult _Header()

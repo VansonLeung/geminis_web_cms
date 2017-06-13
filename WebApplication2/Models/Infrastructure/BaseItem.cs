@@ -32,6 +32,26 @@ namespace WebApplication2.Models.Infrastructure
             return name_en;
         }
 
+        public string GetDesc(string locale = null)
+        {
+            if (locale != null)
+            {
+                if (locale.Equals("en"))
+                {
+                    return desc_en;
+                }
+                if (locale.Equals("zh"))
+                {
+                    return desc_zh;
+                }
+                if (locale.Equals("cn"))
+                {
+                    return desc_cn;
+                }
+            }
+            return desc_en;
+        }
+
         [Required]
         [Display(Name = "Url", ResourceType = typeof(Resource))]
         public string url { get; set; }
@@ -52,6 +72,15 @@ namespace WebApplication2.Models.Infrastructure
         [Required]
         [Display(Name = "name_cn", ResourceType = typeof(Resource))]
         public string name_cn { get; set; }
+
+        [Display(Name = "desc_en", ResourceType = typeof(Resource))]
+        public string desc_en { get; set; }
+
+        [Display(Name = "desc_zh", ResourceType = typeof(Resource))]
+        public string desc_zh { get; set; }
+
+        [Display(Name = "desc_cn", ResourceType = typeof(Resource))]
+        public string desc_cn { get; set; }
 
         [Display(Name = "iconPath", ResourceType = typeof(Resource))]
         public string iconPath { get; set; }

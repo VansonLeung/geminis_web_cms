@@ -24,6 +24,12 @@ namespace Frontend.Controllers
                     session = MakeBaseControllerSession(resp);
                     session.isLoggedIn = true;
 
+                    if (Session["TTLAccount"] != null)
+                    {
+                        TTLITradeWSDEV.queryAccountDetailsResponseQueryAccountDetailsResp resp2 = (TTLITradeWSDEV.queryAccountDetailsResponseQueryAccountDetailsResp)(Session["TTLAccount"]);
+                        session.email = resp2.email;
+                    }
+
                     if (Session["jsessionID"] != null)
                     {
                         string jsessionID = (string)Session["jsessionID"];
@@ -41,6 +47,15 @@ namespace Frontend.Controllers
             if (Session["fontSize"] != null)
             {
                 session.fontSize = (int)Session["fontSize"];
+            }
+
+            if (Session["isKeptAlive"] != null)
+            {
+                session.isKeptAlive = (bool)Session["isKeptAlive"];
+            }
+            else
+            {
+                session.isKeptAlive = false;
             }
 
             return session;
@@ -82,6 +97,11 @@ namespace Frontend.Controllers
             Session["TTLClient"] = resp;
         }
 
+        public void setAccSession(TTLITradeWSDEV.queryAccountDetailsResponseQueryAccountDetailsResp resp)
+        {
+            Session["TTLAccount"] = resp;
+        }
+
         public void setJSession(QPIAPIResponse resp)
         {
             if (resp == null)
@@ -116,6 +136,7 @@ namespace Frontend.Controllers
         public void ClearSession()
         {
             setSession(null);
+            setAccSession(null);
             setJSession(null);
         }
 
@@ -180,6 +201,13 @@ namespace Frontend.Controllers
                 SessionController.UpsertSessionLogin(sessionID, userID, ttlsession, jsessionID);
             }
         }
+
+
+        public void SSO_ForceExpire(string userID)
+        {
+            SessionController.ForceAllSessionLoginExpireByUserID(userID);
+        }
+
 
 
         public bool SSO_SessionTimeout()

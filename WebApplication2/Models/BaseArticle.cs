@@ -142,9 +142,6 @@ namespace WebApplication2.Models
             a.Slug = Slug;
             a.Keywords = Keywords;
             a.Lang = Lang;
-            a.createdBy = createdBy;
-            a.approvedBy = approvedBy;
-            a.publishedBy = publishedBy;
             return a;
         }
     }

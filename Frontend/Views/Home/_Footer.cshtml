@@ -39,13 +39,15 @@
             <div class='gem_form nobg zeromarginpadding'>
                 <div class='row'>
                     <div class='col s12 m12'>
-                        © @Model.currentYear Geminis Securities Limited，版權所有，不得轉載。
+                        © @(Model.currentYear) @(Model.globalData.lbl_copyright)
 
                         @for (var i = 0; i < Model.bottomMenu.Count; i++)
                         {
                             var menuItem = Model.bottomMenu[i];
-                            @("&nbsp; &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp;")
-                            <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
+                            <span>
+                                <span style="width: 100px">&nbsp;</span>|<span style="width: 100px"> &nbsp;</span>
+                                <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
+                            </span>
                         }
                     </div>
                 </div>

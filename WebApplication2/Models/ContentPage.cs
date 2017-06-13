@@ -36,9 +36,6 @@ namespace WebApplication2.Models
             a.MetaData = MetaData;
             a.MetaKeywords = MetaKeywords;
             a.Lang = Lang;
-            a.createdBy = createdBy;
-            a.approvedBy = approvedBy;
-            a.publishedBy = publishedBy;
             return a;
         }
     }

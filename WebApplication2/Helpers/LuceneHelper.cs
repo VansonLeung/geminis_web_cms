@@ -1,27 +1,121 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿using HtmlAgilityPack;
+using ICSharpCode.SharpZipLib.Zip;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
+using Lucene.Net.Search.Highlight;
 using Lucene.Net.Store;
-using org.pdfbox.pdmodel;
-using org.pdfbox.util;
+using org.apache.pdfbox.pdmodel;
+using org.apache.pdfbox.util;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Xml;
+using WebApplication2.Context;
+using WebApplication2.Models;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Helpers
 {
     public class LuceneSearchData
     {
         public int Id { get; set; }
+
+        public int ArticleId { get; set; }
+        public int BaseArticleId { get; set; }
+        public int CategoryId { get; set; }
+
+        public string Url { get; set; }
+
+        public string Type { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        public string GetName(string locale = null)
+        {
+            string val = "";
+            if (locale != null)
+            {
+                if (locale.Equals("en") || locale.Equals("en-US"))
+                {
+                    val = name_en;
+                }
+                if (locale.Equals("zh") || locale.Equals("zh-HK"))
+                {
+                    val = name_zh;
+                }
+                if (locale.Equals("cn") || locale.Equals("zh-CN"))
+                {
+                    val = name_cn;
+                }
+            }
+
+            if (val != "")
+            {
+                return val;
+            }
+            return Name;
+        }
+
+        public string GetDesc(string locale = null)
+        {
+            string val = "";
+            if (locale != null)
+            {
+                if (locale.Equals("en") || locale.Equals("en-US"))
+                {
+                    val = desc_en;
+                }
+                if (locale.Equals("zh") || locale.Equals("zh-HK"))
+                {
+                    val = desc_zh;
+                }
+                if (locale.Equals("cn") || locale.Equals("zh-CN"))
+                {
+                    val = desc_cn;
+                }
+            }
+
+            if (val != "")
+            {
+                return val;
+            }
+            return Description;
+        }
+
+        public string GetURL(string locale = "en-US")
+        {
+            if (is_page == 1)
+            {
+                return "/" + locale + "/Page/" + Url;
+            }
+            else
+            {
+                return Url;
+            }
+        }
+
+        public string name_en { get; set; }
+        public string name_zh { get; set; }
+        public string name_cn { get; set; }
+        public string desc_en { get; set; }
+        public string desc_zh { get; set; }
+        public string desc_cn { get; set; }
+
+        public int is_page { get; set; }
+        public int is_pdf { get; set; }
+        public int is_doc { get; set; }
+        public int is_docx { get; set; }
+
+        public int is_visitor { get; set; }
+        public int is_member { get; set; }
+        public int is_trading { get; set; }
     }
 
     public class LuceneSearchDataRepository
@@ -32,15 +126,227 @@ namespace WebApplication2.Helpers
         }
         public static List<LuceneSearchData> GetAll()
         {
-            return new List<LuceneSearchData> {
-                new LuceneSearchData {Id = 1, Name = "Belgrad", Description = "City in Serbia"},
-                new LuceneSearchData {Id = 2, Name = "Moscow", Description = "City in Russia"},
-                new LuceneSearchData {Id = 3, Name = "Chicago", Description = "City in USA"},
-                new LuceneSearchData {Id = 4, Name = "Mumbai", Description = "City in India"},
-                new LuceneSearchData {Id = 5, Name = "Hong-Kong", Description = "City in Hong-Kong"},
-            };
+            List<LuceneSearchData> searchData = new List<LuceneSearchData>();
+            List<ArticlePublished> items = ArticlePublishedDbContext.getInstance().findPublishedArticlesGroupByBaseVersion("en", "trading");
+
+            List<string> innerHTMLLinks = new List<string>();
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                try
+                {
+                    ArticlePublished article = items[i];
+                    LuceneSearchData data = new LuceneSearchData();
+
+                    data.is_page = 0;
+                    data.is_pdf = 0;
+                    data.is_doc = 0;
+                    data.is_docx = 0;
+
+                    data.is_visitor = 0;
+                    data.is_member = 0;
+                    data.is_trading = 0;
+
+                    if (article != null
+                        && article.categoryID != null
+                        && article.categoryID.HasValue)
+                    {
+                        data.Id = i;
+                        data.ArticleId = article.ArticleID;
+                        data.BaseArticleId = article.BaseArticleID;
+                        data.CategoryId = article.categoryID.Value;
+                        data.Url = article.category.url;
+                        data.Type = "page";
+                        data.Name = article.Name;
+                        data.Description = article.Desc;
+
+                        if (data.Name == null)
+                        {
+                            continue;
+                        }
+
+                        if (data.Description == null)
+                        {
+                            data.Description = "";
+                        }
+
+                        data.name_en = article.Name;
+                        data.desc_en = article.Desc;
+
+                        ArticlePublished a_zh = ArticlePublishedDbContext.getInstance().getArticlePublishedByBaseArticleID(article.BaseArticleID, "zh");
+                        if (a_zh != null)
+                        {
+                            data.name_zh = a_zh.Name;
+                            data.desc_zh = a_zh.Desc;
+                        }
+
+                        ArticlePublished a_cn = ArticlePublishedDbContext.getInstance().getArticlePublishedByBaseArticleID(article.BaseArticleID, "cn");
+                        if (a_cn != null)
+                        {
+                            data.name_cn = a_cn.Name;
+                            data.desc_cn = a_cn.Desc;
+                        }
+
+                        if (data.name_en == null)
+                        {
+                            data.name_en = "";
+                        }
+
+                        if (data.name_zh == null)
+                        {
+                            data.name_zh = "";
+                        }
+
+                        if (data.name_cn == null)
+                        {
+                            data.name_cn = "";
+                        }
+
+                        if (data.desc_en == null)
+                        {
+                            data.desc_en = "";
+                        }
+
+                        if (data.desc_zh == null)
+                        {
+                            data.desc_zh = "";
+                        }
+
+                        if (data.desc_cn == null)
+                        {
+                            data.desc_cn = "";
+                        }
+
+                        data.Description = MyRazorExtensions.Render(null, data.Description, null, true);
+                        data.desc_en = MyRazorExtensions.Render(null, data.desc_en, null, true);
+                        data.desc_zh = MyRazorExtensions.Render(null, data.desc_zh, null, true);
+                        data.desc_cn = MyRazorExtensions.Render(null, data.desc_cn, null, true);
+
+
+                        data.Description = HtmlToPlainText(data.Description);
+                        data.desc_en = HtmlToPlainText(data.desc_en);
+                        data.desc_zh = HtmlToPlainText(data.desc_zh);
+                        data.desc_cn = HtmlToPlainText(data.desc_cn);
+
+
+                        data.is_page = 1;
+
+                        data.is_trading = article.category.isVisibleToTradingOnly ? 1 : 0;
+                        data.is_member = article.category.isVisibleToMembersOnly ? 1 : 0;
+                        data.is_visitor = article.category.isVisibleToVisitorOnly ? 1 : 0;
+
+                        searchData.Add(data);
+
+                        List<string> innerLinks_en = LinkScanner.getInnerUrlsFromHTML(data.desc_en);
+                        List<string> innerLinks_zh = LinkScanner.getInnerUrlsFromHTML(data.desc_zh);
+                        List<string> innerLinks_cn = LinkScanner.getInnerUrlsFromHTML(data.desc_cn);
+
+                        innerLinks_en.AddRange(innerLinks_zh.Except(innerLinks_en));
+                        innerLinks_zh.AddRange(innerLinks_cn.Except(innerLinks_zh));
+
+                        for (var m = innerLinks_en.Count - 1; m >= 0; m--)
+                        {
+                            string link = innerLinks_en[m];
+                            if (innerHTMLLinks.Contains(link))
+                            {
+                                innerLinks_en.RemoveAt(m);
+                            }
+                        }
+
+                        for (var m = innerLinks_en.Count - 1; m >= 0; m--)
+                        {
+                            string link = innerLinks_en[m];
+                            string name = LinkScannerParser.getFilenameFromInnerUrl(link);
+                            string ext = LinkScannerParser.getFiletypeFromInnerUrl(link);
+
+                            LuceneSearchData _data = new LuceneSearchData();
+
+                            _data.ArticleId = 0;
+                            _data.BaseArticleId = 0;
+                            _data.CategoryId = 0;
+
+                            _data.is_page = 0;
+                            _data.is_pdf = 0;
+                            _data.is_doc = 0;
+                            _data.is_docx = 0;
+
+                            if (ext == ".pdf")
+                            {
+                                _data.is_pdf = 1;
+                            }
+                            else if (ext == ".doc")
+                            {
+                                _data.is_doc = 1;
+                            }
+                            else if (ext == ".docx")
+                            {
+                                _data.is_docx = 1;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+
+                            string desc = LinkScannerParser.getDocumentFromInnerUrl(link);
+
+                            _data.is_visitor = data.is_visitor;
+                            _data.is_member = data.is_member;
+                            _data.is_trading = data.is_trading;
+                            _data.Name = name;
+
+                            if (name == "")
+                            {
+                                continue;
+                            }
+
+                            _data.name_en = "";
+                            _data.name_zh = "";
+                            _data.name_cn = "";
+
+                            _data.Url = "/ckfinder/userfiles/files/" + _data.Name;
+                            _data.Type = ext.ToUpper();
+                            _data.Description = desc;
+
+                            _data.desc_en = "";
+                            _data.desc_zh = "";
+                            _data.desc_cn = "";
+
+                            searchData.Add(_data);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    AuditLogDbContext.getInstance().createAuditLog(new AuditLog
+                    {
+                        action = "Search Indexing",
+                        remarks = "Exception GetAll: " + e.Message,
+                    });
+                }
+
+            }
+
+            return searchData;
         }
+
+        private static string HtmlToPlainText(string html)
+        {
+            html = Regex.Replace(html, @"<style (.|\n)*?</style>", string.Empty);
+            html = Regex.Replace(html, @"<style>(.|\n)*?</style>", string.Empty);
+            html = Regex.Replace(html, @"<script (.|\n)*?</script>", string.Empty);
+            html = Regex.Replace(html, @"<script>(.|\n)*?</script>", string.Empty);
+            html = Regex.Replace(html, @"<!--(.|\n)*?-->", string.Empty);
+
+            HtmlDocument mainDoc = new HtmlDocument();
+            string htmlString = html;
+            mainDoc.LoadHtml(htmlString);
+            string cleanText = mainDoc.DocumentNode.InnerText;
+            return cleanText;
+        }
+
     }
+
+    
 
 
     public static class LuceneSearch
@@ -72,8 +378,26 @@ namespace WebApplication2.Helpers
 
             // add lucene fields mapped to db fields
             doc.Add(new Field("Id", sampleData.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-            doc.Add(new Field("Name", sampleData.Name, Field.Store.YES, Field.Index.ANALYZED));
-            doc.Add(new Field("Description", sampleData.Description, Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("ArticleId", sampleData.ArticleId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("BaseArticleId", sampleData.BaseArticleId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("CategoryId", sampleData.CategoryId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("Type", sampleData.Type.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("Name", sampleData.Name.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("Description", sampleData.Description.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("name_en", sampleData.name_en.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("name_zh", sampleData.name_zh.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("name_cn", sampleData.name_cn.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("desc_en", sampleData.desc_en.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("desc_zh", sampleData.desc_zh.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("desc_cn", sampleData.desc_cn.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("Url", sampleData.Url.ToString(), Field.Store.YES, Field.Index.ANALYZED));
+            doc.Add(new Field("is_page", sampleData.is_page.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("is_pdf", sampleData.is_pdf.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("is_doc", sampleData.is_doc.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("is_docx", sampleData.is_docx.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("is_trading", sampleData.is_trading.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("is_member", sampleData.is_member.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            doc.Add(new Field("is_visitor", sampleData.is_visitor.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
             // add entry to index
             writer.AddDocument(doc);
@@ -175,8 +499,56 @@ namespace WebApplication2.Helpers
             return new LuceneSearchData
             {
                 Id = Convert.ToInt32(doc.Get("Id")),
+                ArticleId = Convert.ToInt32(doc.Get("ArticleId")),
+                BaseArticleId = Convert.ToInt32(doc.Get("BaseArticleId")),
+                CategoryId = Convert.ToInt32(doc.Get("CategoryId")),
+                Type = doc.Get("Type"),
                 Name = doc.Get("Name"),
-                Description = doc.Get("Description")
+                Description = doc.Get("Description"),
+                name_en = doc.Get("name_en"),
+                name_zh = doc.Get("name_zh"),
+                name_cn = doc.Get("name_cn"),
+                desc_en = doc.Get("desc_en"),
+                desc_zh = doc.Get("desc_zh"),
+                desc_cn = doc.Get("desc_cn"),
+                Url = doc.Get("Url"),
+                is_page = Convert.ToInt32(doc.Get("is_page")),
+                is_pdf = Convert.ToInt32(doc.Get("is_pdf")),
+                is_doc = Convert.ToInt32(doc.Get("is_doc")),
+                is_docx = Convert.ToInt32(doc.Get("is_docx")),
+                is_trading = Convert.ToInt32(doc.Get("is_trading")),
+                is_member = Convert.ToInt32(doc.Get("is_member")),
+                is_visitor = Convert.ToInt32(doc.Get("is_visitor")),
+            };
+        }
+
+
+
+        private static LuceneSearchData _mapLuceneDocumentToData(Document doc, Highlighter highlighter, StandardAnalyzer analyzer)
+        {
+            return new LuceneSearchData
+            {
+                Id = Convert.ToInt32(doc.Get("Id")),
+                ArticleId = Convert.ToInt32(doc.Get("ArticleId")),
+                BaseArticleId = Convert.ToInt32(doc.Get("BaseArticleId")),
+                CategoryId = Convert.ToInt32(doc.Get("CategoryId")),
+                Type = doc.Get("Type"),
+                Name = doc.Get("Name"),
+                Description = getHighlight(highlighter, analyzer, doc.Get("Description")),
+                name_en = doc.Get("name_en"),
+                name_zh = doc.Get("name_zh"),
+                name_cn = doc.Get("name_cn"),
+                Url = doc.Get("Url"),
+                desc_en = getHighlight(highlighter, analyzer, doc.Get("desc_en")),
+                desc_zh = getHighlight(highlighter, analyzer, doc.Get("desc_zh")),
+                desc_cn = getHighlight(highlighter, analyzer, doc.Get("desc_cn")),
+                is_page = Convert.ToInt32(doc.Get("is_page")),
+                is_pdf = Convert.ToInt32(doc.Get("is_pdf")),
+                is_doc = Convert.ToInt32(doc.Get("is_doc")),
+                is_docx = Convert.ToInt32(doc.Get("is_docx")),
+                is_trading = Convert.ToInt32(doc.Get("is_trading")),
+                is_member = Convert.ToInt32(doc.Get("is_member")),
+                is_visitor = Convert.ToInt32(doc.Get("is_visitor")),
             };
         }
 
@@ -191,6 +563,22 @@ namespace WebApplication2.Helpers
         {
             return hits.Select(hit => _mapLuceneDocumentToData(searcher.Doc(hit.Doc))).ToList();
         }
+
+
+        private static IEnumerable<LuceneSearchData> _mapLuceneToDataList(IEnumerable<ScoreDoc> hits,
+            IndexSearcher searcher, Highlighter highlighter, StandardAnalyzer analyzer)
+        {
+            return hits.Select(hit => _mapLuceneDocumentToData(searcher.Doc(hit.Doc), highlighter, analyzer)).ToList();
+        }
+
+
+
+        private static string getHighlight(Highlighter highlighter, StandardAnalyzer analyzer, string fieldContent)
+        {
+            Lucene.Net.Analysis.TokenStream stream = analyzer.TokenStream("", new StringReader(fieldContent));
+            return highlighter.GetBestFragments(stream, fieldContent, 1, ".");
+        }
+
 
 
 
@@ -211,7 +599,7 @@ namespace WebApplication2.Helpers
 
 
         private static IEnumerable<LuceneSearchData> _search
-            (string searchQuery, string searchField = "")
+            (string searchQuery, string searchField = "", string role = null)
         {
             // validation
             if (string.IsNullOrEmpty(searchQuery.Replace("*", "").Replace("?", ""))) return new List<LuceneSearchData>();
@@ -237,11 +625,72 @@ namespace WebApplication2.Helpers
                 else
                 {
                     var parser = new MultiFieldQueryParser
-                        (Lucene.Net.Util.Version.LUCENE_30, new[] { "Id", "Name", "Description" }, analyzer);
+                        (Lucene.Net.Util.Version.LUCENE_30, new[] {
+                            "Name",
+                            "name_en",
+                            "name_zh",
+                            "name_cn",
+                            "Description",
+                            "desc_en",
+                            "desc_zh",
+                            "desc_cn",
+                        }, analyzer);
                     var query = parseQuery(searchQuery, parser);
-                    var hits = searcher.Search
-                    (query, null, hits_limit, Sort.RELEVANCE).ScoreDocs;
-                    var results = _mapLuceneToDataList(hits, searcher);
+
+                    BooleanQuery bq = new BooleanQuery();
+                    bq.Add(query, Occur.MUST);
+
+                    if (role == "trading")
+                    {
+                        var role_parser = new MultiFieldQueryParser
+                            (Lucene.Net.Util.Version.LUCENE_30, new[] {
+                            "is_trading",
+                            "is_member",
+                            "is_visitor",
+                            }, analyzer);
+
+                        role_parser.DefaultOperator = QueryParser.AND_OPERATOR;
+
+                        var role_query = parseQuery("1", role_parser);
+                        bq.Add(role_query, Occur.MUST);
+                    }
+                    else if (role == "member")
+                    {
+                        var role_parser = new MultiFieldQueryParser
+                            (Lucene.Net.Util.Version.LUCENE_30, new[] {
+                            "is_member",
+                            "is_visitor",
+                            }, analyzer);
+
+                        role_parser.DefaultOperator = QueryParser.AND_OPERATOR;
+
+                        var role_query = parseQuery("1", role_parser);
+                        bq.Add(role_query, Occur.MUST);
+                    }
+                    else
+                    {
+                        var role_parser = new MultiFieldQueryParser
+                            (Lucene.Net.Util.Version.LUCENE_30, new[] {
+                            "is_visitor",
+                            }, analyzer);
+
+                        role_parser.DefaultOperator = QueryParser.AND_OPERATOR;
+
+                        var role_query = parseQuery("1", role_parser);
+                        bq.Add(role_query, Occur.MUST);
+                    }
+
+
+                    var scorer = new QueryScorer(bq);
+                    var hits = searcher.Search(bq, null, hits_limit, Sort.RELEVANCE).ScoreDocs;
+                    IFormatter formatter = new SimpleHTMLFormatter("<span style=\"font-weight:bold; background-color:yellow;\">", "</span>");
+
+                    SimpleFragmenter fragmenter = new SimpleFragmenter(1000);
+
+                    Highlighter highlighter = new Highlighter(formatter, scorer);
+                    highlighter.TextFragmenter = fragmenter;
+
+                    var results = _mapLuceneToDataList(hits, searcher, highlighter, analyzer);
                     analyzer.Close();
                     searcher.Dispose();
                     return results;

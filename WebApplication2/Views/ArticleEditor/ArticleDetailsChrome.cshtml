@@ -53,3 +53,17 @@
 @Html.ActionLink("Submit for Approval", "SubmitRequestForApproval", new { baseArticleID = Model.BaseArticleID, version = Model.Version, lang = "en" }) |
 @Html.ActionLink("List Versions", "ListArticleVersions", new { baseArticleID = Model.BaseArticleID }) |
 @Html.ActionLink("Back to Articles", "List")
+
+<script type="text/javascript">
+    $('.tabs-menu').next().css("border", "1px solid #d4d4d1");
+    $('.tabs-menu').next().css("margin-top", "-1px");
+    $('.tabs-menu').next().css("margin-bottom", "10px");
+    $('.tabs-menu').next().css("padding-top", "10px");
+    $('.tabs-menu').next().css("padding-bottom", "10px");
+</script>
+
+<style>
+    .tabs-menu li.current {
+        border-bottom: 2px solid #fff !important;
+    }
+</style>

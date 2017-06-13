@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication2.Context;
+using WebApplication2.Helpers;
 using WebApplication2.Models;
 using static WebApplication2.Controllers.BaseController;
 
@@ -70,11 +71,17 @@ namespace WebApplication2.ViewModels.Include
         public Menu menu { get; set; }
         public Sideitem sideitem { get; set; }
         public List<Menu> topbarMenu { get; set; }
+        public GlobalData globalData { get; set; }
 
         public bool isError { get; set; } 
         public int errorCode { get; set; }
         public string errorMessage { get; set; }
         public string currentYear { get; set; }
+
+        public BaseViewModel redirectPack { get; set; }
+
+        public string search_keywords { get; set; }
+        public List<LuceneSearchData> search_data = new List<LuceneSearchData>();
 
         public List<string> topWarningMessages { get; set; }
 
@@ -181,13 +188,9 @@ namespace WebApplication2.ViewModels.Include
                     continue;
                 }
 
-                if (_cat.isHeaderMenuRight)
-                {
-                    continue;
-                }
-
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
+                item.desc = _cat.GetDesc(lang.lang);
                 item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
@@ -236,6 +239,7 @@ namespace WebApplication2.ViewModels.Include
 
                 Menu item = new Menu();
                 item.name = _cat.GetName(lang.lang);
+                item.desc = _cat.GetDesc(lang.lang);
                 item.link = new Link(lang.locale, _cat.getUrl(), null, null);
                 item.category = new ViewCategory(_cat, lang);
 
@@ -275,7 +279,7 @@ namespace WebApplication2.ViewModels.Include
         {
             List<Menu> menuitems = new List<Menu>();
 
-            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(categoryItemID);
+            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(-1);
             foreach (var _cat in rootCategories)
             {
                 Menu item = new Menu();
@@ -322,7 +326,7 @@ namespace WebApplication2.ViewModels.Include
         {
             List<Menu> menuitems = new List<Menu>();
 
-            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(categoryItemID);
+            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(-1);
             foreach (var _cat in rootCategories)
             {
                 Menu item = new Menu();
@@ -430,7 +434,7 @@ namespace WebApplication2.ViewModels.Include
         {
             List<Menu> menuitems = new List<Menu>();
 
-            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(categoryItemID);
+            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(-1);
             foreach (var _cat in rootCategories)
             {
                 Menu item = new Menu();
@@ -571,11 +575,18 @@ namespace WebApplication2.ViewModels.Include
                 language = "zh";
             }
 
+
+            GlobalData globalData = new GlobalData();
+            globalData.implement_lbls(language);
+
+
             BaseViewModel vm = new BaseViewModel();
             vm.lang = new Lang();
             vm.lang.locale = locale;
             vm.lang.lang = language;
             vm.lang.culture = culture;
+
+            vm.globalData = globalData;
 
             vm.currentYear = DateTime.Now.Year.ToString();
 

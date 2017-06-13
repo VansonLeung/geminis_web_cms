@@ -39,7 +39,7 @@ namespace WebApplication2.Context
 
         #region "Query"
 
-        public List<ArticlePublished> findPublishedArticlesGroupByBaseVersion(string lang = "en")
+        public List<ArticlePublished> findPublishedArticlesGroupByBaseVersion(string lang = "en", string role = null)
         {
             using (var db = new BaseDbContext())
             {
@@ -58,10 +58,9 @@ namespace WebApplication2.Context
                     .ToList();
                 }
 
-                if (SessionPersister.account != null)
+                else if (SessionPersister.account != null)
                 {
                     var categories = SessionPersister.account.Group.getAccessibleCategoryListInt();
-                    categories.Add(0);
 
                     return db.articlePublishedDb
                     .GroupBy(acc => acc.BaseArticleID)
@@ -69,6 +68,32 @@ namespace WebApplication2.Context
                     ).OrderByDescending(acc => acc.Version)
                     .FirstOrDefault())
                     .Where(acc => categories.Contains(acc.categoryID ?? 0))
+                    .OrderByDescending(acc => acc.datePublished)
+                    .Include(acc => acc.createdByAccount)
+    .Include(acc => acc.approvedByAccount)
+    .Include(acc => acc.publishedByAccount)
+                    .Include(acc => acc.category)
+                    .ToList();
+                }
+
+
+                else if (role != null)
+                {
+                    var categories = InfrastructureCategoryDbContext.getInstance().findAllEnabledCategorysByPermission(role);
+
+                    List<int> listInt = new List<int>();
+
+                    foreach (var cat in categories)
+                    {
+                        listInt.Add(cat.ItemID);
+                    }
+
+                    return db.articlePublishedDb
+                    .GroupBy(acc => acc.BaseArticleID)
+                    .Select(u => u.Where(acc => acc.Lang == lang
+                    ).OrderByDescending(acc => acc.Version)
+                    .FirstOrDefault())
+                    .Where(acc => listInt.Contains(acc.categoryID ?? 0))
                     .OrderByDescending(acc => acc.datePublished)
                     .Include(acc => acc.createdByAccount)
     .Include(acc => acc.approvedByAccount)

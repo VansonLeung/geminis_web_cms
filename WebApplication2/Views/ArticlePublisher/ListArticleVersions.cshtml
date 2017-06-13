@@ -11,6 +11,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -44,7 +45,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.datePublished)
             </th>
-            <th>
+            <th id="column_def_sort" data-direction="desc">
                 @Html.DisplayNameFor(model => model.created_at)
             </th>
             <th>
@@ -59,13 +60,22 @@
             <th>
                 @Html.DisplayNameFor(model => model.publishedBy)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @if (item.isApproved)
+                {
+                        @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })
+                    }
+                    else
+                    {
+
+                    }
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -124,16 +134,6 @@
                     @if (item.publishedByAccount != null)
                 {
                         @item.publishedByAccount.Username
-                    }
-                </td>
-                <td>
-                    @if (item.isApproved)
-                {
-                        @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })
-                    }
-                    else
-                    {
-
                     }
                 </td>
             </tr>

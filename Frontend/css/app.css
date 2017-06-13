@@ -308,48 +308,138 @@
 
 .font_xsm {
   /*12px*/
-  font-size: 0.6em !important; }
+  font-size: 12px !important; }
 
 .font_sm {
   /*14px*/
-  font-size: 0.7em !important; }
+  font-size: 14px !important; }
 
 .font_smed {
   /*15px*/
-  font-size: 0.75em !important; }
+  font-size: 15px !important; }
 
 .font_smedmed {
   /*16px*/
-  font-size: 0.8em !important; }
+  font-size: 16px !important; }
 
 .font_med {
   /*18px*/
-  font-size: 0.9em !important; }
+  font-size: 18px !important; }
 
 .font_lmed {
   /*20px*/
-  font-size: 1.0em !important; }
+  font-size: 20px !important; }
 
 .font_llmed {
   /*22px*/
-  font-size: 1.1em !important; }
+  font-size: 22px !important; }
 
 .font_lg {
   /*25px*/
-  font-size: 1.25em !important; }
+  font-size: 25px !important; }
 
 .font_xlg {
   /*18px*/
-  font-size: 1.4em !important; }
+  font-size: 28px !important; }
 
 .font_xxlg {
   /*42px*/
-  font-size: 2.1em !important; }
+  font-size: 42px !important; }
 
 .font_xxxlg {
   /*48px*/
-  font-size: 2.4em !important; }
+  font-size: 48px !important; }
 
+
+body.larger .font_xsm {
+  /*12px*/
+  font-size: 15px !important; }
+
+body.larger .font_sm {
+  /*14px*/
+  font-size: 17.5px !important; }
+
+body.larger .font_smed {
+  /*15px*/
+  font-size: 18.75px !important; }
+
+body.larger .font_smedmed {
+  /*16px*/
+  font-size: 20px !important; }
+
+body.larger .font_med {
+  /*18px*/
+  font-size: 22.5px !important; }
+
+body.larger .font_lmed {
+  /*20px*/
+  font-size: 25px !important; }
+
+body.larger .font_llmed {
+  /*22px*/
+  font-size: 27.5px !important; }
+
+body.larger .font_lg {
+  /*25px*/
+  font-size: 31.25px !important; }
+
+body.larger .font_xlg {
+  /*18px*/
+  font-size: 35px !important; }
+
+body.larger .font_xxlg {
+  /*42px*/
+  font-size: 52.5px !important; }
+
+body.larger .font_xxxlg {
+  /*48px*/
+  font-size: 60px !important; }
+
+/*
+.font_xsm {
+  font-size: 0.6em !important; 
+}
+
+.font_sm {
+  font-size: 0.7em !important; 
+}
+
+.font_smed {
+  font-size: 0.75em !important; 
+}
+
+.font_smedmed {
+  font-size: 0.8em !important; 
+}
+
+.font_med {
+  font-size: 0.9em !important; 
+}
+
+.font_lmed {
+  font-size: 1.0em !important; 
+}
+
+.font_llmed {
+  font-size: 1.1em !important; 
+}
+
+.font_lg {
+  font-size: 1.25em !important; 
+}
+
+.font_xlg {
+  font-size: 1.4em !important; 
+}
+
+.font_xxlg {
+  font-size: 2.1em !important; 
+}
+
+.font_xxxlg {
+  font-size: 2.4em !important; 
+}
+*/
 .flag-icon {
   width: 28px;
   height: 24px; }
@@ -792,6 +882,15 @@ input[type="text"]:focus, input[type="password"]:focus {
         #nav-overlay.right ul.nav-sub-menu li.active .arrow {
           background: url("../images/menu_arrow_2.png") 0 0; }
 
+p.misc_arrow {
+margin-left: 5px;
+margin-right: 5px;
+right: 10px;
+width: 9px;
+height: 16px;
+background: url("../images/menu_arrow_1.png") 0 -16px; }
+
+
 .text-bottom-wrapper {
   position: relative; }
   .text-bottom-wrapper .text-bottom {
@@ -1165,7 +1264,7 @@ table.generic-table-form {
   border-radius: 10px;
   background-color: #ffffff;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   text-align: left;
   margin: 0 auto; }
   .horizontal-menu ul {
@@ -1245,7 +1344,7 @@ table.generic-table-form {
 .submenubar {
   background-color: white;
   border-radius: 10px;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   overflow: hidden; }
 
@@ -1420,7 +1519,7 @@ table.generic-table-form {
   border-radius: 10px;
   overflow: hidden;
   margin-top: 0px;
-  padding-top: 10px;
+  padding-top: 0px;
   padding-bottom: 10px;
   margin-bottom: 10px; }
   .gem_form .row:last-child {

@@ -177,6 +177,14 @@ namespace WebApplication2.Context
                         .OrderBy(item => item.order)
                         .ToList();
                 }
+                else if (parentItemID == -1)
+                {
+                    return db.infrastructureCategoryDb
+                        .AsNoTracking()
+                        .Where(item => item.isEnabled == true)
+                        .OrderBy(item => item.order)
+                        .ToList();
+                }
                 return db.infrastructureCategoryDb
                     .Where(item => item.parentItemID == parentItemID
                         && item.isEnabled == true)
@@ -271,6 +279,58 @@ namespace WebApplication2.Context
                 }
 
                 return new List<Category>();
+            }
+        }
+
+
+
+        public List<Category> findAllEnabledCategorysByPermission(string role = null)
+        {
+            using (var db = new BaseDbContext())
+            {
+                if (role != null)
+                {
+                    if (role == "trading")
+                    {
+                        return db.infrastructureCategoryDb
+                            .Where(item => item.isEnabled == true
+                            && (item.isVisibleToTradingOnly == true
+                            || item.isVisibleToMembersOnly == true
+                            || item.isVisibleToVisitorOnly == true))
+                            .OrderBy(item => item.order)
+                            .Include(item => item.parentItem)
+                            .ToList();
+                    }
+                    else if (role == "member")
+                    {
+                        return db.infrastructureCategoryDb
+                            .Where(item => item.isEnabled == true
+                            && (item.isVisibleToMembersOnly == true
+                            || item.isVisibleToVisitorOnly == true))
+                            .OrderBy(item => item.order)
+                            .Include(item => item.parentItem)
+                            .ToList();
+                    }
+                    else if (role == "visitor")
+                    {
+                        return db.infrastructureCategoryDb
+                            .Where(item => item.isEnabled == true
+                            && item.isVisibleToVisitorOnly == true
+                            && item.isVisibleToMembersOnly == false
+                            && item.isVisibleToTradingOnly == false)
+                            .OrderBy(item => item.order)
+                            .Include(item => item.parentItem)
+                            .ToList();
+                    }
+                }
+                return db.infrastructureCategoryDb
+                    .Where(item => item.isEnabled == true
+                    && item.isVisibleToVisitorOnly == true
+                    && item.isVisibleToMembersOnly == false
+                    && item.isVisibleToTradingOnly == false)
+                    .OrderBy(item => item.order)
+                    .Include(item => item.parentItem)
+                    .ToList();
             }
         }
 

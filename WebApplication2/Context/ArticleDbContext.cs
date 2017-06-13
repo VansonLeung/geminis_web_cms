@@ -477,6 +477,7 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                 article = latestArticle.makeNewArticleByCloningContent();
                 article.Version = latestArticle.Version;
                 article.Version = article.Version + 1;
+                article.createdBy = SessionPersister.account.AccountID;
             }
             else
             {

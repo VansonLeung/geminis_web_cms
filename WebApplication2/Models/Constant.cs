@@ -19,5 +19,7 @@ namespace WebApplication2.Models
 
         [Required]
         public bool isActive { get; set; }
+        
+        public string Desc { get; set; }
     }
 }

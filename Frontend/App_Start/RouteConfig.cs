@@ -52,6 +52,17 @@ namespace Frontend
                 );
 
             routes.MapRoute(
+                    name: "HomeLocale",
+                    url: "{locale}",
+                    defaults: new
+                    {
+                        locale = "zh-HK",
+                        controller = "Home",
+                        action = "Index"
+                    }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{locale}/{controller}/{action}/{id}",
                 defaults: new

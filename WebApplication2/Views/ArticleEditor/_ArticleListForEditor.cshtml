@@ -4,6 +4,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -31,7 +32,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.isPublished)
             </th>
-            <th>
+            <th id="column_def_sort" data-direction="desc">
                 @Html.DisplayNameFor(model => model.created_at)
             </th>
             <th>
@@ -46,13 +47,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.publishedBy)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })<br />
+                    @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })<br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })<br />
+                    @Html.ActionLink("Version History", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })<br />
+                    @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = item.BaseArticleID })
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -106,13 +113,6 @@
                 {
                         @item.publishedByAccount.Username
                     }
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "UpsertLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })<br />
-                    @Html.ActionLink("Details", "DetailsLocale", new { baseArticleID = item.BaseArticleID, version = item.Version, lang = "en" })<br />
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })<br />
-                    @Html.ActionLink("Version History", "ListArticleVersions", new { baseArticleID = item.BaseArticleID })<br />
-                    @Html.ActionLink("Create New Version", "CreateNewVersion", new { baseArticleID = item.BaseArticleID })
                 </td>
             </tr>
         }

@@ -12,6 +12,16 @@ namespace WebApplication2.Controllers
     public class SystemMaintenanceNotificationController : Controller
     {
         // GET: SystemMaintenance
+        SelectList getLevelList(int? selectedID = null)
+        {
+            List<string> items = new List<string>();
+            items.Add("");
+            items.Add("Info");
+            items.Add("Notice");
+            items.Add("Warning");
+            items.Add("Severe");
+            return new SelectList(items);
+        }
 
 
         [CustomAuthorize(Roles = "superadmin")]

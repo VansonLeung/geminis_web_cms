@@ -31,9 +31,6 @@ namespace WebApplication2.Models
             a.Lang = article.Lang;
             a.datePublishStart = article.datePublishStart;
             a.datePublishEnd = article.datePublishEnd;
-            a.createdBy = article.createdBy;
-            a.approvedBy = article.approvedBy;
-            a.publishedBy = article.publishedBy;
             return a;
         }
     }

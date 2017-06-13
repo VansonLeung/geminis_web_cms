@@ -14,6 +14,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.name_en)
             </th>
@@ -41,19 +42,23 @@
             <th>
                 @Html.DisplayNameFor(model => model.endDate)
             </th>
-            <th>
+            <th id="column_def_sort" data-direction="desc">
                 @Html.DisplayNameFor(model => model.created_at)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.modified_at)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.NotificationID })<br />
+                    @Html.ActionLink("Activate", "Activate", new { id = item.NotificationID })<br />
+                    @Html.ActionLink("Deactivate", "Deactivate", new { id = item.NotificationID })
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.name_en)
                 </td>
@@ -86,11 +91,6 @@
                 </td>
                 <td>
                     <span style="white-space: pre-line">@DateTimeExtensions.DateTimeToStringBR(item.modified_at)</span>
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.NotificationID })<br />
-                    @Html.ActionLink("Activate", "Activate", new { id = item.NotificationID })<br />
-                    @Html.ActionLink("Deactivate", "Deactivate", new { id = item.NotificationID })
                 </td>
             </tr>
         }

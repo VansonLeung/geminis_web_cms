@@ -288,23 +288,36 @@ namespace Frontend.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult forceExpire(string clientID)
+        {
+            SSO_ForceExpire(clientID);
+            return this.Json(BaseResponse.MakeResponse(new Dictionary<string, string>
+            {
+            }));
+        }
+
+
         [ForceApplicationJsonContentType]
         [HttpPost]
         public ActionResult submitSoapQuery(TTLAPIRequestForm wrapper)
         {
             try
             {
-                // validate form OTP here
                 TTLAPIRequest form = wrapper.form;
 
-                if (form.otp != null && form.otp != "")
+                // validate form OTP here
+                var disable = ConstantDbContext.getInstance().findActiveByKeyNoTracking("INSTRUCTION_FORM_OTP_DISABLE");
+                if (disable == null || disable.Value != "1")
                 {
-                    if (!(new UserCodeController().VerifyEmailCodeCombination("kaycheung@cherrypicks.com", form.otp)))
+                    if (form.otp != null && form.otp != "")
                     {
-                        return this.Json(BaseResponse.MakeResponse("F002", null, null, "OTP Incorrect"));
+                        if (!(new UserCodeController().VerifyEmailCodeCombination("kaycheung@cherrypicks.com", form.otp)))
+                        {
+                            return this.Json(BaseResponse.MakeResponse("F002", null, null, "OTP Incorrect"));
+                        }
                     }
                 }
-
                 var res = new APIController().callSoapQuery<object>(form);
                 return this.Json(BaseResponse.MakeResponse(res));
             }
@@ -341,7 +354,53 @@ namespace Frontend.Controllers
                     return this.Json(BaseResponse.MakeResponse("F001", resp.errorCode, null, resp.errorMessage));
                 }
 
+
+
                 setSession(resp);
+
+
+                BaseControllerSession session = getSession();
+
+
+                if (session != null)
+                {
+                    try
+                    {
+                        var isNonTradingAccField = "1";
+                        if (session.hasTradingAcc)
+                        {
+                            isNonTradingAccField = "-1";
+                        }
+
+                        var res2 = new APIController().callSoapQuery<TTLITradeWSDEV.queryAccountDetailsResponseQueryAccountDetailsResp>(
+                            new TTLAPIRequest(
+                                "queryAccountDetails",
+                                new Dictionary<string, object>
+                                {
+                                    ["ClientID"] = session.clientID,
+                                    ["SessionID"] = session.sessionID,
+                                    ["isNonTradingAccField"] = isNonTradingAccField,
+                                    ["version"] = "1",
+                                    ["deviceID"] = "",
+                                    ["osVersion"] = "1",
+                                })
+                        );
+
+                        if (res2 != null)
+                        {
+                            setAccSession(res2);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        AuditLogDbContext.getInstance().createAuditLog(new AuditLog
+                        {
+                            action = "queryAccountDetails",
+                            remarks = "failed",
+                        });
+                    }
+                }
+
 
                 /*
                 var jsession = loginQPI(username, password, resp);

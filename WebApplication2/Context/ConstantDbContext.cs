@@ -93,12 +93,15 @@ namespace WebApplication2.Context
 
                 db.constantDb.Add(item);
                 db.SaveChanges();
-                return null;
             }
+            AuditLogDbContext.getInstance().createAuditLogConstantAction(item, AuditLogDbContext.ACTION_CREATE);
+            return null;
         }
 
         public string edit(Constant item)
         {
+            List<string> modified_fields = new List<string>();
+
             using (var db = new BaseDbContext())
             {
                 var constant = findByID(item.ConstantID);
@@ -117,6 +120,11 @@ namespace WebApplication2.Context
                                 .FirstOrDefault(f => f.ConstantID == item.ConstantID);
                 if (local != null)
                 {
+                    if (local.Key != item.Key) { modified_fields.Add("Key"); }
+                    if (local.Value != item.Value) { modified_fields.Add("Value"); }
+                    if (local.isActive != item.isActive) { modified_fields.Add("isActive"); }
+                    if (local.Desc != item.Desc) { modified_fields.Add("Desc"); }
+
                     db.Entry(local).State = EntityState.Detached;
                 }
 
@@ -127,8 +135,9 @@ namespace WebApplication2.Context
                 constant.isActive = item.isActive;
 
                 db.SaveChanges();
-                return null;
             }
+            AuditLogDbContext.getInstance().createAuditLogConstantAction(item, AuditLogDbContext.ACTION_EDIT, modified_fields);
+            return null;
         }
 
         public string delete(Constant item)
@@ -137,8 +146,9 @@ namespace WebApplication2.Context
             {
                 db.Entry(item).State = EntityState.Deleted;
                 db.SaveChanges();
-                return null;
             }
+            AuditLogDbContext.getInstance().createAuditLogConstantAction(item, AuditLogDbContext.ACTION_DELETE);
+            return null;
         }
 
 

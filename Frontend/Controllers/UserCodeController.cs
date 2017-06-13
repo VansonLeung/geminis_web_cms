@@ -113,6 +113,8 @@ namespace Frontend.Controllers
                 "[Geminis] Registration Verification Code"
             );
 
+            
+
             EmailHelper.SendEmail(new List<string> { code.Email }, mailbody, subject);
 
             return true;
