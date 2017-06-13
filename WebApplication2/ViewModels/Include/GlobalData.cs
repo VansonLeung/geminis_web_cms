@@ -17,6 +17,7 @@ namespace WebApplication2.ViewModels.Include
         public string lbl_search_placeholder { get; set; }
         public string lbl_search_results { get; set; }
         public string lbl_search_results_your { get; set; }
+        public string lbl_sitemap { get; set; }
 
         public void implement_lbls(string lang)
         {
@@ -32,6 +33,7 @@ namespace WebApplication2.ViewModels.Include
                 lbl_search_placeholder = "搜尋";
                 lbl_search_results = "搜尋結果";
                 lbl_search_results_your = "你的搜尋結果";
+                lbl_sitemap = "網頁地圖";
             }
             else if (lang == "cn")
             {
@@ -45,6 +47,7 @@ namespace WebApplication2.ViewModels.Include
                 lbl_search_placeholder = "搜寻";
                 lbl_search_results = "搜寻结果";
                 lbl_search_results_your = "你的搜寻结果";
+                lbl_sitemap = "網頁地圖";
             }
             else
             {
@@ -58,6 +61,7 @@ namespace WebApplication2.ViewModels.Include
                 lbl_search_placeholder = "Search";
                 lbl_search_results = "Search Results";
                 lbl_search_results_your = "Your Search Results";
+                lbl_sitemap = "Site Map";
             }
         }
     }

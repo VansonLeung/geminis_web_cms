@@ -133,6 +133,33 @@ namespace Frontend.Controllers
 
 
 
+
+
+        [Internationalization]
+        public ActionResult Sitemap(string locale = "en-US")
+        {
+            // check session if timeout
+            if (SSO_SessionTimeout())
+            {
+                SSO_ClearSession();
+            }
+
+            SSO_InternalKeepAlive();
+            SSO_InternalHeartbeat();
+
+            var session = getSession();
+            if (session != null && !session.isKeptAlive)
+            {
+                Session["isKeptAlive"] = true;
+            }
+
+            BaseViewModel vm2 = BaseViewModel.make(locale, "home", null, Request, session);
+            return View(vm2);
+        }
+
+
+
+
         [Internationalization]
         public ActionResult Search(string locale = "en-US")
         {

@@ -73,6 +73,7 @@ namespace WebApplication2.ViewModels.Include
         public List<Menu> topbarMenu { get; set; }
         public GlobalData globalData { get; set; }
 
+        public bool isShowSitemap { get; set; }
         public bool isError { get; set; } 
         public int errorCode { get; set; }
         public string errorMessage { get; set; }

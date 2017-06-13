@@ -1,0 +1,172 @@
+﻿@model WebApplication2.ViewModels.Include.BaseViewModel
+@using WebApplication2.ViewModels.Include
+@using WebApplication2.ViewModels
+
+@{
+    ViewBag.Title = "Home Page";
+}
+@Html.Partial("_Header", Model)
+
+@{
+    var page_class_name = "";
+    if (Model.content != null && Model.content.pageClassName != null)
+    {
+        page_class_name = Model.content.pageClassName;
+    }
+}
+
+<div class="@page_class_name" style="background-color: #f0f0f0">
+
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <section class='back'>
+            <div class='content_big_title' style='background-color: transparent;'>
+                <table>
+                    <tr>
+                        <td>
+                            <div class='title' style="color: #000">
+                                @Model.globalData.lbl_sitemap
+                            </div>
+                            <div class='hr' style="background-color: #000 !important"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class='front'>
+
+            <div class="container">
+                <div class="gem_form">
+                    <div class="row">
+
+                        @{
+                            var s_menuCount = 0;
+                        }
+
+                        @for (var i = 0; i < Model.headerMenu.Count; i++)
+                        {
+                            s_menuCount += 1;
+
+                            var menuItem = Model.headerMenu[i];
+
+                            <div class="col s12 m3">
+                                <h5 style="font-weight: bolder;">@menuItem.name</h5>
+                                <div class='hr' style="background-color: #dd0000 !important"></div>
+
+                                <ul>
+                                    @for (var j = 0; j < menuItem.submenu.Count; j++)
+                                    {
+                                        var submenuItem = menuItem.submenu[j];
+                                        <a href="@submenuItem.link.GetFullURL()">
+                                            <li>
+                                                @submenuItem.name
+                                            </li>
+                                        </a>
+
+                                        if (submenuItem.submenu != null
+                    && submenuItem.submenu.Count > 0)
+                                        {
+                                            <ul>
+                                                @for (var k = 0; k < submenuItem.submenu.Count; k++)
+                                                {
+                                                    var jk = j + "_" + k;
+                                                    var subsubmenuItem = submenuItem.submenu[k];
+                                                    <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name</li></a>
+                                                }
+                                            </ul>
+                                        }
+
+                                    }
+                                </ul>
+                            </div>
+                        }
+
+                        <div class="col s12 m3">
+                            <h5 style="font-weight: bolder;">關於我們</h5>
+                            <div class='hr' style="background-color: #dd0000 !important"></div>
+
+                            <ul>
+
+                                @for (var j = 0; j < Model.bottomMenu.Count; j++)
+                                {
+                                    s_menuCount += 1;
+
+                                    var submenuItem = Model.bottomMenu[j];
+                                    <a href="@submenuItem.link.GetFullURL()">
+                                        <li>
+                                            @submenuItem.name
+                                        </li>
+                                    </a>
+
+                                    if (submenuItem.submenu != null
+                    && submenuItem.submenu.Count > 0)
+                                    {
+                                        <ul>
+                                            @for (var k = 0; k < submenuItem.submenu.Count; k++)
+                                            {
+                                                var jk = j + "_" + k;
+                                                var subsubmenuItem = submenuItem.submenu[k];
+                                                <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name</li></a>
+                                            }
+                                        </ul>
+                                    }
+
+                                }
+                            </ul>
+                        </div>
+
+
+                        @for (var i = 0; i < Model.headerMenuRight.Count; i++)
+                        {
+                            s_menuCount += 1;
+
+                            var menuItem = Model.headerMenuRight[i];
+
+                            <div class="col s12 m3" style="text-align: left !important">
+                                <h5 style="font-weight: bolder;">@menuItem.name</h5>
+                                <div class='hr' style="background-color: #dd0000 !important"></div>
+
+                                <ul>
+                                    @for (var j = 0; j < menuItem.submenu.Count; j++)
+                                    {
+                                        var submenuItem = menuItem.submenu[j];
+                                        <a href="@submenuItem.link.GetFullURL()">
+                                            <li>
+                                                @submenuItem.name
+                                            </li>
+                                        </a>
+
+                                        if (submenuItem.submenu != null
+                    && submenuItem.submenu.Count > 0)
+                                        {
+                                            <ul>
+                                                @for (var k = 0; k < submenuItem.submenu.Count; k++)
+                                                {
+                                                    var jk = j + "_" + k;
+                                                    var subsubmenuItem = submenuItem.submenu[k];
+                                                    <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name</li></a>
+                                                }
+                                            </ul>
+                                        }
+
+                                    }
+                                </ul>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+
+        </section>
+    </div>
+</div>
+@Html.Partial("_Footer", Model)
+
+
+

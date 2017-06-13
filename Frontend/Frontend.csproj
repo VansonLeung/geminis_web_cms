@@ -1128,6 +1128,7 @@
     <Content Include="Views\Page\NewsDetails.cshtml" />
     <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Sitemap.cshtml" />
     <None Include="Web.ReleaseLocal.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
