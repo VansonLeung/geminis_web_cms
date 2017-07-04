@@ -61,6 +61,10 @@ namespace Frontend.Controllers
                     ViewBag.message = "Session has been idled over " + min + " mins, please login again";
                 }
 
+                if (locale != null)
+                {
+                    Session["LANG"] = locale;
+                }
                 return View(vml);
             }
 
@@ -135,6 +139,10 @@ namespace Frontend.Controllers
                         ViewBag.message = "Please login";
                     }
 
+                    if (locale != null)
+                    {
+                        Session["LANG"] = locale;
+                    }
                     return View(vml);
                 }
             }
@@ -178,10 +186,18 @@ namespace Frontend.Controllers
                         ViewBag.message = "Please login as trading account";
                     }
 
+                    if (locale != null)
+                    {
+                        Session["LANG"] = locale;
+                    }
                     return View(vml);
                 }
             }
 
+            if (locale != null)
+            {
+                Session["LANG"] = locale;
+            }
             return View(vm);
         }
         public ActionResult _Header()

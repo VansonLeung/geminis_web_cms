@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="eStmtFileListEnquiryResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Frontend.TTLITradeWSDEV.eStmtFileListEnquiryResponse</TypeInfo>
+   <TypeInfo>Frontend.TTLITradeWSDEV.eStmtFileListEnquiryResponse, Frontend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

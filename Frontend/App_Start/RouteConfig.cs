@@ -26,6 +26,18 @@ namespace Frontend
             );
 
             routes.MapRoute(
+                    name: "Error",
+                    url: "Error/{code}",
+                    defaults: new
+                    {
+                        locale = "zh-HK",
+                        controller = "Home",
+                        action = "Error",
+                        code = UrlParameter.Optional
+                    }
+                );
+
+            routes.MapRoute(
                     name: "Page",
                     url: "Page/{category}/{id}",
                     defaults: new

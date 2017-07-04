@@ -246,3 +246,5 @@ ModelManifest.xml
 /WebApplication2/Images/uploads
 WebApplication2/logs/
 WebApplication2/ckfinder/userfiles/
+Frontend/lucene_index/
+Frontend/job_scheduling_data_2_0.xsd

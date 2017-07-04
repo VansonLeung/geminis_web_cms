@@ -14,8 +14,8 @@ window.popupIframe = function(url, height, is_fullscreen, has_close_button)
 	    contentType: 'iframe',
 	    loadUrl: url,
 	    iframeWidth: '100%',
-	    iframeHeight: height || '500px',
-	    closeButton: false,
+	    iframeHeight: height || '600px',
+	    closeButton: has_close_button,
 	};
 
 	if (is_fullscreen)

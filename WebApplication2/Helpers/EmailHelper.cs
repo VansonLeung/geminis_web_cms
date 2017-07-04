@@ -36,6 +36,9 @@ namespace WebApplication2.Helpers
             var c_port = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_port");
             var c_host = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_host");
             var c_domain = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_domain");
+            var c_smtpClientHost = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_smtpClientHost");
+            var c_smtpClientPort = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_smtpClientPort");
+            var c_smtpSSL = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SMTP_ssl");
 
             /*
             var from = new MailAddress("uattest@geminisgroup.com", "Geminis");
@@ -52,6 +55,9 @@ namespace WebApplication2.Helpers
             var port = 587;
             var host = "smtp.gmail.com";
             string domain = null;
+            string smtpClientHost = null;
+            var smtpClientPort = 465;
+            var smtpSSL = 0;
 
 
             if (c_from != null && c_from.Value != null && c_from.Value != "") { from = new MailAddress(c_from.Value, "Geminis"); }
@@ -60,7 +66,18 @@ namespace WebApplication2.Helpers
             if (c_port != null && c_port.Value != null && c_port.Value != "") { port = int.Parse(c_port.Value); }
             if (c_host != null && c_host.Value != null && c_host.Value != "") { host = c_host.Value; }
             if (c_domain != null && c_domain.Value != null && c_domain.Value != "") { domain = c_domain.Value; }
+            if (c_smtpClientHost != null && c_smtpClientHost.Value != null && c_smtpClientHost.Value != "") { smtpClientHost = c_smtpClientHost.Value; }
+            if (c_smtpClientPort != null && c_smtpClientPort.Value != null && c_smtpClientPort.Value != "") { smtpClientPort = int.Parse(c_smtpClientPort.Value); }
+            if (c_smtpSSL != null && c_smtpSSL.Value != null && c_smtpSSL.Value != "") { smtpSSL = int.Parse(c_smtpSSL.Value); }
 
+            if (smtpSSL == 0)
+            {
+                enableSsl = false;
+            }
+            else
+            {
+                enableSsl = true;
+            }
 
             using (var mail = new MailMessage())
             {
@@ -79,7 +96,17 @@ namespace WebApplication2.Helpers
                                                    DeliveryNotificationOptions.OnFailure |
                                                    DeliveryNotificationOptions.OnSuccess;
 
-                using (var client = new SmtpClient())
+                SmtpClient _client = null;
+                if (smtpClientHost == null)
+                {
+                    _client = new SmtpClient();
+                }
+                else
+                {
+                    _client = new SmtpClient(smtpClientHost, smtpClientPort);
+                }
+
+                using (var client = _client)
                 {
                     client.Host = host;
                     client.EnableSsl = enableSsl;

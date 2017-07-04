@@ -6108,6 +6108,8 @@ namespace Frontend.TTLITradeWSDEV {
         
         private string telField;
         
+        private string telCountryField;
+        
         private string address1Field;
         
         private string address2Field;
@@ -6194,6 +6196,18 @@ namespace Frontend.TTLITradeWSDEV {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string telCountry {
+            get {
+                return this.telCountryField;
+            }
+            set {
+                this.telCountryField = value;
+                this.RaisePropertyChanged("telCountry");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
         public string address1 {
             get {
                 return this.address1Field;
@@ -6205,7 +6219,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
         public string address2 {
             get {
                 return this.address2Field;
@@ -6217,7 +6231,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
         public string address3 {
             get {
                 return this.address3Field;
@@ -6229,7 +6243,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
         public string address4 {
             get {
                 return this.address4Field;
@@ -6241,7 +6255,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
         public string address5 {
             get {
                 return this.address5Field;
@@ -6253,7 +6267,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
         public string country {
             get {
                 return this.countryField;
@@ -6294,6 +6308,8 @@ namespace Frontend.TTLITradeWSDEV {
         
         private string telField;
         
+        private string telCountryField;
+        
         private string address1Field;
         
         private string address2Field;
@@ -6380,6 +6396,18 @@ namespace Frontend.TTLITradeWSDEV {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string telCountry {
+            get {
+                return this.telCountryField;
+            }
+            set {
+                this.telCountryField = value;
+                this.RaisePropertyChanged("telCountry");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
         public string address1 {
             get {
                 return this.address1Field;
@@ -6391,7 +6419,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
         public string address2 {
             get {
                 return this.address2Field;
@@ -6403,7 +6431,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
         public string address3 {
             get {
                 return this.address3Field;
@@ -6415,7 +6443,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
         public string address4 {
             get {
                 return this.address4Field;
@@ -6427,7 +6455,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
         public string address5 {
             get {
                 return this.address5Field;
@@ -6439,7 +6467,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
         public string country {
             get {
                 return this.countryField;
@@ -7268,6 +7296,10 @@ namespace Frontend.TTLITradeWSDEV {
         
         private bool tUnSettleSellFieldSpecified;
         
+        private decimal pendingField;
+        
+        private bool pendingFieldSpecified;
+        
         private decimal totalAverageCostField;
         
         private bool totalAverageCostFieldSpecified;
@@ -7966,6 +7998,30 @@ namespace Frontend.TTLITradeWSDEV {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=32)]
+        public decimal pending {
+            get {
+                return this.pendingField;
+            }
+            set {
+                this.pendingField = value;
+                this.RaisePropertyChanged("pending");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool pendingSpecified {
+            get {
+                return this.pendingFieldSpecified;
+            }
+            set {
+                this.pendingFieldSpecified = value;
+                this.RaisePropertyChanged("pendingSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
         public decimal totalAverageCost {
             get {
                 return this.totalAverageCostField;
@@ -7989,7 +8045,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
         public decimal totalCostAmount {
             get {
                 return this.totalCostAmountField;
@@ -8013,7 +8069,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
         public decimal tradableQty {
             get {
                 return this.tradableQtyField;
@@ -8873,6 +8929,52 @@ namespace Frontend.TTLITradeWSDEV {
             set {
                 this.reasonField = value;
                 this.RaisePropertyChanged("reason");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.itrade.com/")]
+    public partial class MarketValueLoop_CType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string marketIDField;
+        
+        private string totalMarketValueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string marketID {
+            get {
+                return this.marketIDField;
+            }
+            set {
+                this.marketIDField = value;
+                this.RaisePropertyChanged("marketID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string totalMarketValue {
+            get {
+                return this.totalMarketValueField;
+            }
+            set {
+                this.totalMarketValueField = value;
+                this.RaisePropertyChanged("totalMarketValue");
             }
         }
         
@@ -12094,6 +12196,8 @@ namespace Frontend.TTLITradeWSDEV {
         
         private AccountBalanceLoop_CType[] accountBalanceLoopListField;
         
+        private MarketValueLoop_CType[] marketValueLoopListField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string enableMargin {
@@ -13099,6 +13203,18 @@ namespace Frontend.TTLITradeWSDEV {
             set {
                 this.accountBalanceLoopListField = value;
                 this.RaisePropertyChanged("accountBalanceLoopList");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("marketValueLoopList", IsNullable=true, Order=47)]
+        public MarketValueLoop_CType[] marketValueLoopList {
+            get {
+                return this.marketValueLoopListField;
+            }
+            set {
+                this.marketValueLoopListField = value;
+                this.RaisePropertyChanged("marketValueLoopList");
             }
         }
     }
@@ -17669,9 +17785,7 @@ namespace Frontend.TTLITradeWSDEV {
         
         private string positionField;
         
-        private int occupationYearField;
-        
-        private bool occupationYearFieldSpecified;
+        private string occupationYearField;
         
         private string employerNameField;
         
@@ -17699,11 +17813,19 @@ namespace Frontend.TTLITradeWSDEV {
         
         private string mobileField;
         
+        private string mobileCountryField;
+        
         private string homeTelField;
+        
+        private string homeTelCountryField;
         
         private string officeTelField;
         
+        private string officeTelCountryField;
+        
         private string faxField;
+        
+        private string faxCountryField;
         
         private int addressTypeField;
         
@@ -17953,25 +18075,13 @@ namespace Frontend.TTLITradeWSDEV {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=12)]
-        public int occupationYear {
+        public string occupationYear {
             get {
                 return this.occupationYearField;
             }
             set {
                 this.occupationYearField = value;
                 this.RaisePropertyChanged("occupationYear");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool occupationYearSpecified {
-            get {
-                return this.occupationYearFieldSpecified;
-            }
-            set {
-                this.occupationYearFieldSpecified = value;
-                this.RaisePropertyChanged("occupationYearSpecified");
             }
         }
         
@@ -18133,6 +18243,18 @@ namespace Frontend.TTLITradeWSDEV {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=26)]
+        public string mobileCountry {
+            get {
+                return this.mobileCountryField;
+            }
+            set {
+                this.mobileCountryField = value;
+                this.RaisePropertyChanged("mobileCountry");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
         public string homeTel {
             get {
                 return this.homeTelField;
@@ -18144,7 +18266,19 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=27)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        public string homeTelCountry {
+            get {
+                return this.homeTelCountryField;
+            }
+            set {
+                this.homeTelCountryField = value;
+                this.RaisePropertyChanged("homeTelCountry");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
         public string officeTel {
             get {
                 return this.officeTelField;
@@ -18156,7 +18290,19 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=28)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
+        public string officeTelCountry {
+            get {
+                return this.officeTelCountryField;
+            }
+            set {
+                this.officeTelCountryField = value;
+                this.RaisePropertyChanged("officeTelCountry");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
         public string fax {
             get {
                 return this.faxField;
@@ -18168,7 +18314,19 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=29)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
+        public string faxCountry {
+            get {
+                return this.faxCountryField;
+            }
+            set {
+                this.faxCountryField = value;
+                this.RaisePropertyChanged("faxCountry");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
         public int addressType {
             get {
                 return this.addressTypeField;
@@ -18192,7 +18350,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=30)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
         public string address1 {
             get {
                 return this.address1Field;
@@ -18204,7 +18362,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=31)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=35)]
         public string address2 {
             get {
                 return this.address2Field;
@@ -18216,7 +18374,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=32)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
         public string address3 {
             get {
                 return this.address3Field;
@@ -18228,7 +18386,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=33)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
         public string address4 {
             get {
                 return this.address4Field;
@@ -18240,7 +18398,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=34)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
         public string address5 {
             get {
                 return this.address5Field;
@@ -18252,7 +18410,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("addressList", IsNullable=true, Order=35)]
+        [System.Xml.Serialization.XmlElementAttribute("addressList", IsNullable=true, Order=39)]
         public AddressLoop_CType[] addressList {
             get {
                 return this.addressListField;
@@ -18264,7 +18422,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=36)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
         public string bankID {
             get {
                 return this.bankIDField;
@@ -18276,7 +18434,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=37)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=41)]
         public string bankACID {
             get {
                 return this.bankACIDField;
@@ -18288,7 +18446,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=38)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=42)]
         public string bankAccountName {
             get {
                 return this.bankAccountNameField;
@@ -18300,7 +18458,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=39)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=43)]
         public string currencyID {
             get {
                 return this.currencyIDField;
@@ -18312,7 +18470,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=44)]
         public string bankAddress {
             get {
                 return this.bankAddressField;
@@ -18324,7 +18482,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=41)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=45)]
         public string swiftCode {
             get {
                 return this.swiftCodeField;
@@ -18336,7 +18494,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("bankAccountList", IsNullable=true, Order=42)]
+        [System.Xml.Serialization.XmlElementAttribute("bankAccountList", IsNullable=true, Order=46)]
         public BankAccountLoop_CType[] bankAccountList {
             get {
                 return this.bankAccountListField;
@@ -18348,7 +18506,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("investmentItemList", IsNullable=true, Order=43)]
+        [System.Xml.Serialization.XmlElementAttribute("investmentItemList", IsNullable=true, Order=47)]
         public InvestmentItemLoop_CType[] investmentItemList {
             get {
                 return this.investmentItemListField;
@@ -18360,7 +18518,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("investmentObjectiveList", IsNullable=true, Order=44)]
+        [System.Xml.Serialization.XmlElementAttribute("investmentObjectiveList", IsNullable=true, Order=48)]
         public InvestmentObjectiveLoop_CType[] investmentObjectiveList {
             get {
                 return this.investmentObjectiveListField;
@@ -18372,7 +18530,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=45)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=49)]
         public string investmentYear {
             get {
                 return this.investmentYearField;
@@ -18384,7 +18542,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=46)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=50)]
         public string derivativeKnowledgeTraining {
             get {
                 return this.derivativeKnowledgeTrainingField;
@@ -18396,7 +18554,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=47)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=51)]
         public string derivativeKnowledgeWorkExperience {
             get {
                 return this.derivativeKnowledgeWorkExperienceField;
@@ -18408,7 +18566,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=48)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=52)]
         public string derivativeKnowledgeTradeExperience {
             get {
                 return this.derivativeKnowledgeTradeExperienceField;
@@ -18420,7 +18578,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("beneficiaryList", IsNullable=true, Order=49)]
+        [System.Xml.Serialization.XmlElementAttribute("beneficiaryList", IsNullable=true, Order=53)]
         public BeneficiaryLoop_CType[] beneficiaryList {
             get {
                 return this.beneficiaryListField;
@@ -18432,7 +18590,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("agentList", IsNullable=true, Order=50)]
+        [System.Xml.Serialization.XmlElementAttribute("agentList", IsNullable=true, Order=54)]
         public AgentLoop_CType[] agentList {
             get {
                 return this.agentListField;
@@ -18444,7 +18602,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=51)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=55)]
         public string licensedPersonFlag {
             get {
                 return this.licensedPersonFlagField;
@@ -18456,7 +18614,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=52)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=56)]
         public string licensedPersonName {
             get {
                 return this.licensedPersonNameField;
@@ -18468,7 +18626,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=53)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=57)]
         public string employeeUnderLicensedPersonFlag {
             get {
                 return this.employeeUnderLicensedPersonFlagField;
@@ -18480,7 +18638,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=54)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=58)]
         public string employeeUnderLicensedPersonName {
             get {
                 return this.employeeUnderLicensedPersonNameField;
@@ -18492,7 +18650,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=55)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=59)]
         public string employeeUnderLicensedPersonEmployerName {
             get {
                 return this.employeeUnderLicensedPersonEmployerNameField;
@@ -18504,7 +18662,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=56)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=60)]
         public string taxObligationInUS {
             get {
                 return this.taxObligationInUSField;
@@ -18516,7 +18674,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=57)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=61)]
         public string USCitizenshipFlag {
             get {
                 return this.uSCitizenshipFlagField;
@@ -18528,7 +18686,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=58)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=62)]
         public string relatedAccountFlag {
             get {
                 return this.relatedAccountFlagField;
@@ -18540,7 +18698,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=59)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=63)]
         public string relatedPersonName {
             get {
                 return this.relatedPersonNameField;
@@ -18552,7 +18710,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=60)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=64)]
         public string relatedDirectorName {
             get {
                 return this.relatedDirectorNameField;
@@ -18564,7 +18722,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=61)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=65)]
         public string relatedCompanyName {
             get {
                 return this.relatedCompanyNameField;
@@ -18576,7 +18734,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=62)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=66)]
         public string relatedAccountRelationship {
             get {
                 return this.relatedAccountRelationshipField;
@@ -18588,7 +18746,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=63)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=67)]
         public string relatedSubaccountFlag {
             get {
                 return this.relatedSubaccountFlagField;
@@ -18600,7 +18758,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=64)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=68)]
         public string relatedMarginAccountSpouseFlag {
             get {
                 return this.relatedMarginAccountSpouseFlagField;
@@ -18612,7 +18770,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=65)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=69)]
         public string relatedMarginAccountSpouseName {
             get {
                 return this.relatedMarginAccountSpouseNameField;
@@ -18624,7 +18782,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=66)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=70)]
         public string largeVoteRightFlag {
             get {
                 return this.largeVoteRightFlagField;
@@ -18636,7 +18794,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=67)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=71)]
         public string largeVoteRightSpouseName {
             get {
                 return this.largeVoteRightSpouseNameField;
@@ -18648,7 +18806,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=68)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=72)]
         public string largeVoteRightCompanyName {
             get {
                 return this.largeVoteRightCompanyNameField;
@@ -18660,7 +18818,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=69)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=73)]
         public string isDirectMarketingRefused {
             get {
                 return this.isDirectMarketingRefusedField;
@@ -18672,7 +18830,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=70)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=74)]
         public string referenceCode {
             get {
                 return this.referenceCodeField;
@@ -18684,7 +18842,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=71)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=75)]
         public string isNonTradingAcc {
             get {
                 return this.isNonTradingAccField;
@@ -18696,7 +18854,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("fundSourceList", IsNullable=true, Order=72)]
+        [System.Xml.Serialization.XmlElementAttribute("fundSourceList", IsNullable=true, Order=76)]
         public FundSourceLoop_CType[] fundSourceList {
             get {
                 return this.fundSourceListField;
@@ -24213,6 +24371,8 @@ namespace Frontend.TTLITradeWSDEV {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
     public partial class otpTicketVerificationOtpTicketVerificationReq : BaseRequest_CType {
         
+        private string authIDField;
+        
         private string otpTicketField;
         
         private string otpField;
@@ -24221,6 +24381,18 @@ namespace Frontend.TTLITradeWSDEV {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string authID {
+            get {
+                return this.authIDField;
+            }
+            set {
+                this.authIDField = value;
+                this.RaisePropertyChanged("authID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
         public string otpTicket {
             get {
                 return this.otpTicketField;
@@ -24232,7 +24404,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
         public string otp {
             get {
                 return this.otpField;
@@ -24244,7 +24416,7 @@ namespace Frontend.TTLITradeWSDEV {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string showResult {
             get {
                 return this.showResultField;
@@ -25069,6 +25241,8 @@ namespace Frontend.TTLITradeWSDEV {
         
         private bool toAmountFieldSpecified;
         
+        private string remarkField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string channelID {
@@ -25174,6 +25348,18 @@ namespace Frontend.TTLITradeWSDEV {
             set {
                 this.toAmountFieldSpecified = value;
                 this.RaisePropertyChanged("toAmountSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string remark {
+            get {
+                return this.remarkField;
+            }
+            set {
+                this.remarkField = value;
+                this.RaisePropertyChanged("remark");
             }
         }
     }
@@ -25736,10 +25922,24 @@ namespace Frontend.TTLITradeWSDEV {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://ws.itrade.com/")]
     public partial class changePasswordResponseChangePasswordResp : BaseResponse_CType {
         
+        private string isSuccessField;
+        
         private string otpTicketField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string isSuccess {
+            get {
+                return this.isSuccessField;
+            }
+            set {
+                this.isSuccessField = value;
+                this.RaisePropertyChanged("isSuccess");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
         public string otpTicket {
             get {
                 return this.otpTicketField;
@@ -26897,6 +27097,8 @@ namespace Frontend.TTLITradeWSDEV {
         
         private string newPasswordField;
         
+        private string otpTicketField;
+        
         private string encryptField;
         
         /// <remarks/>
@@ -26937,6 +27139,18 @@ namespace Frontend.TTLITradeWSDEV {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string otpTicket {
+            get {
+                return this.otpTicketField;
+            }
+            set {
+                this.otpTicketField = value;
+                this.RaisePropertyChanged("otpTicket");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public string encrypt {
             get {
                 return this.encryptField;

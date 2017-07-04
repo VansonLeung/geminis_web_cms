@@ -411,7 +411,15 @@ namespace Frontend.Controllers
                 }
                 */
 
-                SSO_UpsertUser();
+                var is_sso_enabled = false;
+                var sso_enabled = ConstantDbContext.getInstance().findActiveByKeyNoTracking("SSO_enabled");
+                if (sso_enabled != null
+                    && sso_enabled.Value != null)
+                {
+                    is_sso_enabled = sso_enabled.Value == "1";
+                }
+
+                SSO_UpsertUser(is_sso_enabled);
 
                 return this.Json(BaseResponse.MakeResponse(resp));
             }

@@ -635,6 +635,7 @@
           <xs:complexContent mixed="false">
             <xs:extension base="tns:BaseResponse_CType">
               <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="otpTicket" type="xs:string" />
               </xs:sequence>
             </xs:extension>
@@ -795,7 +796,7 @@
                 <xs:element minOccurs="0" form="qualified" name="occupationID" type="xs:int" />
                 <xs:element minOccurs="0" form="qualified" name="specifiedOccupation" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="position" type="xs:string" />
-                <xs:element minOccurs="0" form="qualified" name="occupationYear" type="xs:int" />
+                <xs:element minOccurs="0" form="qualified" name="occupationYear" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="employerName" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="annualIncome" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="netAsset" type="xs:string" />
@@ -809,9 +810,13 @@
                 <xs:element minOccurs="0" form="qualified" name="email" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="estatementFlag" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="mobile" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="mobileCountry" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="homeTel" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="homeTelCountry" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="officeTel" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="officeTelCountry" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="fax" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="faxCountry" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="addressType" type="xs:int" />
                 <xs:element minOccurs="0" form="qualified" name="address1" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="address2" type="xs:string" />
@@ -1102,6 +1107,7 @@
                 <xs:element minOccurs="0" form="qualified" name="exchangeRate" type="xs:decimal" />
                 <xs:element minOccurs="0" form="qualified" name="toCurrency" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="toAmount" type="xs:decimal" />
+                <xs:element minOccurs="0" form="qualified" name="remark" type="xs:string" />
               </xs:sequence>
             </xs:extension>
           </xs:complexContent>
@@ -1201,7 +1207,9 @@
           <xs:sequence>
             <xs:element minOccurs="0" form="qualified" name="marketID" type="xs:string" />
             <xs:element minOccurs="0" form="qualified" name="newsID" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="instrumentID" type="xs:string" />
             <xs:element minOccurs="0" form="qualified" name="page" type="xs:string" />
+            <xs:element minOccurs="0" form="qualified" name="category" type="xs:string" />
             <xs:element minOccurs="0" form="qualified" name="token" type="xs:string" />
             <xs:element minOccurs="0" form="qualified" name="language" type="xs:string" />
           </xs:sequence>
@@ -1383,6 +1391,28 @@
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
+      <xs:element name="MarketConfigReq_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseRequest_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="companyCode" type="xs:string" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="MarketConfigResp_CType">
+        <xs:complexType>
+          <xs:complexContent mixed="false">
+            <xs:extension base="tns:BaseResponse_CType">
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="markets" nillable="true" type="tns:MarketConfig_CType" />
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="MarketDataSubscriptionReq_CType">
         <xs:complexType>
           <xs:complexContent mixed="false">
@@ -1484,6 +1514,7 @@
                 <xs:element minOccurs="0" form="qualified" name="marginCallN" type="xs:decimal" />
                 <xs:element minOccurs="0" form="qualified" name="warningMessage" type="xs:string" />
                 <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="accountBalanceLoopList" nillable="true" type="tns:AccountBalanceLoop_CType" />
+                <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="marketValueLoopList" nillable="true" type="tns:MarketValueLoop_CType" />
               </xs:sequence>
             </xs:extension>
           </xs:complexContent>
@@ -1655,6 +1686,7 @@
           <xs:complexContent mixed="false">
             <xs:extension base="tns:BaseRequest_CType">
               <xs:sequence>
+                <xs:element minOccurs="0" form="qualified" name="authID" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="otpTicket" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="otp" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="showResult" type="xs:string" />
@@ -2837,6 +2869,7 @@
                 <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="externalPassword" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="newPassword" type="xs:string" />
+                <xs:element minOccurs="0" form="qualified" name="otpTicket" type="xs:string" />
                 <xs:element minOccurs="0" form="qualified" name="encrypt" type="xs:string" />
               </xs:sequence>
             </xs:extension>
@@ -3120,6 +3153,7 @@
           <xs:element minOccurs="0" form="qualified" name="placeOfIssue" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="nationality" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="tel" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="telCountry" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="address1" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="address2" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="address3" type="xs:string" />
@@ -3136,6 +3170,7 @@
           <xs:element minOccurs="0" form="qualified" name="placeOfIssue" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="nationality" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="tel" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="telCountry" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="address1" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="address2" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="address3" type="xs:string" />
@@ -3621,6 +3656,12 @@
           <xs:element minOccurs="0" form="qualified" name="buyingPowerWRG" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="MarketValueLoop_CType">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="marketID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="totalMarketValue" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="Fees_CType">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="amount" type="xs:decimal" />
@@ -3766,6 +3807,7 @@
           <xs:element minOccurs="0" form="qualified" name="tTodaySell" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="tUnSettleBuy" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="tUnSettleSell" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="pending" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="totalAverageCost" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="totalCostAmount" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="tradableQty" type="xs:decimal" />
@@ -4035,6 +4077,40 @@
           <xs:element minOccurs="0" form="qualified" name="auditor" type="xs:string" />
           <xs:element minOccurs="0" form="qualified" name="otherAssets" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="othLongTermLib" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MarketConfig_CType">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="marketID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="enabled" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="supportedOrderTypes" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="defaultOrderType" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="maxLotSize" type="xs:int" />
+          <xs:element minOccurs="0" form="qualified" name="allowPlaceOrder" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="allowModifyOrder" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="allowCancelOrder" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="allowBuyOddLot" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="allowSellOddLot" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="displayQuotaBalance" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="displayDefaultCurrency" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="goodTillDate" type="xs:int" />
+          <xs:element minOccurs="0" form="qualified" name="symbolLength" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="displayNames" nillable="true" type="tns:MarketConfigDisplayName_CType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="flags" nillable="true" type="tns:MarketConfigImage_CType" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="headers" nillable="true" type="tns:MarketConfigImage_CType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MarketConfigDisplayName_CType">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="name" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="languageID" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MarketConfigImage_CType">
+        <xs:sequence>
+          <xs:element minOccurs="0" form="qualified" name="theme" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="scale" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="url" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="ForeignExchangeInstructionEnquiry_CType">
@@ -4336,6 +4412,7 @@
                     <xs:element minOccurs="0" form="qualified" name="marginCallN" type="xs:decimal" />
                     <xs:element minOccurs="0" form="qualified" name="warningMessage" type="xs:string" />
                     <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="accountBalanceLoopList" nillable="true" type="tns:AccountBalanceLoop_CType" />
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="marketValueLoopList" nillable="true" type="tns:MarketValueLoop_CType" />
                   </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
@@ -5174,7 +5251,7 @@
                     <xs:element minOccurs="0" form="qualified" name="occupationID" type="xs:int" />
                     <xs:element minOccurs="0" form="qualified" name="specifiedOccupation" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="position" type="xs:string" />
-                    <xs:element minOccurs="0" form="qualified" name="occupationYear" type="xs:int" />
+                    <xs:element minOccurs="0" form="qualified" name="occupationYear" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="employerName" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="annualIncome" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="netAsset" type="xs:string" />
@@ -5188,9 +5265,13 @@
                     <xs:element minOccurs="0" form="qualified" name="email" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="estatementFlag" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="mobile" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="mobileCountry" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="homeTel" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="homeTelCountry" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="officeTel" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="officeTelCountry" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="fax" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="faxCountry" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="addressType" type="xs:int" />
                     <xs:element minOccurs="0" form="qualified" name="address1" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="address2" type="xs:string" />
@@ -6376,6 +6457,7 @@
               <xs:complexContent mixed="false">
                 <xs:extension base="tns:BaseRequest_CType">
                   <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="authID" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="otpTicket" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="otp" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="showResult" type="xs:string" />
@@ -6592,6 +6674,7 @@
                     <xs:element minOccurs="0" form="qualified" name="exchangeRate" type="xs:decimal" />
                     <xs:element minOccurs="0" form="qualified" name="toCurrency" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="toAmount" type="xs:decimal" />
+                    <xs:element minOccurs="0" form="qualified" name="remark" type="xs:string" />
                   </xs:sequence>
                 </xs:extension>
               </xs:complexContent>
@@ -6689,6 +6772,7 @@
               <xs:complexContent mixed="false">
                 <xs:extension base="tns:BaseResponse_CType">
                   <xs:sequence>
+                    <xs:element minOccurs="0" form="qualified" name="isSuccess" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="otpTicket" type="xs:string" />
                   </xs:sequence>
                 </xs:extension>
@@ -6959,6 +7043,7 @@
                     <xs:element minOccurs="0" form="qualified" name="channelID" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="externalPassword" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="newPassword" type="xs:string" />
+                    <xs:element minOccurs="0" form="qualified" name="otpTicket" type="xs:string" />
                     <xs:element minOccurs="0" form="qualified" name="encrypt" type="xs:string" />
                   </xs:sequence>
                 </xs:extension>
@@ -7267,6 +7352,28 @@
           </xs:element>
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="CaptchaManagementRequest_CType">
+        <xs:sequence>
+          <xs:element form="qualified" name="key" type="xs:string" />
+          <xs:element form="qualified" name="answer" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SessionManagementRequest_CType">
+        <xs:sequence>
+          <xs:element form="qualified" name="clientID" type="xs:string" />
+          <xs:element form="qualified" name="sessionID" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CaptchaManagementResponse_CType">
+        <xs:sequence>
+          <xs:element form="qualified" name="returnCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SessionManagementResponse_CType">
+        <xs:sequence>
+          <xs:element form="qualified" name="returnCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="Quote_CType">
         <xs:sequence>
           <xs:element minOccurs="0" form="qualified" name="ID" type="xs:string" />
@@ -7323,28 +7430,6 @@
           <xs:element minOccurs="0" form="qualified" name="Change" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="PctChange" type="xs:decimal" />
           <xs:element minOccurs="0" form="qualified" name="Real" type="xs:int" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="CaptchaManagementRequest_CType">
-        <xs:sequence>
-          <xs:element form="qualified" name="key" type="xs:string" />
-          <xs:element form="qualified" name="answer" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="SessionManagementRequest_CType">
-        <xs:sequence>
-          <xs:element form="qualified" name="clientID" type="xs:string" />
-          <xs:element form="qualified" name="sessionID" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="CaptchaManagementResponse_CType">
-        <xs:sequence>
-          <xs:element form="qualified" name="returnCode" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="SessionManagementResponse_CType">
-        <xs:sequence>
-          <xs:element form="qualified" name="returnCode" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="News_CType">

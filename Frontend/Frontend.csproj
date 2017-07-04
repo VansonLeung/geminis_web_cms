@@ -1129,6 +1129,7 @@
     <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Sitemap.cshtml" />
+    <Content Include="Views\Page\Error404.cshtml" />
     <None Include="Web.ReleaseLocal.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -52,6 +52,10 @@ namespace Frontend.Controllers
                     ViewBag.message = "Session has been idled over " + min + " mins, please login again";
                 }
 
+                if (locale != null)
+                {
+                    Session["LANG"] = locale;
+                }
                 return View(vml);
             }
 
@@ -70,6 +74,11 @@ namespace Frontend.Controllers
             }
 
             BaseViewModel vm = BaseViewModel.make(locale, "home", null, Request, session);
+
+            if (locale != null)
+            {
+                Session["LANG"] = locale;
+            }
             return View(vm);
         }
 
@@ -154,6 +163,11 @@ namespace Frontend.Controllers
             }
 
             BaseViewModel vm2 = BaseViewModel.make(locale, "home", null, Request, session);
+
+            if (locale != null)
+            {
+                Session["LANG"] = locale;
+            }
             return View(vm2);
         }
 
@@ -196,12 +210,22 @@ namespace Frontend.Controllers
                     BaseViewModel vm = BaseViewModel.make(locale, "home", null, Request, session);
                     vm.search_keywords = val;
                     vm.search_data = searchData;
+
+                    if (locale != null)
+                    {
+                        Session["LANG"] = locale;
+                    }
                     return View(vm);
                 }
             }
             BaseViewModel vm2 = BaseViewModel.make(locale, "home", null, Request, session);
             vm2.search_keywords = "";
             vm2.search_data = new List<LuceneSearchData>();
+
+            if (locale != null)
+            {
+                Session["LANG"] = locale;
+            }
             return View(vm2);
         }
 
@@ -218,6 +242,37 @@ namespace Frontend.Controllers
             LuceneSearch.Optimize();
             TempData["Result"] = "Search index was optimized successfully!";
             return RedirectToAction("Index");
+        }
+
+
+
+
+
+        public ActionResult Error(string locale, string code)
+        {
+            if (SSO_SessionTimeout())
+            {
+                SSO_ClearSession();
+            }
+
+            SSO_InternalKeepAlive();
+            SSO_InternalHeartbeat();
+
+            var session = getSession();
+            if (session != null && !session.isKeptAlive)
+            {
+                Session["isKeptAlive"] = true;
+            }
+
+
+            if (Session["LANG"] != null)
+            {
+                locale = (string) Session["LANG"];
+            }
+
+
+            BaseViewModel vm2 = BaseViewModel.make(locale, "error_" + code, null, Request, session);
+            return View(vm2);
         }
     }
 }
