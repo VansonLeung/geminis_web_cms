@@ -109,11 +109,11 @@ namespace WebApplication2.ViewModels
 
                 if (model != null)
                 {
-                    var value = "http://uat.quotepower.com/web/geminis/" + str + ".jsp;jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}&UpDwnColor=@{S:UPDWNCOLOR}";
+                    var value = "http://uat.quotepower.com/web/geminis/" + str + ".jsp;jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}&UpDwnColor=@{S:UPDWNCOLOR}&fontsize=@{S:FONTSIZE}";
                     var _constant = ConstantDbContext.getInstance().findActiveByKeyNoTracking("IFRAME_QPI_URL");
                     if (_constant != null)
                     {
-                        value = _constant.Value + str + ".jsp;jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}&UpDwnColor=@{S:UPDWNCOLOR}";
+                        value = _constant.Value + str + ".jsp;jsessionid=@{S:JSESSIONID}?lang=@{S:LOCALE_QPI}&UpDwnColor=@{S:UPDWNCOLOR}&fontsize=@{S:FONTSIZE}";
                     }
     
                     foreach (var constant in model.GetQueries())
@@ -245,7 +245,21 @@ namespace WebApplication2.ViewModels
                 return "";
             });
 
-            
+
+
+            pattern = @"@{S:FONTSIZE}";
+            output = Regex.Replace(output, pattern, delegate (Match m) {
+                if (model != null
+                    && model.current != null
+                    && model.current.session != null
+                    && model.current.session.fontSize > 0)
+                {
+                    return model.current.session.fontSize + "";
+                }
+                return "";
+            });
+
+
 
 
             pattern = @"@{S:LANG}";

@@ -528,6 +528,14 @@ $('.nav-sub-menu.subsub').find('li').on('mouseover', function (e) {
 
             var segments = pathname.split("/");
             if (segments.length > 1) {
+
+                if (segments[1] !== "zh-HK"
+                    && segments[1] !== "zh-CN"
+                    && segments[1] !== "en-US") {
+                    pathname = "/zh-HK" + pathname;
+                    segments = pathname.split("/");
+                }
+
                 segments[1] = lang;
             }
 

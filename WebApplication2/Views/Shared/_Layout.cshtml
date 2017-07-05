@@ -20,6 +20,15 @@
     <script type="text/javascript" src="@Url.Content("~/Content/ckeditor/styles.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/ckeditor/adapters/jquery.js")"></script>
     @Scripts.Render("~/bundles/ckfinder")
+
+    <script>
+        CKEDITOR_CONFIG = {};
+        CKEDITOR_CONFIG.filebrowserBrowseUrl = '@Url.Content("~/Content/ckfinder/ckfinder.html")';
+        CKEDITOR_CONFIG.filebrowserImageBrowseUrl = '@Url.Content("~/Content/ckfinder/ckfinder.html?type=Images")';
+        CKEDITOR_CONFIG.filebrowserUploadUrl = '@Url.Content("~/FileUpload/UploadNow")';
+        CKEDITOR_CONFIG.filebrowserImageUploadUrl = '@Url.Content("~/image/UploadNow")';
+        CKEDITOR_CONFIG.filebrowserVideoUploadUrl = '@Url.Content("~/VideoUpload/UploadPage")';
+    </script>
 </head>
 <body style="padding-top:64px;">
     <div style="padding-left: 0px; padding-right: 0px;" class="container-fluid">

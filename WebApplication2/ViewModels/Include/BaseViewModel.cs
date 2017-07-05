@@ -42,7 +42,8 @@ namespace WebApplication2.ViewModels.Include
 
             foreach (var constant in queries)
             {
-                if (constant.Key.Equals(Key))
+                if (constant.Key != null
+                    && constant.Key.Equals(Key))
                 {
                     return constant.Value;
                 }

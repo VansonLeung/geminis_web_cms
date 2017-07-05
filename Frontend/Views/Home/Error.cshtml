@@ -1,0 +1,31 @@
+﻿@model WebApplication2.ViewModels.Include.BaseViewModel
+@using WebApplication2.ViewModels.Include
+@using WebApplication2.ViewModels
+
+@Html.Partial("_Header", Model)
+
+@{
+    var page_class_name = "";
+    if (Model.content != null && Model.content.pageClassName != null)
+    {
+        page_class_name = Model.content.pageClassName;
+    }
+
+    var background_image = "/images/bg_img/hkstock_bg.jpg";
+
+    if (Model.category.backgroundURL != null)
+    {
+        background_image = Model.category.backgroundURL;
+    }
+
+    <div class="@page_class_name"
+         style='background-image: url("@background_image"); background-size: contain; background-repeat: no-repeat; background-position-y: 0px; min-height: 800px;'>
+
+        <section class='front' style="min-height: 400px;">
+
+            @Html.RazorEncode(HttpUtility.HtmlDecode(Model.content.desc), Model)
+
+        </section>
+    </div>
+    @Html.Partial("_Footer", Model)
+}

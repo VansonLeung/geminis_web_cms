@@ -271,7 +271,7 @@ namespace Frontend.Controllers
             }
 
 
-            BaseViewModel vm2 = BaseViewModel.make(locale, "error_" + code, null, Request, session);
+            BaseViewModel vm2 = BaseViewModel.make(locale, "error" + code, null, Request, session);
             return View(vm2);
         }
     }

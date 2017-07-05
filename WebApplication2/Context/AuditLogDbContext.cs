@@ -130,6 +130,7 @@ namespace WebApplication2.Context
                 return itemDb.AsExpandable()
                     .Where(predicate)
                     .OrderByDescending(item => item.modified_at)
+                    .Take(150)
                     .ToList();
             }
         }

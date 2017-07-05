@@ -20,7 +20,7 @@ namespace WebApplication2
                 url: "ckfinder/userfiles/{type}/{*path}",
                 defaults: new
                 {
-                    controller = "CMSFile",
+                    controller = "ICMSFile",
                     action = "Redirect"
                 }
             );

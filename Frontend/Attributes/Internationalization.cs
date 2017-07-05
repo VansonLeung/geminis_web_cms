@@ -24,7 +24,8 @@ namespace Frontend.Attributes
             }
             catch (Exception e)
             {
-
+                language = "zh";
+                culture = "HK";
             }
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(string.Format("{0}-{1}", language, culture));
