@@ -507,7 +507,7 @@ body {
   font-size: 20px;
   margin: 0;
   padding: 0;
-  background-color: transparent; }
+  background-color: #eeefef; }
   body.opaque {
     background-color: #F3F3F3; }
 
@@ -8675,8 +8675,8 @@ label {
 
 .pop-screen {
   background: #000;
-  opacity: 0.9;
-  filter: alpha(opacity=90);
+  opacity: 0.4;
+  filter: alpha(opacity=40);
   position: fixed;
   left: 0;
   top: 0;
