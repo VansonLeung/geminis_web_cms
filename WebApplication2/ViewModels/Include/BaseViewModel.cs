@@ -850,6 +850,35 @@ namespace WebApplication2.ViewModels.Include
                 }
             }
 
+
+            if (vm.content == null)
+            {
+                var error404cat = db.findCategoryByURL("error404");
+                WebApplication2.Models.ArticlePublished contentPage = null;
+                var contentPages = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlesPublishedByCategory(error404cat, vm.lang.lang);
+                if (contentPages.Count > 0)
+                {
+                    contentPage = contentPages[0];
+                }
+
+                if (contentPage != null)
+                {
+                    vm.category.type = "ContentPage";
+
+                    vm.content = new ViewContent();
+                    vm.content.name = contentPage.Name;
+                    vm.content.desc = contentPage.Desc;
+                    vm.content.slug = contentPage.Slug;
+                    vm.content.link = new Link(vm.lang.locale, cat.getUrl(), contentPage.BaseArticleID + "", null);
+                    vm.content.link.is_absolute = false;
+                    vm.content.link.is_external = false;
+                    vm.content.type = "ContentPage";
+                    vm.content.datetime = contentPage.datePublished;
+                    vm.content.datetime_representation = contentPage.getDatePublished();
+                }
+            }
+
+
             if (vm.content == null)
             {
                 if (vm.category == null)
