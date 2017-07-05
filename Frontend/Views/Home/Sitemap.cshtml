@@ -33,10 +33,39 @@
             </div>
         </section>
 
+        <style>
+            .sitemap-area {
+                padding: 30px;
+            }
+            .sitemap-area h5 {
+                border-bottom: 3px solid #bc0000;
+                padding-bottom: 20px;
+                text-align: center;
+            }
+            .sitemap-area a {
+                color: #666 !important;
+            }
+            .sitemap-area ul.sub-sitemap > a > li {
+                list-style-type: none;
+            }
+            .sitemap-area ul.subsub-sitemap {
+                margin-left: 2em;
+                paddinng-left: 1em;
+                list-style-type: disc;
+            }
+            .sitemap-area ul.subsub-sitemap > a > li {
+                list-style-type: disc;
+                color: #f00 !important;
+            }
+            .sitemap-area ul.subsub-sitemap > a > li > span {
+                color: #666 !important;
+            }
+        </style>
+
         <section class='front'>
 
-            <div class="container">
-                <div class="gem_form">
+            <div class="container sitemap-area" style="width: 100%;">
+                <div class="gem_form" style="padding: 30px;">
                     <div class="row">
 
                         @{
@@ -53,7 +82,7 @@
                                 <h5 style="font-weight: bolder;">@menuItem.name</h5>
                                 <div class='hr' style="background-color: #dd0000 !important"></div>
 
-                                <ul>
+                                <ul class="sub-sitemap">
                                     @for (var j = 0; j < menuItem.submenu.Count; j++)
                                     {
                                         var submenuItem = menuItem.submenu[j];
@@ -66,7 +95,7 @@
                                         if (submenuItem.submenu != null
                     && submenuItem.submenu.Count > 0)
                                         {
-                                            <ul>
+                                            <ul class="subsub-sitemap">
                                                 @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                                 {
                                                     var jk = j + "_" + k;

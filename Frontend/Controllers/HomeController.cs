@@ -31,6 +31,8 @@ namespace Frontend.Controllers
 
             if (SSO_SessionTimeout())
             {
+                return Redirect("/" + locale + "/Page/" + "session_timeout");
+                /*
                 SSO_ClearSession();
 
                 string category = "login";
@@ -56,7 +58,7 @@ namespace Frontend.Controllers
                 {
                     Session["LANG"] = locale;
                 }
-                return View(vml);
+                */
             }
 
             SSO_InternalKeepAlive();
@@ -271,6 +273,11 @@ namespace Frontend.Controllers
             }
 
 
+            if (code == "404")
+            {
+                BaseViewModel vmp = BaseViewModel.make(locale, "page-not-found", null, Request, session);
+                return View(vmp);
+            }
             BaseViewModel vm2 = BaseViewModel.make(locale, "error" + code, null, Request, session);
             return View(vm2);
         }

@@ -347,7 +347,7 @@ namespace WebApplication2.ViewModels.Include
 
 
                     var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
-                    if (hasArticles)
+                    if (hasArticles && (_cat.isContentPage || _cat.isArticleList))
                     {
                         item.is_has_published_content = true;
                     }

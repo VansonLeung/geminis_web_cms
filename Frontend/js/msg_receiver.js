@@ -157,6 +157,38 @@ function receiver(message) {
     	else if (msg.action === "refresh") {
     	    window.location.reload(true);
     	}
+
+
+
+
+
+    	    /**
+             * function: trigger Geminis to pop-up an iframe with URL
+             * action: popup_url
+             * target: iframe popup height in string format with "px" suffix e.g.: "500px"
+             * url: pop-up URL
+             */
+    	else if (msg.action === "showLoading") {
+    	    window.turnLoader("c");
+    	}
+
+
+
+
+
+
+    	    /**
+             * function: trigger Geminis to pop-up an iframe with URL
+             * action: popup_url
+             * target: iframe popup height in string format with "px" suffix e.g.: "500px"
+             * url: pop-up URL
+             */
+    	else if (msg.action === "hideLoading") {
+    	    window.turnLoader();
+    	}
+
+
+
     }
 }
 

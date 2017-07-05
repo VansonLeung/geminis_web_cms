@@ -13,9 +13,14 @@
     {
         page_class_name = Model.content.pageClassName;
     }
+
+    var background_image = "/images/bg_img/hkstock_bg.jpg";
+
+    if (Model.category.backgroundURL != null)
+    {
+        background_image = Model.category.backgroundURL;
+    }
 }
-
-
 
 
 
@@ -25,71 +30,76 @@
     <div style="position: relative; margin: 0 auto;">
         <section class='front'>
 
-            <div class='gem_form shortbottom' style='border-radius: 0 !important; padding-top: 0px; padding-bottom: 20px; background-image: url("/images/index/inedx_bg.jpg"); background-size: cover; background-repeat: no-repeat; background-position-y: 0px;'>
+            <div class='gem_form shortbottom' style='text-align: center; border-radius: 0 !important; padding-top: 0px; padding-bottom: 20px; background-image: url("@background_image"); background-size: cover; background-repeat: no-repeat; background-position-y: 0px;'>
 
                 @{
                     var iframe_src7 = "<iframe style='border-radius: 0 !important; height: 0px' class='if-flexible' frameborder='0' id='i7' scrolling='no' src='@{IFRAME_QPI:geminis.indicesBar}'></iframe>";
                 }
                 @Html.RazorEncode(HttpUtility.HtmlDecode(iframe_src7), Model)
 
-                <div class='row' style="background-color:transparent !important; padding-top: 10px;">
-                    <div class='col s12 m8'>
-                        <div class="landingpage_banner">
-                            <table style="height: 100%">
-                                <tr>
-                                    <td>
-                                        @for (var i = 0; i < Model.jumbotronMenu.Count; i++)
-                                        {
-                                            var menuItem = Model.jumbotronMenu[i];
+                <div style="margin: 0 auto; max-width: 1400px;">
 
-                                            if (i == 0)
-                                            {
-                                                <div class="jumbotron_html jumbotron_html_@i">
-                                                    @Html.RazorEncode(HttpUtility.HtmlDecode(menuItem.desc), Model)
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="jumbotron_html jumbotron_html_@i" style="display: none">
-                                                    @Html.RazorEncode(HttpUtility.HtmlDecode(menuItem.desc), Model)
-                                                </div>
-                                            }
-                                        }
-                                    </td>
-                                    <td style="width: 228px;">
-                                        <ul class="landingpage_banner_button">
+                    <div class='row' style="background-color:transparent !important; padding-top: 10px;">
+                        <div class='col s12 m8'>
+                            <div class="landingpage_banner">
+                                <table style="height: 100%">
+                                    <tr>
+                                        <td>
                                             @for (var i = 0; i < Model.jumbotronMenu.Count; i++)
                                             {
                                                 var menuItem = Model.jumbotronMenu[i];
 
-                                                <li><a style='color: #fff' href="#">@menuItem.name</a><p class="arrow"></p></li>
+                                                if (i == 0)
+                                                {
+                                                    <div class="jumbotron_html jumbotron_html_@i">
+                                                        @Html.RazorEncode(HttpUtility.HtmlDecode(menuItem.desc), Model)
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="jumbotron_html jumbotron_html_@i" style="display: none">
+                                                        @Html.RazorEncode(HttpUtility.HtmlDecode(menuItem.desc), Model)
+                                                    </div>
+                                                }
                                             }
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <br />
-                        <div class="landingpage_shortcut">
-                            <table>
-                                <tr>
-                                    @for (var i = 0; i < Model.shortcutMenu.Count; i++)
-                                    {
-                                        var menuItem = Model.shortcutMenu[i];
-
-                                        <td>
-                                            <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
                                         </td>
-                                    }
-                                </tr>
-                            </table>
+                                        <td style="width: 228px;">
+                                            <ul class="landingpage_banner_button">
+                                                @for (var i = 0; i < Model.jumbotronMenu.Count; i++)
+                                                {
+                                                    var menuItem = Model.jumbotronMenu[i];
+
+                                                    <li><a style='color: #fff' href="#">@menuItem.name</a><p class="arrow"></p></li>
+                                                }
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br />
+                            <div class="landingpage_shortcut">
+                                <table>
+                                    <tr>
+                                        @for (var i = 0; i < Model.shortcutMenu.Count; i++)
+                                        {
+                                            var menuItem = Model.shortcutMenu[i];
+
+                                            <td>
+                                                <a href="@menuItem.link.GetFullURL()">@menuItem.name</a>
+                                            </td>
+                                        }
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
+
+                        @{
+                            var iframe_src = "<div class='col s12 m4'><iframe class='if-flexible' frameborder='0' id='i1' scrolling='no' src='@{IFRAME_QPI:geminis.stock_quoter}'></iframe></div>";
+                        }
+                        @Html.RazorEncode(HttpUtility.HtmlDecode(iframe_src), Model)
+
                     </div>
 
-                    @{
-                        var iframe_src = "<div class='col s12 m4'><iframe class='if-flexible' frameborder='0' id='i1' scrolling='no' src='@{IFRAME_QPI:geminis.stock_quoter}'></iframe></div>";
-                    }
-                    @Html.RazorEncode(HttpUtility.HtmlDecode(iframe_src), Model)
 
                 </div>
             </div>

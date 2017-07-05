@@ -33,7 +33,7 @@ namespace WebApplication2.ViewModels.Include
                 lbl_search_placeholder = "搜尋";
                 lbl_search_results = "搜尋結果";
                 lbl_search_results_your = "你的搜尋結果";
-                lbl_sitemap = "網頁地圖";
+                lbl_sitemap = "網站地圖";
             }
             else if (lang == "cn")
             {
@@ -47,7 +47,7 @@ namespace WebApplication2.ViewModels.Include
                 lbl_search_placeholder = "搜寻";
                 lbl_search_results = "搜寻结果";
                 lbl_search_results_your = "你的搜寻结果";
-                lbl_sitemap = "網頁地圖";
+                lbl_sitemap = "網站地圖";
             }
             else
             {
