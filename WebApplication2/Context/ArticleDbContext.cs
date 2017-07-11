@@ -497,6 +497,12 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
             using (var db = new BaseDbContext())
             {
                 article.createdBy = SessionPersister.account.AccountID;
+
+                if (article.Desc != null)
+                {
+                    article.Desc = article.Desc.Replace("cms/ckfinder/userfiles", "ckfinder/userfiles");
+                }
+
                 db.articleDb.Add(article);
                 db.SaveChanges();
 
@@ -578,6 +584,12 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
             using (var db = new BaseDbContext())
             {
                 article.createdBy = SessionPersister.account.AccountID;
+
+                if (article.Desc != null)
+                {
+                    article.Desc = article.Desc.Replace("cms/ckfinder/userfiles", "ckfinder/userfiles");
+                }
+
                 db.articleDb.Add(article);
                 db.SaveChanges();
 
@@ -634,6 +646,10 @@ if (SessionPersister.account != null && SessionPersister.account.isRoleSuperadmi
                 db.Entry(_article).State = EntityState.Modified;
                 _article.Name = article.Name;
                 _article.Desc = article.Desc;
+                if (_article.Desc != null)
+                {
+                    _article.Desc = _article.Desc.Replace("cms/ckfinder/userfiles", "ckfinder/userfiles");
+                }
                 _article.Slug = article.Slug;
                 _article.Keywords = article.Keywords;
                 _article.MetaData = article.MetaData;

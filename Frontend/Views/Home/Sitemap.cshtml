@@ -100,7 +100,7 @@
                                                 {
                                                     var jk = j + "_" + k;
                                                     var subsubmenuItem = submenuItem.submenu[k];
-                                                    <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name</li></a>
+                                                    <a href="@subsubmenuItem.link.GetFullURL()"><li><span>@subsubmenuItem.name</span></li></a>
                                                 }
                                             </ul>
                                         }
@@ -114,7 +114,7 @@
                             <h5 style="font-weight: bolder;">關於我們</h5>
                             <div class='hr' style="background-color: #dd0000 !important"></div>
 
-                            <ul>
+                            <ul class="sub-sitemap">
 
                                 @for (var j = 0; j < Model.bottomMenu.Count; j++)
                                 {
@@ -130,12 +130,12 @@
                                     if (submenuItem.submenu != null
                     && submenuItem.submenu.Count > 0)
                                     {
-                                        <ul>
+                                        <ul class="subsub-sitemap">
                                             @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                             {
                                                 var jk = j + "_" + k;
                                                 var subsubmenuItem = submenuItem.submenu[k];
-                                                <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name</li></a>
+                                                <a href="@subsubmenuItem.link.GetFullURL()"><li><span>@subsubmenuItem.name</span></li></a>
                                             }
                                         </ul>
                                     }
@@ -155,7 +155,7 @@
                                 <h5 style="font-weight: bolder;">@menuItem.name</h5>
                                 <div class='hr' style="background-color: #dd0000 !important"></div>
 
-                                <ul>
+                                <ul class="sub-sitemap">
                                     @for (var j = 0; j < menuItem.submenu.Count; j++)
                                     {
                                         var submenuItem = menuItem.submenu[j];
@@ -168,12 +168,12 @@
                                         if (submenuItem.submenu != null
                     && submenuItem.submenu.Count > 0)
                                         {
-                                            <ul>
+                                            <ul class="subsub-sitemap">
                                                 @for (var k = 0; k < submenuItem.submenu.Count; k++)
                                                 {
                                                     var jk = j + "_" + k;
                                                     var subsubmenuItem = submenuItem.submenu[k];
-                                                    <a href="@subsubmenuItem.link.GetFullURL()"><li>@subsubmenuItem.name</li></a>
+                                                    <a href="@subsubmenuItem.link.GetFullURL()"><li><span>@subsubmenuItem.name</span></li></a>
                                                 }
                                             </ul>
                                         }

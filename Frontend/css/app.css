@@ -8696,10 +8696,12 @@ label {
   display: none; }
 
 .pop-container {
+  box-shadow: 0 0 20px 10px grey;
   margin: 40px auto;
   display: block;
   width: 600px;
   background: white;
+  border-radius: 8px;
   position: relative; }
 
 .pop-block {
@@ -8736,6 +8738,7 @@ label {
   font-size: 28px;
   width: 30px;
   height: 30px;
+  border-radius: 8px;
   line-height: 31px;
   text-align: center;
   cursor: pointer;

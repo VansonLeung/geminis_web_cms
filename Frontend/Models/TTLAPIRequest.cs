@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Frontend.Models
@@ -35,7 +36,27 @@ namespace Frontend.Models
             this.body = body;
 
             this.otp = otp;
-    }
+
+            string[] keys = body.Keys.ToArray();
+            for (int i = 0; i < keys.Count(); i++)
+            {
+                string key = keys[i];
+
+                string pattern = @"[(?<key>.*?)]";
+                string output = Regex.Replace(key, pattern, delegate (Match m) {
+                    var str = m.Value;
+                    if (str.Length >= 3)
+                    {
+                        str = str.Substring(1, str.Length - 1);
+                        return str;
+                    }
+                    return "";
+                });
+
+
+            }
+
+        }
 
         public string name { get; set; } = "";
         public string otp { get; set; } = "";

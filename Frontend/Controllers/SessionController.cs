@@ -4,6 +4,7 @@ using Frontend.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -291,6 +292,16 @@ namespace Frontend.Controllers
         [HttpPost]
         public ActionResult forceExpire(string clientID)
         {
+            if (clientID == null)
+            {
+                clientID = getSession().clientID;
+            }
+            if (clientID == null)
+            {
+                return this.Json(BaseResponse.MakeResponse(new Dictionary<string, string>
+                {
+                }));
+            }
             SSO_ForceExpire(clientID);
             return this.Json(BaseResponse.MakeResponse(new Dictionary<string, string>
             {
@@ -298,12 +309,38 @@ namespace Frontend.Controllers
         }
 
 
+        private dynamic ParseHttpGetJson(string query)
+        {
+            if (!string.IsNullOrEmpty(query))
+            {
+                try
+                {
+                    var json = query.Substring(7, query.Length - 7);  // the number 7 is for data=
+                    json = System.Web.HttpUtility.UrlDecode(json);
+                    dynamic queryJson = JsonConvert.DeserializeObject<dynamic>(json);
+
+                    return queryJson;
+                }
+                catch (System.Exception e)
+                {
+                    throw new ApplicationException("wrong json format in the query string！", e);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
         [ForceApplicationJsonContentType]
         [HttpPost]
-        public ActionResult submitSoapQuery(TTLAPIRequestForm wrapper)
+        public ActionResult submitSoapQuery()
         {
             try
             {
+                String json = new StreamReader(this.Request.InputStream).ReadToEnd();
+                TTLAPIRequestForm wrapper = (TTLAPIRequestForm) JsonConvert.DeserializeObject(json, typeof(TTLAPIRequestForm));
                 TTLAPIRequest form = wrapper.form;
 
                 // validate form OTP here
@@ -687,9 +724,17 @@ namespace Frontend.Controllers
             return this.Json(SSO_InternalHeartbeat());
         }
 
-
-
         
+        [ForceApplicationJsonContentType]
+        [HttpPost]
+        public ActionResult api_sso_force_expire(string clientID)
+        {
+            return this.Json(forceExpire(clientID));
+        }
+
+
+
+
 
         public bool keepAliveQPI(string jsessionID)
         {

@@ -77,6 +77,7 @@ namespace WebApplication2.Context
             using (var db = new BaseDbContext())
             {
                 return db.accountDb
+                    .Where(acc => acc.isRemoved != true)
                 .Include(acc => acc.Group)
                 .ToList();
             }
@@ -86,7 +87,7 @@ namespace WebApplication2.Context
         {
             using (var db = new BaseDbContext())
             {
-                return db.accountDb.Where(acc => acc.AccountID == accountID)
+                return db.accountDb.Where(acc => acc.AccountID == accountID && acc.isRemoved != true)
                 .Include(acc => acc.Group)
                 .FirstOrDefault();
             }
@@ -96,7 +97,7 @@ namespace WebApplication2.Context
         {
             using (var db = new BaseDbContext())
             {
-                return db.accountDb.Where(acc => acc.Username == account.Username)
+                return db.accountDb.Where(acc => acc.Username == account.Username && acc.isRemoved != true)
                 .Include(acc => acc.Group)
                 .FirstOrDefault();
             }
@@ -106,7 +107,7 @@ namespace WebApplication2.Context
         {
             using (var db = new BaseDbContext())
             {
-                return db.accountDb.Where(acc => acc.Email == email)
+                return db.accountDb.Where(acc => acc.Email == email && acc.isRemoved != true)
                 .ToList();
             }
         }
@@ -125,7 +126,7 @@ namespace WebApplication2.Context
         {
             using (var db = new BaseDbContext())
             {
-                return db.accountDb.AsNoTracking().Where(acc => acc.Email == email)
+                return db.accountDb.AsNoTracking().Where(acc => acc.Email == email && acc.isRemoved != true)
                 .ToList();
             }
         }
@@ -134,7 +135,7 @@ namespace WebApplication2.Context
         {
             using (var db = new BaseDbContext())
             {
-                return db.accountDb.Where(acc => acc.Role.Contains(role))
+                return db.accountDb.Where(acc => acc.Role.Contains(role) && acc.isRemoved != true)
                 .ToList();
             }
         }
@@ -143,7 +144,7 @@ namespace WebApplication2.Context
         {
             using (var db = new BaseDbContext())
             {
-                var accounts = db.accountDb.Where(acc => acc.GroupID == accountGroup.AccountGroupID)
+                var accounts = db.accountDb.Where(acc => acc.GroupID == accountGroup.AccountGroupID && acc.isRemoved != true)
                     .ToList();
                 return accounts;
             }
@@ -199,6 +200,10 @@ namespace WebApplication2.Context
                         (
                             acc.AccountID == ownerAccountID && !acc.EmailNotificationsNotNotifyOwnChangesToMySelf
                         )
+                    )
+                    &&
+                    (
+                        acc.isRemoved != true
                     )
                 )).ToList();
             }
@@ -513,11 +518,21 @@ namespace WebApplication2.Context
         {
             AuditLogDbContext.getInstance().createAuditLogAccountAction(account, AuditLogDbContext.ACTION_DELETE);
 
-            using (var db = new BaseDbContext())
+            Account _account = findAccountByID(account.AccountID);
+            if (_account != null)
             {
-                db.accountDb.Remove(account);
-                db.SaveChanges();
+                using (var db = new BaseDbContext())
+                {
+                    db.Entry(_account).State = EntityState.Modified;
+                    _account.isEnabled = false;
+                    _account.isRemoved = true;
+                    _account.Username = _account.Username + "(deleted)";
+                //db.accountDb.Remove(_acc);
+                //db.Entry(_acc).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
             }
+
             return null;
         }
 

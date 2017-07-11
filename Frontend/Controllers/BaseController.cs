@@ -206,6 +206,7 @@ namespace Frontend.Controllers
         public void SSO_ForceExpire(string userID)
         {
             SessionController.ForceAllSessionLoginExpireByUserID(userID);
+            SSO_ClearSession();
         }
 
 

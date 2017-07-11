@@ -174,6 +174,8 @@ namespace WebApplication2.Models
             str = str.Substring(0, 20);
             return str;
         }
+
+        public bool isRemoved { get; set; }
     }
-    
+
 }

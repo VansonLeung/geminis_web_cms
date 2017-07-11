@@ -23,6 +23,21 @@ namespace Frontend.Controllers
             }
             */
 
+            if (locale == "zh-hk")
+            {
+                locale = "zh-HK";
+            }
+
+            if (locale == "zh-cn")
+            {
+                locale = "zh-CN";
+            }
+
+            if (locale == "en-us")
+            {
+                locale = "en-US";
+            }
+
 
             // check session if timeout
 

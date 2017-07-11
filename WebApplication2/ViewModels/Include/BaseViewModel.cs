@@ -5,6 +5,7 @@ using System.Web;
 using WebApplication2.Context;
 using WebApplication2.Helpers;
 using WebApplication2.Models;
+using WebApplication2.Models.Infrastructure;
 using static WebApplication2.Controllers.BaseController;
 
 namespace WebApplication2.ViewModels.Include
@@ -87,6 +88,90 @@ namespace WebApplication2.ViewModels.Include
 
         public List<string> topWarningMessages { get; set; }
 
+        public static Menu fillMenuLink(Menu item, Lang lang, Category _cat)
+        {
+            var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+            if (hasArticles)
+            {
+                item.is_has_published_content = true;
+            }
+            else if (item.submenu != null)
+            {
+                foreach (Menu m in item.submenu)
+                {
+                    var subCat = InfrastructureCategoryDbContext.getInstance().findCategoryByID(m.category.categoryItemID);
+                    var subHasArticles = false;
+                    if (subCat != null)
+                    {
+                        subHasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(subCat, lang.lang);
+                    }
+                    if (subHasArticles)
+                    {
+                        item.link = m.link;
+                        break;
+                    }
+                    else if (item.submenu != null)
+                    {
+                        foreach (Menu mm in item.submenu)
+                        {
+                            var subsubCat = InfrastructureCategoryDbContext.getInstance().findCategoryByID(mm.category.categoryItemID);
+                            var subsubHasArticles = false;
+                            if (subsubCat != null)
+                            {
+                                subsubHasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(subsubCat, lang.lang);
+                            }
+                            if (subsubHasArticles)
+                            {
+                                item.link = mm.link;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return item;
+        }
+
+
+        public static List<Menu> createSubmenuForce(
+            int categoryItemID,
+            Lang lang)
+        {
+            List<Menu> menuitems = new List<Menu>();
+
+            var rootCategories = WebApplication2.Context.InfrastructureCategoryDbContext.getInstance().findActiveCategorysByParentIDAsNoTracking(categoryItemID);
+            foreach (var _cat in rootCategories)
+            {
+                Menu item = new Menu();
+                item.name = _cat.GetName(lang.lang);
+                item.link = new Link(lang.locale, _cat.getUrl(), null, null);
+                item.category = new ViewCategory(_cat, lang);
+
+                item.submenu = createSubmenuForce(item.category.categoryItemID, lang);
+
+                var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
+                if (hasArticles)
+                {
+                    item.is_has_published_content = true;
+                }
+                else if (item.submenu != null)
+                {
+                    foreach (Menu m in item.submenu)
+                    {
+                        if (m.is_has_published_content)
+                        {
+                            item.link = m.link;
+                            break;
+                        }
+                    }
+                }
+
+                menuitems.Add(item);
+            }
+
+            return menuitems;
+        }
 
         public static List<Menu> createSubmenu(
             int categoryItemID,
@@ -153,23 +238,7 @@ namespace WebApplication2.ViewModels.Include
                     isJumbotron,
                     isBottomMenu);
 
-
-                var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
-                if (hasArticles)
-                {
-                    item.is_has_published_content = true;
-                }
-                else if (item.submenu != null)
-                {
-                    foreach (Menu m in item.submenu)
-                    {
-                        if (m.is_has_published_content)
-                        {
-                            item.link = m.link;
-                            break;
-                        }
-                    }
-                }
+                fillMenuLink(item, lang, _cat);
 
                 menuitems.Add(item);
             }
@@ -204,23 +273,7 @@ namespace WebApplication2.ViewModels.Include
                     false);
 
 
-                var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
-                if (hasArticles)
-                {
-                    item.is_has_published_content = true;
-                }
-                else if (item.submenu != null)
-                {
-                    foreach (Menu m in item.submenu)
-                    {
-                        if (m.is_has_published_content)
-                        {
-                            item.link = m.link;
-                            break;
-                        }
-                    }
-                }
-
+                fillMenuLink(item, lang, _cat);
 
                 menuitems.Add(item);
             }
@@ -253,23 +306,7 @@ namespace WebApplication2.ViewModels.Include
                     false);
 
 
-                var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
-                if (hasArticles)
-                {
-                    item.is_has_published_content = true;
-                }
-                else if (item.submenu != null)
-                {
-                    foreach (Menu m in item.submenu)
-                    {
-                        if (m.is_has_published_content)
-                        {
-                            item.link = m.link;
-                            break;
-                        }
-                    }
-                }
-
+                fillMenuLink(item, lang, _cat);
 
                 menuitems.Add(item);
             }
@@ -299,23 +336,7 @@ namespace WebApplication2.ViewModels.Include
                         false);
 
 
-                    var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
-                    if (hasArticles)
-                    {
-                        item.is_has_published_content = true;
-                    }
-                    else if (item.submenu != null)
-                    {
-                        foreach (Menu m in item.submenu)
-                        {
-                            if (m.is_has_published_content)
-                            {
-                                item.link = m.link;
-                                break;
-                            }
-                        }
-                    }
-
+                    fillMenuLink(item, lang, _cat);
 
                     menuitems.Add(item);
                 }
@@ -346,23 +367,8 @@ namespace WebApplication2.ViewModels.Include
                         false);
 
 
-                    var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
-                    if (hasArticles && (_cat.isContentPage || _cat.isArticleList))
-                    {
-                        item.is_has_published_content = true;
-                    }
-                    else if (item.submenu != null)
-                    {
-                        foreach (Menu m in item.submenu)
-                        {
-                            if (m.is_has_published_content)
-                            {
-                                item.link = m.link;
-                                break;
-                            }
-                        }
-                    }
 
+                    fillMenuLink(item, lang, _cat);
 
                     menuitems.Add(item);
                 }
@@ -405,24 +411,7 @@ namespace WebApplication2.ViewModels.Include
                         item.desc = contentPage.Desc;
                     }
 
-
-                    var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
-                    if (hasArticles)
-                    {
-                        item.is_has_published_content = true;
-                    }
-                    else if (item.submenu != null)
-                    {
-                        foreach (Menu m in item.submenu)
-                        {
-                            if (m.is_has_published_content)
-                            {
-                                item.link = m.link;
-                                break;
-                            }
-                        }
-                    }
-
+                    fillMenuLink(item, lang, _cat);
 
                     menuitems.Add(item);
                 }
@@ -455,24 +444,7 @@ namespace WebApplication2.ViewModels.Include
                         false,
                         true);
 
-
-                    var hasArticles = WebApplication2.Context.ArticlePublishedDbContext.getInstance().hasArticlesPublishedByCategory(_cat, lang.lang);
-                    if (hasArticles)
-                    {
-                        item.is_has_published_content = true;
-                    }
-                    else if (item.submenu != null)
-                    {
-                        foreach (Menu m in item.submenu)
-                        {
-                            if (m.is_has_published_content)
-                            {
-                                item.link = m.link;
-                                break;
-                            }
-                        }
-                    }
-
+                    fillMenuLink(item, lang, _cat);
 
                     menuitems.Add(item);
                 }

@@ -150,6 +150,29 @@ function receiver(message) {
     	}
 
 
+
+    	    /**
+             * function: redirect the page to another url
+             * action: redirect_to_url
+             * url: URL of the page to be redirected to
+             */
+    	else if (msg.action === "force_expire") {
+    	    $.ajax({
+    	        type: "POST",
+    	        url: "/api/session/api_sso_force_expire",
+    	        // The key needs to match your method's input parameter (case-sensitive).
+    	        data: JSON.stringify(jsession),
+                dataType: 'json',
+                success: function (data) {
+                    window.location.href = msg.url;
+                },
+    	        error: function (errMsg) {
+
+    	        }
+    	    });
+    	}
+
+
     	    /**
              * function: refresh the whole page
              * action: refresh

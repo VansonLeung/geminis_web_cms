@@ -369,10 +369,13 @@
     <Content Include="images\ic_details.png" />
     <Content Include="images\ic_expand.png" />
     <Content Include="images\ic_report.png" />
+    <Content Include="images\index\appleicon.svg" />
     <Content Include="images\index\banner_arrow.png" />
     <Content Include="images\index\banner_txt.png" />
     <Content Include="images\index\demo_chart_1.jpg" />
     <Content Include="images\index\demo_chart_2.jpg" />
+    <Content Include="images\index\googleicon.png" />
+    <Content Include="images\index\gsl.svg" />
     <Content Include="images\index\indexbar_left_arrow.png" />
     <Content Include="images\index\indexbar_right_arrow.png" />
     <Content Include="images\index\index_downloadapp_banner.jpg" />
@@ -1129,7 +1132,6 @@
     <None Include="Service References\TTLITradeWSDEV\ItradeWebServicesService.wsdl" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Sitemap.cshtml" />
-    <Content Include="Views\Page\Error404.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <None Include="Web.ReleaseLocal.config">
       <DependentUpon>Web.config</DependentUpon>

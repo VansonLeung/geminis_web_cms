@@ -267,16 +267,17 @@ namespace Frontend.Controllers
             }
 
 
-            if (Session["LANG"] != null)
+            if (locale == null)
             {
-                locale = (string) Session["LANG"];
+                if (Session["LANG"] != null)
+                {
+                    locale = (string)Session["LANG"];
+                }
             }
-
 
             if (code == "404")
             {
-                BaseViewModel vmp = BaseViewModel.make(locale, "page-not-found", null, Request, session);
-                return View(vmp);
+                return Redirect("/" + locale + "/Page/page-not-found");
             }
             BaseViewModel vm2 = BaseViewModel.make(locale, "error" + code, null, Request, session);
             return View(vm2);
