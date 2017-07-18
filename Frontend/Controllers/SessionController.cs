@@ -349,7 +349,11 @@ namespace Frontend.Controllers
                 {
                     if (form.otp != null && form.otp != "")
                     {
-                        if (!(new UserCodeController().VerifyEmailCodeCombination("kaycheung@cherrypicks.com", form.otp)))
+                        BaseControllerSession session = getSession();
+
+                        string email = session.email;
+
+                        if (!(new UserCodeController().VerifyEmailCodeCombination(email, form.otp)))
                         {
                             return this.Json(BaseResponse.MakeResponse("F002", null, null, "OTP Incorrect"));
                         }

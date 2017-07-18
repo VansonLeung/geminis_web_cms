@@ -527,6 +527,7 @@
     <Content Include="js\init_iframe.js" />
     <Content Include="js\jquerymin.js" />
     <Content Include="js\jschannel.js" />
+    <Content Include="js\js_localstorage.js" />
     <Content Include="js\js_qpi.js" />
     <Content Include="js\js_sha256.js" />
     <Content Include="js\materialize.js" />

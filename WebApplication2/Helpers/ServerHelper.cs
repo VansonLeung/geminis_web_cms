@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication2.Context;
 
 namespace WebApplication2.Helpers
 {
@@ -21,7 +22,7 @@ namespace WebApplication2.Helpers
             else
                 protocol = "https://";
 
-            string sOut = protocol + System.Web.HttpContext.Current.Request.ServerVariables["SERVER_NAME"] + port + System.Web.HttpContext.Current.Request.ApplicationPath;
+            string sOut = protocol + ConstantDbContext.getInstance().findActiveByKeyNoTracking("CMS_BASE_URL").Value + "/";
 
             if (sOut.EndsWith("/"))
             {

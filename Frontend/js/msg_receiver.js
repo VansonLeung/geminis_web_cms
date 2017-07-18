@@ -161,7 +161,7 @@ function receiver(message) {
     	        type: "POST",
     	        url: "/api/session/api_sso_force_expire",
     	        // The key needs to match your method's input parameter (case-sensitive).
-    	        data: JSON.stringify(jsession),
+    	        data: JSON.stringify({}),
                 dataType: 'json',
                 success: function (data) {
                     window.location.href = msg.url;

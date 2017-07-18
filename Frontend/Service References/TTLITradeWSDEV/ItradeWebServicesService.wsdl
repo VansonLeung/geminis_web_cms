@@ -7352,26 +7352,34 @@
           </xs:element>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="CaptchaManagementRequest_CType">
+      <xs:complexType name="Index_CType">
         <xs:sequence>
-          <xs:element form="qualified" name="key" type="xs:string" />
-          <xs:element form="qualified" name="answer" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="ID" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Symbol" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Exchange" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Desp" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Last" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Open" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Close" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="PrevClose" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="High" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Low" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Volume" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Turnover" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Change" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="PctChange" type="xs:decimal" />
+          <xs:element minOccurs="0" form="qualified" name="Real" type="xs:int" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="SessionManagementRequest_CType">
+      <xs:complexType name="News_CType">
         <xs:sequence>
-          <xs:element form="qualified" name="clientID" type="xs:string" />
-          <xs:element form="qualified" name="sessionID" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="CaptchaManagementResponse_CType">
-        <xs:sequence>
-          <xs:element form="qualified" name="returnCode" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="SessionManagementResponse_CType">
-        <xs:sequence>
-          <xs:element form="qualified" name="returnCode" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="ID" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="Symbols" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Exchange" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Source" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="Headline" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="Content" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" form="qualified" name="LastUpdate" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="Quote_CType">
@@ -7413,34 +7421,26 @@
           <xs:element minOccurs="0" form="qualified" name="Real" type="xs:int" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="Index_CType">
+      <xs:complexType name="SessionManagementRequest_CType">
         <xs:sequence>
-          <xs:element minOccurs="0" form="qualified" name="ID" type="xs:string" />
-          <xs:element minOccurs="0" form="qualified" name="Symbol" type="xs:string" />
-          <xs:element minOccurs="0" form="qualified" name="Exchange" type="xs:string" />
-          <xs:element minOccurs="0" form="qualified" name="Desp" type="xs:string" />
-          <xs:element minOccurs="0" form="qualified" name="Last" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="Open" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="Close" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="PrevClose" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="High" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="Low" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="Volume" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="Turnover" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="Change" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="PctChange" type="xs:decimal" />
-          <xs:element minOccurs="0" form="qualified" name="Real" type="xs:int" />
+          <xs:element form="qualified" name="clientID" type="xs:string" />
+          <xs:element form="qualified" name="sessionID" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="News_CType">
+      <xs:complexType name="SessionManagementResponse_CType">
         <xs:sequence>
-          <xs:element minOccurs="0" form="qualified" name="ID" type="xs:string" />
-          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="Symbols" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" form="qualified" name="Exchange" type="xs:string" />
-          <xs:element minOccurs="0" form="qualified" name="Source" type="xs:string" />
-          <xs:element minOccurs="0" form="qualified" name="Headline" type="xs:string" />
-          <xs:element minOccurs="0" maxOccurs="unbounded" form="qualified" name="Content" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" form="qualified" name="LastUpdate" type="xs:string" />
+          <xs:element form="qualified" name="returnCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CaptchaManagementResponse_CType">
+        <xs:sequence>
+          <xs:element form="qualified" name="returnCode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CaptchaManagementRequest_CType">
+        <xs:sequence>
+          <xs:element form="qualified" name="key" type="xs:string" />
+          <xs:element form="qualified" name="answer" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:simpleType name="theme_SType">

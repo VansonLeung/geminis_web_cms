@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Helpers;
 using Frontend.Models;
+using static WebApplication2.Controllers.BaseController;
 
 namespace Frontend.Controllers
 {
@@ -56,7 +57,11 @@ namespace Frontend.Controllers
 
             try
             {
-                var res = RegisterEmailCodeCombination("kaycheung@cherrypicks.com");
+                BaseControllerSession session = getSession();
+
+                string email = session.email;
+
+                var res = RegisterEmailCodeCombination(email);
 
                 return this.Json(BaseResponse.MakeResponse(res));
             }

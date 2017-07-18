@@ -58,7 +58,7 @@ namespace WebApplication2.ViewModels
 
                 return "";
             });
-
+            
             pattern = @"@{Q:(?<key>\w+)}";
             output = Regex.Replace(output, pattern, delegate (Match m) {
                 var str = m.Value;
@@ -131,7 +131,6 @@ namespace WebApplication2.ViewModels
 
                 return m.Value;
             });
-
 
 
             pattern = @"@{IFRAME_TTL:(?<key>.*?)}";
