@@ -183,6 +183,15 @@ function receiver(message) {
 
 
 
+    	else if (msg.action === "scrolltoChart") {
+    	    $('html,body').animate({
+    	        scrollTop: $("#i0").offset().top
+    	    },
+                'slow');
+    	}
+
+
+
 
 
     	    /**
