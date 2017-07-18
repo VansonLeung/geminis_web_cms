@@ -825,7 +825,7 @@ namespace WebApplication2.ViewModels.Include
 
             if (vm.content == null)
             {
-                var error404cat = db.findCategoryByURL("error404");
+                var error404cat = db.findCategoryByURL("page-not-found");
                 WebApplication2.Models.ArticlePublished contentPage = null;
                 var contentPages = WebApplication2.Context.ArticlePublishedDbContext.getInstance().getArticlesPublishedByCategory(error404cat, vm.lang.lang);
                 if (contentPages.Count > 0)
