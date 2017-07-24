@@ -43,9 +43,11 @@ else
                                     @if (Model.category != null
                                         && Model.category.iconURL != null)
                                     {
-                                        <img src="@HttpUtility.HtmlDecode(Model.category.iconURL)" style="width: 60px; height: 60px"/>
+                                        <img src="@HttpUtility.HtmlDecode(Model.category.iconURL)" style="width: 60px; height: 60px;vertical-align: middle;"/>
                                     }
+                                    <span style="vertical-align: middle;">
                                     @Html.RazorEncode(HttpUtility.HtmlDecode(Model.category.title), Model)
+                                    </span>
                                 </div>
                                 <div class='hr'></div>
                             </td>
